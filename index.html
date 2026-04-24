@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Collocations Intermediate - Master English Word Combinations</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-color: #2563eb;
+            --secondary-color: #7c3aed;
+            --accent-color: #ec4899;
+            --light-bg: #f8fafc;
+            --dark-text: #1e293b;
+            --border-radius: 12px;
+            --transition: all 0.3s ease;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: var(--dark-text);
+            background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+        }
+
+        header {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            color: white;
+            padding: 40px 20px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(37, 99, 235, 0.2);
+        }
+
+        header h1 {
+            font-size: 3em;
+            margin-bottom: 10px;
+            font-weight: 800;
+            letter-spacing: -1px;
+        }
+
+        header p {
+            font-size: 1.3em;
+            opacity: 0.95;
+            max-width: 600px;
+            margin: 0 auto;
+            font-weight: 300;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .hero-section {
+            padding: 60px 20px;
+            text-align: center;
+        }
+
+        .hero-section h2 {
+            font-size: 2.2em;
+            margin-bottom: 20px;
+            color: var(--dark-text);
+        }
+
+        .hero-section p {
+            font-size: 1.1em;
+            color: #475569;
+            max-width: 700px;
+            margin: 0 auto 40px;
+            line-height: 1.8;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 60px;
+        }
+
+        .btn {
+            padding: 14px 32px;
+            font-size: 1.05em;
+            border: none;
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            transition: var(--transition);
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            box-shadow: 0 4px 15px rgba(37, 99, 235, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(37, 99, 235, 0.4);
+        }
+
+        .btn-secondary {
+            background: white;
+            color: var(--primary-color);
+            border: 2px solid var(--primary-color);
+        }
+
+        .btn-secondary:hover {
+            background: var(--light-bg);
+            transform: translateY(-2px);
+        }
+
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-bottom: 80px;
+        }
+
+        .feature-card {
+            background: white;
+            padding: 40px 30px;
+            border-radius: var(--border-radius);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.07);
+            transition: var(--transition);
+            border-top: 4px solid var(--primary-color);
+        }
+
+        .feature-card:nth-child(2) {
+            border-top-color: var(--secondary-color);
+        }
+
+        .feature-card:nth-child(3) {
+            border-top-color: var(--accent-color);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
+        }
+
+        .feature-icon {
+            font-size: 2.5em;
+            margin-bottom: 15px;
+        }
+
+        .feature-card h3 {
+            font-size: 1.4em;
+            margin-bottom: 15px;
+            color: var(--dark-text);
+        }
+
+        .feature-card p {
+            color: #64748b;
+            line-height: 1.7;
+        }
+
+        .modules-section {
+            margin: 80px 0;
+        }
+
+        .modules-section h2 {
+            font-size: 2.5em;
+            text-align: center;
+            margin-bottom: 60px;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .modules-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin-bottom: 60px;
+        }
+
+        .module-card {
+            background: white;
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.07);
+            transition: var(--transition);
+            border: 1px solid #e2e8f0;
+        }
+
+        .module-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 12px 20px rgba(0, 0, 0, 0.12);
+        }
+
+        .module-header {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 25px;
+            text-align: center;
+        }
+
+        .module-number {
+            font-size: 3em;
+            font-weight: 800;
+            opacity: 0.3;
+            position: absolute;
+            top: -10px;
+            right: 10px;
+        }
+
+        .module-header h3 {
+            font-size: 1.4em;
+            margin-bottom: 8px;
+            font-weight: 700;
+            position: relative;
+        }
+
+        .module-content {
+            padding: 25px;
+            text-align: center;
+        }
+
+        .module-content p {
+            color: #64748b;
+            margin-bottom: 20px;
+            font-size: 0.95em;
+        }
+
+        .module-link {
+            display: inline-block;
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 600;
+            padding: 10px 20px;
+            border: 2px solid var(--primary-color);
+            border-radius: 8px;
+            transition: var(--transition);
+        }
+
+        .module-link:hover {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        .stats-section {
+            background: white;
+            padding: 60px 40px;
+            border-radius: var(--border-radius);
+            margin-bottom: 80px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.07);
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            text-align: center;
+        }
+
+        .stat-item h4 {
+            font-size: 2.5em;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 10px;
+        }
+
+        .stat-item p {
+            font-size: 1.1em;
+            color: #64748b;
+        }
+
+        .about-section {
+            background: linear-gradient(135deg, rgba(37, 99, 235, 0.05), rgba(124, 58, 237, 0.05));
+            padding: 60px 40px;
+            border-radius: var(--border-radius);
+            margin-bottom: 80px;
+            border: 1px solid rgba(37, 99, 235, 0.1);
+        }
+
+        .about-section h2 {
+            font-size: 2em;
+            margin-bottom: 30px;
+            color: var(--dark-text);
+        }
+
+        .about-section p {
+            font-size: 1.1em;
+            color: #475569;
+            line-height: 1.9;
+            max-width: 800px;
+            margin-bottom: 15px;
+        }
+
+        footer {
+            background: var(--dark-text);
+            color: white;
+            padding: 40px 20px;
+            text-align: center;
+            margin-top: 60px;
+        }
+
+        footer p {
+            margin-bottom: 10px;
+            opacity: 0.9;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+
+        .footer-links a {
+            color: #60a5fa;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .footer-links a:hover {
+            color: white;
+        }
+
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 2em;
+            }
+
+            header p {
+                font-size: 1.05em;
+            }
+
+            .hero-section h2 {
+                font-size: 1.8em;
+            }
+
+            .modules-section h2 {
+                font-size: 1.8em;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .btn {
+                width: 100%;
+                max-width: 300px;
+            }
+
+            .stats-grid {
+                gap: 20px;
+            }
+        }
+
+        .tag {
+            display: inline-block;
+            background: var(--light-bg);
+            color: var(--primary-color);
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 0.85em;
+            font-weight: 600;
+            margin-right: 8px;
+            margin-top: 10px;
+        }
+
+        .badge {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.85em;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>🎯 Collocations Intermediate</h1>
+        <p>Master English Word Combinations with Our Comprehensive Learning Modules</p>
+    </header>
+
+    <div class="container">
+        <section class="hero-section">
+            <h2>Learn Collocations Like a Native Speaker</h2>
+            <p>Collocations are the natural combinations of words that native speakers use every day. This comprehensive learning resource will help you improve your English fluency by mastering intermediate-level word combinations across real-life contexts.</p>
+            
+            <div class="cta-buttons">
+                <a href="#modules" class="btn btn-primary">Explore Modules</a>
+                <a href="https://github.com/NeoTetsuya/Collocations-Intermediate" class="btn btn-secondary">View on GitHub</a>
+            </div>
+        </section>
+
+        <section class="features">
+            <div class="feature-card">
+                <div class="feature-icon">📚</div>
+                <h3>10 Focused Modules</h3>
+                <p>Structured lessons covering everyday verbs, synonyms, metaphors, travel, relationships, lifestyle, work, society, and fundamental concepts.</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">🎓</div>
+                <h3>Intermediate Level</h3>
+                <p>Perfect for learners who already have basic English knowledge and want to level up their vocabulary and natural expression.</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">✨</div>
+                <h3>Interactive Learning</h3>
+                <p>Engaging HTML-based lessons that make learning collocations fun, practical, and immediately applicable to real conversations.</p>
+            </div>
+        </section>
+
+        <section class="stats-section">
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <h4>10+</h4>
+                    <p>Learning Modules</p>
+                </div>
+                <div class="stat-item">
+                    <h4>100+</h4>
+                    <p>Collocations Covered</p>
+                </div>
+                <div class="stat-item">
+                    <h4>All Levels</h4>
+                    <p>Context-Based Learning</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="modules-section" id="modules">
+            <h2>Learning Modules</h2>
+            
+            <div class="modules-grid">
+                <div class="module-card">
+                    <div class="module-header">
+                        <span class="module-number">1</span>
+                        <h3>Everyday Verbs</h3>
+                    </div>
+                    <div class="module-content">
+                        <p>Master the most common verb collocations used in daily conversations and situations.</p>
+                        <a href="1-everyday%20verbs.html" class="module-link">Start Learning →</a>
+                    </div>
+                </div>
+
+                <div class="module-card">
+                    <div class="module-header">
+                        <span class="module-number">2</span>
+                        <h3>Synonyms & Confusable Words</h3>
+                    </div>
+                    <div class="module-content">
+                        <p>Understand the nuances between similar words and learn the correct collocations for each.</p>
+                        <a href="2-synonyms%20%26%20confusable%20words.html" class="module-link">Start Learning →</a>
+                    </div>
+                </div>
+
+                <div class="module-card">
+                    <div class="module-header">
+                        <span class="module-number">3</span>
+                        <h3>Metaphor</h3>
+                    </div>
+                    <div class="module-content">
+                        <p>Explore figurative language and metaphorical collocations that add depth to your English.</p>
+                        <a href="3-metaphor.html" class="module-link">Start Learning →</a>
+                    </div>
+                </div>
+
+                <div class="module-card">
+                    <div class="module-header">
+                        <span class="module-number">4</span>
+                        <h3>Travel & Environment</h3>
+                    </div>
+                    <div class="module-content">
+                        <p>Learn collocations related to travel, tourism, nature, and environmental topics.</p>
+                        <a href="4-travel%20%26%20the%20environment.html" class="module-link">Start Learning →</a>
+                    </div>
+                </div>
+
+                <div class="module-card">
+                    <div class="module-header">
+                        <span class="module-number">5</span>
+                        <h3>People & Relationships</h3>
+                    </div>
+                    <div class="module-content">
+                        <p>Discover how to talk about relationships, personalities, and human interactions naturally.</p>
+                        <a href="5-people%20%26%20relationships.html" class="module-link">Start Learning →</a>
+                    </div>
+                </div>
+
+                <div class="module-card">
+                    <div class="module-header">
+                        <span class="module-number">6</span>
+                        <h3>Leisure & Lifestyle</h3>
+                    </div>
+                    <div class="module-content">
+                        <p>Learn collocations about hobbies, entertainment, habits, and lifestyle choices.</p>
+                        <a href="6-leisure%20%26%20lifestyle.html" class="module-link">Start Learning →</a>
+                    </div>
+                </div>
+
+                <div class="module-card">
+                    <div class="module-header">
+                        <span class="module-number">7</span>
+                        <h3>Work & Study</h3>
+                    </div>
+                    <div class="module-content">
+                        <p>Professional and academic collocations for career and educational contexts.</p>
+                        <a href="7-work%20%26%20study.html" class="module-link">Start Learning →</a>
+                    </div>
+                </div>
+
+                <div class="module-card">
+                    <div class="module-header">
+                        <span class="module-number">8</span>
+                        <h3>Society & Institutions</h3>
+                    </div>
+                    <div class="module-content">
+                        <p>Vocabulary for discussing government, law, public institutions, and civic topics.</p>
+                        <a href="8-society%20%26%20instituitions.html" class="module-link">Start Learning →</a>
+                    </div>
+                </div>
+
+                <div class="module-card">
+                    <div class="module-header">
+                        <span class="module-number">9</span>
+                        <h3>Basic Concepts</h3>
+                    </div>
+                    <div class="module-content">
+                        <p>Fundamental collocations and word combinations that form the foundation of English.</p>
+                        <a href="9-basic%20concepts.html" class="module-link">Start Learning →</a>
+                    </div>
+                </div>
+
+                <div class="module-card">
+                    <div class="module-header">
+                        <span class="module-number">10</span>
+                        <h3>Functions</h3>
+                    </div>
+                    <div class="module-content">
+                        <p>Language functions and expressions for different communicative purposes.</p>
+                        <a href="10-functions.html" class="module-link">Start Learning →</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="about-section">
+            <h2>About This Project</h2>
+            <p><strong>Collocations Intermediate</strong> is a comprehensive English language learning resource designed specifically for intermediate-level learners who want to improve their fluency and natural expression.</p>
+            
+            <p>Collocations are word combinations that occur together naturally. Native speakers use them instinctively, and learning them is crucial for achieving native-like fluency. This project provides structured, context-based lessons that help you understand and internalize these combinations.</p>
+            
+            <p><span class="badge">✓ Open Source</span> <span class="badge">✓ Free</span> <span class="badge">✓ Interactive</span></p>
+        </section>
+    </div>
+
+    <footer>
+        <p><strong>Collocations Intermediate</strong> © 2026 - A Free English Learning Resource</p>
+        <p>Explore collocations and improve your English fluency at an intermediate level</p>
+        <div class="footer-links">
+            <a href="https://github.com/NeoTetsuya/Collocations-Intermediate">GitHub Repository</a>
+            <a href="https://github.com/NeoTetsuya">GitHub Profile</a>
+        </div>
+        <p style="margin-top: 20px; opacity: 0.7; font-size: 0.9em;">Built with ❤️ for English learners worldwide</p>
+    </footer>
+</body>
+</html>
