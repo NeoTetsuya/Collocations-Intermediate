@@ -1,0 +1,1342 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Leisure & Lifestyle | Self-Study</title>
+  
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <style>
+    /* Utility classes for states */
+    .tab-content { display: none; }
+    .tab-content.active { display: block; }
+    
+    .input-correct { 
+      border-color: #22c55e !important; 
+      background-color: #f0fdf4 !important; 
+      color: #166534 !important; 
+      pointer-events: none; /* Lock input when correct */
+    }
+    .input-incorrect { 
+      border-color: #ef4444 !important; 
+      background-color: #fef2f2 !important; 
+      color: #991b1b !important; 
+    }
+    .input-empty-error { 
+      border-color: #fca5a5 !important; 
+      background-color: #fff1f2 !important; 
+    }
+    
+    select {
+      background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e");
+      background-position: right 0.1rem center;
+      background-repeat: no-repeat;
+      background-size: 1.5em 1.5em;
+    }
+
+    /* Animation for incomplete exercises */
+    @keyframes shake {
+      0%, 100% { transform: translateX(0); }
+      25% { transform: translateX(-6px); }
+      50% { transform: translateX(6px); }
+      75% { transform: translateX(-6px); }
+    }
+    .shake { animation: shake 0.4s ease-in-out; }
+
+    /* Enhanced Correction Tooltip */
+    .answer-tooltip {
+      background-color: #ef4444; /* red-500 */
+      color: white;
+      font-weight: 600;
+      letter-spacing: 0.025em;
+      box-shadow: 0 4px 6px -1px rgba(239, 68, 68, 0.3), 0 2px 4px -1px rgba(239, 68, 68, 0.2);
+    }
+    .answer-tooltip::after {
+      content: '';
+      position: absolute;
+      bottom: 100%;
+      left: 50%;
+      margin-left: -6px;
+      border-width: 6px;
+      border-style: solid;
+      border-color: transparent transparent #ef4444 transparent;
+    }
+
+    /* Sub-tabs fade animation */
+    .exercise-tab-content, .theory-tab-content {
+      animation: fadeIn 0.3s ease-in-out;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(5px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body class="bg-gray-50 text-gray-900 font-sans selection:bg-indigo-200 min-h-screen flex flex-col">
+
+  <!-- Header -->
+  <header class="bg-indigo-900 text-white p-4 shadow-md sticky top-0 z-30 flex-shrink-0">
+    <div class="max-w-6xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-4">
+      <div class="flex items-center gap-3">
+        <div class="bg-indigo-800 p-2 rounded-lg border border-indigo-700 shadow-sm">
+          <i class="fa-solid fa-icons text-xl text-indigo-300"></i>
+        </div>
+        <h1 class="text-2xl font-bold tracking-tight">Leisure & Lifestyle <span class="font-light opacity-80 text-lg hidden sm:inline">| Self-Study</span></h1>
+      </div>
+      <nav class="flex bg-indigo-800 rounded-lg p-1 overflow-x-auto w-full sm:w-auto shadow-inner" id="tab-nav">
+        <button data-target="unit21" class="tab-btn whitespace-nowrap px-3 py-2 rounded-md text-sm font-semibold transition-all bg-white text-indigo-900 shadow">21: Houses</button>
+        <button data-target="unit22" class="tab-btn whitespace-nowrap px-3 py-2 rounded-md text-sm font-semibold transition-all text-indigo-100 hover:bg-indigo-700">22: Food</button>
+        <button data-target="unit23" class="tab-btn whitespace-nowrap px-3 py-2 rounded-md text-sm font-semibold transition-all text-indigo-100 hover:bg-indigo-700">23: Media</button>
+        <button data-target="unit24" class="tab-btn whitespace-nowrap px-3 py-2 rounded-md text-sm font-semibold transition-all text-indigo-100 hover:bg-indigo-700">24: Music</button>
+        <button data-target="unit25" class="tab-btn whitespace-nowrap px-3 py-2 rounded-md text-sm font-semibold transition-all text-indigo-100 hover:bg-indigo-700">25: Sport</button>
+        <button data-target="unit26" class="tab-btn whitespace-nowrap px-3 py-2 rounded-md text-sm font-semibold transition-all text-indigo-100 hover:bg-indigo-700">26: Health</button>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Main Content Layout -->
+  <main class="max-w-6xl mx-auto p-4 sm:p-6 lg:py-8 flex-grow w-full flex flex-col">
+    <div class="flex flex-col lg:flex-row gap-6 items-start">
+      
+      <!-- LEFT PANE: Theory -->
+      <section class="lg:w-2/5 flex-shrink-0 flex flex-col bg-white rounded-xl border border-gray-200 shadow-sm">
+        <div class="bg-gray-100 p-4 border-b border-gray-200 flex items-center justify-between z-10 rounded-t-xl">
+          <h2 class="font-bold text-gray-700 uppercase tracking-wider text-sm flex items-center gap-2">
+            <i class="fa-solid fa-bookmark text-indigo-500"></i> Reference & Rules
+          </h2>
+        </div>
+
+        <!-- THEORY SUB-TABS -->
+        <div id="theory-tabs-container" class="flex overflow-x-auto bg-gray-50 border-b border-gray-200 px-4 pt-3 gap-1 flex-shrink-0 custom-scrollbar">
+           <!-- Tabs injected here -->
+        </div>
+
+        <div class="p-6 flex-grow overflow-y-auto max-h-[600px] lg:max-h-none custom-scrollbar" id="theory-container">
+          <!-- Theory Content Injected via JS -->
+        </div>
+      </section>
+
+      <!-- RIGHT PANE: Exercises -->
+      <section class="lg:w-3/5 flex flex-col bg-white rounded-xl shadow-md border border-gray-200 relative">
+        <div class="bg-indigo-50 p-4 border-b border-indigo-100 flex items-center justify-between flex-shrink-0 shadow-sm rounded-t-xl">
+          <h2 class="font-bold text-indigo-900 text-lg" id="exercise-title">Unit 21: Houses, flats and rooms</h2>
+        </div>
+        
+        <!-- EXERCISE SUB-TABS -->
+        <div id="sub-tabs-container" class="flex overflow-x-auto bg-indigo-50/50 border-b border-gray-200 px-4 pt-3 gap-1 flex-shrink-0 custom-scrollbar">
+           <!-- Tabs injected here -->
+        </div>
+
+        <div class="p-6 sm:p-8 flex-grow" id="exercises-container" style="padding-bottom: 6rem;">
+          <!-- Exercise Content Injected via JS -->
+        </div>
+
+        <!-- Global Exercise Controls (Reset only) -->
+        <div class="sticky bottom-0 w-full bg-white/95 backdrop-blur border-t p-4 flex justify-center items-center gap-4 rounded-b-xl shadow-[0_-10px_15px_-3px_rgba(0,0,0,0.05)] z-20">
+          <button id="btn-reset" class="flex items-center gap-2 text-indigo-700 hover:text-indigo-900 bg-indigo-50 hover:bg-indigo-100 font-medium px-6 py-2 rounded-lg transition-all shadow-sm">
+            <i class="fa-solid fa-rotate-right"></i> Reset All Progress
+          </button>
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <script>
+    // --- CONTENT DATA ---
+    const contentData = {
+      unit21: {
+        title: "Unit 21: Houses, flats and rooms",
+        theory: [
+          {
+            tabLabel: "Finding a Place",
+            html: `
+              <div class="space-y-6">
+                <div class="bg-blue-50 rounded-lg shadow-sm border border-blue-200 overflow-hidden">
+                  <h3 class="bg-blue-600 text-white font-bold p-3 text-lg"><i class="fa-solid fa-house-chimney mr-2"></i> Finding somewhere to live</h3>
+                  <div class="p-4 space-y-3 text-sm text-gray-800">
+                    <ul class="list-disc pl-5 space-y-2">
+                      <li><span class="font-bold text-blue-700">short-let accommodation:</span> can be rented for short periods of time.</li>
+                      <li><span class="font-bold text-blue-700">studio flats:</span> small flats designed for one person.</li>
+                      <li><span class="font-bold text-blue-700">newly-built apartment:</span> a recently constructed apartment.</li>
+                      <li><span class="font-bold text-blue-700">fully-fitted kitchen:</span> kitchen already equipped with modern cooker, washing machine, cupboards, etc.</li>
+                      <li><span class="font-bold text-blue-700">off-road parking:</span> a place to park that is not on the street.</li>
+                      <li><span class="font-bold text-blue-700">furnished / unfurnished:</span> rented with or without furniture.</li>
+                      <li><span class="font-bold text-blue-700">residential area:</span> area with private houses, not offices or factories.</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>`
+          },
+          {
+            tabLabel: "Describing Rooms",
+            html: `
+              <div class="space-y-6">
+                <div class="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
+                  <h3 class="bg-amber-500 text-white font-bold p-3 text-lg"><i class="fa-solid fa-couch mr-2"></i> Describing your house/flat/room</h3>
+                  <div class="p-4 space-y-4 text-sm text-gray-800">
+                    <p class="font-bold text-amber-700 border-b border-amber-100 pb-1">Positive descriptions:</p>
+                    <ul class="list-disc pl-5 space-y-1">
+                      <li><span class="font-bold">dream home:</span> perfect house</li>
+                      <li><span class="font-bold">four-storey house:</span> house with four levels</li>
+                      <li><span class="font-bold">spacious living room:</span> large living room</li>
+                      <li><span class="font-bold">wonderful view</span> of the park</li>
+                      <li><span class="font-bold">cosy study:</span> warm and comfortable room for working</li>
+                      <li><span class="font-bold">light, airy bedrooms</span> which <span class="font-bold">overlook the garden</span></li>
+                      <li><span class="font-bold">basement flat</span> / <span class="font-bold">granny flat</span> (separate flat for an older relative)</li>
+                      <li><span class="font-bold">add an extension:</span> build an extra room onto an existing house</li>
+                      <li><span class="font-bold">completely refurbished:</span> completely renewed/decorated</li>
+                      <li><span class="font-bold">do up</span> an old house: repair, repaint and decorate</li>
+                    </ul>
+                    
+                    <p class="font-bold text-amber-700 border-b border-amber-100 pb-1 mt-4">Negative descriptions:</p>
+                    <ul class="list-disc pl-5 space-y-1">
+                      <li><span class="font-bold">dilapidated building:</span> in very bad condition</li>
+                      <li><span class="font-bold">draughty hall:</span> letting in cold air</li>
+                      <li><span class="font-bold">chilly corridor:</span> cold corridor</li>
+                      <li><span class="font-bold">cramped room:</span> uncomfortably small</li>
+                      <li><span class="font-bold">shortage of affordable housing:</span> not enough cheap homes</li>
+                      <li><span class="font-bold">take out a big mortgage:</span> borrow a large amount of money to buy a house</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>`
+          },
+          {
+            tabLabel: "Home Collocations",
+            html: `
+              <div class="space-y-6">
+                <div class="bg-rose-50 rounded-lg shadow-sm border border-rose-200 overflow-hidden">
+                  <h3 class="bg-rose-500 text-white font-bold p-3 text-lg"><i class="fa-solid fa-heart mr-2"></i> Collocations with "home"</h3>
+                  <div class="p-4 space-y-3 text-sm text-gray-800">
+                    <ul class="list-disc pl-5 space-y-2">
+                      <li>She <span class="font-bold text-rose-600">left home</span> to go to university, but moving away made her feel <span class="font-bold text-rose-600">homesick</span>.</li>
+                      <li>Peter's back from a year abroad. His family are throwing a party to <span class="font-bold text-rose-600">welcome him home</span>.</li>
+                      <li>Come in and <span class="font-bold text-rose-600">make yourself at home</span>. [relax and make yourself comfortable]</li>
+                      <li>I haven't lived in Oxford for long but I already <span class="font-bold text-rose-600">feel at home</span> here.</li>
+                      <li>I'd like to buy a <span class="font-bold text-rose-600">second home</span> near the coast. [house used only for weekends, holidays]</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>`
+          }
+        ],
+        exercises: [
+          {
+            tabLabel: "21.1 Questions",
+            html: `
+              <div class="exercise-block bg-white border border-gray-100 rounded-xl p-5 shadow-[0_2px_10px_-3px_rgba(6,81,237,0.1)]">
+                <h3 class="font-bold text-lg mb-4 text-gray-800 flex items-center gap-3 border-b pb-3"><span class="bg-indigo-100 text-indigo-800 px-3 py-1 rounded text-sm shadow-sm">21.1</span> Answer using collocations from the theory.</h3>
+                <ol class="list-decimal list-inside space-y-6 pl-2 text-gray-700">
+                  <li>What kind of accommodation would suit a student who has no furniture of his or her own? <br> <i class="fa-solid fa-arrow-right text-gray-300 mx-2"></i> ${generateInput({ correct: ['furnished accommodation', 'furnished flat', 'furnished'], widthClass: 'w-56' })}</li>
+                  <li>What kind of accommodation would suit someone who is only going to be in a place for three months? <br> <i class="fa-solid fa-arrow-right text-gray-300 mx-2"></i> ${generateInput({ correct: ['short-let accommodation', 'short-let'], widthClass: 'w-56' })}</li>
+                  <li>What part of town would you want to live in if you wanted to be somewhere where there are lots of private houses and no factories? <br> <i class="fa-solid fa-arrow-right text-gray-300 mx-2"></i> a ${generateInput({ correct: ['residential area'], widthClass: 'w-40' })}</li>
+                  <li>What kind of accommodation would suit a young single person who would prefer to live alone? <br> <i class="fa-solid fa-arrow-right text-gray-300 mx-2"></i> a ${generateInput({ correct: ['studio flat'], widthClass: 'w-40' })}</li>
+                  <li>If accommodation doesn't have its own garage, what else might it have to make life easier for car-owners? <br> <i class="fa-solid fa-arrow-right text-gray-300 mx-2"></i> ${generateInput({ correct: ['off-road parking'], widthClass: 'w-40' })}</li>
+                  <li>If you are moving into a new unfurnished house, but don't need to take a washing machine, cooker or fridge, what does the house have? <br> <i class="fa-solid fa-arrow-right text-gray-300 mx-2"></i> a ${generateInput({ correct: ['fully-fitted kitchen'], widthClass: 'w-40' })}</li>
+                </ol>
+              </div>`
+          },
+          {
+            tabLabel: "21.2 Match",
+            html: `
+              <div class="exercise-block bg-white border border-gray-100 rounded-xl p-5 shadow-[0_2px_10px_-3px_rgba(6,81,237,0.1)]">
+                <h3 class="font-bold text-lg mb-4 text-gray-800 flex items-center gap-3 border-b pb-3"><span class="bg-indigo-100 text-indigo-800 px-3 py-1 rounded text-sm shadow-sm">21.2</span> Match the halves of sentences.</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-gray-700 leading-8">
+                  <div>1. We want to turn our garage into a... <br> ${generateSelect({ options: ['house-warming party.', 'mortgage.', 'my own.', 'granny flat.', 'my flat.', 'the garden.', 'old houses.', 'refurbished.'], correct: 'granny flat.' })}</div>
+                  <div>2. Harper has invited me to her... <br> ${generateSelect({ options: ['house-warming party.', 'mortgage.', 'my own.', 'granny flat.', 'my flat.', 'the garden.', 'old houses.', 'refurbished.'], correct: 'house-warming party.' })}</div>
+                  <div>3. Next week I have to move out of... <br> ${generateSelect({ options: ['house-warming party.', 'mortgage.', 'my own.', 'granny flat.', 'my flat.', 'the garden.', 'old houses.', 'refurbished.'], correct: 'my flat.' })}</div>
+                  <div>4. Xavier makes a business out of doing up... <br> ${generateSelect({ options: ['house-warming party.', 'mortgage.', 'my own.', 'granny flat.', 'my flat.', 'the garden.', 'old houses.', 'refurbished.'], correct: 'old houses.' })}</div>
+                  <div>5. Our bedroom overlooks... <br> ${generateSelect({ options: ['house-warming party.', 'mortgage.', 'my own.', 'granny flat.', 'my flat.', 'the garden.', 'old houses.', 'refurbished.'], correct: 'the garden.' })}</div>
+                  <div>6. Our house needs to be completely... <br> ${generateSelect({ options: ['house-warming party.', 'mortgage.', 'my own.', 'granny flat.', 'my flat.', 'the garden.', 'old houses.', 'refurbished.'], correct: 'refurbished.' })}</div>
+                  <div>7. I hope that one day I'll have a place of... <br> ${generateSelect({ options: ['house-warming party.', 'mortgage.', 'my own.', 'granny flat.', 'my flat.', 'the garden.', 'old houses.', 'refurbished.'], correct: 'my own.' })}</div>
+                  <div>8. The bank can help if you want to take out a... <br> ${generateSelect({ options: ['house-warming party.', 'mortgage.', 'my own.', 'granny flat.', 'my flat.', 'the garden.', 'old houses.', 'refurbished.'], correct: 'mortgage.' })}</div>
+                </div>
+              </div>`
+          },
+          {
+            tabLabel: "21.3 Correct Errors",
+            html: `
+              <div class="exercise-block bg-indigo-50/50 p-6 rounded-xl border border-indigo-200 shadow-sm">
+                <h3 class="font-bold text-lg mb-4 text-indigo-900 border-b border-indigo-200 pb-2"><i class="fa-solid fa-pen-to-square text-indigo-600 mr-2"></i> 21.3 Correct the collocation errors.</h3>
+                <ol class="list-decimal list-inside space-y-4 pl-2 leading-8 text-gray-700">
+                  <li>We live on a busy road, but we're lucky because we have off-road <span class="line-through text-red-400">park</span> ${generateInput({ correct: ['parking'] })}.</li>
+                  <li>Gemma has moved <span class="line-through text-red-400">off</span> ${generateInput({ correct: ['out'] })} from her old flat and has now got a new place.</li>
+                  <li>We're building an <span class="line-through text-red-400">expansion</span> ${generateInput({ correct: ['extension'] })} to our house which will give us a bigger kitchen.</li>
+                  <li>The flat is <span class="line-through text-red-400">totally</span> ${generateInput({ correct: ['fully'] })} furnished, which is good.</li>
+                  <li>She had to <span class="line-through text-red-400">get</span> ${generateInput({ correct: ['take'] })} out a big mortgage as the house was very expensive.</li>
+                  <li>There is no <span class="line-through text-red-400">buyable</span> ${generateInput({ correct: ['affordable'] })} housing for young people in this area.</li>
+                  <li>New people have <span class="line-through text-red-400">entered into</span> ${generateInput({ correct: ['moved into'] })} the house next door.</li>
+                  <li>It's a very <span class="line-through text-red-400">spatial</span> ${generateInput({ correct: ['spacious'] })} apartment with a huge living room.</li>
+                  <li>The flat is <span class="line-through text-red-400">accessible</span> ${generateInput({ correct: ['available'] })} to rent from the first of March onwards.</li>
+                  <li>My brother and his wife live in a <span class="line-through text-red-400">windy</span> ${generateInput({ correct: ['draughty'] })} old cottage.</li>
+                </ol>
+              </div>`
+          },
+          {
+            tabLabel: "21.4 & 21.5 Replace",
+            html: `
+              <div class="exercise-block bg-white border border-gray-100 rounded-xl p-5 shadow-[0_2px_10px_-3px_rgba(6,81,237,0.1)]">
+                <h3 class="font-bold text-lg mb-4 text-gray-800 flex items-center gap-3 border-b pb-3"><span class="bg-indigo-100 text-indigo-800 px-3 py-1 rounded text-sm shadow-sm">21.4 & 21.5</span> Adverts & 'Home' Collocations</h3>
+                <div class="space-y-6 text-gray-700 leading-8">
+                  <div class="bg-gray-50 p-4 rounded border border-gray-200">
+                    <p class="font-bold mb-2">Replace the underlined phrases in this advert:</p>
+                    All cottages <span class="underline decoration-wavy">let you see</span> ${generateInput({ correct: ['overlook'] })} the River Marn. Ideal for anyone seeking a <span class="underline decoration-wavy">house used only for weekends or holidays</span> ${generateInput({ correct: ['second home'], widthClass: 'w-40' })} in the area.
+                  </div>
+                  
+                  <p class="font-bold">Complete these sentences:</p>
+                  <ol class="list-decimal list-inside space-y-4 pl-2">
+                    <li>Lila's been away a whole year. We must have a party to ${generateInput({ correct: ['welcome her home', 'welcome him home'] })}.</li>
+                    <li>Our son lives at home right now but he'll be 21 soon. He'll finish university and then he'll probably ${generateInput({ correct: ['leave home'] })}.</li>
+                    <li>I've lived here almost a year now and I'm really beginning to ${generateInput({ correct: ['feel at home'] })}.</li>
+                    <li>I'll leave the keys to my flat with the neighbour. Just go in and ${generateInput({ correct: ['make yourself at home'] })}.</li>
+                    <li>Alexis thought she would miss her family when she started her new job but she found she had no time to feel ${generateInput({ correct: ['homesick'] })}.</li>
+                  </ol>
+                </div>
+              </div>`
+          }
+        ]
+      },
+      unit22: {
+        title: "Unit 22: Eating and drinking",
+        theory: [
+          {
+            tabLabel: "Types of Food",
+            html: `
+              <div class="space-y-6">
+                <div class="bg-amber-50 rounded-lg shadow-sm border border-amber-200 overflow-hidden">
+                  <h3 class="bg-amber-500 text-white font-bold p-3 text-lg"><i class="fa-solid fa-burger mr-2"></i> Types of Food</h3>
+                  <div class="p-4 space-y-3 text-sm text-gray-800">
+                    <ul class="list-disc pl-5 space-y-2">
+                      <li><span class="font-bold text-amber-700">junk food:</span> food that is unhealthy but quick and easy to eat.</li>
+                      <li><span class="font-bold text-amber-700">nourishing meals:</span> meals which make you healthy and strong.</li>
+                      <li><span class="font-bold text-amber-700">fresh produce:</span> foods produced from farming (dairy produce, agricultural produce).</li>
+                      <li><span class="font-bold text-amber-700">organic food:</span> grown without chemicals.</li>
+                      <li><span class="font-bold text-amber-700">ready meals:</span> meals already prepared or which just need to be heated.</li>
+                      <li><span class="font-bold text-amber-700">food additives:</span> substances added to food to improve taste/appearance or preserve it.</li>
+                      <li><span class="font-bold text-amber-700">processed foods:</span> foods changed/treated as part of an industrial operation.</li>
+                      <li><span class="font-bold text-amber-700">GM foods:</span> genetically modified foods.</li>
+                      <li><span class="font-bold text-amber-700">perishable food:</span> food which goes bad quickly, e.g. cheese, fish.</li>
+                      <li><span class="font-bold text-amber-700">food poisoning:</span> illness caused by eating bad food.</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>`
+          },
+          {
+            tabLabel: "Eating & Drinking",
+            html: `
+              <div class="space-y-6">
+                <div class="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
+                  <h3 class="bg-emerald-500 text-white font-bold p-3 text-lg"><i class="fa-solid fa-utensils mr-2"></i> Eating and Drinking</h3>
+                  <div class="p-4 space-y-4 text-sm text-gray-800">
+                    <p class="font-bold text-emerald-700 border-b border-emerald-100 pb-1">Collocations:</p>
+                    <ul class="list-disc pl-5 space-y-2">
+                      <li><span class="font-bold">light meal</span> OR <span class="font-bold">substantial meal</span> (large meal)</li>
+                      <li><span class="font-bold">quick snack</span></li>
+                      <li><span class="font-bold">refreshing drink</span></li>
+                      <li><span class="font-bold">dying of hunger!</span> (very hungry)</li>
+                      <li><span class="font-bold">decent meal:</span> a proper, satisfying meal</li>
+                      <li><span class="font-bold">healthy appetite:</span> capability of eating a lot</li>
+                      <li><span class="font-bold">hearty breakfast:</span> large breakfast</li>
+                      <li><span class="font-bold">soft drink:</span> non-alcoholic drink</li>
+                      <li><span class="font-bold">spoil your appetite:</span> eat something that makes you no longer hungry for your main meal</li>
+                      <li><span class="font-bold">set menu:</span> fixed items on a menu</li>
+                      <li><span class="font-bold">reasonably priced:</span> not too expensive</li>
+                      <li><span class="font-bold">slap-up meal:</span> unusually large and good</li>
+                      <li><span class="font-bold">gourmet meal:</span> high-quality</li>
+                      <li><span class="font-bold">tasty, home-cooked food</span></li>
+                    </ul>
+                    
+                    <div class="bg-red-50 p-3 rounded border border-red-100 mt-4">
+                      <p class="font-bold text-red-800 text-xs uppercase">Common Mistakes</p>
+                      <p>We say <span class="font-bold">international food/cuisine</span>, NOT world-wide food. <br>A <span class="font-bold">Chinese meal</span> is what you eat in a restaurant. When referring in general to the food of a country, we say <span class="font-bold">Chinese food/cooking/cuisine</span>.</p>
+                    </div>
+                  </div>
+                </div>
+              </div>`
+          }
+        ],
+        exercises: [
+          {
+            tabLabel: "22.1 Match",
+            html: `
+              <div class="exercise-block bg-white border border-gray-100 rounded-xl p-5 shadow-[0_2px_10px_-3px_rgba(6,81,237,0.1)]">
+                <h3 class="font-bold text-lg mb-4 text-gray-800 flex items-center gap-3 border-b pb-3"><span class="bg-indigo-100 text-indigo-800 px-3 py-1 rounded text-sm shadow-sm">22.1</span> Match the words.</h3>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 leading-8 text-gray-700 font-medium">
+                  <div>1. set ${generateSelect({ options: ['additives', 'food', 'produce', 'menu', 'meals'], correct: 'menu' })}</div>
+                  <div>2. food ${generateSelect({ options: ['additives', 'food', 'produce', 'menu', 'meals'], correct: 'additives' })}</div>
+                  <div>3. junk ${generateSelect({ options: ['additives', 'food', 'produce', 'menu', 'meals'], correct: 'food' })}</div>
+                  <div>4. ready ${generateSelect({ options: ['additives', 'food', 'produce', 'menu', 'meals'], correct: 'meals' })}</div>
+                  <div>5. fresh ${generateSelect({ options: ['additives', 'food', 'produce', 'menu', 'meals'], correct: 'produce' })}</div>
+                </div>
+              </div>`
+          },
+          {
+            tabLabel: "22.2 Fill",
+            html: `
+              <div class="exercise-block bg-white border border-gray-100 rounded-xl p-5 shadow-[0_2px_10px_-3px_rgba(6,81,237,0.1)]">
+                <h3 class="font-bold text-lg mb-4 text-gray-800 flex items-center gap-3 border-b pb-3"><span class="bg-indigo-100 text-indigo-800 px-3 py-1 rounded text-sm shadow-sm">22.2</span> Complete using the collocations from 22.1.</h3>
+                <ol class="list-decimal list-inside space-y-4 pl-2 leading-8 text-gray-700">
+                  <li>${generateInput({ correct: ['Food additives'] })} such as artificial flavours and colouring can cause allergies.</li>
+                  <li>${generateInput({ correct: ['Junk food'] })} may be unhealthy, but it's quick and easy and fills you up.</li>
+                  <li>People who don't have much time to cook often buy ${generateInput({ correct: ['ready meals'] })} from the supermarket.</li>
+                  <li>It's always better to buy ${generateInput({ correct: ['fresh produce'] })} instead of canned or frozen foods.</li>
+                  <li>The ${generateInput({ correct: ['set menu'] })} is usually cheaper than ordering dishes separately in a restaurant.</li>
+                </ol>
+              </div>`
+          },
+          {
+            tabLabel: "22.3 Questions",
+            html: `
+              <div class="exercise-block bg-white border border-gray-100 rounded-xl p-5 shadow-[0_2px_10px_-3px_rgba(6,81,237,0.1)]">
+                <h3 class="font-bold text-lg mb-4 text-gray-800 flex items-center gap-3 border-b pb-3"><span class="bg-indigo-100 text-indigo-800 px-3 py-1 rounded text-sm shadow-sm">22.3</span> Read these remarks, then answer.</h3>
+                <div class="bg-amber-50/50 p-4 rounded border border-amber-100 mb-6 text-sm text-gray-700 space-y-1">
+                  <p><span class="font-bold text-amber-800">Logan:</span> I've got some cheese and milk. Is there a fridge here I could put them in?</p>
+                  <p><span class="font-bold text-amber-800">Connor:</span> I feel so hungry! I can't believe it!</p>
+                  <p><span class="font-bold text-amber-800">Layla:</span> I've been sick and my stomach is aching. Must be something I ate.</p>
+                  <p><span class="font-bold text-amber-800">Michael:</span> No matter how much I eat, I always want more.</p>
+                  <p><span class="font-bold text-amber-800">Scarlett:</span> All these vegetables have been grown without any chemicals at all.</p>
+                  <p><span class="font-bold text-amber-800">Bella:</span> I always enjoy my food and look forward to it.</p>
+                </div>
+                <ol class="list-decimal list-inside space-y-4 pl-2 leading-8 text-gray-700">
+                  <li>Who has organic food? <i class="fa-solid fa-arrow-right text-gray-300 mx-2"></i> ${generateSelect({ options: ['Logan', 'Connor', 'Layla', 'Michael', 'Scarlett', 'Bella'], correct: 'Scarlett' })}</li>
+                  <li>Who has a healthy/insatiable appetite? <i class="fa-solid fa-arrow-right text-gray-300 mx-2"></i> ${generateSelect({ options: ['Logan', 'Connor', 'Layla', 'Michael', 'Scarlett', 'Bella'], correct: 'Michael' })}</li>
+                  <li>Who has perishable food? <i class="fa-solid fa-arrow-right text-gray-300 mx-2"></i> ${generateSelect({ options: ['Logan', 'Connor', 'Layla', 'Michael', 'Scarlett', 'Bella'], correct: 'Logan' })}</li>
+                  <li>Who has a healthy appetite (enjoys food)? <i class="fa-solid fa-arrow-right text-gray-300 mx-2"></i> ${generateSelect({ options: ['Logan', 'Connor', 'Layla', 'Michael', 'Scarlett', 'Bella'], correct: 'Bella' })}</li>
+                  <li>Who has food poisoning? <i class="fa-solid fa-arrow-right text-gray-300 mx-2"></i> ${generateSelect({ options: ['Logan', 'Connor', 'Layla', 'Michael', 'Scarlett', 'Bella'], correct: 'Layla' })}</li>
+                  <li>Who is dying of hunger? <i class="fa-solid fa-arrow-right text-gray-300 mx-2"></i> ${generateSelect({ options: ['Logan', 'Connor', 'Layla', 'Michael', 'Scarlett', 'Bella'], correct: 'Connor' })}</li>
+                </ol>
+              </div>`
+          },
+          {
+            tabLabel: "22.4 Replace",
+            html: `
+              <div class="exercise-block bg-amber-50/50 p-6 rounded-xl border border-amber-200 shadow-sm">
+                <h3 class="font-bold text-lg mb-4 text-amber-900 border-b border-amber-200 pb-2"><i class="fa-solid fa-pen-to-square text-amber-600 mr-2"></i> 22.4 Replace the underlined words</h3>
+                <ol class="list-decimal list-inside space-y-5 pl-2 leading-8 text-gray-700">
+                  <li>Foods which are <span class="underline decoration-wavy decoration-red-400">changed or treated as part of an industrial operation</span> ${generateInput({ correct: ['processed foods'], widthClass: 'w-40' })} may damage our health in the long term.</li>
+                  <li>Some people always have three full meals a day, but I prefer a large breakfast, a small meal around midday and a more <span class="underline decoration-wavy decoration-red-400">sizeable meal</span> ${generateInput({ correct: ['substantial meal'], widthClass: 'w-40' })} in the evening.</li>
+                  <li>There are some overpriced restaurants in the city centre, but down at the beach, there are some nice, <span class="underline decoration-wavy decoration-red-400">not too expensively priced</span> ${generateInput({ correct: ['reasonably priced'], widthClass: 'w-40' })} ones.</li>
+                  <li>On my birthday my parents took me out for a big, good meal. They wanted to go for a <span class="underline decoration-wavy decoration-red-400">very high quality meal</span> ${generateInput({ correct: ['gourmet meal'], widthClass: 'w-40' })} but I said I'd prefer something more ordinary.</li>
+                  <li>Iced tea is a <span class="underline decoration-wavy decoration-red-400">drink that cools you</span> ${generateInput({ correct: ['refreshing drink'], widthClass: 'w-40' })} on a hot day, and is better than non-alcoholic drinks.</li>
+                  <li>Let me take you out to dinner on your birthday. Or would you prefer a meal <span class="underline decoration-wavy decoration-red-400">prepared at home</span> ${generateInput({ correct: ['home-cooked food', 'home-cooked meal'], widthClass: 'w-40' })}?</li>
+                </ol>
+              </div>`
+          }
+        ]
+      },
+      unit23: {
+        title: "Unit 23: Films and books",
+        theory: [
+          {
+            tabLabel: "Films & Books",
+            html: `
+              <div class="space-y-6">
+                <div class="bg-indigo-50 rounded-lg shadow-sm border border-indigo-200 overflow-hidden">
+                  <h3 class="bg-indigo-600 text-white font-bold p-3 text-lg"><i class="fa-solid fa-clapperboard mr-2"></i> Talking about films & books</h3>
+                  <div class="p-4 space-y-3 text-sm text-gray-800">
+                    <ul class="list-disc pl-5 space-y-2">
+                      <li><span class="font-bold text-indigo-700">book reviewers / film critics:</span> people who review books/films.</li>
+                      <li><span class="font-bold text-indigo-700">write reviews:</span> they write book/film reviews.</li>
+                      <li><span class="font-bold text-indigo-700">give it a bad review:</span> if they don't like it. (NOT criticise a book/film, which means to say negative things about it, but not as a formal review).</li>
+                      <li><span class="font-bold text-indigo-700">based on a true story.</span></li>
+                      <li><span class="font-bold text-indigo-700">captures an atmosphere:</span> shows the feeling of a place/time perfectly.</li>
+                      <li><span class="font-bold text-indigo-700">deals with a topic.</span></li>
+                      <li><span class="font-bold text-indigo-700">opening/closing scenes</span> (of a film) and <span class="font-bold text-indigo-700">opening/closing chapters</span> (of a book).</li>
+                      <li><span class="font-bold text-indigo-700">beginning and end</span> (NOT start and finish).</li>
+                      <li><span class="font-bold text-indigo-700">happy ending:</span> everything works out well.</li>
+                      <li><span class="font-bold text-indigo-700">highly recommended:</span> a lot of people enjoyed it.</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>`
+          },
+          {
+            tabLabel: "Acting & Cinema",
+            html: `
+              <div class="space-y-6">
+                <div class="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
+                  <h3 class="bg-rose-500 text-white font-bold p-3 text-lg"><i class="fa-solid fa-masks-theater mr-2"></i> Just about films and acting</h3>
+                  <div class="p-4 space-y-4 text-sm text-gray-800">
+                    <ul class="list-disc pl-5 space-y-2">
+                      <li><span class="font-bold text-rose-700">go on the stage:</span> become an actor.</li>
+                      <li><span class="font-bold text-rose-700">the big screen:</span> the cinema.</li>
+                      <li><span class="font-bold text-rose-700">special effects:</span> powerful visual effects created using technology.</li>
+                      <li><span class="font-bold text-rose-700">male lead / female lead:</span> main parts.</li>
+                      <li><span class="font-bold text-rose-700">play the role of...</span></li>
+                      <li><span class="font-bold text-rose-700">cameo role:</span> small but special part.</li>
+                      <li><span class="font-bold text-rose-700">give an excellent performance.</span></li>
+                      <li><span class="font-bold text-rose-700">nominated for an Oscar:</span> put on the official list of potential prize winners.</li>
+                      <li><span class="font-bold text-rose-700">box-office hit:</span> extremely successful with audiences.</li>
+                      <li><span class="font-bold text-rose-700">playing to full houses:</span> cinemas/theatres with no empty seats.</li>
+                      <li><span class="font-bold text-rose-700">cast a film</span> [select actors], <span class="font-bold text-rose-700">star in a film</span>, <span class="font-bold text-rose-700">shoot a film</span>, <span class="font-bold text-rose-700">make a film</span>.</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>`
+          },
+          {
+            tabLabel: "Reading",
+            html: `
+              <div class="space-y-6">
+                <div class="bg-emerald-50 rounded-lg shadow-sm border border-emerald-200 overflow-hidden">
+                  <h3 class="bg-emerald-600 text-white font-bold p-3 text-lg"><i class="fa-solid fa-book-open mr-2"></i> Just about books and reading</h3>
+                  <div class="p-4 space-y-3 text-sm text-gray-800">
+                    <ul class="list-disc pl-5 space-y-2">
+                      <li><span class="font-bold text-emerald-700">engrossed / absorbed in a book:</span> concentrating deeply on it.</li>
+                      <li><span class="font-bold text-emerald-700">compulsive reading:</span> so interesting you can't stop reading.</li>
+                      <li><span class="font-bold text-emerald-700">bedtime reading:</span> good to read before sleeping.</li>
+                      <li><span class="font-bold text-emerald-700">an easy read:</span> good for train journeys, not difficult.</li>
+                      <li><span class="font-bold text-emerald-700">download an audiobook / an e-book reader app.</span></li>
+                      <li><span class="font-bold text-emerald-700">flick / skim through a book:</span> read without reading in detail.</li>
+                      <li><span class="font-bold text-emerald-700">beautifully written.</span></li>
+                    </ul>
+                  </div>
+                </div>
+              </div>`
+          }
+        ],
+        exercises: [
+          {
+            tabLabel: "23.1 Replace",
+            html: `
+              <div class="exercise-block bg-white border border-gray-100 rounded-xl p-5 shadow-[0_2px_10px_-3px_rgba(6,81,237,0.1)]">
+                <h3 class="font-bold text-lg mb-4 text-gray-800 flex items-center gap-3 border-b pb-3"><span class="bg-indigo-100 text-indigo-800 px-3 py-1 rounded text-sm shadow-sm">23.1</span> Improve the conversation by replacing the underlined words.</h3>
+                <div class="space-y-4 leading-8 text-gray-700">
+                  <p><span class="font-bold text-indigo-900">Matthew:</span> Have you <span class="underline decoration-wavy">downloaded that new e-book that has just appeared</span> ${generateInput({ correct: ['downloaded that new e-book that has just come out', 'downloaded an e-book', 'downloaded'], widthClass: 'w-64' })} about Ireland?</p>
+                  <p><span class="font-bold text-indigo-900">Camilla:</span> No, I don't use my <span class="underline decoration-wavy">e-book reader application</span> ${generateInput({ correct: ['e-book reader app'] })} much and I don't visit websites with <span class="underline decoration-wavy">articles discussing new books</span> ${generateInput({ correct: ['book reviews', 'reviews'] })}.</p>
+                  <p><span class="font-bold text-indigo-900">Matthew:</span> Well, it <span class="underline decoration-wavy">concerns</span> ${generateInput({ correct: ['deals with'] })} the Irish War of Independence. It's very authentic and it manages to <span class="underline decoration-wavy">give the atmosphere</span> ${generateInput({ correct: ['capture the atmosphere', 'capture an atmosphere'] })} of Ireland.</p>
+                  <p><span class="font-bold text-indigo-900">Matthew:</span> The <span class="underline decoration-wavy">main people</span> ${generateInput({ correct: ['central characters'] })} are two brothers. In the <span class="underline decoration-wavy">first chapters</span> ${generateInput({ correct: ['opening chapters'] })} they're happy, but by the <span class="underline decoration-wavy">last chapter</span> ${generateInput({ correct: ['closing chapter'] })} they have become enemies.</p>
+                  <p><span class="font-bold text-indigo-900">Matthew:</span> Well, it certainly doesn't <span class="underline decoration-wavy">finish in a happy way</span> ${generateInput({ correct: ['have a happy ending'] })}, but I liked it, and it's <span class="underline decoration-wavy">recommended very much</span> ${generateInput({ correct: ['highly recommended'] })} by all the critics.</p>
+                </div>
+              </div>`
+          },
+          {
+            tabLabel: "23.2 Definitions",
+            html: `
+              <div class="exercise-block bg-white border border-gray-100 rounded-xl p-5 shadow-[0_2px_10px_-3px_rgba(6,81,237,0.1)]">
+                <h3 class="font-bold text-lg mb-4 text-gray-800 flex items-center gap-3 border-b pb-3"><span class="bg-indigo-100 text-indigo-800 px-3 py-1 rounded text-sm shadow-sm">23.2</span> Solve the clues (Adapted from the Crossword).</h3>
+                <ol class="list-decimal list-inside space-y-4 pl-2 leading-8 text-gray-700 font-medium">
+                  <li>I was completely ${generateInput({ correct: ['absorbed', 'engrossed'] })} in my book and didn't realise how late it had got.</li>
+                  <li>Small but special part in a film/play: a ${generateInput({ correct: ['cameo'] })} role.</li>
+                  <li>The film was ${generateInput({ correct: ['nominated'] })} for an Oscar but it didn't win.</li>
+                  <li>It was an amazing film about space travel, with fantastic special ${generateInput({ correct: ['effects'] })}.</li>
+                  <li>He's always wanted to be an actor on the ${generateInput({ correct: ['big'] })} screen.</li>
+                  <li>Who played the male ${generateInput({ correct: ['lead'] })} in the new film?</li>
+                </ol>
+              </div>`
+          },
+          {
+            tabLabel: "23.3 & 23.4 Match",
+            html: `
+              <div class="exercise-block bg-indigo-50/50 p-6 rounded-xl border border-indigo-200 shadow-sm">
+                <h3 class="font-bold text-lg mb-4 text-indigo-900 border-b border-indigo-200 pb-2"><i class="fa-solid fa-link text-indigo-600 mr-2"></i> 23.3 Match & 23.4 Complete</h3>
+                <p class="font-bold text-gray-800 mb-2">Match the words:</p>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 leading-8 text-gray-700 font-medium mb-8">
+                  <div>1. full ${generateSelect({ options: ['screen', 'lead', 'reading', 'hit', 'house'], correct: 'house' })}</div>
+                  <div>2. female ${generateSelect({ options: ['screen', 'lead', 'reading', 'hit', 'house'], correct: 'lead' })}</div>
+                  <div>3. big ${generateSelect({ options: ['screen', 'lead', 'reading', 'hit', 'house'], correct: 'screen' })}</div>
+                  <div>4. bedtime ${generateSelect({ options: ['screen', 'lead', 'reading', 'hit', 'house'], correct: 'reading' })}</div>
+                  <div>5. box-office ${generateSelect({ options: ['screen', 'lead', 'reading', 'hit', 'house'], correct: 'hit' })}</div>
+                </div>
+                
+                <p class="font-bold text-gray-800 mb-2 border-t border-indigo-200 pt-4">Complete the collocations:</p>
+                <ol class="list-decimal list-inside space-y-4 pl-2 leading-8 text-gray-700 font-medium">
+                  <li>shoot / star in / make a ${generateInput({ correct: ['film'] })}</li>
+                  <li>download an ${generateInput({ correct: ['audiobook', 'e-book reader app'] })}</li>
+                  <li>flick / skim through a ${generateInput({ correct: ['book'] })}</li>
+                  <li>compulsive / bedtime ${generateInput({ correct: ['reading'] })}</li>
+                </ol>
+              </div>`
+          }
+        ]
+      },
+      unit24: {
+        title: "Unit 24: Music",
+        theory: [
+          {
+            tabLabel: "Describing Music",
+            html: `
+              <div class="space-y-6">
+                <div class="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
+                  <h3 class="bg-indigo-600 text-white font-bold p-3 text-lg"><i class="fa-solid fa-music mr-2"></i> Describing Music</h3>
+                  <div class="p-4 space-y-4 text-sm text-gray-800">
+                    <p class="font-bold text-indigo-900 border-b border-indigo-100 pb-1">Pop & Rock:</p>
+                    <ul class="list-disc pl-5 space-y-2">
+                      <li><span class="font-bold text-indigo-700">rock music scene:</span> the world of rock music.</li>
+                      <li><span class="font-bold text-indigo-700">background music:</span> music playing while you do something else.</li>
+                      <li><span class="font-bold text-indigo-700">blast out from:</span> sound extremely loud.</li>
+                      <li><span class="font-bold text-indigo-700">debut album:</span> presented to the public for the first time.</li>
+                      <li><span class="font-bold text-indigo-700">live performance:</span> playing to a real audience.</li>
+                      <li><span class="font-bold text-indigo-700">easy listening / catchy tunes:</span> not serious/difficult, pleasant to remember.</li>
+                      <li><span class="font-bold text-indigo-700">sentimental performance:</span> emotional.</li>
+                      <li><span class="font-bold text-indigo-700">pop idol / adoring fans:</span> very big star with many fans.</li>
+                      <li><span class="font-bold text-indigo-700">massive hit:</span> very successful song.</li>
+                      <li><span class="font-bold text-indigo-700">huge following / go on tour:</span> many fans / travelling to play concerts.</li>
+                      <li><span class="font-bold text-indigo-700">rap artist / went solo:</span> hip-hop singer / left the band to perform alone.</li>
+                      <li><span class="font-bold text-indigo-700">remixed tracks / up-tempo numbers:</span> made new versions / played at a fast beat.</li>
+                    </ul>
+
+                    <p class="font-bold text-indigo-900 border-b border-indigo-100 pb-1 mt-4">Classical:</p>
+                    <ul class="list-disc pl-5 space-y-2">
+                      <li><span class="font-bold text-indigo-700">haunting melodies:</span> beautiful, sad, memorable tunes.</li>
+                      <li><span class="font-bold text-indigo-700">virtuoso performance:</span> extremely skilful.</li>
+                      <li><span class="font-bold text-indigo-700">capture a wider audience:</span> get more people to listen.</li>
+                      <li><span class="font-bold text-indigo-700">musical heritage:</span> musical traditions from the past.</li>
+                      <li><span class="font-bold text-indigo-700">conduct the orchestra / compose pieces:</span> direct the musicians / write music.</li>
+                      <li><span class="font-bold text-indigo-700">music lover:</span> fan.</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>`
+          },
+          {
+            tabLabel: "Playing Music",
+            html: `
+              <div class="space-y-6">
+                <div class="bg-amber-50 rounded-lg shadow-sm border border-amber-200 overflow-hidden">
+                  <h3 class="bg-amber-500 text-white font-bold p-3 text-lg"><i class="fa-solid fa-guitar mr-2"></i> Playing Music</h3>
+                  <div class="p-4 space-y-3 text-sm text-gray-800">
+                    <ul class="list-disc pl-5 space-y-2">
+                      <li><span class="font-bold text-amber-700">strumming a guitar:</span> playing by moving fingers across the strings.</li>
+                      <li><span class="font-bold text-amber-700">musical talent:</span> natural ability to play music.</li>
+                      <li><span class="font-bold text-amber-700">taken up the guitar:</span> started learning it.</li>
+                      <li><span class="font-bold text-amber-700">live music:</span> music played in person, not recorded.</li>
+                      <li><span class="font-bold text-amber-700">tuning the instrument:</span> tightening/loosening strings to make the correct note.</li>
+                      <li><span class="font-bold text-amber-700">play a piece:</span> perform a specific item of music.</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>`
+          }
+        ],
+        exercises: [
+          {
+            tabLabel: "24.1 Opposites",
+            html: `
+              <div class="exercise-block bg-white border border-gray-100 rounded-xl p-5 shadow-[0_2px_10px_-3px_rgba(6,81,237,0.1)]">
+                <h3 class="font-bold text-lg mb-4 text-gray-800 flex items-center gap-3 border-b pb-3"><span class="bg-indigo-100 text-indigo-800 px-3 py-1 rounded text-sm shadow-sm">24.1</span> Change the underlined words so the sentence has the opposite meaning.</h3>
+                <ol class="list-decimal list-inside space-y-4 pl-2 leading-8 text-gray-700 font-medium">
+                  <li>The band's last album was a <span class="underline decoration-dotted">minor</span> ${generateInput({ correct: ['massive', 'big'] })} hit.</li>
+                  <li>There are some great <span class="underline decoration-dotted">slow</span> ${generateInput({ correct: ['up-tempo'] })} numbers on this new album.</li>
+                  <li>The band has a <span class="underline decoration-dotted">small</span> ${generateInput({ correct: ['huge'] })} following of dedicated fans.</li>
+                  <li>Music was playing <span class="underline decoration-dotted">quietly</span> ${generateInput({ correct: ['blasting out'] })} on the hi-fi when I entered the house.</li>
+                  <li>Maria gave a <span class="underline decoration-dotted">poor</span> ${generateInput({ correct: ['virtuoso'] })} performance of the violin concerto last night.</li>
+                </ol>
+              </div>`
+          },
+          {
+            tabLabel: "24.2 Correct Errors",
+            html: `
+              <div class="exercise-block bg-indigo-50/50 p-6 rounded-xl border border-indigo-200 shadow-sm">
+                <h3 class="font-bold text-lg mb-4 text-indigo-900 border-b border-indigo-200 pb-2"><i class="fa-solid fa-pen-to-square text-indigo-600 mr-2"></i> 24.2 Correct the 8 collocation errors.</h3>
+                <div class="leading-[3rem] bg-white p-5 rounded-lg shadow-sm border border-indigo-100 text-gray-700">
+                  For all folk <span class="underline decoration-wavy decoration-red-400">music likers</span> ${generateInput({ correct: ['music lovers'] })}, Johnny's new album, 
+                  <span class="underline decoration-wavy decoration-red-400">published</span> ${generateInput({ correct: ['released'] })} last week, will be a great addition. 
+                  Johny recently <span class="underline decoration-wavy decoration-red-400">got solo</span> ${generateInput({ correct: ['went solo'] })} after five years with a band. 
+                  He is proud of the <span class="underline decoration-wavy decoration-red-400">musical inheritance</span> ${generateInput({ correct: ['musical heritage'] })} of his native Kentucky. 
+                  Tracks 3 and 7 <span class="underline decoration-wavy decoration-red-400">comprise</span> ${generateInput({ correct: ['feature'] })} his old friend Wiz on guitar. 
+                  With this album Coppin says he hopes to <span class="underline decoration-wavy decoration-red-400">control</span> ${generateInput({ correct: ['capture'] })} a wider audience. 
+                  His excellent <span class="underline decoration-wavy decoration-red-400">living performance</span> ${generateInput({ correct: ['live performance'] })} at the recent Festival suggests he has a good chance. 
+                  He <span class="underline decoration-wavy decoration-red-400">makes a tour</span> ${generateInput({ correct: ['goes on tour'] })} next month. Don't miss him.
+                </div>
+              </div>`
+          },
+          {
+            tabLabel: "24.3 Meanings",
+            html: `
+              <div class="exercise-block bg-white border border-gray-100 rounded-xl p-5 shadow-[0_2px_10px_-3px_rgba(6,81,237,0.1)]">
+                <h3 class="font-bold text-lg mb-4 text-gray-800 flex items-center gap-3 border-b pb-3"><span class="bg-indigo-100 text-indigo-800 px-3 py-1 rounded text-sm shadow-sm">24.3</span> What word(s) mean...</h3>
+                <ol class="list-decimal list-inside space-y-4 pl-2 leading-8 text-gray-700">
+                  <li>... music playing while doing something else? <i class="fa-solid fa-arrow-right text-gray-300 mx-2"></i> ${generateInput({ correct: ['background music'] })}</li>
+                  <li>... music that is not complicated or difficult to listen to? <i class="fa-solid fa-arrow-right text-gray-300 mx-2"></i> ${generateInput({ correct: ['easy listening'] })}</li>
+                  <li>... a pop musician who is a very big star with many fans? <i class="fa-solid fa-arrow-right text-gray-300 mx-2"></i> a ${generateInput({ correct: ['pop idol'] })}</li>
+                  <li>... a performer who speaks rhymed lyrics over rhythm tracks? <i class="fa-solid fa-arrow-right text-gray-300 mx-2"></i> a ${generateInput({ correct: ['rap artist'] })}</li>
+                  <li>... tighten/loosen strings to make the correct note? <i class="fa-solid fa-arrow-right text-gray-300 mx-2"></i> ${generateInput({ correct: ['tuning'] })}</li>
+                  <li>... play guitar by moving fingers across strings? <i class="fa-solid fa-arrow-right text-gray-300 mx-2"></i> ${generateInput({ correct: ['strumming'] })}</li>
+                </ol>
+              </div>`
+          },
+          {
+            tabLabel: "24.4 Complete",
+            html: `
+              <div class="exercise-block bg-white border border-gray-100 rounded-xl p-5 shadow-[0_2px_10px_-3px_rgba(6,81,237,0.1)]">
+                <h3 class="font-bold text-lg mb-4 text-gray-800 flex items-center gap-3 border-b pb-3"><span class="bg-indigo-100 text-indigo-800 px-3 py-1 rounded text-sm shadow-sm">24.4</span> Complete these sentences.</h3>
+                <ol class="list-decimal list-inside space-y-4 pl-2 leading-8 text-gray-700">
+                  <li>Hundreds of ${generateInput({ correct: ['adoring'] })} fans were waiting for Shamira to come out.</li>
+                  <li>The orchestra gave a wonderful ${generateInput({ correct: ['performance'] })} of some popular classics.</li>
+                  <li>It was a very ${generateInput({ correct: ['catchy'] })} tune; you only heard it once and you were singing it.</li>
+                  <li>I'd love to ${generateInput({ correct: ['take'] })} up a musical instrument but I don't have time.</li>
+                  <li>It is one of those ${generateInput({ correct: ['haunting'] })} melodies which you never forget, so beautiful, yet so sad.</li>
+                  <li>There's a lot of musical ${generateInput({ correct: ['talent'] })} in the family; all the children play.</li>
+                </ol>
+              </div>`
+          }
+        ]
+      },
+      unit25: {
+        title: "Unit 25: Sport",
+        theory: [
+          {
+            tabLabel: "Do, Play, Go",
+            html: `
+              <div class="space-y-6">
+                <div class="bg-emerald-50 rounded-lg shadow-sm border border-emerald-200 overflow-hidden">
+                  <h3 class="bg-emerald-600 text-white font-bold p-3 text-lg"><i class="fa-solid fa-person-running mr-2"></i> Do, play and go</h3>
+                  <div class="overflow-x-auto">
+                    <table class="w-full text-sm text-left">
+                      <thead class="bg-emerald-100 text-emerald-900 border-b border-emerald-200">
+                        <tr>
+                          <th class="p-3 font-bold w-1/4">Verb</th>
+                          <th class="p-3 font-bold">Collocates with...</th>
+                        </tr>
+                      </thead>
+                      <tbody class="divide-y divide-gray-100 text-gray-800 bg-white">
+                        <tr class="hover:bg-gray-50">
+                          <td class="p-3 font-bold text-emerald-700">You DO</td>
+                          <td class="p-3">gymnastics, judo, weightlifting, aerobics, yoga, wrestling, circuit training, archery, athletics</td>
+                        </tr>
+                        <tr class="hover:bg-gray-50">
+                          <td class="p-3 font-bold text-emerald-700">You PLAY</td>
+                          <td class="p-3">games, badminton, billiards, hockey, bowls, rugby, golf, (table) tennis, cricket, baseball, chess, darts, cards, dominoes</td>
+                        </tr>
+                        <tr class="hover:bg-gray-50">
+                          <td class="p-3 font-bold text-emerald-700">You GO</td>
+                          <td class="p-3">fishing, skiing, bowling, cycling, skateboarding, surfing, snowboarding, hang-gliding, climbing, hill walking, sailing, jogging, swimming</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                  <div class="p-4 bg-red-50 text-sm text-gray-800 border-t border-red-100">
+                    <p class="font-bold text-red-800 text-xs uppercase mb-1">Common Mistakes</p>
+                    <ul class="list-disc pl-5">
+                      <li>You <span class="font-bold">do or play sport</span>. (NOT make sport)</li>
+                      <li>You <span class="font-bold">do exercises</span>. (NOT make exercises)</li>
+                      <li>You <span class="font-bold">play computer games</span>. (NOT do games)</li>
+                      <li>You <span class="font-bold">have/play a game of cards</span>. (NOT make a game)</li>
+                      <li>You <span class="font-bold">go skiing</span>. (NOT make skiing)</li>
+                      <li>You <span class="font-bold">do activities</span>. (NOT make or practise activities)</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>`
+          },
+          {
+            tabLabel: "Winning & Losing",
+            html: `
+              <div class="space-y-6">
+                <div class="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
+                  <h3 class="bg-amber-500 text-white font-bold p-3 text-lg"><i class="fa-solid fa-trophy mr-2"></i> Winning and losing</h3>
+                  <div class="p-4 space-y-3 text-sm text-gray-800">
+                    <ul class="list-disc pl-5 space-y-2">
+                      <li><span class="font-bold text-amber-600">win matches / lose matches</span></li>
+                      <li><span class="font-bold text-amber-600">narrowly defeated/beaten:</span> lose by a very small amount.</li>
+                      <li><span class="font-bold text-amber-600">go in for / enter a competition</span></li>
+                      <li><span class="font-bold text-amber-600">train hard / attend (do) training sessions</span></li>
+                      <li><span class="font-bold text-amber-600">put up a fight:</span> try hard to win.</li>
+                      <li><span class="font-bold text-amber-600">gain/get a place:</span> advance in a tournament.</li>
+                      <li><span class="font-bold text-amber-600">stage/round</span> of the competition</li>
+                      <li><span class="font-bold text-amber-600">break/set a world record</span> &rarr; become a <span class="font-bold text-amber-600">world record holder</span></li>
+                      <li><span class="font-bold text-amber-600">come up against fierce/intense competition</span></li>
+                      <li><span class="font-bold text-amber-600">achieve a personal best:</span> do the best you have ever done.</li>
+                      <li><span class="font-bold text-amber-600">enhance your performance:</span> make it better (often used illegally with drugs).</li>
+                      <li><span class="font-bold text-amber-600">fail a drugs test</span></li>
+                    </ul>
+                  </div>
+                </div>
+              </div>`
+          },
+          {
+            tabLabel: "Football",
+            html: `
+              <div class="space-y-6">
+                <div class="bg-blue-50 rounded-lg shadow-sm border border-blue-200 overflow-hidden">
+                  <h3 class="bg-blue-600 text-white font-bold p-3 text-lg"><i class="fa-regular fa-futbol mr-2"></i> Football</h3>
+                  <div class="p-4 space-y-3 text-sm text-gray-800">
+                    <ul class="list-disc pl-5 space-y-2">
+                      <li><span class="font-bold text-blue-700">play / have a match / game</span></li>
+                      <li><span class="font-bold text-blue-700">home match / away match</span></li>
+                      <li><span class="font-bold text-blue-700">score a goal</span></li>
+                      <li><span class="font-bold text-blue-700">tackle an opponent:</span> try to take the ball from them.</li>
+                      <li><span class="font-bold text-blue-700">take possession of the ball:</span> get the ball.</li>
+                      <li><span class="font-bold text-blue-700">foul your opponent:</span> tackle illegally.</li>
+                      <li><span class="font-bold text-blue-700">blow his whistle</span> (the referee).</li>
+                      <li><span class="font-bold text-blue-700">take a penalty / take a free kick</span></li>
+                      <li><span class="font-bold text-blue-700">drop the player:</span> remove them from the team.</li>
+                      <li><span class="font-bold text-blue-700">bring on a substitute:</span> replace one player with another during the game.</li>
+                      <li><span class="font-bold text-blue-700">taken the lead:</span> be in a winning position.</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>`
+          }
+        ],
+        exercises: [
+          {
+            tabLabel: "25.1 Verb choice",
+            html: `
+              <div class="exercise-block bg-white border border-gray-100 rounded-xl p-5 shadow-[0_2px_10px_-3px_rgba(16,185,129,0.1)]">
+                <h3 class="font-bold text-lg mb-4 text-gray-800 flex items-center gap-3 border-b pb-3"><span class="bg-emerald-100 text-emerald-800 px-3 py-1 rounded text-sm shadow-sm">25.1</span> Complete with DO, PLAY or GO.</h3>
+                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 leading-8 text-gray-700 font-medium">
+                  <div>${generateInput({ correct: ['do'], widthClass: 'w-16' })} weight lifting!</div>
+                  <div>${generateInput({ correct: ['do'], widthClass: 'w-16' })} judo!</div>
+                  <div>${generateInput({ correct: ['play'], widthClass: 'w-16' })} badminton!</div>
+                  <div>${generateInput({ correct: ['go'], widthClass: 'w-16' })} swimming!</div>
+                  <div>${generateInput({ correct: ['play'], widthClass: 'w-16' })} table tennis!</div>
+                  <div>${generateInput({ correct: ['go'], widthClass: 'w-16' })} skateboarding!</div>
+                  <div>${generateInput({ correct: ['play'], widthClass: 'w-16' })} darts!</div>
+                  <div>${generateInput({ correct: ['do'], widthClass: 'w-16' })} circuit training!</div>
+                  <div>${generateInput({ correct: ['do', 'play', 'go'], widthClass: 'w-16' })} almost any sport!</div>
+                </div>
+              </div>`
+          },
+          {
+            tabLabel: "25.2 Match",
+            html: `
+              <div class="exercise-block bg-white border border-gray-100 rounded-xl p-5 shadow-[0_2px_10px_-3px_rgba(16,185,129,0.1)]">
+                <h3 class="font-bold text-lg mb-4 text-gray-800 flex items-center gap-3 border-b pb-3"><span class="bg-emerald-100 text-emerald-800 px-3 py-1 rounded text-sm shadow-sm">25.2</span> Match to make 10 collocations.</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-gray-700 leading-8">
+                  <div>1. personal ${generateSelect({ options: ['the lead', 'a competition', 'best', 'your performance', 'a substitute', 'a record', 'a drugs test', 'hard', 'a whistle', 'your ambitions'], correct: 'best' })}</div>
+                  <div>2. set ${generateSelect({ options: ['the lead', 'a competition', 'best', 'your performance', 'a substitute', 'a record', 'a drugs test', 'hard', 'a whistle', 'your ambitions'], correct: 'a record' })}</div>
+                  <div>3. blow ${generateSelect({ options: ['the lead', 'a competition', 'best', 'your performance', 'a substitute', 'a record', 'a drugs test', 'hard', 'a whistle', 'your ambitions'], correct: 'a whistle' })}</div>
+                  <div>4. achieve ${generateSelect({ options: ['the lead', 'a competition', 'best', 'your performance', 'a substitute', 'a record', 'a drugs test', 'hard', 'a whistle', 'your ambitions'], correct: 'your ambitions' })}</div>
+                  <div>5. bring on ${generateSelect({ options: ['the lead', 'a competition', 'best', 'your performance', 'a substitute', 'a record', 'a drugs test', 'hard', 'a whistle', 'your ambitions'], correct: 'a substitute' })}</div>
+                  <div>6. train ${generateSelect({ options: ['the lead', 'a competition', 'best', 'your performance', 'a substitute', 'a record', 'a drugs test', 'hard', 'a whistle', 'your ambitions'], correct: 'hard' })}</div>
+                  <div>7. enhance ${generateSelect({ options: ['the lead', 'a competition', 'best', 'your performance', 'a substitute', 'a record', 'a drugs test', 'hard', 'a whistle', 'your ambitions'], correct: 'your performance' })}</div>
+                  <div>8. fail ${generateSelect({ options: ['the lead', 'a competition', 'best', 'your performance', 'a substitute', 'a record', 'a drugs test', 'hard', 'a whistle', 'your ambitions'], correct: 'a drugs test' })}</div>
+                  <div>9. take ${generateSelect({ options: ['the lead', 'a competition', 'best', 'your performance', 'a substitute', 'a record', 'a drugs test', 'hard', 'a whistle', 'your ambitions'], correct: 'the lead' })}</div>
+                  <div>10. enter ${generateSelect({ options: ['the lead', 'a competition', 'best', 'your performance', 'a substitute', 'a record', 'a drugs test', 'hard', 'a whistle', 'your ambitions'], correct: 'a competition' })}</div>
+                </div>
+              </div>`
+          },
+          {
+            tabLabel: "25.3 Fix Email",
+            html: `
+              <div class="exercise-block bg-emerald-50/50 p-6 rounded-xl border border-emerald-200 shadow-sm">
+                <h3 class="font-bold text-lg mb-4 text-emerald-900 border-b border-emerald-200 pb-2"><i class="fa-solid fa-pen-to-square text-emerald-600 mr-2"></i> 25.3 Find and correct the 6 verb+noun errors.</h3>
+                <div class="leading-[3rem] bg-white p-5 rounded-lg shadow-sm border border-emerald-100 text-gray-700">
+                  Do you fancy coming on a sporting weekend? It would make a change from playing computer games. 
+                  You can <span class="underline decoration-wavy decoration-red-400">make lots of different activities</span> ${generateInput({ correct: ['do lots of different activities', 'do activities'] })}. 
+                  You could even <span class="underline decoration-wavy decoration-red-400">do fishing</span> ${generateInput({ correct: ['go fishing'] })}, I think. 
+                  You can't go skiing now but you can <span class="underline decoration-wavy decoration-red-400">make water skiing</span> ${generateInput({ correct: ['go water skiing'] })}. 
+                  Everyone has to <span class="underline decoration-wavy decoration-red-400">make general exercises</span> ${generateInput({ correct: ['do general exercises', 'do exercises'] })} first thing, 
+                  then you can <span class="underline decoration-wavy decoration-red-400">make whatever sport</span> ${generateInput({ correct: ['do whatever sport', 'play whatever sport'] })} you like. 
+                  I've never <span class="underline decoration-wavy decoration-red-400">practised badminton</span> ${generateInput({ correct: ['played badminton'] })} so I think I'm going to do that. 
+                  Then in the afternoon I'm looking forward to the chance to practise my tennis serve with their professional coach.
+                </div>
+              </div>`
+          },
+          {
+            tabLabel: "25.4 Report",
+            html: `
+              <div class="exercise-block bg-white border border-gray-100 rounded-xl p-5 shadow-[0_2px_10px_-3px_rgba(16,185,129,0.1)]">
+                <h3 class="font-bold text-lg mb-4 text-gray-800 flex items-center gap-3 border-b pb-3"><span class="bg-emerald-100 text-emerald-800 px-3 py-1 rounded text-sm shadow-sm">25.4</span> Complete the collocations in this rugby report.</h3>
+                <div class="leading-loose bg-gray-50 p-5 rounded-lg border border-gray-200 text-gray-700">
+                  Cambridge were happy to (1) ${generateInput({ correct: ['beat', 'defeat'] })} Oxford, the opposing team. 
+                  Oxford put up a good (2) ${generateInput({ correct: ['fight'] })} and some people thought they (3) ${generateInput({ correct: ['deserved'] })} to win. 
+                  They were fearless in (4) ${generateInput({ correct: ['tackling'] })} their opponents, but every time they took (5) ${generateInput({ correct: ['possession'] })} of the ball, Cambridge managed to win it back. 
+                  Cambridge have now (6) ${generateInput({ correct: ['won'] })} a place in the next (7) ${generateInput({ correct: ['round', 'stage'] })} of the competition. 
+                  They will undoubtedly come up against some fierce (8) ${generateInput({ correct: ['competition'] })}. 
+                  However, they have already managed to (9) ${generateInput({ correct: ['set', 'break'] })} an interesting world record by having four members of the same family in their team!
+                </div>
+              </div>`
+          }
+        ]
+      },
+      unit26: {
+        title: "Unit 26: Health and illness",
+        theory: [
+          {
+            tabLabel: "Illnesses",
+            html: `
+              <div class="space-y-6">
+                <div class="bg-red-50 rounded-lg shadow-sm border border-red-200 overflow-hidden">
+                  <h3 class="bg-red-500 text-white font-bold p-3 text-lg"><i class="fa-solid fa-virus-covid mr-2"></i> Verbs + Illnesses / Injuries</h3>
+                  <div class="overflow-x-auto">
+                    <table class="w-full text-sm text-left">
+                      <thead class="bg-red-100 text-red-900 border-b border-red-200">
+                        <tr>
+                          <th class="p-3 font-bold w-1/4">Verb</th>
+                          <th class="p-3 font-bold">Collocates with...</th>
+                        </tr>
+                      </thead>
+                      <tbody class="divide-y divide-gray-100 text-gray-800 bg-white">
+                        <tr class="hover:bg-gray-50">
+                          <td class="p-3 font-bold text-red-700">catch</td>
+                          <td class="p-3">a cold, the flu, a chill, pneumonia</td>
+                        </tr>
+                        <tr class="hover:bg-gray-50">
+                          <td class="p-3 font-bold text-red-700">contract <span class="text-xs font-normal text-gray-500">[formal]</span></td>
+                          <td class="p-3">a disease, malaria, typhoid</td>
+                        </tr>
+                        <tr class="hover:bg-gray-50">
+                          <td class="p-3 font-bold text-red-700">develop <span class="text-xs font-normal text-gray-500">[formal]</span></td>
+                          <td class="p-3">(lung/breast) cancer, diabetes, AIDS, arthritis, Alzheimer's disease</td>
+                        </tr>
+                        <tr class="hover:bg-gray-50">
+                          <td class="p-3 font-bold text-red-700">suffer from</td>
+                          <td class="p-3">asthma, hay fever, backache</td>
+                        </tr>
+                        <tr class="hover:bg-gray-50">
+                          <td class="p-3 font-bold text-red-700">have an attack of</td>
+                          <td class="p-3">bronchitis, asthma, hay fever, diarrhoea</td>
+                        </tr>
+                        <tr class="hover:bg-gray-50">
+                          <td class="p-3 font-bold text-red-700">be diagnosed with</td>
+                          <td class="p-3">(lung/breast) cancer, AIDS, leukaemia, autism</td>
+                        </tr>
+                        <tr class="hover:bg-gray-50">
+                          <td class="p-3 font-bold text-red-700">suffer / sustain <br><span class="text-xs font-normal text-gray-500">[formal]</span></td>
+                          <td class="p-3">(major/minor/serious/head) injuries</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                  <div class="p-3 bg-white text-sm text-red-800 border-t border-red-100 font-medium">
+                    *Common Mistake:* In accidents, things get damaged and people get <span class="font-bold underline">injured</span>.
+                  </div>
+                </div>
+              </div>`
+          },
+          {
+            tabLabel: "Fitness & Pain",
+            html: `
+              <div class="space-y-6">
+                <div class="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
+                  <h3 class="bg-teal-500 text-white font-bold p-3 text-lg"><i class="fa-solid fa-heart-pulse mr-2"></i> Fitness and Sickness</h3>
+                  <div class="p-4 space-y-4 text-sm text-gray-800">
+                    <p class="font-bold text-teal-700 border-b border-teal-100 pb-1">Fitness Collocations:</p>
+                    <ul class="list-disc pl-5 space-y-1">
+                      <li>take <span class="font-bold">regular vigorous exercise</span></li>
+                      <li>eat a <span class="font-bold">balanced diet</span></li>
+                      <li>care about <span class="font-bold">healthy eating</span></li>
+                      <li>follow a <span class="font-bold">personal fitness programme</span></li>
+                      <li>always <span class="font-bold">stick to your programme</span></li>
+                      <li><span class="font-bold">keep fit</span></li>
+                    </ul>
+
+                    <p class="font-bold text-teal-700 border-b border-teal-100 pb-1 mt-4">Sickness & Pain:</p>
+                    <ul class="list-disc pl-5 space-y-1">
+                      <li><span class="font-bold">terminally ill:</span> will die soon.</li>
+                      <li><span class="font-bold">excruciating / unbearable pain</span></li>
+                      <li><span class="font-bold">incurable illness:</span> cannot be cured.</li>
+                      <li><span class="font-bold">trivial / minor ailments:</span> small, unimportant sicknesses.</li>
+                      <li><span class="font-bold">life-threatening:</span> could cause death.</li>
+                      <li><span class="font-bold">acutely / intensely painful</span></li>
+                      <li><span class="font-bold">dull ache:</span> steady, but not sharp pain.</li>
+                      <li><span class="font-bold">prescribe tablets</span></li>
+                      <li><span class="font-bold">relieve / alleviate the pain:</span> make it hurt less.</li>
+                      <li><span class="font-bold">taken ill:</span> suddenly become sick.</li>
+                      <li><span class="font-bold">heavy cold</span> (opposite = slight cold) / <span class="font-bold">splitting headache</span></li>
+                    </ul>
+                  </div>
+                </div>
+              </div>`
+          }
+        ],
+        exercises: [
+          {
+            tabLabel: "26.1 Match",
+            html: `
+              <div class="exercise-block bg-white border border-gray-100 rounded-xl p-5 shadow-[0_2px_10px_-3px_rgba(239,68,68,0.1)]">
+                <h3 class="font-bold text-lg mb-4 text-gray-800 flex items-center gap-3 border-b pb-3"><span class="bg-red-100 text-red-800 px-3 py-1 rounded text-sm shadow-sm">26.1</span> Match the verbs to their collocations.</h3>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 leading-8 text-gray-700 font-medium">
+                  <div>1. sustain ${generateSelect({ options: ['diarrhoea', 'a cold', 'breast cancer', 'minor injuries', 'typhoid', 'autism'], correct: 'minor injuries' })}</div>
+                  <div>2. contract ${generateSelect({ options: ['diarrhoea', 'a cold', 'breast cancer', 'minor injuries', 'typhoid', 'autism'], correct: 'typhoid' })}</div>
+                  <div>3. have an attack of ${generateSelect({ options: ['diarrhoea', 'a cold', 'breast cancer', 'minor injuries', 'typhoid', 'autism'], correct: 'diarrhoea' })}</div>
+                  <div>4. develop ${generateSelect({ options: ['diarrhoea', 'a cold', 'breast cancer', 'minor injuries', 'typhoid', 'autism'], correct: 'breast cancer' })}</div>
+                  <div>5. be diagnosed with ${generateSelect({ options: ['diarrhoea', 'a cold', 'breast cancer', 'minor injuries', 'typhoid', 'autism'], correct: 'autism' })}</div>
+                  <div>6. catch ${generateSelect({ options: ['diarrhoea', 'a cold', 'breast cancer', 'minor injuries', 'typhoid', 'autism'], correct: 'a cold' })}</div>
+                </div>
+              </div>`
+          },
+          {
+            tabLabel: "26.2 Replace 'Get'",
+            html: `
+              <div class="exercise-block bg-white border border-gray-100 rounded-xl p-5 shadow-[0_2px_10px_-3px_rgba(239,68,68,0.1)]">
+                <h3 class="font-bold text-lg mb-4 text-gray-800 flex items-center gap-3 border-b pb-3"><span class="bg-red-100 text-red-800 px-3 py-1 rounded text-sm shadow-sm">26.2</span> Replace 'get' with better formal verbs.</h3>
+                <ol class="list-decimal list-inside space-y-4 pl-2 leading-8 text-gray-700">
+                  <li>Many musicians who <span class="underline decoration-wavy text-red-400">get</span> ${generateInput({ correct: ['develop'] })} arthritis experience tragedy.</li>
+                  <li>More than 50 passengers <span class="underline decoration-wavy text-red-400">got</span> ${generateInput({ correct: ['had an attack of', 'suffered an attack of'], widthClass: 'w-48' })} moderate diarrhoea.</li>
+                  <li>To <span class="underline decoration-wavy text-red-400">get</span> ${generateInput({ correct: ['develop', 'be diagnosed with'] })} cancer is the most frightening experience.</li>
+                  <li>Millions of people <span class="underline decoration-wavy text-red-400">get</span> ${generateInput({ correct: ['contract'] })} malaria each year.</li>
+                  <li>Mr Taylor was lucky not to have <span class="underline decoration-wavy text-red-400">got</span> ${generateInput({ correct: ['sustained', 'suffered'] })} serious injuries.</li>
+                  <li>Patients often <span class="underline decoration-wavy text-red-400">get</span> ${generateInput({ correct: ['catch'] })} pneumonia while in hospital.</li>
+                </ol>
+              </div>`
+          },
+          {
+            tabLabel: "26.3 Fill in the Blanks",
+            html: `
+              <div class="exercise-block bg-red-50/50 p-6 rounded-xl border border-red-200 shadow-sm">
+                <h3 class="font-bold text-lg mb-4 text-red-900 border-b border-red-200 pb-2"><i class="fa-solid fa-pen-to-square text-red-600 mr-2"></i> 26.3 Complete the collocations</h3>
+                <p class="text-sm text-red-800 mb-6 font-medium">Use the first letter clues provided in the text.</p>
+                <div class="leading-loose bg-white p-5 rounded-lg shadow-sm border border-red-100 text-gray-700">
+                  1. Flu is not a s${generateInput({ correct: ['erious'] })} illness for most, but it can be l${generateInput({ correct: ['ife-threatening'] })} for elderly people.<br>
+                  2. Patients who are t${generateInput({ correct: ['erminally'] })} ill often prefer to die at home.<br>
+                  3. I'm not in pain, it's just a d${generateInput({ correct: ['ull'] })} ache in my back tooth.<br>
+                  4. The children have a b${generateInput({ correct: ['alanced'] })} diet, with lots of fruit and veg.<br>
+                  5. Turn that music down! I've got a s${generateInput({ correct: ['plitting'] })} headache!<br>
+                  6. You shouldn't waste the doctor's time with t${generateInput({ correct: ['rivial'] })} ailments.<br>
+                  7. I need to adopt a proper fitness programme and s${generateInput({ correct: ['tick'] })} to it. I was in good s${generateInput({ correct: ['hape'] })} a year ago.<br>
+                  8. Diseases which are i${generateInput({ correct: ['ncurable'] })} now will be beaten one day.<br>
+                  9. My aunt was t${generateInput({ correct: ['aken'] })} ill on holiday. Apparently, she was in e${generateInput({ correct: ['xcruciating', 'unbearable'] })} pain.<br>
+                  10. I believe in h${generateInput({ correct: ['ealthy'] })} eating and I try to do v${generateInput({ correct: ['igorous'] })} exercise.<br>
+                  11. My doctor p${generateInput({ correct: ['rescribed'] })} me a new drug to a${generateInput({ correct: ['lleviate', 'relieve'] })} my backache.<br>
+                  12. I took a day off yesterday. It was nothing serious, just a s${generateInput({ correct: ['light'] })} cold.
+                </div>
+              </div>`
+          }
+        ]
+      }
+    };
+
+    // --- HTML GENERATORS ---
+    
+    function generateInput({ correct, placeholder = "type here", widthClass = "w-32 sm:w-40" }) {
+      const correctStr = JSON.stringify(correct).replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+      const firstAnswer = correct[0].replace(/'/g, '&#39;');
+      return `
+        <div class="inline-block relative m-1 exercise-component align-middle ${widthClass === 'w-full' ? 'w-full block mx-0 mt-2' : ''}">
+          <input type="text" class="exercise-input border-b-2 outline-none px-2 py-1 transition-all duration-200 text-center font-bold text-indigo-900 border-gray-300 focus:border-indigo-500 focus:bg-indigo-50 bg-transparent rounded-t-sm ${widthClass}" data-correct="${correctStr}" placeholder="${placeholder}" />
+          <span class="feedback-icon absolute right-2 top-1 text-lg drop-shadow-sm"></span>
+          <div class="answer-tooltip absolute top-full left-1/2 -translate-x-1/2 mt-2 px-3 py-1.5 rounded whitespace-nowrap z-30 hidden transition-opacity duration-200">${firstAnswer}</div>
+        </div>
+      `;
+    }
+
+    function generateSelect({ options, correct }) {
+      const optionsHtml = options.map(opt => `<option value="${opt}">${opt}</option>`).join('');
+      return `
+        <div class="inline-block relative m-1 exercise-component align-middle w-full sm:w-auto">
+          <select class="exercise-select border-b-2 outline-none px-2 py-1 appearance-none bg-transparent font-bold text-indigo-900 text-center pr-6 cursor-pointer transition-all duration-200 border-gray-300 focus:border-indigo-500 focus:bg-indigo-50 rounded-t-sm max-w-full" data-correct="${correct}">
+            <option value="" disabled selected>select...</option>
+            ${optionsHtml}
+          </select>
+          <span class="feedback-icon absolute -right-2 top-1 text-lg drop-shadow-sm"></span>
+          <div class="answer-tooltip absolute top-full left-1/2 -translate-x-1/2 mt-2 px-3 py-1.5 rounded whitespace-nowrap z-30 hidden transition-opacity duration-200">${correct}</div>
+        </div>
+      `;
+    }
+
+    function generateFlashcard(question, answer) {
+      return `
+        <div class="flashcard p-4 border rounded-xl cursor-pointer transition-all duration-300 bg-white border-gray-200 hover:border-indigo-300 hover:shadow-md select-none group">
+          <div class="flex justify-between items-start pointer-events-none">
+            <p class="font-medium text-gray-800 leading-snug group-hover:text-indigo-900 transition-colors">${question}</p>
+            <span class="status-badge text-xs text-gray-500 uppercase tracking-wider font-bold bg-gray-100 px-2 py-1 rounded-md ml-2 shrink-0 transition-colors">Reveal</span>
+          </div>
+          <div class="answer-content hidden mt-3 pt-3 border-t border-indigo-100 text-indigo-700 font-bold flex items-center gap-2 pointer-events-none">
+            <i class="fa-solid fa-check-circle text-indigo-500"></i> ${answer}
+          </div>
+        </div>
+      `;
+    }
+
+    // --- STATE AND LOGIC ---
+    let currentUnit = 'unit21';
+
+    // Elements
+    const theoryContainer = document.getElementById('theory-container');
+    const theoryTabsContainer = document.getElementById('theory-tabs-container');
+    const exercisesContainer = document.getElementById('exercises-container');
+    const subTabsContainer = document.getElementById('sub-tabs-container');
+    const exerciseTitle = document.getElementById('exercise-title');
+    const tabButtons = document.querySelectorAll('.tab-btn');
+    const btnReset = document.getElementById('btn-reset');
+
+    function loadUnit(unitId) {
+      currentUnit = unitId;
+      
+      // Update Main Navigation Tabs
+      tabButtons.forEach(btn => {
+        if (btn.dataset.target === unitId) {
+          btn.className = "tab-btn whitespace-nowrap px-3 py-2 rounded-md text-sm font-semibold transition-all bg-white text-indigo-900 shadow-sm";
+        } else {
+          btn.className = "tab-btn whitespace-nowrap px-3 py-2 rounded-md text-sm font-semibold transition-all text-indigo-100 hover:bg-indigo-700";
+        }
+      });
+
+      // Fetch Unit Data
+      const data = contentData[unitId];
+      exerciseTitle.textContent = data.title;
+      
+      // Clear containers
+      theoryTabsContainer.innerHTML = '';
+      theoryContainer.innerHTML = '';
+      subTabsContainer.innerHTML = '';
+      exercisesContainer.innerHTML = '';
+
+      // Generate Theory Sub-tabs
+      data.theory.forEach((th, index) => {
+        const tabBtn = document.createElement('button');
+        tabBtn.className = "theory-tab-btn px-4 py-2 text-sm font-bold rounded-t-lg transition-colors border border-b-0 whitespace-nowrap";
+        tabBtn.textContent = th.tabLabel;
+        tabBtn.onclick = () => switchTheoryTab(index);
+        theoryTabsContainer.appendChild(tabBtn);
+
+        const wrapper = document.createElement('div');
+        wrapper.className = "theory-tab-content hidden"; 
+        wrapper.innerHTML = th.html;
+        theoryContainer.appendChild(wrapper);
+      });
+
+      // Generate Exercise Sub-tabs and Exercise Blocks
+      data.exercises.forEach((ex, index) => {
+        // 1. Create Tab Button
+        const tabBtn = document.createElement('button');
+        tabBtn.className = "sub-tab-btn px-4 py-2 text-sm font-bold rounded-t-lg transition-colors border border-b-0 whitespace-nowrap";
+        tabBtn.textContent = ex.tabLabel;
+        tabBtn.onclick = () => switchSubTab(index);
+        subTabsContainer.appendChild(tabBtn);
+
+        // 2. Create Exercise Wrapper
+        const wrapper = document.createElement('div');
+        wrapper.className = "exercise-tab-content hidden"; // all hidden initially
+        wrapper.innerHTML = ex.html;
+        exercisesContainer.appendChild(wrapper);
+      });
+
+      // Inject Per-Exercise Validation Controls
+      const blocks = exercisesContainer.querySelectorAll('.exercise-block');
+      blocks.forEach(block => {
+        // Only append Check Button if there are inputs/selects to check
+        if (block.querySelectorAll('.exercise-input, .exercise-select').length > 0) {
+          const controlDiv = document.createElement('div');
+          controlDiv.className = "mt-6 flex flex-col sm:flex-row justify-end items-center gap-4 border-t border-gray-100 pt-4";
+          
+          const warningSpan = document.createElement('span');
+          warningSpan.className = "text-red-500 text-sm font-bold hidden flex items-center gap-1 warning-msg drop-shadow-sm";
+          warningSpan.innerHTML = '<i class="fa-solid fa-triangle-exclamation"></i> Please fill in all blanks first!';
+          
+          const checkBtn = document.createElement('button');
+          checkBtn.className = "flex items-center gap-2 font-bold px-6 py-2 rounded-lg bg-indigo-600 text-white hover:bg-indigo-700 transition-all shadow-md hover:shadow-lg active:scale-95";
+          checkBtn.innerHTML = '<i class="fa-solid fa-clipboard-check"></i> Check Answers';
+          checkBtn.onclick = () => validateExerciseBlock(block, warningSpan);
+          
+          controlDiv.appendChild(warningSpan);
+          controlDiv.appendChild(checkBtn);
+          block.appendChild(controlDiv);
+        }
+      });
+
+      setupFlashcards();
+      
+      // Default to the first sub-tabs
+      if (data.theory.length > 0) switchTheoryTab(0);
+      if (data.exercises.length > 0) switchSubTab(0);
+    }
+
+    function switchTheoryTab(activeIndex) {
+      const btns = document.querySelectorAll('.theory-tab-btn');
+      const contents = document.querySelectorAll('.theory-tab-content');
+
+      btns.forEach((btn, idx) => {
+        if (idx === activeIndex) {
+          btn.className = "theory-tab-btn px-4 py-2 text-sm font-bold rounded-t-lg transition-colors border border-b-0 bg-white text-indigo-700 border-gray-200 shadow-[0_-2px_4px_rgba(0,0,0,0.02)] relative top-[1px] z-10 cursor-default whitespace-nowrap";
+        } else {
+          btn.className = "theory-tab-btn px-4 py-2 text-sm font-bold rounded-t-lg transition-colors border border-b-0 bg-transparent text-gray-500 border-transparent hover:bg-gray-100 hover:text-gray-700 cursor-pointer whitespace-nowrap";
+        }
+      });
+
+      contents.forEach((content, idx) => {
+        if (idx === activeIndex) {
+          content.classList.remove('hidden');
+        } else {
+          content.classList.add('hidden');
+        }
+      });
+    }
+
+    function switchSubTab(activeIndex) {
+      const btns = document.querySelectorAll('.sub-tab-btn');
+      const contents = document.querySelectorAll('.exercise-tab-content');
+
+      btns.forEach((btn, idx) => {
+        if (idx === activeIndex) {
+          btn.className = "sub-tab-btn px-4 py-2 text-sm font-bold rounded-t-lg transition-colors border border-b-0 bg-white text-indigo-700 border-gray-200 shadow-[0_-2px_4px_rgba(0,0,0,0.02)] relative top-[1px] z-10 cursor-default whitespace-nowrap";
+        } else {
+          btn.className = "sub-tab-btn px-4 py-2 text-sm font-bold rounded-t-lg transition-colors border border-b-0 bg-transparent text-gray-500 border-transparent hover:bg-gray-100 hover:text-gray-700 cursor-pointer whitespace-nowrap";
+        }
+      });
+
+      contents.forEach((content, idx) => {
+        if (idx === activeIndex) {
+          content.classList.remove('hidden');
+        } else {
+          content.classList.add('hidden');
+        }
+      });
+    }
+
+    function setupFlashcards() {
+      const flashcards = exercisesContainer.querySelectorAll('.flashcard');
+      flashcards.forEach(card => {
+        card.addEventListener('click', function() {
+          const content = this.querySelector('.answer-content');
+          const badge = this.querySelector('.status-badge');
+          
+          if (content.classList.contains('hidden')) {
+            content.classList.remove('hidden');
+            this.classList.replace('bg-white', 'bg-indigo-50');
+            this.classList.replace('border-gray-200', 'border-indigo-300');
+            badge.textContent = 'Hide';
+            badge.className = "status-badge text-xs text-indigo-700 uppercase tracking-wider font-bold bg-indigo-200 px-2 py-1 rounded-md ml-2 shrink-0 transition-colors";
+          } else {
+            content.classList.add('hidden');
+            this.classList.replace('bg-indigo-50', 'bg-white');
+            this.classList.replace('border-indigo-300', 'border-gray-200');
+            badge.textContent = 'Reveal';
+            badge.className = "status-badge text-xs text-gray-500 uppercase tracking-wider font-bold bg-gray-100 px-2 py-1 rounded-md ml-2 shrink-0 transition-colors";
+          }
+        });
+      });
+    }
+
+    // Helper to strip punctuation to make typing validation more forgiving
+    function normalizeTextForComparison(text) {
+      return text.toLowerCase().replace(/[.,?!]/g, '').replace(/\s+/g, ' ').trim();
+    }
+
+    function validateExerciseBlock(block, warningSpan) {
+      const inputs = block.querySelectorAll('.exercise-input');
+      const selects = block.querySelectorAll('.exercise-select');
+      const elements = [...inputs, ...selects];
+      
+      if (elements.length === 0) return;
+
+      // 1. Force all blanks to be filled check
+      let allFilled = true;
+      elements.forEach(el => {
+        if(el.value.trim() === '') {
+          allFilled = false;
+          el.classList.add('input-empty-error');
+        } else {
+          el.classList.remove('input-empty-error');
+        }
+      });
+
+      if (!allFilled) {
+        warningSpan.classList.remove('hidden', 'shake');
+        void warningSpan.offsetWidth; // trigger browser reflow
+        warningSpan.classList.add('shake');
+        return;
+      }
+
+      // 2. Proceed with validation if all filled
+      warningSpan.classList.add('hidden');
+
+      const processElement = (el, isSelect) => {
+        const rawVal = el.value.trim();
+        const val = normalizeTextForComparison(rawVal);
+        const parent = el.closest('.exercise-component');
+        const iconContainer = parent.querySelector('.feedback-icon');
+        const tooltip = parent.querySelector('.answer-tooltip');
+        
+        // Reset classes
+        el.classList.remove('input-correct', 'input-incorrect', 'input-empty-error');
+        iconContainer.innerHTML = '';
+        tooltip.classList.add('hidden');
+
+        let isCorrect = false;
+
+        if (isSelect) {
+          isCorrect = (rawVal === el.dataset.correct);
+        } else {
+          const correctAnswersArray = JSON.parse(el.dataset.correct.replace(/&quot;/g, '"').replace(/&#39;/g, "'"));
+          isCorrect = correctAnswersArray.some(ans => normalizeTextForComparison(ans) === val);
+        }
+
+        if (isCorrect) {
+          el.classList.add('input-correct');
+          iconContainer.innerHTML = '<i class="fa-solid fa-circle-check text-green-500 drop-shadow-sm bg-white rounded-full"></i>';
+        } else {
+          el.classList.add('input-incorrect');
+          iconContainer.innerHTML = '<i class="fa-solid fa-circle-xmark text-red-500 drop-shadow-sm bg-white rounded-full"></i>';
+          tooltip.classList.remove('hidden'); // Automatically reveal correct answer on mistake
+        }
+      };
+
+      inputs.forEach(el => processElement(el, false));
+      selects.forEach(el => processElement(el, true));
+    }
+
+    function resetAllExercises() {
+      if(confirm("Clear all your progress for this unit?")) {
+        const inputs = exercisesContainer.querySelectorAll('.exercise-input');
+        const selects = exercisesContainer.querySelectorAll('.exercise-select');
+        const components = exercisesContainer.querySelectorAll('.exercise-component');
+        const warnings = exercisesContainer.querySelectorAll('.warning-msg');
+        
+        inputs.forEach(input => {
+          input.value = '';
+          input.disabled = false;
+          input.classList.remove('input-correct', 'input-incorrect', 'input-empty-error');
+        });
+        
+        selects.forEach(select => {
+          select.value = '';
+          select.disabled = false;
+          select.classList.remove('input-correct', 'input-incorrect', 'input-empty-error');
+        });
+
+        components.forEach(parent => {
+          parent.querySelector('.feedback-icon').innerHTML = '';
+          parent.querySelector('.answer-tooltip').classList.add('hidden');
+        });
+
+        warnings.forEach(warning => warning.classList.add('hidden'));
+
+        // Reset Flashcards
+        const flashcards = exercisesContainer.querySelectorAll('.flashcard');
+        flashcards.forEach(card => {
+          const content = card.querySelector('.answer-content');
+          const badge = card.querySelector('.status-badge');
+          content.classList.add('hidden');
+          card.classList.replace('bg-indigo-50', 'bg-white');
+          card.classList.replace('border-indigo-300', 'border-gray-200');
+          badge.textContent = 'Reveal';
+          badge.className = "status-badge text-xs text-gray-500 uppercase tracking-wider font-bold bg-gray-100 px-2 py-1 rounded-md ml-2 shrink-0 transition-colors";
+        });
+      }
+    }
+
+    // --- EVENT LISTENERS ---
+    
+    // Tab switching
+    tabButtons.forEach(btn => {
+      btn.addEventListener('click', () => loadUnit(btn.dataset.target));
+    });
+
+    // Reset Button
+    btnReset.addEventListener('click', resetAllExercises);
+
+    // Remove red borders and tooltips when user edits a field
+    exercisesContainer.addEventListener('input', (e) => {
+      if (e.target.classList.contains('exercise-input') || e.target.classList.contains('exercise-select')) {
+        e.target.classList.remove('input-empty-error', 'input-incorrect');
+        const parent = e.target.closest('.exercise-component');
+        parent.querySelector('.feedback-icon').innerHTML = '';
+        parent.querySelector('.answer-tooltip').classList.add('hidden');
+        
+        // Hide empty warning if they start typing
+        const block = e.target.closest('.exercise-block');
+        if (block) {
+          const warning = block.querySelector('.warning-msg');
+          if (warning) warning.classList.add('hidden');
+        }
+      }
+    });
+
+    // Initial Load
+    loadUnit('unit21');
+
+  </script>
+</body>
+</html>

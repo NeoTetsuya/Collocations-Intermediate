@@ -1,0 +1,798 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>People & Relationships | Self-Study</title>
+  
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <style>
+    /* Utility classes for states */
+    .tab-content { display: none; }
+    .tab-content.active { display: block; }
+    
+    .input-correct { 
+      border-color: #22c55e !important; 
+      background-color: #f0fdf4 !important; 
+      color: #166534 !important; 
+      pointer-events: none; /* Lock input when correct */
+    }
+    .input-incorrect { 
+      border-color: #ef4444 !important; 
+      background-color: #fef2f2 !important; 
+      color: #991b1b !important; 
+    }
+    .input-empty-error { 
+      border-color: #fca5a5 !important; 
+      background-color: #fff1f2 !important; 
+    }
+    
+    select {
+      background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e");
+      background-position: right 0.1rem center;
+      background-repeat: no-repeat;
+      background-size: 1.5em 1.5em;
+    }
+
+    /* Animation for incomplete exercises */
+    @keyframes shake {
+      0%, 100% { transform: translateX(0); }
+      25% { transform: translateX(-6px); }
+      50% { transform: translateX(6px); }
+      75% { transform: translateX(-6px); }
+    }
+    .shake { animation: shake 0.4s ease-in-out; }
+
+    /* Enhanced Correction Tooltip */
+    .answer-tooltip {
+      background-color: #ef4444; /* red-500 */
+      color: white;
+      font-weight: 600;
+      letter-spacing: 0.025em;
+      box-shadow: 0 4px 6px -1px rgba(239, 68, 68, 0.3), 0 2px 4px -1px rgba(239, 68, 68, 0.2);
+    }
+    .answer-tooltip::after {
+      content: '';
+      position: absolute;
+      bottom: 100%;
+      left: 50%;
+      margin-left: -6px;
+      border-width: 6px;
+      border-style: solid;
+      border-color: transparent transparent #ef4444 transparent;
+    }
+
+    /* Sub-tabs fade animation */
+    .exercise-tab-content, .theory-tab-content {
+      animation: fadeIn 0.3s ease-in-out;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(5px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body class="bg-gray-50 text-gray-900 font-sans selection:bg-indigo-200 min-h-screen flex flex-col">
+
+  <!-- Header -->
+  <header class="bg-indigo-900 text-white p-4 shadow-md sticky top-0 z-30 flex-shrink-0">
+    <div class="max-w-6xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-4">
+      <div class="flex items-center gap-3">
+        <div class="bg-indigo-800 p-2 rounded-lg border border-indigo-700 shadow-sm">
+          <i class="fa-solid fa-users text-xl text-indigo-300"></i>
+        </div>
+        <h1 class="text-2xl font-bold tracking-tight">People & Relationships <span class="font-light opacity-80 text-lg hidden sm:inline">| Self-Study</span></h1>
+      </div>
+      <nav class="flex bg-indigo-800 rounded-lg p-1 overflow-x-auto w-full sm:w-auto shadow-inner" id="tab-nav">
+        <button data-target="unit17" class="tab-btn whitespace-nowrap px-4 py-2 rounded-md text-sm font-semibold transition-all bg-white text-indigo-900 shadow">Unit 17: Character</button>
+        <button data-target="unit18" class="tab-btn whitespace-nowrap px-4 py-2 rounded-md text-sm font-semibold transition-all text-indigo-100 hover:bg-indigo-700">Unit 18: Appearance</button>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Main Content Layout -->
+  <main class="max-w-6xl mx-auto p-4 sm:p-6 lg:py-8 flex-grow w-full flex flex-col">
+    <div class="flex flex-col lg:flex-row gap-6 items-start">
+      
+      <!-- LEFT PANE: Theory -->
+      <section class="lg:w-2/5 flex-shrink-0 flex flex-col bg-white rounded-xl border border-gray-200 shadow-sm">
+        <div class="bg-gray-100 p-4 border-b border-gray-200 flex items-center justify-between z-10 rounded-t-xl">
+          <h2 class="font-bold text-gray-700 uppercase tracking-wider text-sm flex items-center gap-2">
+            <i class="fa-solid fa-bookmark text-indigo-500"></i> Reference & Rules
+          </h2>
+        </div>
+
+        <!-- THEORY SUB-TABS -->
+        <div id="theory-tabs-container" class="flex overflow-x-auto bg-gray-50 border-b border-gray-200 px-4 pt-3 gap-1 flex-shrink-0 custom-scrollbar">
+           <!-- Tabs injected here -->
+        </div>
+
+        <div class="p-6 flex-grow overflow-y-auto max-h-[600px] lg:max-h-none custom-scrollbar" id="theory-container">
+          <!-- Theory Content Injected via JS -->
+        </div>
+      </section>
+
+      <!-- RIGHT PANE: Exercises -->
+      <section class="lg:w-3/5 flex flex-col bg-white rounded-xl shadow-md border border-gray-200 relative">
+        <div class="bg-indigo-50 p-4 border-b border-indigo-100 flex items-center justify-between flex-shrink-0 shadow-sm rounded-t-xl">
+          <h2 class="font-bold text-indigo-900 text-lg" id="exercise-title">Unit 17: People: character and behaviour</h2>
+        </div>
+        
+        <!-- EXERCISE SUB-TABS -->
+        <div id="sub-tabs-container" class="flex overflow-x-auto bg-indigo-50/50 border-b border-gray-200 px-4 pt-3 gap-1 flex-shrink-0 custom-scrollbar">
+           <!-- Tabs injected here -->
+        </div>
+
+        <div class="p-6 sm:p-8 flex-grow" id="exercises-container" style="padding-bottom: 6rem;">
+          <!-- Exercise Content Injected via JS -->
+        </div>
+
+        <!-- Global Exercise Controls (Reset only) -->
+        <div class="sticky bottom-0 w-full bg-white/95 backdrop-blur border-t p-4 flex justify-center items-center gap-4 rounded-b-xl shadow-[0_-10px_15px_-3px_rgba(0,0,0,0.05)] z-20">
+          <button id="btn-reset" class="flex items-center gap-2 text-indigo-700 hover:text-indigo-900 bg-indigo-50 hover:bg-indigo-100 font-medium px-6 py-2 rounded-lg transition-all shadow-sm">
+            <i class="fa-solid fa-rotate-right"></i> Reset All Progress
+          </button>
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <script>
+    // --- CONTENT DATA ---
+    const contentData = {
+      unit17: {
+        title: "Unit 17: People: character and behaviour",
+        theory: [
+          {
+            tabLabel: "Character",
+            html: `
+              <div class="space-y-6">
+                <div class="bg-indigo-50 rounded-lg shadow-sm border border-indigo-200 overflow-hidden">
+                  <h3 class="bg-indigo-600 text-white font-bold p-3 text-lg"><i class="fa-solid fa-star mr-2"></i> Personality & Character</h3>
+                  <div class="p-4 space-y-3 text-sm text-gray-800">
+                    <ul class="list-disc pl-5 space-y-3">
+                      <li><span class="font-bold text-indigo-700">good company:</span> people enjoy being with you.</li>
+                      <li><span class="font-bold text-indigo-700">selfish streak:</span> you sometimes act in a selfish way.</li>
+                      <li><span class="font-bold text-indigo-700">outgoing personality:</span> friendly, sociable.</li>
+                      <li><span class="font-bold text-indigo-700">good sense of humour:</span> able to see the funny side of things.</li>
+                      <li><span class="font-bold text-indigo-700">vivid imagination:</span> very creative and descriptive.</li>
+                      <li><span class="font-bold text-indigo-700">lose your temper:</span> get angry.</li>
+                      <li><span class="font-bold text-indigo-700">highly intelligent / razor-sharp mind:</span> very smart, quick thinker.</li>
+                      <li><span class="font-bold text-indigo-700">set high standards:</span> demand a lot of yourself/others.</li>
+                      <li><span class="font-bold text-indigo-700">fiercely loyal:</span> stronger than extremely loyal.</li>
+                      <li><span class="font-bold text-indigo-700">put others first:</span> prioritize other people's needs.</li>
+                      <li><span class="font-bold text-indigo-700">painfully shy:</span> extremely shy.</li>
+                      <li><span class="font-bold text-indigo-700">give the impression:</span> make people think a certain way about you.</li>
+                      <li><span class="font-bold text-indigo-700">supremely confident:</span> very sure of yourself.</li>
+                      <li><span class="font-bold text-indigo-700">snap decisions:</span> quick decisions.</li>
+                      <li><span class="font-bold text-indigo-700">sense of responsibility:</span> feeling of duty/obligation.</li>
+                      <li><span class="font-bold text-indigo-700">keep your word / keep secrets:</span> do what you promise / not tell others' secrets.</li>
+                      <li><span class="font-bold text-indigo-700">bear a grudge:</span> resent for a long time bad things others have done to you.</li>
+                      <li><span class="font-bold text-indigo-700">keep your temper:</span> not get angry.</li>
+                      <li><span class="font-bold text-indigo-700">making a fool out of you:</span> trying to deceive or trick you.</li>
+                      <li><span class="font-bold text-indigo-700">brutally honest:</span> honest in a way that may hurt.</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>`
+          },
+          {
+            tabLabel: "Behaviour",
+            html: `
+              <div class="space-y-6">
+                <div class="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
+                  <h3 class="bg-emerald-600 text-white font-bold p-3 text-lg"><i class="fa-solid fa-masks-theater mr-2"></i> Behaviour: verb + noun</h3>
+                  <div class="overflow-x-auto">
+                    <table class="w-full text-sm text-left">
+                      <thead class="bg-emerald-50 text-emerald-900 border-b border-emerald-100">
+                        <tr>
+                          <th class="p-3 font-bold w-1/3">Collocation</th>
+                          <th class="p-3 font-bold">Example & Meaning</th>
+                        </tr>
+                      </thead>
+                      <tbody class="divide-y divide-gray-100 text-gray-700">
+                        <tr class="hover:bg-gray-50">
+                          <td class="p-3 font-bold text-emerald-700">play a joke / trick</td>
+                          <td class="p-3">The children played a joke on the teacher. (NOT make a joke)</td>
+                        </tr>
+                        <tr class="hover:bg-gray-50">
+                          <td class="p-3 font-bold text-emerald-700">take a joke</td>
+                          <td class="p-3">She could take a joke. (= didn't mind a joke being played on her)</td>
+                        </tr>
+                        <tr class="hover:bg-gray-50">
+                          <td class="p-3 font-bold text-emerald-700">swallow your pride</td>
+                          <td class="p-3">She swallowed her pride and admitted she was wrong. (= did it even though embarrassing)</td>
+                        </tr>
+                        <tr class="hover:bg-gray-50">
+                          <td class="p-3 font-bold text-emerald-700">throw a tantrum</td>
+                          <td class="p-3">The child threw a tantrum. (= behaved in a very uncontrolled manner)</td>
+                        </tr>
+                        <tr class="hover:bg-gray-50">
+                          <td class="p-3 font-bold text-emerald-700">lose your patience</td>
+                          <td class="p-3">I lost my patience and shouted. (= lost my temper, became angry)</td>
+                        </tr>
+                        <tr class="hover:bg-gray-50">
+                          <td class="p-3 font-bold text-emerald-700">come to terms with</td>
+                          <td class="p-3">He found it hard to come to terms with his illness. (= accept something psychologically)</td>
+                        </tr>
+                        <tr class="hover:bg-gray-50">
+                          <td class="p-3 font-bold text-emerald-700">reveal your true character</td>
+                          <td class="p-3">His failure to support her revealed his true character. (Opposite = conceal / hide)</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>`
+          }
+        ],
+        exercises: [
+          {
+            tabLabel: "17.1 Flashcards",
+            html: `
+              <div class="exercise-block bg-white border border-gray-100 rounded-xl p-5 shadow-[0_2px_10px_-3px_rgba(79,70,229,0.1)]">
+                <h3 class="font-bold text-lg mb-4 text-gray-800 flex items-center gap-3 border-b pb-3"><span class="bg-indigo-100 text-indigo-800 px-3 py-1 rounded text-sm shadow-sm">17.1 & 17.4</span> Vocabulary Checks</h3>
+                <p class="text-sm text-gray-500 mb-4 italic">Think of the correct collocations based on the clues, then click to reveal.</p>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  ${generateFlashcard("1. Which of the collocations in Section A describe negative aspects of character?", "selfish streak, lose your temper, painfully shy, snap decisions, bear a grudge, brutally honest, making a fool out of you")}
+                  ${generateFlashcard("2. Collocations where 'word' means promise.", "keep your word, break your word")}
+                  ${generateFlashcard("3. Collocations where 'temper' relates to behaviour.", "lose your temper, keep your temper")}
+                  ${generateFlashcard("4. Collocations where 'sense of...' relates to character.", "sense of humour, sense of responsibility")}
+                </div>
+              </div>`
+          },
+          {
+            tabLabel: "17.2 Letters (1-3)",
+            html: `
+              <div class="exercise-block bg-white border border-gray-100 rounded-xl p-5 shadow-[0_2px_10px_-3px_rgba(79,70,229,0.1)]">
+                <h3 class="font-bold text-lg mb-4 text-gray-800 flex items-center gap-3 border-b pb-3"><span class="bg-indigo-100 text-indigo-800 px-3 py-1 rounded text-sm shadow-sm">17.2</span> Fill in the missing letters/words in these magazine letters.</h3>
+                <div class="space-y-6 leading-8 text-gray-700">
+                  <div class="bg-indigo-50/50 p-4 rounded-lg border border-indigo-100">
+                    <p class="font-bold text-indigo-900 border-b border-indigo-100 pb-1 mb-2">Letter 1</p>
+                    I know that I have a tendency to ${generateInput({ correct: ['bear'] })} a grudge, but I just can't forget something bad a friend did to me recently. She has a selfish ${generateInput({ correct: ['streak'] })} and doesn't care sometimes how much she hurts my ${generateInput({ correct: ['feelings'] })}. I am finding it increasingly hard to k${generateInput({ correct: ['eep'] })} my temper with her. But perhaps it might be better to l${generateInput({ correct: ['ose'] })} my temper and let her know how I really feel? 
+                    <br><span class="font-semibold text-sm mt-2 block">— Silvia M.</span>
+                  </div>
+
+                  <div class="bg-indigo-50/50 p-4 rounded-lg border border-indigo-100">
+                    <p class="font-bold text-indigo-900 border-b border-indigo-100 pb-1 mb-2">Letter 2</p>
+                    Should I talk about personal matters to my closest colleague at work? She is not very good at ${generateInput({ correct: ['keeping'] })} secrets and she has a very v${generateInput({ correct: ['ivid'] })} imagination. She always promises not to tell other people, but I'm not sure she always k${generateInput({ correct: ['eeps'] })} her word.
+                    <br><span class="font-semibold text-sm mt-2 block">— Jan H.</span>
+                  </div>
+
+                  <div class="bg-indigo-50/50 p-4 rounded-lg border border-indigo-100">
+                    <p class="font-bold text-indigo-900 border-b border-indigo-100 pb-1 mb-2">Letter 3</p>
+                    I have always tried to p${generateInput({ correct: ['ut'] })} others first and not to think of myself. I believe you should not lose your p${generateInput({ correct: ['atience'] })} with your friends, but if someone seems to enjoy ${generateInput({ correct: ['making'] })} a fool out of you in front of other people, do those rules of friendship still apply?
+                    <br><span class="font-semibold text-sm mt-2 block">— Stefan P.</span>
+                  </div>
+                </div>
+              </div>`
+          },
+          {
+            tabLabel: "17.2 Letters (4-6)",
+            html: `
+              <div class="exercise-block bg-white border border-gray-100 rounded-xl p-5 shadow-[0_2px_10px_-3px_rgba(79,70,229,0.1)]">
+                <h3 class="font-bold text-lg mb-4 text-gray-800 flex items-center gap-3 border-b pb-3"><span class="bg-indigo-100 text-indigo-800 px-3 py-1 rounded text-sm shadow-sm">17.2</span> Fill in the missing letters/words in these magazine letters.</h3>
+                <div class="space-y-6 leading-8 text-gray-700">
+                  <div class="bg-indigo-50/50 p-4 rounded-lg border border-indigo-100">
+                    <p class="font-bold text-indigo-900 border-b border-indigo-100 pb-1 mb-2">Letter 4</p>
+                    I'm a little shy with new people, though not p${generateInput({ correct: ['ainfully'] })} shy, but sometimes I think I g${generateInput({ correct: ['ive'] })} the impression that I'm unfriendly. How can I convince people that I'm good c${generateInput({ correct: ['ompany'] })} and worth getting to know?
+                    <br><span class="font-semibold text-sm mt-2 block">— Tom W.</span>
+                  </div>
+
+                  <div class="bg-indigo-50/50 p-4 rounded-lg border border-indigo-100">
+                    <p class="font-bold text-indigo-900 border-b border-indigo-100 pb-1 mb-2">Letter 5</p>
+                    My boyfriend has a really friendly, o${generateInput({ correct: ['utgoing'] })} personality and a great ${generateInput({ correct: ['sense'] })} of humour. He's h${generateInput({ correct: ['ighly'] })} intelligent and has a r${generateInput({ correct: ['azor'] })}-sharp mind. The perfect man. We've been together now for a year, and I like him a lot, but don't love him any more. Should I be b${generateInput({ correct: ['rutally'] })} honest with him and tell him?
+                    <br><span class="font-semibold text-sm mt-2 block">— Lydia T.</span>
+                  </div>
+
+                  <div class="bg-indigo-50/50 p-4 rounded-lg border border-indigo-100">
+                    <p class="font-bold text-indigo-900 border-b border-indigo-100 pb-1 mb-2">Letter 6</p>
+                    I think a friend is destroying himself with drugs. I feel a ${generateInput({ correct: ['sense'] })} of responsibility towards him. He has always been f${generateInput({ correct: ['iercely'] })} loyal to me in good and bad times, which is a wonderful a${generateInput({ correct: ['spect'] })} of his personality. I feel I ought to contact the police or social services, but I don't want to make a s${generateInput({ correct: ['nap'] })} decision which I'll regret later.
+                    <br><span class="font-semibold text-sm mt-2 block">— Gary J.</span>
+                  </div>
+                </div>
+              </div>`
+          },
+          {
+            tabLabel: "17.3 Conversations",
+            html: `
+              <div class="exercise-block bg-white border border-gray-100 rounded-xl p-5 shadow-[0_2px_10px_-3px_rgba(79,70,229,0.1)]">
+                <h3 class="font-bold text-lg mb-4 text-gray-800 flex items-center gap-3 border-b pb-3"><span class="bg-indigo-100 text-indigo-800 px-3 py-1 rounded text-sm shadow-sm">17.3</span> Complete B's remarks to mean the same as A's.</h3>
+                <div class="space-y-6 leading-8 text-gray-700">
+                  <div>
+                    <p class="font-bold text-indigo-700">1. A: Charlie's found it hard to accept psychologically the fact that he's now divorced.</p>
+                    <p class="ml-5">B: Yes, he's found it hard to ${generateInput({ correct: ['come to terms'] })} with his new situation.</p>
+                  </div>
+                  <div>
+                    <p class="font-bold text-indigo-700">2. A: Parker's problem is he can't laugh when people play jokes on him.</p>
+                    <p class="ml-5">B: No, it's true. He just can't ${generateInput({ correct: ['take a joke'] })}, can he?</p>
+                  </div>
+                  <div>
+                    <p class="font-bold text-indigo-700">3. A: Well, Sara's behaviour last night certainly showed the truth about her.</p>
+                    <p class="ml-5">B: Yes, it certainly ${generateInput({ correct: ['revealed her true character', 'revealed his true character'], widthClass: 'w-64' })}.</p>
+                  </div>
+                  <div>
+                    <p class="font-bold text-indigo-700">4. A: She always has very high expectations of both herself and her children.</p>
+                    <p class="ml-5">B: Yes, she always ${generateInput({ correct: ['sets high standards'] })}.</p>
+                  </div>
+                  <div>
+                    <p class="font-bold text-indigo-700">5. A: Max started screaming and stamping his feet when I tried to put him to bed.</p>
+                    <p class="ml-5">B: Well, two-year-olds often ${generateInput({ correct: ['throw a tantrum'] })}.</p>
+                  </div>
+                </div>
+              </div>`
+          }
+        ]
+      },
+      unit18: {
+        title: "Unit 18: People: physical appearance",
+        theory: [
+          {
+            tabLabel: "Face & Hair",
+            html: `
+              <div class="space-y-6">
+                <div class="bg-emerald-50 rounded-lg shadow-sm border border-emerald-200 overflow-hidden">
+                  <h3 class="bg-emerald-600 text-white font-bold p-3 text-lg"><i class="fa-solid fa-face-smile mr-2"></i> Faces & Hair</h3>
+                  <div class="p-4 space-y-4 text-sm text-gray-800">
+                    <p class="font-bold text-emerald-900 border-b border-emerald-200 pb-1">Facial Features:</p>
+                    <ul class="list-disc pl-5 space-y-1">
+                      <li><span class="font-bold text-emerald-700">round face / pointed face / oval face</span> (egg-shaped)</li>
+                      <li><span class="font-bold text-emerald-700">straight nose / upturned nose</span></li>
+                      <li><span class="font-bold text-emerald-700">droopy moustache:</span> long and hanging down heavily</li>
+                      <li><span class="font-bold text-emerald-700">lovely complexion:</span> the natural colour and quality of a person's skin</li>
+                      <li><span class="font-bold text-emerald-700">chubby cheeks:</span> fat in a pleasant and attractive way</li>
+                      <li><span class="font-bold text-emerald-700">bushy eyebrows:</span> very thick</li>
+                    </ul>
+
+                    <p class="font-bold text-emerald-900 border-b border-emerald-200 pb-1 mt-4">Hair Collocations:</p>
+                    <ul class="list-disc pl-5 space-y-1">
+                      <li><span class="font-bold text-emerald-700">sleek, shoulder-length hair:</span> smooth and shiny</li>
+                      <li><span class="font-bold text-emerald-700">coarse hair:</span> rough, not smooth or soft</li>
+                      <li><span class="font-bold text-emerald-700">thick hair / dark hair / fair hair</span></li>
+                      <li><span class="font-bold text-emerald-700">jet-black hair:</span> completely black</li>
+                      <li><span class="font-bold text-emerald-700">ginger hair:</span> red or orange-brown (only used for people's hair)</li>
+                      <li><span class="font-bold text-emerald-700">going bald / went grey</span></li>
+                      <li><span class="font-bold text-emerald-700">dishevelled hair:</span> very untidy</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>`
+          },
+          {
+            tabLabel: "Body & Appearance",
+            html: `
+              <div class="space-y-6">
+                <div class="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
+                  <h3 class="bg-cyan-600 text-white font-bold p-3 text-lg"><i class="fa-solid fa-person mr-2"></i> Body & Overall Appearance</h3>
+                  <div class="p-4 space-y-4 text-sm text-gray-800">
+                    <p class="font-bold text-cyan-900 border-b border-cyan-100 pb-1">Figures & Build:</p>
+                    <ul class="list-disc pl-5 space-y-2">
+                      <li><span class="font-bold text-cyan-700">slim figure / slender waist:</span> slender is a formal, poetic word for attractively slim.</li>
+                      <li><span class="font-bold text-cyan-700">broad hips / broad shoulders</span></li>
+                      <li><span class="font-bold text-cyan-700">well-built:</span> have strong, attractive bodies.</li>
+                      <li><span class="font-bold text-cyan-700">short, dumpy woman:</span> short and quite fat. (Slightly negative, use carefully).</li>
+                      <li><span class="font-bold text-cyan-700">portly gentleman:</span> fat and round; usually used for middle-aged/older men.</li>
+                      <li><span class="font-bold text-cyan-700">lanky youth:</span> tall and thin and tending to move awkwardly.</li>
+                    </ul>
+
+                    <p class="font-bold text-cyan-900 border-b border-cyan-100 pb-1 mt-4">General Appearance:</p>
+                    <ul class="list-disc pl-5 space-y-2">
+                      <li><span class="font-bold text-cyan-700">immaculately groomed:</span> appearance is always tidy and looked after with great care.</li>
+                      <li><span class="font-bold text-cyan-700">youthful appearance:</span> looks young.</li>
+                      <li><span class="font-bold text-cyan-700">bear a striking resemblance to:</span> looks remarkably like someone.</li>
+                      <li><span class="font-bold text-cyan-700">striking appearance:</span> unusual appearance, in a positive, attractive sense.</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>`
+          }
+        ],
+        exercises: [
+          {
+            tabLabel: "18.1 Fat or Thin?",
+            html: `
+              <div class="exercise-block bg-white border border-gray-100 rounded-xl p-5 shadow-[0_2px_10px_-3px_rgba(16,185,129,0.1)]">
+                <h3 class="font-bold text-lg mb-4 text-gray-800 flex items-center gap-3 border-b pb-3"><span class="bg-emerald-100 text-emerald-800 px-3 py-1 rounded text-sm shadow-sm">18.1</span> Fat or Thin? Answer the questions.</h3>
+                <p class="text-sm text-gray-500 mb-4 font-medium">Use these words: <span class="bg-gray-100 px-2 py-0.5 rounded font-mono">portly</span>, <span class="bg-gray-100 px-2 py-0.5 rounded font-mono">lanky</span>, <span class="bg-gray-100 px-2 py-0.5 rounded font-mono">slender</span>, <span class="bg-gray-100 px-2 py-0.5 rounded font-mono">dumpy</span>, <span class="bg-gray-100 px-2 py-0.5 rounded font-mono">slim</span>, <span class="bg-gray-100 px-2 py-0.5 rounded font-mono">chubby</span></p>
+                <ol class="list-decimal list-inside space-y-4 pl-2 leading-8 text-gray-700">
+                  <li>Which words could be used to describe someone's waist? <br><i class="fa-solid fa-arrow-right text-emerald-400 mx-4"></i> ${generateInput({ correct: ['slender', 'slim'] })} and ${generateInput({ correct: ['slim', 'slender'] })}</li>
+                  <li>Which word is likely to be used of a rather physically awkward young person? <br><i class="fa-solid fa-arrow-right text-emerald-400 mx-4"></i> ${generateInput({ correct: ['lanky'] })}</li>
+                  <li>Which word means 'fat but in a pleasant way'? <br><i class="fa-solid fa-arrow-right text-emerald-400 mx-4"></i> ${generateInput({ correct: ['chubby'] })}</li>
+                  <li>Which word is more likely to be used to describe a man rather than a woman? <br><i class="fa-solid fa-arrow-right text-emerald-400 mx-4"></i> ${generateInput({ correct: ['portly'] })}</li>
+                  <li>Which word is more likely to be used to describe a woman rather than a man? <br><i class="fa-solid fa-arrow-right text-emerald-400 mx-4"></i> ${generateInput({ correct: ['dumpy'] })}</li>
+                </ol>
+              </div>`
+          },
+          {
+            tabLabel: "18.2 Match Adjectives",
+            html: `
+              <div class="exercise-block bg-white border border-gray-100 rounded-xl p-5 shadow-[0_2px_10px_-3px_rgba(16,185,129,0.1)]">
+                <h3 class="font-bold text-lg mb-4 text-gray-800 flex items-center gap-3 border-b pb-3"><span class="bg-emerald-100 text-emerald-800 px-3 py-1 rounded text-sm shadow-sm">18.2</span> Match the adjectives to the nouns.</h3>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 leading-8 text-gray-700 font-medium">
+                  <div>1. bushy ${generateSelect({ options: ['cheeks', 'moustache', 'shoulders', 'hair', 'eyebrows', 'resemblance', 'face'], correct: 'eyebrows' })}</div>
+                  <div>2. oval ${generateSelect({ options: ['cheeks', 'moustache', 'shoulders', 'hair', 'eyebrows', 'resemblance', 'face'], correct: 'face' })}</div>
+                  <div>3. striking ${generateSelect({ options: ['cheeks', 'moustache', 'shoulders', 'hair', 'eyebrows', 'resemblance', 'face'], correct: 'resemblance' })}</div>
+                  <div>4. broad ${generateSelect({ options: ['cheeks', 'moustache', 'shoulders', 'hair', 'eyebrows', 'resemblance', 'face'], correct: 'shoulders' })}</div>
+                  <div>5. droopy ${generateSelect({ options: ['cheeks', 'moustache', 'shoulders', 'hair', 'eyebrows', 'resemblance', 'face'], correct: 'moustache' })}</div>
+                  <div>6. chubby ${generateSelect({ options: ['cheeks', 'moustache', 'shoulders', 'hair', 'eyebrows', 'resemblance', 'face'], correct: 'cheeks' })}</div>
+                  <div>7. dishevelled ${generateSelect({ options: ['cheeks', 'moustache', 'shoulders', 'hair', 'eyebrows', 'resemblance', 'face'], correct: 'hair' })}</div>
+                </div>
+              </div>`
+          },
+          {
+            tabLabel: "18.3 Story Fill-in",
+            html: `
+              <div class="exercise-block bg-emerald-50/50 p-6 rounded-xl border border-emerald-200 shadow-sm">
+                <h3 class="font-bold text-lg mb-4 text-emerald-900 border-b border-emerald-200 pb-2"><i class="fa-solid fa-pen-to-square text-emerald-600 mr-2"></i> 18.3 Fill the gaps</h3>
+                <div class="leading-loose bg-white p-5 rounded-lg shadow-sm border border-emerald-100 text-gray-700">
+                  I hadn't seen Owen since he was just a baby. He was (1) im${generateInput({ correct: ['maculately groomed'], widthClass: 'w-48' })}, smart and elegant. He was with a pretty young woman with (2) j${generateInput({ correct: ['et'] })}-black, (3) shoulder-${generateInput({ correct: ['length'] })} hair and a (4) lovely com${generateInput({ correct: ['plexion'] })}. She could have been a model, she had such a (5) str${generateInput({ correct: ['iking appearance'], widthClass: 'w-48' })}. He had his arm round her (6) sl${generateInput({ correct: ['ender'] })} wa${generateInput({ correct: ['ist'] })}. With them was a (7) po${generateInput({ correct: ['rtly'] })} g${generateInput({ correct: ['entleman'] })} who looked as though he enjoyed good food. When I introduced myself to Owen, he smiled. 'You haven't aged at all! You have a much more (8) y${generateInput({ correct: ['outhful'] })} a${generateInput({ correct: ['ppearance'], widthClass: 'w-32' })} than my father now does. Dad has (9) g${generateInput({ correct: ['one'] })} very grey.' I felt very pleased; he obviously didn't notice I was beginning to (10) ${generateInput({ correct: ['go'] })} bald.
+                </div>
+              </div>`
+          },
+          {
+            tabLabel: "18.4 Contrasts",
+            html: `
+              <div class="exercise-block bg-white border border-gray-100 rounded-xl p-5 shadow-[0_2px_10px_-3px_rgba(16,185,129,0.1)]">
+                <h3 class="font-bold text-lg mb-4 text-gray-800 flex items-center gap-3 border-b pb-3"><span class="bg-emerald-100 text-emerald-800 px-3 py-1 rounded text-sm shadow-sm">18.4</span> Fill the gaps to give contrasting meanings.</h3>
+                <p class="text-sm text-gray-500 mb-4 font-medium">Use these words: <span class="bg-gray-100 px-2 py-0.5 rounded font-mono">round</span>, <span class="bg-gray-100 px-2 py-0.5 rounded font-mono">coarse</span>, <span class="bg-gray-100 px-2 py-0.5 rounded font-mono">upturned</span>, <span class="bg-gray-100 px-2 py-0.5 rounded font-mono">fair</span>, <span class="bg-gray-100 px-2 py-0.5 rounded font-mono">pointed</span>, <span class="bg-gray-100 px-2 py-0.5 rounded font-mono">straight</span>, <span class="bg-gray-100 px-2 py-0.5 rounded font-mono">dark</span>, <span class="bg-gray-100 px-2 py-0.5 rounded font-mono">sleek</span></p>
+                <ol class="list-decimal list-inside space-y-4 pl-2 leading-8 text-gray-700">
+                  <li>Her hair's not ${generateInput({ correct: ['fair'] })}, in fact it's almost black.</li>
+                  <li>She has an ${generateInput({ correct: ['upturned'] })} nose but her brother has a ${generateInput({ correct: ['straight'] })} nose.</li>
+                  <li>Her mother has a ${generateInput({ correct: ['round', 'pointed'] })} face but her father has a ${generateInput({ correct: ['pointed', 'round'] })} face.</li>
+                  <li>My hair is so ${generateInput({ correct: ['coarse'] })} and ugly; Sally's is so ${generateInput({ correct: ['sleek'] })} and lovely.</li>
+                </ol>
+              </div>`
+          }
+        ]
+      }
+    };
+
+    // --- HTML GENERATORS ---
+    
+    function generateInput({ correct, placeholder = "type here", widthClass = "w-32 sm:w-40" }) {
+      const correctStr = JSON.stringify(correct).replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+      const firstAnswer = correct[0].replace(/'/g, '&#39;');
+      return `
+        <div class="inline-block relative m-1 exercise-component align-middle ${widthClass === 'w-full' ? 'w-full block mx-0 mt-2' : ''}">
+          <input type="text" class="exercise-input border-b-2 outline-none px-2 py-1 transition-all duration-200 text-center font-bold text-indigo-900 border-gray-300 focus:border-indigo-500 focus:bg-indigo-50 bg-transparent rounded-t-sm ${widthClass}" data-correct="${correctStr}" placeholder="${placeholder}" />
+          <span class="feedback-icon absolute right-2 top-1 text-lg drop-shadow-sm"></span>
+          <div class="answer-tooltip absolute top-full left-1/2 -translate-x-1/2 mt-2 px-3 py-1.5 rounded whitespace-nowrap z-30 hidden transition-opacity duration-200">${firstAnswer}</div>
+        </div>
+      `;
+    }
+
+    function generateSelect({ options, correct }) {
+      const optionsHtml = options.map(opt => `<option value="${opt}">${opt}</option>`).join('');
+      return `
+        <div class="inline-block relative m-1 exercise-component align-middle w-full sm:w-auto">
+          <select class="exercise-select border-b-2 outline-none px-2 py-1 appearance-none bg-transparent font-bold text-indigo-900 text-center pr-6 cursor-pointer transition-all duration-200 border-gray-300 focus:border-indigo-500 focus:bg-indigo-50 rounded-t-sm max-w-full" data-correct="${correct}">
+            <option value="" disabled selected>select...</option>
+            ${optionsHtml}
+          </select>
+          <span class="feedback-icon absolute -right-2 top-1 text-lg drop-shadow-sm"></span>
+          <div class="answer-tooltip absolute top-full left-1/2 -translate-x-1/2 mt-2 px-3 py-1.5 rounded whitespace-nowrap z-30 hidden transition-opacity duration-200">${correct}</div>
+        </div>
+      `;
+    }
+
+    function generateFlashcard(question, answer) {
+      return `
+        <div class="flashcard p-4 border rounded-xl cursor-pointer transition-all duration-300 bg-white border-gray-200 hover:border-indigo-300 hover:shadow-md select-none group">
+          <div class="flex justify-between items-start pointer-events-none">
+            <p class="font-medium text-gray-800 leading-snug group-hover:text-indigo-900 transition-colors">${question}</p>
+            <span class="status-badge text-xs text-gray-500 uppercase tracking-wider font-bold bg-gray-100 px-2 py-1 rounded-md ml-2 shrink-0 transition-colors">Reveal</span>
+          </div>
+          <div class="answer-content hidden mt-3 pt-3 border-t border-indigo-100 text-indigo-700 font-bold flex items-center gap-2 pointer-events-none">
+            <i class="fa-solid fa-check-circle text-indigo-500"></i> ${answer}
+          </div>
+        </div>
+      `;
+    }
+
+    // --- STATE AND LOGIC ---
+    let currentUnit = 'unit17';
+
+    // Elements
+    const theoryContainer = document.getElementById('theory-container');
+    const theoryTabsContainer = document.getElementById('theory-tabs-container');
+    const exercisesContainer = document.getElementById('exercises-container');
+    const subTabsContainer = document.getElementById('sub-tabs-container');
+    const exerciseTitle = document.getElementById('exercise-title');
+    const tabButtons = document.querySelectorAll('.tab-btn');
+    const btnReset = document.getElementById('btn-reset');
+
+    function loadUnit(unitId) {
+      currentUnit = unitId;
+      
+      // Update Main Navigation Tabs
+      tabButtons.forEach(btn => {
+        if (btn.dataset.target === unitId) {
+          btn.className = "tab-btn whitespace-nowrap px-4 py-2 rounded-md text-sm font-semibold transition-all bg-white text-indigo-900 shadow-sm";
+        } else {
+          btn.className = "tab-btn whitespace-nowrap px-4 py-2 rounded-md text-sm font-semibold transition-all text-indigo-100 hover:bg-indigo-700";
+        }
+      });
+
+      // Fetch Unit Data
+      const data = contentData[unitId];
+      exerciseTitle.textContent = data.title;
+      
+      // Clear containers
+      theoryTabsContainer.innerHTML = '';
+      theoryContainer.innerHTML = '';
+      subTabsContainer.innerHTML = '';
+      exercisesContainer.innerHTML = '';
+
+      // Generate Theory Sub-tabs
+      data.theory.forEach((th, index) => {
+        const tabBtn = document.createElement('button');
+        tabBtn.className = "theory-tab-btn px-4 py-2 text-sm font-bold rounded-t-lg transition-colors border border-b-0 whitespace-nowrap";
+        tabBtn.textContent = th.tabLabel;
+        tabBtn.onclick = () => switchTheoryTab(index);
+        theoryTabsContainer.appendChild(tabBtn);
+
+        const wrapper = document.createElement('div');
+        wrapper.className = "theory-tab-content hidden"; 
+        wrapper.innerHTML = th.html;
+        theoryContainer.appendChild(wrapper);
+      });
+
+      // Generate Exercise Sub-tabs and Exercise Blocks
+      data.exercises.forEach((ex, index) => {
+        // 1. Create Tab Button
+        const tabBtn = document.createElement('button');
+        tabBtn.className = "sub-tab-btn px-4 py-2 text-sm font-bold rounded-t-lg transition-colors border border-b-0 whitespace-nowrap";
+        tabBtn.textContent = ex.tabLabel;
+        tabBtn.onclick = () => switchSubTab(index);
+        subTabsContainer.appendChild(tabBtn);
+
+        // 2. Create Exercise Wrapper
+        const wrapper = document.createElement('div');
+        wrapper.className = "exercise-tab-content hidden"; // all hidden initially
+        wrapper.innerHTML = ex.html;
+        exercisesContainer.appendChild(wrapper);
+      });
+
+      // Inject Per-Exercise Validation Controls
+      const blocks = exercisesContainer.querySelectorAll('.exercise-block');
+      blocks.forEach(block => {
+        // Only append Check Button if there are inputs/selects to check
+        if (block.querySelectorAll('.exercise-input, .exercise-select').length > 0) {
+          const controlDiv = document.createElement('div');
+          controlDiv.className = "mt-6 flex flex-col sm:flex-row justify-end items-center gap-4 border-t border-gray-100 pt-4";
+          
+          const warningSpan = document.createElement('span');
+          warningSpan.className = "text-red-500 text-sm font-bold hidden flex items-center gap-1 warning-msg drop-shadow-sm";
+          warningSpan.innerHTML = '<i class="fa-solid fa-triangle-exclamation"></i> Please fill in all blanks first!';
+          
+          const checkBtn = document.createElement('button');
+          checkBtn.className = "flex items-center gap-2 font-bold px-6 py-2 rounded-lg bg-indigo-600 text-white hover:bg-indigo-700 transition-all shadow-md hover:shadow-lg active:scale-95";
+          checkBtn.innerHTML = '<i class="fa-solid fa-clipboard-check"></i> Check Answers';
+          checkBtn.onclick = () => validateExerciseBlock(block, warningSpan);
+          
+          controlDiv.appendChild(warningSpan);
+          controlDiv.appendChild(checkBtn);
+          block.appendChild(controlDiv);
+        }
+      });
+
+      setupFlashcards();
+      
+      // Default to the first sub-tabs
+      if (data.theory.length > 0) switchTheoryTab(0);
+      if (data.exercises.length > 0) switchSubTab(0);
+    }
+
+    function switchTheoryTab(activeIndex) {
+      const btns = document.querySelectorAll('.theory-tab-btn');
+      const contents = document.querySelectorAll('.theory-tab-content');
+
+      btns.forEach((btn, idx) => {
+        if (idx === activeIndex) {
+          btn.className = "theory-tab-btn px-4 py-2 text-sm font-bold rounded-t-lg transition-colors border border-b-0 bg-white text-indigo-700 border-gray-200 shadow-[0_-2px_4px_rgba(0,0,0,0.02)] relative top-[1px] z-10 cursor-default whitespace-nowrap";
+        } else {
+          btn.className = "theory-tab-btn px-4 py-2 text-sm font-bold rounded-t-lg transition-colors border border-b-0 bg-transparent text-gray-500 border-transparent hover:bg-gray-100 hover:text-gray-700 cursor-pointer whitespace-nowrap";
+        }
+      });
+
+      contents.forEach((content, idx) => {
+        if (idx === activeIndex) {
+          content.classList.remove('hidden');
+        } else {
+          content.classList.add('hidden');
+        }
+      });
+    }
+
+    function switchSubTab(activeIndex) {
+      const btns = document.querySelectorAll('.sub-tab-btn');
+      const contents = document.querySelectorAll('.exercise-tab-content');
+
+      btns.forEach((btn, idx) => {
+        if (idx === activeIndex) {
+          btn.className = "sub-tab-btn px-4 py-2 text-sm font-bold rounded-t-lg transition-colors border border-b-0 bg-white text-indigo-700 border-gray-200 shadow-[0_-2px_4px_rgba(0,0,0,0.02)] relative top-[1px] z-10 cursor-default whitespace-nowrap";
+        } else {
+          btn.className = "sub-tab-btn px-4 py-2 text-sm font-bold rounded-t-lg transition-colors border border-b-0 bg-transparent text-gray-500 border-transparent hover:bg-gray-100 hover:text-gray-700 cursor-pointer whitespace-nowrap";
+        }
+      });
+
+      contents.forEach((content, idx) => {
+        if (idx === activeIndex) {
+          content.classList.remove('hidden');
+        } else {
+          content.classList.add('hidden');
+        }
+      });
+    }
+
+    function setupFlashcards() {
+      const flashcards = exercisesContainer.querySelectorAll('.flashcard');
+      flashcards.forEach(card => {
+        card.addEventListener('click', function() {
+          const content = this.querySelector('.answer-content');
+          const badge = this.querySelector('.status-badge');
+          
+          if (content.classList.contains('hidden')) {
+            content.classList.remove('hidden');
+            this.classList.replace('bg-white', 'bg-indigo-50');
+            this.classList.replace('border-gray-200', 'border-indigo-300');
+            badge.textContent = 'Hide';
+            badge.className = "status-badge text-xs text-indigo-700 uppercase tracking-wider font-bold bg-indigo-200 px-2 py-1 rounded-md ml-2 shrink-0 transition-colors";
+          } else {
+            content.classList.add('hidden');
+            this.classList.replace('bg-indigo-50', 'bg-white');
+            this.classList.replace('border-indigo-300', 'border-gray-200');
+            badge.textContent = 'Reveal';
+            badge.className = "status-badge text-xs text-gray-500 uppercase tracking-wider font-bold bg-gray-100 px-2 py-1 rounded-md ml-2 shrink-0 transition-colors";
+          }
+        });
+      });
+    }
+
+    // Helper to strip punctuation to make typing validation more forgiving
+    function normalizeTextForComparison(text) {
+      return text.toLowerCase().replace(/[.,?!]/g, '').replace(/\s+/g, ' ').trim();
+    }
+
+    function validateExerciseBlock(block, warningSpan) {
+      const inputs = block.querySelectorAll('.exercise-input');
+      const selects = block.querySelectorAll('.exercise-select');
+      const elements = [...inputs, ...selects];
+      
+      if (elements.length === 0) return;
+
+      // 1. Force all blanks to be filled check
+      let allFilled = true;
+      elements.forEach(el => {
+        if(el.value.trim() === '') {
+          allFilled = false;
+          el.classList.add('input-empty-error');
+        } else {
+          el.classList.remove('input-empty-error');
+        }
+      });
+
+      if (!allFilled) {
+        warningSpan.classList.remove('hidden', 'shake');
+        void warningSpan.offsetWidth; // trigger browser reflow
+        warningSpan.classList.add('shake');
+        return;
+      }
+
+      // 2. Proceed with validation if all filled
+      warningSpan.classList.add('hidden');
+
+      const processElement = (el, isSelect) => {
+        const rawVal = el.value.trim();
+        const val = normalizeTextForComparison(rawVal);
+        const parent = el.closest('.exercise-component');
+        const iconContainer = parent.querySelector('.feedback-icon');
+        const tooltip = parent.querySelector('.answer-tooltip');
+        
+        // Reset classes
+        el.classList.remove('input-correct', 'input-incorrect', 'input-empty-error');
+        iconContainer.innerHTML = '';
+        tooltip.classList.add('hidden');
+
+        let isCorrect = false;
+
+        if (isSelect) {
+          isCorrect = (rawVal === el.dataset.correct);
+        } else {
+          const correctAnswersArray = JSON.parse(el.dataset.correct.replace(/&quot;/g, '"').replace(/&#39;/g, "'"));
+          isCorrect = correctAnswersArray.some(ans => normalizeTextForComparison(ans) === val);
+        }
+
+        if (isCorrect) {
+          el.classList.add('input-correct');
+          iconContainer.innerHTML = '<i class="fa-solid fa-circle-check text-green-500 drop-shadow-sm bg-white rounded-full"></i>';
+        } else {
+          el.classList.add('input-incorrect');
+          iconContainer.innerHTML = '<i class="fa-solid fa-circle-xmark text-red-500 drop-shadow-sm bg-white rounded-full"></i>';
+          tooltip.classList.remove('hidden'); // Automatically reveal correct answer on mistake
+        }
+      };
+
+      inputs.forEach(el => processElement(el, false));
+      selects.forEach(el => processElement(el, true));
+    }
+
+    function resetAllExercises() {
+      if(confirm("Clear all your progress for this unit?")) {
+        const inputs = exercisesContainer.querySelectorAll('.exercise-input');
+        const selects = exercisesContainer.querySelectorAll('.exercise-select');
+        const components = exercisesContainer.querySelectorAll('.exercise-component');
+        const warnings = exercisesContainer.querySelectorAll('.warning-msg');
+        
+        inputs.forEach(input => {
+          input.value = '';
+          input.disabled = false;
+          input.classList.remove('input-correct', 'input-incorrect', 'input-empty-error');
+        });
+        
+        selects.forEach(select => {
+          select.value = '';
+          select.disabled = false;
+          select.classList.remove('input-correct', 'input-incorrect', 'input-empty-error');
+        });
+
+        components.forEach(parent => {
+          parent.querySelector('.feedback-icon').innerHTML = '';
+          parent.querySelector('.answer-tooltip').classList.add('hidden');
+        });
+
+        warnings.forEach(warning => warning.classList.add('hidden'));
+
+        // Reset Flashcards
+        const flashcards = exercisesContainer.querySelectorAll('.flashcard');
+        flashcards.forEach(card => {
+          const content = card.querySelector('.answer-content');
+          const badge = card.querySelector('.status-badge');
+          content.classList.add('hidden');
+          card.classList.replace('bg-indigo-50', 'bg-white');
+          card.classList.replace('border-indigo-300', 'border-gray-200');
+          badge.textContent = 'Reveal';
+          badge.className = "status-badge text-xs text-gray-500 uppercase tracking-wider font-bold bg-gray-100 px-2 py-1 rounded-md ml-2 shrink-0 transition-colors";
+        });
+      }
+    }
+
+    // --- EVENT LISTENERS ---
+    
+    // Tab switching
+    tabButtons.forEach(btn => {
+      btn.addEventListener('click', () => loadUnit(btn.dataset.target));
+    });
+
+    // Reset Button
+    btnReset.addEventListener('click', resetAllExercises);
+
+    // Remove red borders and tooltips when user edits a field
+    exercisesContainer.addEventListener('input', (e) => {
+      if (e.target.classList.contains('exercise-input') || e.target.classList.contains('exercise-select')) {
+        e.target.classList.remove('input-empty-error', 'input-incorrect');
+        const parent = e.target.closest('.exercise-component');
+        parent.querySelector('.feedback-icon').innerHTML = '';
+        parent.querySelector('.answer-tooltip').classList.add('hidden');
+        
+        // Hide empty warning if they start typing
+        const block = e.target.closest('.exercise-block');
+        if (block) {
+          const warning = block.querySelector('.warning-msg');
+          if (warning) warning.classList.add('hidden');
+        }
+      }
+    });
+
+    // Initial Load
+    loadUnit('unit17');
+
+  </script>
+</body>
+</html>
