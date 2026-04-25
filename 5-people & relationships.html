@@ -88,9 +88,11 @@
         </div>
         <h1 class="text-2xl font-bold tracking-tight">People & Relationships <span class="font-light opacity-80 text-lg hidden sm:inline">| Self-Study</span></h1>
       </div>
-      <nav class="flex bg-indigo-800 rounded-lg p-1 overflow-x-auto w-full sm:w-auto shadow-inner" id="tab-nav">
+      <nav class="flex bg-indigo-800 rounded-lg p-1 overflow-x-auto w-full sm:w-auto shadow-inner custom-scrollbar" id="tab-nav">
         <button data-target="unit17" class="tab-btn whitespace-nowrap px-4 py-2 rounded-md text-sm font-semibold transition-all bg-white text-indigo-900 shadow">Unit 17: Character</button>
         <button data-target="unit18" class="tab-btn whitespace-nowrap px-4 py-2 rounded-md text-sm font-semibold transition-all text-indigo-100 hover:bg-indigo-700">Unit 18: Appearance</button>
+        <button data-target="unit19" class="tab-btn whitespace-nowrap px-4 py-2 rounded-md text-sm font-semibold transition-all text-indigo-100 hover:bg-indigo-700">Unit 19: Families</button>
+        <button data-target="unit20" class="tab-btn whitespace-nowrap px-4 py-2 rounded-md text-sm font-semibold transition-all text-indigo-100 hover:bg-indigo-700">Unit 20: Relationships</button>
       </nav>
     </div>
   </header>
@@ -446,6 +448,310 @@
                   <li>She has an ${generateInput({ correct: ['upturned'] })} nose but her brother has a ${generateInput({ correct: ['straight'] })} nose.</li>
                   <li>Her mother has a ${generateInput({ correct: ['round', 'pointed'] })} face but her father has a ${generateInput({ correct: ['pointed', 'round'] })} face.</li>
                   <li>My hair is so ${generateInput({ correct: ['coarse'] })} and ugly; Sally's is so ${generateInput({ correct: ['sleek'] })} and lovely.</li>
+                </ol>
+              </div>`
+          }
+        ]
+      },
+      unit19: {
+        title: "Unit 19: Families",
+        theory: [
+          {
+            tabLabel: "Family Relationships",
+            html: `
+              <div class="space-y-6">
+                <div class="bg-amber-50 rounded-lg shadow-sm border border-amber-200 overflow-hidden">
+                  <h3 class="bg-amber-600 text-white font-bold p-3 text-lg"><i class="fa-solid fa-people-roof mr-2"></i> Family Networks & Types</h3>
+                  <div class="p-4 space-y-4 text-sm text-gray-800">
+                    <ul class="list-disc pl-5 space-y-2">
+                      <li><span class="font-bold text-amber-700">nuclear family:</span> just parents and children.</li>
+                      <li><span class="font-bold text-amber-700">extended family:</span> a wider network including grandparents, cousins, etc.</li>
+                      <li><span class="font-bold text-amber-700">close / immediate family:</span> people who are your nearest blood relatives.</li>
+                      <li><span class="font-bold text-amber-700">distant relatives:</span> e.g. second cousins or distant cousins.</li>
+                      <li><span class="font-bold text-amber-700">close-knit family:</span> a family where the relationship is very strong.</li>
+                      <li><span class="font-bold text-amber-700">respectable family:</span> well-regarded in society.</li>
+                      <li><span class="font-bold text-amber-700">dysfunctional family:</span> unhappy, not working in a healthy way.</li>
+                    </ul>
+
+                    <p class="font-bold text-amber-900 border-b border-amber-200 pb-1 mt-4">Marriage & Divorce:</p>
+                    <ul class="list-disc pl-5 space-y-2">
+                      <li><span class="font-bold text-amber-700">late husband/wife:</span> one who has died.</li>
+                      <li><span class="font-bold text-amber-700">estranged husband/wife:</span> lives in a different place and has a difficult relationship.</li>
+                      <li><span class="font-bold text-amber-700">trial separation / get a divorce / bitter (acrimonious) divorce</span></li>
+                      <li><span class="font-bold text-amber-700">ex-husband / ex-wife:</span> previously married.</li>
+                      <li><span class="font-bold text-amber-700">confirmed bachelor:</span> a man who seems to have no intention of ever marrying.</li>
+                    </ul>
+
+                    <p class="font-bold text-amber-900 border-b border-amber-200 pb-1 mt-4">Types of Homes:</p>
+                    <ul class="list-disc pl-5 space-y-2">
+                      <li><span class="font-bold text-amber-700">broken home:</span> children whose parents have separated/divorced.</li>
+                      <li><span class="font-bold text-amber-700">stable home:</span> strong, loving family environment.</li>
+                      <li><span class="font-bold text-amber-700">deprived home:</span> poor, lacking things necessary for a pleasant life.</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>`
+          },
+          {
+            tabLabel: "Parents & Children",
+            html: `
+              <div class="space-y-6">
+                <div class="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
+                  <h3 class="bg-orange-600 text-white font-bold p-3 text-lg"><i class="fa-solid fa-children mr-2"></i> Parents and Children</h3>
+                  <div class="overflow-x-auto">
+                    <table class="w-full text-sm text-left">
+                      <thead class="bg-orange-50 text-orange-900 border-b border-orange-100">
+                        <tr>
+                          <th class="p-3 font-bold w-1/3">Collocation</th>
+                          <th class="p-3 font-bold">Comments / Usage</th>
+                        </tr>
+                      </thead>
+                      <tbody class="divide-y divide-gray-100 text-gray-700">
+                        <tr class="hover:bg-gray-50">
+                          <td class="p-3 font-bold text-orange-700">start a family</td>
+                          <td class="p-3">NOT <em>begin a family</em></td>
+                        </tr>
+                        <tr class="hover:bg-gray-50">
+                          <td class="p-3 font-bold text-orange-700">have children / a baby</td>
+                          <td class="p-3">NOT <em>get children / a baby</em></td>
+                        </tr>
+                        <tr class="hover:bg-gray-50">
+                          <td class="p-3 font-bold text-orange-700">expect a baby</td>
+                          <td class="p-3">NOT <em>wait (for) a baby</em></td>
+                        </tr>
+                        <tr class="hover:bg-gray-50">
+                          <td class="p-3 font-bold text-orange-700">the baby is due</td>
+                          <td class="p-3">Expected to arrive</td>
+                        </tr>
+                        <tr class="hover:bg-gray-50">
+                          <td class="p-3 font-bold text-orange-700">single parent/mother</td>
+                          <td class="p-3">Unmarried or divorced</td>
+                        </tr>
+                        <tr class="hover:bg-gray-50">
+                          <td class="p-3 font-bold text-orange-700">raise / bring up children (or a family)</td>
+                          <td class="p-3"><em>Raise</em> is more common in US; <em>bring up</em> in UK</td>
+                        </tr>
+                        <tr class="hover:bg-gray-50">
+                          <td class="p-3 font-bold text-orange-700">apply for / grant custody of</td>
+                          <td class="p-3">Legal right to care for a child after separation</td>
+                        </tr>
+                        <tr class="hover:bg-gray-50">
+                          <td class="p-3 font-bold text-orange-700">provide for your family</td>
+                          <td class="p-3">To earn enough money to support them</td>
+                        </tr>
+                        <tr class="hover:bg-gray-50">
+                          <td class="p-3 font-bold text-orange-700">set up home</td>
+                          <td class="p-3">Start an independent life in one's own flat/house</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>`
+          }
+        ],
+        exercises: [
+          {
+            tabLabel: "19.1 Old Man's Memories",
+            html: `
+              <div class="exercise-block bg-white border border-gray-100 rounded-xl p-5 shadow-[0_2px_10px_-3px_rgba(245,158,11,0.1)]">
+                <h3 class="font-bold text-lg mb-4 text-gray-800 flex items-center gap-3 border-b pb-3"><span class="bg-amber-100 text-amber-800 px-3 py-1 rounded text-sm shadow-sm">19.1</span> Fill the gaps in these memories.</h3>
+                <div class="leading-loose bg-amber-50/50 p-6 rounded-lg shadow-sm border border-amber-100 text-gray-700">
+                  I grew up in an (1) ${generateInput({ correct: ['extended'] })} family as my grandparents and a couple of aunts and an uncle, who was a (2) ${generateInput({ correct: ['confirmed'] })} bachelor, lived with us. We saw a lot of our (3) ${generateInput({ correct: ['distant'] })} relatives as well as our close ones. I think that families tended to be much more (4) ${generateInput({ correct: ['close', 'close-knit'] })} then - we talked to each other more and did things together more. I'm sure there are far more (5) ${generateInput({ correct: ['dysfunctional'] })} families now than there used to be - you know, where parents hardly spend any time with their children, or with each other - and a lot of parents who are divorced. My (6) ${generateInput({ correct: ['late'] })} wife, who died two years ago, used to say that it is not fair on children to let them grow up in (7) ${generateInput({ correct: ['broken', 'deprived'] })} homes.
+                </div>
+              </div>`
+          },
+          {
+            tabLabel: "19.2 Fix the Errors",
+            html: `
+              <div class="exercise-block bg-white border border-gray-100 rounded-xl p-5 shadow-[0_2px_10px_-3px_rgba(245,158,11,0.1)]">
+                <h3 class="font-bold text-lg mb-4 text-gray-800 flex items-center gap-3 border-b pb-3"><span class="bg-amber-100 text-amber-800 px-3 py-1 rounded text-sm shadow-sm">19.2</span> Correct the 6 collocation errors.</h3>
+                <div class="bg-white p-5 rounded-lg shadow-sm text-gray-700 leading-loose border border-orange-100 space-y-4">
+                  <div>James and I are hoping to <span class="line-through text-red-400">begin</span> ${generateInput({ correct: ['start'] })} a family soon.</div>
+                  <div>We both want to <span class="line-through text-red-400">get</span> ${generateInput({ correct: ['have'] })} lots of children. Ideally, I'd like to have my first baby next year.</div>
+                  <div>My sister is <span class="line-through text-red-400">waiting</span> ${generateInput({ correct: ['expecting'] })} a baby now.</div>
+                  <div>It's <span class="line-through text-red-400">coming</span> ${generateInput({ correct: ['due'] })} next month.</div>
+                  <div>She's going to be a <span class="line-through text-red-400">sole</span> ${generateInput({ correct: ['single'] })} parent...</div>
+                  <div>...and it'll be hard for her to <span class="line-through text-red-400">grow up</span> ${generateInput({ correct: ['bring up', 'raise'] })} a child on her own.</div>
+                </div>
+              </div>`
+          },
+          {
+            tabLabel: "19.3 Match Halves",
+            html: `
+              <div class="exercise-block bg-white border border-gray-100 rounded-xl p-5 shadow-[0_2px_10px_-3px_rgba(245,158,11,0.1)]">
+                <h3 class="font-bold text-lg mb-4 text-gray-800 flex items-center gap-3 border-b pb-3"><span class="bg-amber-100 text-amber-800 px-3 py-1 rounded text-sm shadow-sm">19.3</span> Match the two parts of these collocations.</h3>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 leading-8 text-gray-700 font-medium">
+                  <div>1. apply for ${generateSelect({ options: ['cousin', 'separation', 'custody', 'home', 'wife', 'family', 'your family', 'a divorce'], correct: 'custody' })}</div>
+                  <div>2. get ${generateSelect({ options: ['cousin', 'separation', 'custody', 'home', 'wife', 'family', 'your family', 'a divorce'], correct: 'a divorce' })}</div>
+                  <div>3. estranged ${generateSelect({ options: ['cousin', 'separation', 'custody', 'home', 'wife', 'family', 'your family', 'a divorce'], correct: 'wife' })}</div>
+                  <div>4. nuclear ${generateSelect({ options: ['cousin', 'separation', 'custody', 'home', 'wife', 'family', 'your family', 'a divorce'], correct: 'family' })}</div>
+                  <div>5. provide for ${generateSelect({ options: ['cousin', 'separation', 'custody', 'home', 'wife', 'family', 'your family', 'a divorce'], correct: 'your family' })}</div>
+                  <div>6. distant ${generateSelect({ options: ['cousin', 'separation', 'custody', 'home', 'wife', 'family', 'your family', 'a divorce'], correct: 'cousin' })}</div>
+                  <div>7. set up ${generateSelect({ options: ['cousin', 'separation', 'custody', 'home', 'wife', 'family', 'your family', 'a divorce'], correct: 'home' })}</div>
+                  <div>8. trial ${generateSelect({ options: ['cousin', 'separation', 'custody', 'home', 'wife', 'family', 'your family', 'a divorce'], correct: 'separation' })}</div>
+                </div>
+              </div>`
+          },
+          {
+            tabLabel: "19.4 Q&A",
+            html: `
+              <div class="exercise-block bg-white border border-gray-100 rounded-xl p-5 shadow-[0_2px_10px_-3px_rgba(245,158,11,0.1)]">
+                <h3 class="font-bold text-lg mb-4 text-gray-800 flex items-center gap-3 border-b pb-3"><span class="bg-amber-100 text-amber-800 px-3 py-1 rounded text-sm shadow-sm">19.4</span> Answer these specific questions from the unit.</h3>
+                <ol class="list-decimal list-inside space-y-6 pl-2 leading-8 text-gray-700">
+                  <li>
+                    What collocation means the same as to be pregnant?<br>
+                    <i class="fa-solid fa-arrow-right text-amber-400 mx-4"></i> ${generateInput({ correct: ['expecting a baby', 'expect a baby'], widthClass: 'w-48' })}
+                  </li>
+                  <li>
+                    What can be put before the words <em>wife</em> and <em>husband</em> to indicate that they are no longer married?<br>
+                    <i class="fa-solid fa-arrow-right text-amber-400 mx-4"></i> ${generateInput({ correct: ['ex', 'ex-'] })}
+                  </li>
+                  <li>
+                    What is a more formal alternative for <em>give custody</em>?<br>
+                    <i class="fa-solid fa-arrow-right text-amber-400 mx-4"></i> ${generateInput({ correct: ['grant custody'] })}
+                  </li>
+                </ol>
+              </div>`
+          }
+        ]
+      },
+      unit20: {
+        title: "Unit 20: Relationships",
+        theory: [
+          {
+            tabLabel: "Friendship",
+            html: `
+              <div class="space-y-6">
+                <div class="bg-rose-50 rounded-lg shadow-sm border border-rose-200 overflow-hidden">
+                  <h3 class="bg-rose-600 text-white font-bold p-3 text-lg"><i class="fa-solid fa-user-group mr-2"></i> Friends and Friendship</h3>
+                  <div class="overflow-x-auto">
+                    <table class="w-full text-sm text-left">
+                      <thead class="bg-rose-100 text-rose-900 border-b border-rose-200">
+                        <tr>
+                          <th class="p-3 font-bold w-1/3">Collocation</th>
+                          <th class="p-3 font-bold">Example & Meaning</th>
+                        </tr>
+                      </thead>
+                      <tbody class="divide-y divide-gray-100 text-gray-700">
+                        <tr class="hover:bg-white">
+                          <td class="p-3 font-bold text-rose-700">make friends</td>
+                          <td class="p-3">NOT <em>find friends</em> (a common error)</td>
+                        </tr>
+                        <tr class="hover:bg-white">
+                          <td class="p-3 font-bold text-rose-700">strike up a friendship</td>
+                          <td class="p-3">To start a friendship</td>
+                        </tr>
+                        <tr class="hover:bg-white">
+                          <td class="p-3 font-bold text-rose-700">form/develop a friendship</td>
+                          <td class="p-3">NOT <em>make a friendship</em></td>
+                        </tr>
+                        <tr class="hover:bg-white">
+                          <td class="p-3 font-bold text-rose-700">cement/spoil a friendship</td>
+                          <td class="p-3">cement = strengthen ; spoil = have a bad effect on</td>
+                        </tr>
+                        <tr class="hover:bg-white">
+                          <td class="p-3 font-bold text-rose-700">a friendship grows</td>
+                          <td class="p-3">Gets stronger</td>
+                        </tr>
+                        <tr class="hover:bg-white">
+                          <td class="p-3 font-bold text-rose-700">close/special friends<br>mutual friends</td>
+                          <td class="p-3">mutual friends = friends that you share with someone else</td>
+                        </tr>
+                        <tr class="hover:bg-white">
+                          <td class="p-3 font-bold text-rose-700">a casual acquaintance</td>
+                          <td class="p-3">Someone you know a little</td>
+                        </tr>
+                        <tr class="hover:bg-white">
+                          <td class="p-3 font-bold text-rose-700">have a good relationship with</td>
+                          <td class="p-3">NOT <em>have a relation/relations with</em></td>
+                        </tr>
+                        <tr class="hover:bg-white">
+                          <td class="p-3 font-bold text-rose-700">keep in contact/touch</td>
+                          <td class="p-3">Opposite = lose contact/touch</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>`
+          },
+          {
+            tabLabel: "More Than Friends",
+            html: `
+              <div class="space-y-6">
+                <div class="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
+                  <h3 class="bg-pink-600 text-white font-bold p-3 text-lg"><i class="fa-solid fa-heart mr-2"></i> A Love Story</h3>
+                  <div class="p-4 text-sm text-gray-800 leading-relaxed bg-pink-50/30">
+                    <p>
+                      I fell <strong class="text-pink-700">madly in love</strong> with Anton from the moment I met him. It was certainly <strong class="text-pink-700">love at first sight</strong>. I knew at once that he was the <strong class="text-pink-700">love of my life</strong> but at first I was not sure if my <strong class="text-pink-700">love was returned</strong> or not.
+                    </p>
+                    <p class="mt-3">
+                      Within a few days, however, he had told me that he was <strong class="text-pink-700">desperately in love</strong> with me too. A couple of weeks later, we realised that we wanted to <strong class="text-pink-700">make a commitment</strong> to each other and, when Anton asked me to marry him, I immediately <strong class="text-pink-700">accepted his proposal</strong>.
+                    </p>
+                    <p class="mt-3">
+                      I'm sure we will always <strong class="text-pink-700">love each other unconditionally</strong> <em>(love that is total and does not change)</em>. Neither of us would ever consider <strong class="text-pink-700">having an affair</strong> <em>(having a sexual relationship outside marriage)</em> with someone else.
+                    </p>
+                  </div>
+                </div>
+              </div>`
+          }
+        ],
+        exercises: [
+          {
+            tabLabel: "20.1 Fill-in",
+            html: `
+              <div class="exercise-block bg-white border border-gray-100 rounded-xl p-5 shadow-[0_2px_10px_-3px_rgba(225,29,72,0.1)]">
+                <h3 class="font-bold text-lg mb-4 text-gray-800 flex items-center gap-3 border-b pb-3"><span class="bg-rose-100 text-rose-800 px-3 py-1 rounded text-sm shadow-sm">20.1</span> Choose an appropriate word to complete each sentence.</h3>
+                <ol class="list-decimal list-inside space-y-4 pl-2 leading-8 text-gray-700">
+                  <li>Ellie is quite a shy person and finds it hard to ${generateInput({ correct: ['make'] })} friends.</li>
+                  <li>Do Matthew and Emily ${generateInput({ correct: ['have'] })} a good relationship?</li>
+                  <li>Alex is always ${generateInput({ correct: ['striking'] })} up friendships with people he meets.</li>
+                  <li>I hope their disagreement over the bill won't ${generateInput({ correct: ['spoil'] })} their friendship.</li>
+                  <li>It's amazing how often you find that you have some ${generateInput({ correct: ['mutual'] })} friends.</li>
+                  <li>Apparently, people ${generateInput({ correct: ['make', 'form', 'develop'] })} most of their closest friendships when they are young.</li>
+                  <li>I wouldn't call Graham a close friend, more a casual ${generateInput({ correct: ['acquaintance'] })}.</li>
+                  <li>We didn't really like each other at first, but our friendship ${generateInput({ correct: ['grew'] })} as we got to know each other better.</li>
+                </ol>
+              </div>`
+          },
+          {
+            tabLabel: "20.2 Match Collocations",
+            html: `
+              <div class="exercise-block bg-white border border-gray-100 rounded-xl p-5 shadow-[0_2px_10px_-3px_rgba(225,29,72,0.1)]">
+                <h3 class="font-bold text-lg mb-4 text-gray-800 flex items-center gap-3 border-b pb-3"><span class="bg-rose-100 text-rose-800 px-3 py-1 rounded text-sm shadow-sm">20.2</span> Make 9 collocations out of the words in the box.</h3>
+                <div class="flex gap-2 justify-center mb-6 flex-wrap text-sm border p-4 bg-gray-50 rounded">
+                  ${['a', 'a', 'contact', 'love', 'a', 'love', 'proposal', 'accept', 'affair', 'an', 'at first', 'friends', 'friendship', 'return', 'sight', 'commitment', 'contact', 'have', 'in', "someone's", 'keep', 'special', 'lose', 'make', 'strike', 'up'].map(v => `<span class="bg-white border border-rose-200 px-2 py-1 rounded shadow-sm text-gray-700">${v}</span>`).join('')}
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 leading-8">
+                  <div class="flex items-center gap-2"><span class="w-6 text-right">1.</span> ${generateInput({ correct: ['accept a proposal'], placeholder: '...', widthClass: 'w-full' })}</div>
+                  <div class="flex items-center gap-2"><span class="w-6 text-right">2.</span> ${generateInput({ correct: ['have an affair'], placeholder: '...', widthClass: 'w-full' })}</div>
+                  <div class="flex items-center gap-2"><span class="w-6 text-right">3.</span> ${generateInput({ correct: ['love at first sight'], placeholder: '...', widthClass: 'w-full' })}</div>
+                  <div class="flex items-center gap-2"><span class="w-6 text-right">4.</span> ${generateInput({ correct: ['make a commitment'], placeholder: '...', widthClass: 'w-full' })}</div>
+                  <div class="flex items-center gap-2"><span class="w-6 text-right">5.</span> ${generateInput({ correct: ["return someone's love"], placeholder: '...', widthClass: 'w-full' })}</div>
+                  <div class="flex items-center gap-2"><span class="w-6 text-right">6.</span> ${generateInput({ correct: ['keep in contact'], placeholder: '...', widthClass: 'w-full' })}</div>
+                  <div class="flex items-center gap-2"><span class="w-6 text-right">7.</span> ${generateInput({ correct: ['lose contact'], placeholder: '...', widthClass: 'w-full' })}</div>
+                  <div class="flex items-center gap-2"><span class="w-6 text-right">8.</span> ${generateInput({ correct: ['strike up a friendship'], placeholder: '...', widthClass: 'w-full' })}</div>
+                  <div class="flex items-center gap-2"><span class="w-6 text-right">9.</span> ${generateInput({ correct: ['special friends'], placeholder: '...', widthClass: 'w-full' })}</div>
+                </div>
+              </div>`
+          },
+          {
+            tabLabel: "20.3 & 20.4 Questions",
+            html: `
+              <div class="exercise-block bg-rose-50/50 border border-rose-100 rounded-xl p-5 shadow-sm">
+                <h3 class="font-bold text-lg mb-4 text-rose-900 flex items-center gap-3 border-b border-rose-200 pb-3"><span class="bg-white text-rose-800 px-3 py-1 rounded text-sm shadow-sm">20.3 & 20.4</span> Answer and complete these questions.</h3>
+                <ol class="list-decimal list-inside space-y-6 pl-2 leading-8 text-gray-700 bg-white p-6 rounded-lg shadow-sm">
+                  <li>Which verb suggests that friendship can be seen as a plant? <i class="fa-solid fa-arrow-right text-rose-300 mx-2"></i> ${generateInput({ correct: ['grow'] })}</li>
+                  <li>Which collocation suggests that love is close to being crazy? <i class="fa-solid fa-arrow-right text-rose-300 mx-2"></i> ${generateInput({ correct: ['madly in love', 'fall madly in love'], widthClass: 'w-40' })}</li>
+                  <li>Which collocation means 'agree to marry someone'? <i class="fa-solid fa-arrow-right text-rose-300 mx-2"></i> ${generateInput({ correct: ['accept a proposal'], widthClass: 'w-40' })}</li>
+                  <li>Which collocation means the same as 'keep in contact with'? <i class="fa-solid fa-arrow-right text-rose-300 mx-2"></i> ${generateInput({ correct: ['keep in touch', 'keep in touch with'], widthClass: 'w-40' })}</li>
+                  <li class="border-t pt-4">Have you ever fallen in love at first ${generateInput({ correct: ['sight'] })}?</li>
+                  <li>Do you think it's true that men are more reluctant to ${generateInput({ correct: ['make'] })} a commitment?</li>
+                  <li>How old were you when you ${generateInput({ correct: ['fell'] })} in love for the first time?</li>
+                  <li>Do you think it is possible to have one person who is the love of your ${generateInput({ correct: ['life'] })}?</li>
+                  <li>Have you ever been in love with someone who has not ${generateInput({ correct: ['returned'] })} your love?</li>
+                  <li>Do you think that men or women are more likely to be tempted to ${generateInput({ correct: ['have'] })} an affair?</li>
                 </ol>
               </div>`
           }
