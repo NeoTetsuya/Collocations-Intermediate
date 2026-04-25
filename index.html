@@ -1,645 +1,458 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Collocations Intermediate - Master English Word Combinations</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <!-- Custom Tailwind Configuration -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+                    },
+                    colors: {
+                        primary: '#4f46e5', // Indigo 600
+                        secondary: '#0ea5e9', // Sky 500
+                        accent: '#f43f5e', // Rose 500
+                    }
+                }
+            }
+        }
+    </script>
+
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
+        /* Custom styles for things Tailwind is too verbose for */
+        .glass-nav {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.3);
         }
-
-        :root {
-            --primary-color: #2563eb;
-            --secondary-color: #7c3aed;
-            --accent-color: #ec4899;
-            --light-bg: #f8fafc;
-            --dark-text: #1e293b;
-            --border-radius: 12px;
-            --transition: all 0.3s ease;
-        }
-
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-            line-height: 1.6;
-            color: var(--dark-text);
-            background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
-        }
-
-        header {
-            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
-            color: white;
-            padding: 40px 20px;
-            text-align: center;
-            box-shadow: 0 10px 30px rgba(37, 99, 235, 0.2);
-        }
-
-        header h1 {
-            font-size: 3em;
-            margin-bottom: 10px;
-            font-weight: 800;
-            letter-spacing: -1px;
-        }
-
-        header p {
-            font-size: 1.3em;
-            opacity: 0.95;
-            max-width: 600px;
-            margin: 0 auto;
-            font-weight: 300;
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-
-        .hero-section {
-            padding: 60px 20px;
-            text-align: center;
-        }
-
-        .hero-section h2 {
-            font-size: 2.2em;
-            margin-bottom: 20px;
-            color: var(--dark-text);
-        }
-
-        .hero-section p {
-            font-size: 1.1em;
-            color: #475569;
-            max-width: 700px;
-            margin: 0 auto 40px;
-            line-height: 1.8;
-        }
-
-        .cta-buttons {
-            display: flex;
-            gap: 15px;
-            justify-content: center;
-            flex-wrap: wrap;
-            margin-bottom: 60px;
-        }
-
-        .btn {
-            padding: 14px 32px;
-            font-size: 1.05em;
-            border: none;
-            border-radius: var(--border-radius);
-            cursor: pointer;
-            transition: var(--transition);
-            font-weight: 600;
-            text-decoration: none;
-            display: inline-block;
-        }
-
-        .btn-primary {
-            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-            color: white;
-            box-shadow: 0 4px 15px rgba(37, 99, 235, 0.3);
-        }
-
-        .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(37, 99, 235, 0.4);
-        }
-
-        .btn-secondary {
-            background: white;
-            color: var(--primary-color);
-            border: 2px solid var(--primary-color);
-        }
-
-        .btn-secondary:hover {
-            background: var(--light-bg);
-            transform: translateY(-2px);
-        }
-
-        .features {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 30px;
-            margin-bottom: 80px;
-        }
-
-        .feature-card {
-            background: white;
-            padding: 40px 30px;
-            border-radius: var(--border-radius);
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.07);
-            transition: var(--transition);
-            border-top: 4px solid var(--primary-color);
-        }
-
-        .feature-card:nth-child(2) {
-            border-top-color: var(--secondary-color);
-        }
-
-        .feature-card:nth-child(3) {
-            border-top-color: var(--accent-color);
-        }
-
-        .feature-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
-        }
-
-        .feature-icon {
-            font-size: 2.5em;
-            margin-bottom: 15px;
-        }
-
-        .feature-card h3 {
-            font-size: 1.4em;
-            margin-bottom: 15px;
-            color: var(--dark-text);
-        }
-
-        .feature-card p {
-            color: #64748b;
-            line-height: 1.7;
-        }
-
-        .modules-section {
-            margin: 80px 0;
-        }
-
-        .modules-section h2 {
-            font-size: 2.5em;
-            text-align: center;
-            margin-bottom: 60px;
-            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+        
+        .gradient-text {
+            background: linear-gradient(135deg, #4f46e5, #0ea5e9);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
         }
 
-        .modules-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 25px;
-            margin-bottom: 60px;
+        .card-hover-effect {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
-
-        .module-card {
-            background: white;
-            border-radius: var(--border-radius);
-            overflow: hidden;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.07);
-            transition: var(--transition);
-            border: 1px solid #e2e8f0;
+        
+        .card-hover-effect:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
         }
-
-        .module-card:hover {
-            transform: translateY(-6px);
-            box-shadow: 0 12px 20px rgba(0, 0, 0, 0.12);
-        }
-
-        .module-header {
-            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-            color: white;
-            padding: 25px;
-            text-align: center;
-        }
-
-        .module-number {
-            font-size: 3em;
-            font-weight: 800;
-            opacity: 0.3;
-            position: absolute;
-            top: -10px;
-            right: 10px;
-        }
-
-        .module-header h3 {
-            font-size: 1.4em;
-            margin-bottom: 8px;
-            font-weight: 700;
-            position: relative;
-        }
-
-        .module-content {
-            padding: 25px;
-            text-align: center;
-        }
-
-        .module-content p {
-            color: #64748b;
-            margin-bottom: 20px;
-            font-size: 0.95em;
-        }
-
-        .module-link {
-            display: inline-block;
-            color: var(--primary-color);
-            text-decoration: none;
-            font-weight: 600;
-            padding: 10px 20px;
-            border: 2px solid var(--primary-color);
-            border-radius: 8px;
-            transition: var(--transition);
-            margin-bottom: 10px;
-        }
-
-        .module-link:hover {
-            background: var(--primary-color);
-            color: white;
-        }
-
-        .quizlet-link {
-            display: inline-block;
-            color: #10b981;
-            text-decoration: none;
-            font-weight: 600;
-            padding: 8px 16px;
-            border: 2px solid #10b981;
-            border-radius: 8px;
-            transition: var(--transition);
-            font-size: 0.9em;
-            background: #ecfdf5;
-        }
-
-        .quizlet-link:hover {
-            background: #10b981;
-            color: white;
-        }
-
-        .stats-section {
-            background: white;
-            padding: 60px 40px;
-            border-radius: var(--border-radius);
-            margin-bottom: 80px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.07);
-        }
-
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 40px;
-            text-align: center;
-        }
-
-        .stat-item h4 {
-            font-size: 2.5em;
-            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            margin-bottom: 10px;
-        }
-
-        .stat-item p {
-            font-size: 1.1em;
-            color: #64748b;
-        }
-
-        .about-section {
-            background: linear-gradient(135deg, rgba(37, 99, 235, 0.05), rgba(124, 58, 237, 0.05));
-            padding: 60px 40px;
-            border-radius: var(--border-radius);
-            margin-bottom: 80px;
-            border: 1px solid rgba(37, 99, 235, 0.1);
-        }
-
-        .about-section h2 {
-            font-size: 2em;
-            margin-bottom: 30px;
-            color: var(--dark-text);
-        }
-
-        .about-section p {
-            font-size: 1.1em;
-            color: #475569;
-            line-height: 1.9;
-            max-width: 800px;
-            margin-bottom: 15px;
-        }
-
-        footer {
-            background: var(--dark-text);
-            color: white;
-            padding: 40px 20px;
-            text-align: center;
-            margin-top: 60px;
-        }
-
-        footer p {
-            margin-bottom: 10px;
-            opacity: 0.9;
-        }
-
-        .footer-links {
-            display: flex;
-            justify-content: center;
-            gap: 25px;
-            flex-wrap: wrap;
-            margin-top: 20px;
-        }
-
-        .footer-links a {
-            color: #60a5fa;
-            text-decoration: none;
-            transition: var(--transition);
-        }
-
-        .footer-links a:hover {
-            color: white;
-        }
-
-        @media (max-width: 768px) {
-            header h1 {
-                font-size: 2em;
-            }
-
-            header p {
-                font-size: 1.05em;
-            }
-
-            .hero-section h2 {
-                font-size: 1.8em;
-            }
-
-            .modules-section h2 {
-                font-size: 1.8em;
-            }
-
-            .cta-buttons {
-                flex-direction: column;
-                align-items: center;
-            }
-
-            .btn {
-                width: 100%;
-                max-width: 300px;
-            }
-
-            .stats-grid {
-                gap: 20px;
-            }
-        }
-
-        .tag {
-            display: inline-block;
-            background: var(--light-bg);
-            color: var(--primary-color);
-            padding: 6px 12px;
-            border-radius: 20px;
-            font-size: 0.85em;
-            font-weight: 600;
-            margin-right: 8px;
-            margin-top: 10px;
-        }
-
-        .badge {
-            display: inline-block;
-            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-            color: white;
-            padding: 8px 16px;
-            border-radius: 20px;
-            font-size: 0.85em;
-            font-weight: 600;
-            margin-bottom: 15px;
-        }
-
-        .featured-badge {
-            display: inline-block;
-            background: linear-gradient(135deg, #f59e0b, #ec4899);
-            color: white;
-            padding: 6px 12px;
-            border-radius: 6px;
-            font-size: 0.75em;
-            font-weight: 700;
-            margin-bottom: 8px;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
+        
+        .bg-pattern {
+            background-color: #ffffff;
+            background-image: radial-gradient(#e2e8f0 1px, transparent 1px);
+            background-size: 24px 24px;
         }
     </style>
 </head>
-<body>
-    <header>
-        <h1>🎯 Collocations Intermediate</h1>
-        <p>Master English Word Combinations with Our Comprehensive Learning Modules</p>
-    </header>
+<body class="bg-slate-50 text-slate-800 antialiased font-sans selection:bg-primary selection:text-white">
 
-    <div class="container">
-        <section class="hero-section">
-            <h2>Learn Collocations Like a Native Speaker</h2>
-            <p>Collocations are the natural combinations of words that native speakers use every day. This comprehensive learning resource will help you improve your English fluency by mastering intermediate-level word combinations across real-life contexts.</p>
-            
-            <div class="cta-buttons">
-                <a href="#modules" class="btn btn-primary">Explore Modules</a>
-                <a href="https://github.com/NeoTetsuya/Collocations-Intermediate" class="btn btn-secondary">View on GitHub</a>
-            </div>
-        </section>
-
-        <section class="features">
-            <div class="feature-card">
-                <div class="feature-icon">📚</div>
-                <h3>11 Focused Modules</h3>
-                <p>Structured lessons covering collocations & grammar, everyday verbs, synonyms, metaphors, travel, relationships, lifestyle, work, society, and fundamental concepts.</p>
-            </div>
-
-            <div class="feature-card">
-                <div class="feature-icon">🎓</div>
-                <h3>Intermediate Level</h3>
-                <p>Perfect for learners who already have basic English knowledge and want to level up their vocabulary and natural expression.</p>
-            </div>
-
-            <div class="feature-card">
-                <div class="feature-icon">✨</div>
-                <h3>Interactive Learning</h3>
-                <p>Engaging HTML-based lessons with Quizlet integration to make learning collocations fun, practical, and immediately applicable to real conversations.</p>
-            </div>
-        </section>
-
-        <section class="stats-section">
-            <div class="stats-grid">
-                <div class="stat-item">
-                    <h4>11</h4>
-                    <p>Learning Modules</p>
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 glass-nav transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <div class="flex-shrink-0 flex items-center gap-2 cursor-pointer">
+                    <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-primary to-secondary flex items-center justify-center text-white shadow-lg">
+                        <i data-lucide="book-open-text" class="w-6 h-6"></i>
+                    </div>
+                    <span class="font-bold text-xl tracking-tight text-slate-900">Collocations<span class="text-primary">.</span></span>
                 </div>
-                <div class="stat-item">
-                    <h4>100+</h4>
-                    <p>Collocations Covered</p>
-                </div>
-                <div class="stat-item">
-                    <h4>11+</h4>
-                    <p>Quizlet Sets</p>
+                <div class="hidden md:flex space-x-8 items-center">
+                    <a href="#features" class="text-slate-600 hover:text-primary font-medium transition-colors">Features</a>
+                    <a href="#modules" class="text-slate-600 hover:text-primary font-medium transition-colors">Modules</a>
+                    <a href="#about" class="text-slate-600 hover:text-primary font-medium transition-colors">About</a>
+                    <a href="#modules" class="bg-primary hover:bg-indigo-700 text-white px-5 py-2.5 rounded-full font-medium transition-all shadow-md hover:shadow-lg transform hover:-translate-y-0.5">Start Learning</a>
                 </div>
             </div>
-        </section>
-
-        <section class="modules-section" id="modules">
-            <h2>Learning Modules</h2>
-            
-            <div class="modules-grid">
-                <div class="module-card">
-                    <div class="module-header">
-                        <span class="featured-badge">⭐ Featured</span>
-                        <span class="module-number">0</span>
-                        <h3>Collocations & Grammar</h3>
-                    </div>
-                    <div class="module-content">
-                        <p>Start your journey with the foundations! Learn what collocations are, their importance in English, and the grammar patterns that support them.</p>
-                        <a href="0-collocations%20%26%20grammar.html" class="module-link">Start Learning →</a>
-                        <br>
-                        <a href="#quizlet-link-placeholder" class="quizlet-link">📝 Quizlet Set</a>
-                    </div>
-                </div>
-
-                <div class="module-card">
-                    <div class="module-header">
-                        <span class="module-number">1</span>
-                        <h3>Everyday Verbs</h3>
-                    </div>
-                    <div class="module-content">
-                        <p>Master the most common verb collocations used in daily conversations and situations.</p>
-                        <a href="1-everyday%20verbs.html" class="module-link">Start Learning →</a>
-                        <br>
-                        <a href="#quizlet-link-placeholder" class="quizlet-link">📝 Quizlet Set</a>
-                    </div>
-                </div>
-
-                <div class="module-card">
-                    <div class="module-header">
-                        <span class="module-number">2</span>
-                        <h3>Synonyms & Confusable Words</h3>
-                    </div>
-                    <div class="module-content">
-                        <p>Understand the nuances between similar words and learn the correct collocations for each.</p>
-                        <a href="2-synonyms%20%26%20confusable%20words.html" class="module-link">Start Learning →</a>
-                        <br>
-                        <a href="#quizlet-link-placeholder" class="quizlet-link">📝 Quizlet Set</a>
-                    </div>
-                </div>
-
-                <div class="module-card">
-                    <div class="module-header">
-                        <span class="module-number">3</span>
-                        <h3>Metaphor</h3>
-                    </div>
-                    <div class="module-content">
-                        <p>Explore figurative language and metaphorical collocations that add depth to your English.</p>
-                        <a href="3-metaphor.html" class="module-link">Start Learning →</a>
-                        <br>
-                        <a href="#quizlet-link-placeholder" class="quizlet-link">📝 Quizlet Set</a>
-                    </div>
-                </div>
-
-                <div class="module-card">
-                    <div class="module-header">
-                        <span class="module-number">4</span>
-                        <h3>Travel & Environment</h3>
-                    </div>
-                    <div class="module-content">
-                        <p>Learn collocations related to travel, tourism, nature, and environmental topics.</p>
-                        <a href="4-travel%20%26%20the%20environment.html" class="module-link">Start Learning →</a>
-                        <br>
-                        <a href="#quizlet-link-placeholder" class="quizlet-link">📝 Quizlet Set</a>
-                    </div>
-                </div>
-
-                <div class="module-card">
-                    <div class="module-header">
-                        <span class="module-number">5</span>
-                        <h3>People & Relationships</h3>
-                    </div>
-                    <div class="module-content">
-                        <p>Discover how to talk about relationships, personalities, and human interactions naturally.</p>
-                        <a href="5-people%20%26%20relationships.html" class="module-link">Start Learning →</a>
-                        <br>
-                        <a href="#quizlet-link-placeholder" class="quizlet-link">📝 Quizlet Set</a>
-                    </div>
-                </div>
-
-                <div class="module-card">
-                    <div class="module-header">
-                        <span class="module-number">6</span>
-                        <h3>Leisure & Lifestyle</h3>
-                    </div>
-                    <div class="module-content">
-                        <p>Learn collocations about hobbies, entertainment, habits, and lifestyle choices.</p>
-                        <a href="6-leisure%20%26%20lifestyle.html" class="module-link">Start Learning →</a>
-                        <br>
-                        <a href="#quizlet-link-placeholder" class="quizlet-link">📝 Quizlet Set</a>
-                    </div>
-                </div>
-
-                <div class="module-card">
-                    <div class="module-header">
-                        <span class="module-number">7</span>
-                        <h3>Work & Study</h3>
-                    </div>
-                    <div class="module-content">
-                        <p>Professional and academic collocations for career and educational contexts.</p>
-                        <a href="7-work%20%26%20study.html" class="module-link">Start Learning →</a>
-                        <br>
-                        <a href="#quizlet-link-placeholder" class="quizlet-link">📝 Quizlet Set</a>
-                    </div>
-                </div>
-
-                <div class="module-card">
-                    <div class="module-header">
-                        <span class="module-number">8</span>
-                        <h3>Society & Institutions</h3>
-                    </div>
-                    <div class="module-content">
-                        <p>Vocabulary for discussing government, law, public institutions, and civic topics.</p>
-                        <a href="8-society%20%26%20instituitions.html" class="module-link">Start Learning →</a>
-                        <br>
-                        <a href="#quizlet-link-placeholder" class="quizlet-link">📝 Quizlet Set</a>
-                    </div>
-                </div>
-
-                <div class="module-card">
-                    <div class="module-header">
-                        <span class="module-number">9</span>
-                        <h3>Basic Concepts</h3>
-                    </div>
-                    <div class="module-content">
-                        <p>Fundamental collocations and word combinations that form the foundation of English.</p>
-                        <a href="9-basic%20concepts.html" class="module-link">Start Learning →</a>
-                        <br>
-                        <a href="#quizlet-link-placeholder" class="quizlet-link">📝 Quizlet Set</a>
-                    </div>
-                </div>
-
-                <div class="module-card">
-                    <div class="module-header">
-                        <span class="module-number">10</span>
-                        <h3>Functions</h3>
-                    </div>
-                    <div class="module-content">
-                        <p>Language functions and expressions for different communicative purposes.</p>
-                        <a href="10-functions.html" class="module-link">Start Learning →</a>
-                        <br>
-                        <a href="#quizlet-link-placeholder" class="quizlet-link">📝 Quizlet Set</a>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section class="about-section">
-            <h2>About This Project</h2>
-            <p><strong>Collocations Intermediate</strong> is a comprehensive English language learning resource designed specifically for intermediate-level learners who want to improve their fluency and natural expression.</p>
-            
-            <p>Collocations are word combinations that occur together naturally. Native speakers use them instinctively, and learning them is crucial for achieving native-like fluency. This project provides structured, context-based lessons that help you understand and internalize these combinations. Each module includes Quizlet links for additional practice and reinforcement.</p>
-            
-            <p><span class="badge">✓ Open Source</span> <span class="badge">✓ Free</span> <span class="badge">✓ Interactive</span> <span class="badge">✓ Quizlet Integration</span></p>
-        </section>
-    </div>
-
-    <footer>
-        <p><strong>Collocations Intermediate</strong> © 2026 - A Free English Learning Resource</p>
-        <p>Explore collocations and improve your English fluency at an intermediate level</p>
-        <div class="footer-links">
-            <a href="https://github.com/NeoTetsuya/Collocations-Intermediate">GitHub Repository</a>
-            <a href="https://github.com/NeoTetsuya">GitHub Profile</a>
         </div>
-        <p style="margin-top: 20px; opacity: 0.7; font-size: 0.9em;">Built with ❤️ for English learners worldwide</p>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="relative pt-32 pb-20 lg:pt-48 lg:pb-32 overflow-hidden">
+        <!-- Decorative background elements -->
+        <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[1000px] h-[500px] opacity-30 pointer-events-none">
+            <div class="absolute top-0 left-1/4 w-96 h-96 bg-primary rounded-full mix-blend-multiply filter blur-3xl opacity-50 animate-blob"></div>
+            <div class="absolute top-0 right-1/4 w-96 h-96 bg-secondary rounded-full mix-blend-multiply filter blur-3xl opacity-50 animate-blob animation-delay-2000"></div>
+            <div class="absolute -bottom-8 left-1/2 w-96 h-96 bg-accent rounded-full mix-blend-multiply filter blur-3xl opacity-50 animate-blob animation-delay-4000"></div>
+        </div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
+            <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-indigo-50 border border-indigo-100 text-indigo-600 font-semibold text-sm mb-8 shadow-sm">
+                <span class="flex h-2 w-2 rounded-full bg-indigo-600"></span>
+                Master English Word Combinations
+            </div>
+            
+            <h1 class="text-5xl md:text-6xl lg:text-7xl font-extrabold tracking-tight text-slate-900 mb-8 leading-tight max-w-4xl mx-auto">
+                Learn Collocations Like a <br class="hidden md:block" />
+                <span class="gradient-text">Native Speaker</span>
+            </h1>
+            
+            <p class="text-lg md:text-xl text-slate-600 mb-10 max-w-2xl mx-auto leading-relaxed">
+                Unlock natural English fluency. This comprehensive resource helps you master intermediate-level word combinations across real-life contexts.
+            </p>
+            
+            <div class="flex flex-col sm:flex-row justify-center gap-4">
+                <a href="#modules" class="inline-flex justify-center items-center gap-2 bg-slate-900 hover:bg-slate-800 text-white px-8 py-4 rounded-full font-semibold text-lg transition-all shadow-xl hover:shadow-2xl transform hover:-translate-y-1">
+                    Explore Modules
+                    <i data-lucide="arrow-right" class="w-5 h-5"></i>
+                </a>
+                <a href="#features" class="inline-flex justify-center items-center gap-2 bg-white text-slate-700 border-2 border-slate-200 hover:border-slate-300 hover:bg-slate-50 px-8 py-4 rounded-full font-semibold text-lg transition-all">
+                    Learn More
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 -mt-8 relative z-20">
+        <div class="bg-white rounded-3xl shadow-xl border border-slate-100 p-8 md:p-12">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center divide-y md:divide-y-0 md:divide-x divide-slate-100">
+                <div class="pt-4 md:pt-0">
+                    <div class="text-4xl md:text-5xl font-black text-primary mb-2">11</div>
+                    <div class="text-slate-500 font-medium uppercase tracking-wide text-sm">Learning Modules</div>
+                </div>
+                <div class="pt-8 md:pt-0">
+                    <div class="text-4xl md:text-5xl font-black text-secondary mb-2">100+</div>
+                    <div class="text-slate-500 font-medium uppercase tracking-wide text-sm">Collocations Covered</div>
+                </div>
+                <div class="pt-8 md:pt-0">
+                    <div class="text-4xl md:text-5xl font-black text-accent mb-2">11+</div>
+                    <div class="text-slate-500 font-medium uppercase tracking-wide text-sm">Interactive Quizlets</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="py-24 bg-slate-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold text-slate-900 mb-4">Why study collocations?</h2>
+                <p class="text-lg text-slate-600">Knowing words is not enough. You need to know which words go together to sound natural and fluent.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Feature 1 -->
+                <div class="bg-white rounded-2xl p-8 shadow-sm border border-slate-100 card-hover-effect">
+                    <div class="w-14 h-14 bg-indigo-50 rounded-2xl flex items-center justify-center mb-6 text-primary">
+                        <i data-lucide="layers" class="w-7 h-7"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-900 mb-3">Structured Approach</h3>
+                    <p class="text-slate-600 leading-relaxed">11 focused modules covering grammar, everyday verbs, synonyms, travel, relationships, and fundamental concepts to build a strong foundation.</p>
+                </div>
+
+                <!-- Feature 2 -->
+                <div class="bg-white rounded-2xl p-8 shadow-sm border border-slate-100 card-hover-effect">
+                    <div class="w-14 h-14 bg-sky-50 rounded-2xl flex items-center justify-center mb-6 text-secondary">
+                        <i data-lucide="target" class="w-7 h-7"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-900 mb-3">Intermediate Level</h3>
+                    <p class="text-slate-600 leading-relaxed">Designed specifically for learners who already grasp basic English and are ready to level up their vocabulary and natural expression.</p>
+                </div>
+
+                <!-- Feature 3 -->
+                <div class="bg-white rounded-2xl p-8 shadow-sm border border-slate-100 card-hover-effect">
+                    <div class="w-14 h-14 bg-rose-50 rounded-2xl flex items-center justify-center mb-6 text-accent">
+                        <i data-lucide="zap" class="w-7 h-7"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-900 mb-3">Interactive Practice</h3>
+                    <p class="text-slate-600 leading-relaxed">Engaging lessons complete with integrated Quizlet sets to make memorization fun, practical, and immediately applicable.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Modules Section -->
+    <section id="modules" class="py-24 bg-pattern border-t border-slate-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <span class="text-primary font-bold tracking-wider uppercase text-sm mb-2 block">Curriculum</span>
+                <h2 class="text-3xl md:text-5xl font-bold text-slate-900 mb-6">Learning Modules</h2>
+                <p class="text-lg text-slate-600">Work through the modules sequentially or jump to topics that interest you the most.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                
+                <!-- Module 0 (Featured) -->
+                <div class="bg-white rounded-2xl p-8 shadow-md border border-indigo-100 relative overflow-hidden group card-hover-effect ring-2 ring-indigo-50/50">
+                    <div class="absolute -right-6 -top-10 text-9xl font-black text-slate-50 group-hover:text-indigo-50/50 transition-colors duration-300 z-0">0</div>
+                    <div class="relative z-10">
+                        <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-gradient-to-r from-amber-400 to-orange-500 text-white text-xs font-bold uppercase tracking-wide mb-4 shadow-sm">
+                            <i data-lucide="star" class="w-3 h-3 fill-current"></i> Featured
+                        </div>
+                        <h3 class="text-2xl font-bold text-slate-900 mb-3">Collocations & Grammar</h3>
+                        <p class="text-slate-600 mb-6 line-clamp-3">Start your journey with the foundations! Learn what collocations are, their importance in English, and the grammar patterns that support them.</p>
+                        
+                        <div class="flex items-center justify-between mt-auto">
+                            <a href="0-collocations%20%26%20grammar.html" class="inline-flex items-center text-primary font-semibold hover:text-indigo-800 transition-colors">
+                                Start Lesson <i data-lucide="chevron-right" class="w-4 h-4 ml-1"></i>
+                            </a>
+                            <a href="#quizlet-link-placeholder" class="inline-flex items-center gap-1.5 bg-emerald-50 text-emerald-600 hover:bg-emerald-100 px-3 py-1.5 rounded-lg text-sm font-medium transition-colors">
+                                <i data-lucide="pen-tool" class="w-4 h-4"></i> Practice
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Module 1 -->
+                <div class="bg-white rounded-2xl p-8 shadow-sm border border-slate-100 relative overflow-hidden group card-hover-effect">
+                    <div class="absolute -right-6 -top-10 text-9xl font-black text-slate-50 transition-colors duration-300 z-0">1</div>
+                    <div class="relative z-10 flex flex-col h-full">
+                        <h3 class="text-2xl font-bold text-slate-900 mb-3 mt-4">Everyday Verbs</h3>
+                        <p class="text-slate-600 mb-6 flex-grow">Master the most common verb collocations used in daily conversations and situations.</p>
+                        
+                        <div class="flex items-center justify-between">
+                            <a href="1-everyday%20verbs.html" class="inline-flex items-center text-primary font-semibold hover:text-indigo-800 transition-colors">
+                                Start Lesson <i data-lucide="chevron-right" class="w-4 h-4 ml-1"></i>
+                            </a>
+                            <a href="#quizlet-link-placeholder" class="inline-flex items-center gap-1.5 bg-emerald-50 text-emerald-600 hover:bg-emerald-100 px-3 py-1.5 rounded-lg text-sm font-medium transition-colors">
+                                <i data-lucide="pen-tool" class="w-4 h-4"></i> Practice
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Module 2 -->
+                <div class="bg-white rounded-2xl p-8 shadow-sm border border-slate-100 relative overflow-hidden group card-hover-effect">
+                    <div class="absolute -right-6 -top-10 text-9xl font-black text-slate-50 transition-colors duration-300 z-0">2</div>
+                    <div class="relative z-10 flex flex-col h-full">
+                        <h3 class="text-2xl font-bold text-slate-900 mb-3 mt-4 leading-tight">Synonyms & Confusable Words</h3>
+                        <p class="text-slate-600 mb-6 flex-grow">Understand the nuances between similar words and learn the correct collocations for each.</p>
+                        
+                        <div class="flex items-center justify-between">
+                            <a href="2-synonyms%20%26%20confusable%20words.html" class="inline-flex items-center text-primary font-semibold hover:text-indigo-800 transition-colors">
+                                Start Lesson <i data-lucide="chevron-right" class="w-4 h-4 ml-1"></i>
+                            </a>
+                            <a href="#quizlet-link-placeholder" class="inline-flex items-center gap-1.5 bg-emerald-50 text-emerald-600 hover:bg-emerald-100 px-3 py-1.5 rounded-lg text-sm font-medium transition-colors">
+                                <i data-lucide="pen-tool" class="w-4 h-4"></i> Practice
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Module 3 -->
+                <div class="bg-white rounded-2xl p-8 shadow-sm border border-slate-100 relative overflow-hidden group card-hover-effect">
+                    <div class="absolute -right-6 -top-10 text-9xl font-black text-slate-50 transition-colors duration-300 z-0">3</div>
+                    <div class="relative z-10 flex flex-col h-full">
+                        <h3 class="text-2xl font-bold text-slate-900 mb-3 mt-4">Metaphor</h3>
+                        <p class="text-slate-600 mb-6 flex-grow">Explore figurative language and metaphorical collocations that add depth to your English.</p>
+                        
+                        <div class="flex items-center justify-between">
+                            <a href="3-metaphor.html" class="inline-flex items-center text-primary font-semibold hover:text-indigo-800 transition-colors">
+                                Start Lesson <i data-lucide="chevron-right" class="w-4 h-4 ml-1"></i>
+                            </a>
+                            <a href="#quizlet-link-placeholder" class="inline-flex items-center gap-1.5 bg-emerald-50 text-emerald-600 hover:bg-emerald-100 px-3 py-1.5 rounded-lg text-sm font-medium transition-colors">
+                                <i data-lucide="pen-tool" class="w-4 h-4"></i> Practice
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Module 4 -->
+                <div class="bg-white rounded-2xl p-8 shadow-sm border border-slate-100 relative overflow-hidden group card-hover-effect">
+                    <div class="absolute -right-6 -top-10 text-9xl font-black text-slate-50 transition-colors duration-300 z-0">4</div>
+                    <div class="relative z-10 flex flex-col h-full">
+                        <h3 class="text-2xl font-bold text-slate-900 mb-3 mt-4">Travel & Environment</h3>
+                        <p class="text-slate-600 mb-6 flex-grow">Learn collocations related to travel, tourism, nature, and environmental topics.</p>
+                        
+                        <div class="flex items-center justify-between">
+                            <a href="4-travel%20%26%20the%20environment.html" class="inline-flex items-center text-primary font-semibold hover:text-indigo-800 transition-colors">
+                                Start Lesson <i data-lucide="chevron-right" class="w-4 h-4 ml-1"></i>
+                            </a>
+                            <a href="#quizlet-link-placeholder" class="inline-flex items-center gap-1.5 bg-emerald-50 text-emerald-600 hover:bg-emerald-100 px-3 py-1.5 rounded-lg text-sm font-medium transition-colors">
+                                <i data-lucide="pen-tool" class="w-4 h-4"></i> Practice
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Module 5 -->
+                <div class="bg-white rounded-2xl p-8 shadow-sm border border-slate-100 relative overflow-hidden group card-hover-effect">
+                    <div class="absolute -right-6 -top-10 text-9xl font-black text-slate-50 transition-colors duration-300 z-0">5</div>
+                    <div class="relative z-10 flex flex-col h-full">
+                        <h3 class="text-2xl font-bold text-slate-900 mb-3 mt-4">People & Relationships</h3>
+                        <p class="text-slate-600 mb-6 flex-grow">Discover how to talk about relationships, personalities, and human interactions naturally.</p>
+                        
+                        <div class="flex items-center justify-between">
+                            <a href="5-people%20%26%20relationships.html" class="inline-flex items-center text-primary font-semibold hover:text-indigo-800 transition-colors">
+                                Start Lesson <i data-lucide="chevron-right" class="w-4 h-4 ml-1"></i>
+                            </a>
+                            <a href="#quizlet-link-placeholder" class="inline-flex items-center gap-1.5 bg-emerald-50 text-emerald-600 hover:bg-emerald-100 px-3 py-1.5 rounded-lg text-sm font-medium transition-colors">
+                                <i data-lucide="pen-tool" class="w-4 h-4"></i> Practice
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Module 6 -->
+                <div class="bg-white rounded-2xl p-8 shadow-sm border border-slate-100 relative overflow-hidden group card-hover-effect">
+                    <div class="absolute -right-6 -top-10 text-9xl font-black text-slate-50 transition-colors duration-300 z-0">6</div>
+                    <div class="relative z-10 flex flex-col h-full">
+                        <h3 class="text-2xl font-bold text-slate-900 mb-3 mt-4">Leisure & Lifestyle</h3>
+                        <p class="text-slate-600 mb-6 flex-grow">Learn collocations about hobbies, entertainment, habits, and lifestyle choices.</p>
+                        
+                        <div class="flex items-center justify-between">
+                            <a href="6-leisure%20%26%20lifestyle.html" class="inline-flex items-center text-primary font-semibold hover:text-indigo-800 transition-colors">
+                                Start Lesson <i data-lucide="chevron-right" class="w-4 h-4 ml-1"></i>
+                            </a>
+                            <a href="#quizlet-link-placeholder" class="inline-flex items-center gap-1.5 bg-emerald-50 text-emerald-600 hover:bg-emerald-100 px-3 py-1.5 rounded-lg text-sm font-medium transition-colors">
+                                <i data-lucide="pen-tool" class="w-4 h-4"></i> Practice
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Module 7 -->
+                <div class="bg-white rounded-2xl p-8 shadow-sm border border-slate-100 relative overflow-hidden group card-hover-effect">
+                    <div class="absolute -right-6 -top-10 text-9xl font-black text-slate-50 transition-colors duration-300 z-0">7</div>
+                    <div class="relative z-10 flex flex-col h-full">
+                        <h3 class="text-2xl font-bold text-slate-900 mb-3 mt-4">Work & Study</h3>
+                        <p class="text-slate-600 mb-6 flex-grow">Professional and academic collocations for career and educational contexts.</p>
+                        
+                        <div class="flex items-center justify-between">
+                            <a href="7-work%20%26%20study.html" class="inline-flex items-center text-primary font-semibold hover:text-indigo-800 transition-colors">
+                                Start Lesson <i data-lucide="chevron-right" class="w-4 h-4 ml-1"></i>
+                            </a>
+                            <a href="#quizlet-link-placeholder" class="inline-flex items-center gap-1.5 bg-emerald-50 text-emerald-600 hover:bg-emerald-100 px-3 py-1.5 rounded-lg text-sm font-medium transition-colors">
+                                <i data-lucide="pen-tool" class="w-4 h-4"></i> Practice
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Module 8 -->
+                <div class="bg-white rounded-2xl p-8 shadow-sm border border-slate-100 relative overflow-hidden group card-hover-effect">
+                    <div class="absolute -right-6 -top-10 text-9xl font-black text-slate-50 transition-colors duration-300 z-0">8</div>
+                    <div class="relative z-10 flex flex-col h-full">
+                        <h3 class="text-2xl font-bold text-slate-900 mb-3 mt-4">Society & Institutions</h3>
+                        <p class="text-slate-600 mb-6 flex-grow">Vocabulary for discussing government, law, public institutions, and civic topics.</p>
+                        
+                        <div class="flex items-center justify-between">
+                            <a href="8-society%20%26%20instituitions.html" class="inline-flex items-center text-primary font-semibold hover:text-indigo-800 transition-colors">
+                                Start Lesson <i data-lucide="chevron-right" class="w-4 h-4 ml-1"></i>
+                            </a>
+                            <a href="#quizlet-link-placeholder" class="inline-flex items-center gap-1.5 bg-emerald-50 text-emerald-600 hover:bg-emerald-100 px-3 py-1.5 rounded-lg text-sm font-medium transition-colors">
+                                <i data-lucide="pen-tool" class="w-4 h-4"></i> Practice
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Module 9 -->
+                <div class="bg-white rounded-2xl p-8 shadow-sm border border-slate-100 relative overflow-hidden group card-hover-effect">
+                    <div class="absolute -right-6 -top-10 text-9xl font-black text-slate-50 transition-colors duration-300 z-0">9</div>
+                    <div class="relative z-10 flex flex-col h-full">
+                        <h3 class="text-2xl font-bold text-slate-900 mb-3 mt-4">Basic Concepts</h3>
+                        <p class="text-slate-600 mb-6 flex-grow">Fundamental collocations and word combinations that form the foundation of English.</p>
+                        
+                        <div class="flex items-center justify-between">
+                            <a href="9-basic%20concepts.html" class="inline-flex items-center text-primary font-semibold hover:text-indigo-800 transition-colors">
+                                Start Lesson <i data-lucide="chevron-right" class="w-4 h-4 ml-1"></i>
+                            </a>
+                            <a href="#quizlet-link-placeholder" class="inline-flex items-center gap-1.5 bg-emerald-50 text-emerald-600 hover:bg-emerald-100 px-3 py-1.5 rounded-lg text-sm font-medium transition-colors">
+                                <i data-lucide="pen-tool" class="w-4 h-4"></i> Practice
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Module 10 -->
+                <div class="bg-white rounded-2xl p-8 shadow-sm border border-slate-100 relative overflow-hidden group card-hover-effect">
+                    <div class="absolute -right-6 -top-10 text-9xl font-black text-slate-50 transition-colors duration-300 z-0">10</div>
+                    <div class="relative z-10 flex flex-col h-full">
+                        <h3 class="text-2xl font-bold text-slate-900 mb-3 mt-4">Functions</h3>
+                        <p class="text-slate-600 mb-6 flex-grow">Language functions and expressions for different communicative purposes.</p>
+                        
+                        <div class="flex items-center justify-between">
+                            <a href="10-functions.html" class="inline-flex items-center text-primary font-semibold hover:text-indigo-800 transition-colors">
+                                Start Lesson <i data-lucide="chevron-right" class="w-4 h-4 ml-1"></i>
+                            </a>
+                            <a href="#quizlet-link-placeholder" class="inline-flex items-center gap-1.5 bg-emerald-50 text-emerald-600 hover:bg-emerald-100 px-3 py-1.5 rounded-lg text-sm font-medium transition-colors">
+                                <i data-lucide="pen-tool" class="w-4 h-4"></i> Practice
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-24 bg-slate-900 text-white relative overflow-hidden">
+        <!-- Abstract shape -->
+        <div class="absolute top-0 right-0 -mr-20 -mt-20 w-96 h-96 bg-primary rounded-full mix-blend-multiply filter blur-3xl opacity-20"></div>
+        
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
+            <h2 class="text-3xl md:text-4xl font-bold mb-8">About This Project</h2>
+            <div class="space-y-6 text-slate-300 text-lg leading-relaxed">
+                <p>
+                    <strong class="text-white">Collocations Intermediate</strong> is a comprehensive English language learning resource designed specifically for intermediate-level learners who want to improve their fluency and natural expression.
+                </p>
+                <p>
+                    Collocations are word combinations that occur together naturally. Native speakers use them instinctively, and learning them is crucial for achieving native-like fluency. This project provides structured, context-based lessons that help you understand and internalize these combinations. Each module includes practice links for additional reinforcement.
+                </p>
+            </div>
+            
+            <div class="flex flex-wrap justify-center gap-4 mt-10">
+                <span class="inline-flex items-center gap-1.5 bg-slate-800 px-4 py-2 rounded-full text-sm font-medium border border-slate-700">
+                    <i data-lucide="check-circle-2" class="w-4 h-4 text-emerald-400"></i> Free Access
+                </span>
+                <span class="inline-flex items-center gap-1.5 bg-slate-800 px-4 py-2 rounded-full text-sm font-medium border border-slate-700">
+                    <i data-lucide="check-circle-2" class="w-4 h-4 text-emerald-400"></i> Interactive
+                </span>
+                <span class="inline-flex items-center gap-1.5 bg-slate-800 px-4 py-2 rounded-full text-sm font-medium border border-slate-700">
+                    <i data-lucide="check-circle-2" class="w-4 h-4 text-emerald-400"></i> Self-Paced
+                </span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-slate-950 text-slate-400 py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center gap-6">
+            <div class="flex items-center gap-2">
+                <i data-lucide="book-open-text" class="w-6 h-6 text-primary"></i>
+                <span class="font-bold text-lg text-white">Collocations<span class="text-primary">.</span></span>
+            </div>
+            
+            <p class="text-center md:text-left text-sm">
+                © 2026 Collocations Intermediate. All rights reserved.<br/>
+                <span class="opacity-75">Built with ❤️ for English learners worldwide.</span>
+            </p>
+            
+            <div class="flex gap-6 text-sm">
+                <a href="#features" class="hover:text-white transition-colors">Features</a>
+                <a href="#modules" class="hover:text-white transition-colors">Modules</a>
+                <a href="#about" class="hover:text-white transition-colors">About</a>
+            </div>
+        </div>
     </footer>
+
+    <!-- Initialize Lucide Icons -->
+    <script>
+        lucide.createIcons();
+    </script>
 </body>
 </html>
