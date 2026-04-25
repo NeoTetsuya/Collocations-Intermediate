@@ -241,10 +241,29 @@
             border: 2px solid var(--primary-color);
             border-radius: 8px;
             transition: var(--transition);
+            margin-bottom: 10px;
         }
 
         .module-link:hover {
             background: var(--primary-color);
+            color: white;
+        }
+
+        .quizlet-link {
+            display: inline-block;
+            color: #10b981;
+            text-decoration: none;
+            font-weight: 600;
+            padding: 8px 16px;
+            border: 2px solid #10b981;
+            border-radius: 8px;
+            transition: var(--transition);
+            font-size: 0.9em;
+            background: #ecfdf5;
+        }
+
+        .quizlet-link:hover {
+            background: #10b981;
             color: white;
         }
 
@@ -384,6 +403,19 @@
             font-weight: 600;
             margin-bottom: 15px;
         }
+
+        .featured-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, #f59e0b, #ec4899);
+            color: white;
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-size: 0.75em;
+            font-weight: 700;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
     </style>
 </head>
 <body>
@@ -406,8 +438,8 @@
         <section class="features">
             <div class="feature-card">
                 <div class="feature-icon">📚</div>
-                <h3>10 Focused Modules</h3>
-                <p>Structured lessons covering everyday verbs, synonyms, metaphors, travel, relationships, lifestyle, work, society, and fundamental concepts.</p>
+                <h3>11 Focused Modules</h3>
+                <p>Structured lessons covering collocations & grammar, everyday verbs, synonyms, metaphors, travel, relationships, lifestyle, work, society, and fundamental concepts.</p>
             </div>
 
             <div class="feature-card">
@@ -419,14 +451,14 @@
             <div class="feature-card">
                 <div class="feature-icon">✨</div>
                 <h3>Interactive Learning</h3>
-                <p>Engaging HTML-based lessons that make learning collocations fun, practical, and immediately applicable to real conversations.</p>
+                <p>Engaging HTML-based lessons with Quizlet integration to make learning collocations fun, practical, and immediately applicable to real conversations.</p>
             </div>
         </section>
 
         <section class="stats-section">
             <div class="stats-grid">
                 <div class="stat-item">
-                    <h4>10+</h4>
+                    <h4>11</h4>
                     <p>Learning Modules</p>
                 </div>
                 <div class="stat-item">
@@ -434,8 +466,8 @@
                     <p>Collocations Covered</p>
                 </div>
                 <div class="stat-item">
-                    <h4>All Levels</h4>
-                    <p>Context-Based Learning</p>
+                    <h4>11+</h4>
+                    <p>Quizlet Sets</p>
                 </div>
             </div>
         </section>
@@ -446,12 +478,28 @@
             <div class="modules-grid">
                 <div class="module-card">
                     <div class="module-header">
+                        <span class="featured-badge">⭐ Featured</span>
+                        <span class="module-number">0</span>
+                        <h3>Collocations & Grammar</h3>
+                    </div>
+                    <div class="module-content">
+                        <p>Start your journey with the foundations! Learn what collocations are, their importance in English, and the grammar patterns that support them.</p>
+                        <a href="0-collocations%20%26%20grammar.html" class="module-link">Start Learning →</a>
+                        <br>
+                        <a href="#quizlet-link-placeholder" class="quizlet-link">📝 Quizlet Set</a>
+                    </div>
+                </div>
+
+                <div class="module-card">
+                    <div class="module-header">
                         <span class="module-number">1</span>
                         <h3>Everyday Verbs</h3>
                     </div>
                     <div class="module-content">
                         <p>Master the most common verb collocations used in daily conversations and situations.</p>
                         <a href="1-everyday%20verbs.html" class="module-link">Start Learning →</a>
+                        <br>
+                        <a href="#quizlet-link-placeholder" class="quizlet-link">📝 Quizlet Set</a>
                     </div>
                 </div>
 
@@ -463,6 +511,8 @@
                     <div class="module-content">
                         <p>Understand the nuances between similar words and learn the correct collocations for each.</p>
                         <a href="2-synonyms%20%26%20confusable%20words.html" class="module-link">Start Learning →</a>
+                        <br>
+                        <a href="#quizlet-link-placeholder" class="quizlet-link">📝 Quizlet Set</a>
                     </div>
                 </div>
 
@@ -474,6 +524,8 @@
                     <div class="module-content">
                         <p>Explore figurative language and metaphorical collocations that add depth to your English.</p>
                         <a href="3-metaphor.html" class="module-link">Start Learning →</a>
+                        <br>
+                        <a href="#quizlet-link-placeholder" class="quizlet-link">📝 Quizlet Set</a>
                     </div>
                 </div>
 
@@ -485,6 +537,8 @@
                     <div class="module-content">
                         <p>Learn collocations related to travel, tourism, nature, and environmental topics.</p>
                         <a href="4-travel%20%26%20the%20environment.html" class="module-link">Start Learning →</a>
+                        <br>
+                        <a href="#quizlet-link-placeholder" class="quizlet-link">📝 Quizlet Set</a>
                     </div>
                 </div>
 
@@ -496,6 +550,8 @@
                     <div class="module-content">
                         <p>Discover how to talk about relationships, personalities, and human interactions naturally.</p>
                         <a href="5-people%20%26%20relationships.html" class="module-link">Start Learning →</a>
+                        <br>
+                        <a href="#quizlet-link-placeholder" class="quizlet-link">📝 Quizlet Set</a>
                     </div>
                 </div>
 
@@ -507,6 +563,8 @@
                     <div class="module-content">
                         <p>Learn collocations about hobbies, entertainment, habits, and lifestyle choices.</p>
                         <a href="6-leisure%20%26%20lifestyle.html" class="module-link">Start Learning →</a>
+                        <br>
+                        <a href="#quizlet-link-placeholder" class="quizlet-link">📝 Quizlet Set</a>
                     </div>
                 </div>
 
@@ -518,6 +576,8 @@
                     <div class="module-content">
                         <p>Professional and academic collocations for career and educational contexts.</p>
                         <a href="7-work%20%26%20study.html" class="module-link">Start Learning →</a>
+                        <br>
+                        <a href="#quizlet-link-placeholder" class="quizlet-link">📝 Quizlet Set</a>
                     </div>
                 </div>
 
@@ -529,6 +589,8 @@
                     <div class="module-content">
                         <p>Vocabulary for discussing government, law, public institutions, and civic topics.</p>
                         <a href="8-society%20%26%20instituitions.html" class="module-link">Start Learning →</a>
+                        <br>
+                        <a href="#quizlet-link-placeholder" class="quizlet-link">📝 Quizlet Set</a>
                     </div>
                 </div>
 
@@ -540,6 +602,8 @@
                     <div class="module-content">
                         <p>Fundamental collocations and word combinations that form the foundation of English.</p>
                         <a href="9-basic%20concepts.html" class="module-link">Start Learning →</a>
+                        <br>
+                        <a href="#quizlet-link-placeholder" class="quizlet-link">📝 Quizlet Set</a>
                     </div>
                 </div>
 
@@ -551,6 +615,8 @@
                     <div class="module-content">
                         <p>Language functions and expressions for different communicative purposes.</p>
                         <a href="10-functions.html" class="module-link">Start Learning →</a>
+                        <br>
+                        <a href="#quizlet-link-placeholder" class="quizlet-link">📝 Quizlet Set</a>
                     </div>
                 </div>
             </div>
@@ -560,9 +626,9 @@
             <h2>About This Project</h2>
             <p><strong>Collocations Intermediate</strong> is a comprehensive English language learning resource designed specifically for intermediate-level learners who want to improve their fluency and natural expression.</p>
             
-            <p>Collocations are word combinations that occur together naturally. Native speakers use them instinctively, and learning them is crucial for achieving native-like fluency. This project provides structured, context-based lessons that help you understand and internalize these combinations.</p>
+            <p>Collocations are word combinations that occur together naturally. Native speakers use them instinctively, and learning them is crucial for achieving native-like fluency. This project provides structured, context-based lessons that help you understand and internalize these combinations. Each module includes Quizlet links for additional practice and reinforcement.</p>
             
-            <p><span class="badge">✓ Open Source</span> <span class="badge">✓ Free</span> <span class="badge">✓ Interactive</span></p>
+            <p><span class="badge">✓ Open Source</span> <span class="badge">✓ Free</span> <span class="badge">✓ Interactive</span> <span class="badge">✓ Quizlet Integration</span></p>
         </section>
     </div>
 
