@@ -21,6 +21,7 @@
       background-color: #f0fdf4 !important; 
       color: #166534 !important; 
       pointer-events: none; /* Lock input when correct */
+      box-shadow: 0 0 0 1px #22c55e;
     }
     .input-incorrect { 
       border-color: #ef4444 !important; 
@@ -75,6 +76,23 @@
       from { opacity: 0; transform: translateY(5px); }
       to { opacity: 1; transform: translateY(0); }
     }
+
+    /* Custom Scrollbar for responsive tabs/content */
+    .custom-scrollbar::-webkit-scrollbar {
+      height: 4px;
+      width: 4px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-track {
+      background: #f1f1f1; 
+      border-radius: 4px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-thumb {
+      background: #c1c1c1; 
+      border-radius: 4px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+      background: #a8a8a8; 
+    }
   </style>
 </head>
 <body class="bg-gray-50 text-gray-900 font-sans selection:bg-indigo-200 min-h-screen flex flex-col">
@@ -86,15 +104,12 @@
         <div class="bg-indigo-800 p-2 rounded-lg border border-indigo-700 shadow-sm">
           <i class="fa-solid fa-landmark text-xl text-indigo-300"></i>
         </div>
-        <h1 class="text-2xl font-bold tracking-tight">Society & Institutions <span class="font-light opacity-80 text-lg hidden sm:inline">| Self-Study</span></h1>
+        <h1 class="text-xl sm:text-2xl font-bold tracking-tight">Society & Institutions <span class="font-light opacity-80 text-lg hidden sm:inline">| Self-Study</span></h1>
       </div>
-      <nav class="flex bg-indigo-800 rounded-lg p-1 overflow-x-auto w-full sm:w-auto shadow-inner" id="tab-nav">
-        <button data-target="unit34" class="tab-btn whitespace-nowrap px-3 py-2 rounded-md text-sm font-semibold transition-all bg-white text-indigo-900 shadow">34: Law</button>
-        <button data-target="unit35" class="tab-btn whitespace-nowrap px-3 py-2 rounded-md text-sm font-semibold transition-all text-indigo-100 hover:bg-indigo-700">35: Crime</button>
-        <button data-target="unit36" class="tab-btn whitespace-nowrap px-3 py-2 rounded-md text-sm font-semibold transition-all text-indigo-100 hover:bg-indigo-700">36: News</button>
-        <button data-target="unit37" class="tab-btn whitespace-nowrap px-3 py-2 rounded-md text-sm font-semibold transition-all text-indigo-100 hover:bg-indigo-700">37: Money</button>
-        <button data-target="unit38" class="tab-btn whitespace-nowrap px-3 py-2 rounded-md text-sm font-semibold transition-all text-indigo-100 hover:bg-indigo-700">38: War & Peace</button>
-        <button data-target="unit39" class="tab-btn whitespace-nowrap px-3 py-2 rounded-md text-sm font-semibold transition-all text-indigo-100 hover:bg-indigo-700">39: Global Problems</button>
+      <nav class="flex bg-indigo-800 rounded-lg p-1 overflow-x-auto w-full sm:w-auto shadow-inner custom-scrollbar" id="tab-nav">
+        <button data-target="unit25" class="tab-btn whitespace-nowrap px-4 py-2 rounded-md text-sm font-semibold transition-all bg-white text-indigo-900 shadow border-b-2 border-indigo-500">Unit 25: Crime</button>
+        <button data-target="unit26" class="tab-btn whitespace-nowrap px-4 py-2 rounded-md text-sm font-semibold transition-all text-indigo-100 hover:bg-indigo-700 border-b-2 border-transparent">Unit 26: Law & Justice</button>
+        <button data-target="unit27" class="tab-btn whitespace-nowrap px-4 py-2 rounded-md text-sm font-semibold transition-all text-indigo-100 hover:bg-indigo-700 border-b-2 border-transparent">Unit 27: Politics</button>
       </nav>
     </div>
   </header>
@@ -104,7 +119,7 @@
     <div class="flex flex-col lg:flex-row gap-6 items-start">
       
       <!-- LEFT PANE: Theory -->
-      <section class="lg:w-2/5 flex-shrink-0 flex flex-col bg-white rounded-xl border border-gray-200 shadow-sm">
+      <section class="lg:w-2/5 flex-shrink-0 flex flex-col bg-white rounded-xl border border-gray-200 shadow-sm h-auto lg:sticky lg:top-24">
         <div class="bg-gray-100 p-4 border-b border-gray-200 flex items-center justify-between z-10 rounded-t-xl">
           <h2 class="font-bold text-gray-700 uppercase tracking-wider text-sm flex items-center gap-2">
             <i class="fa-solid fa-bookmark text-indigo-500"></i> Reference & Rules
@@ -116,15 +131,17 @@
            <!-- Tabs injected here -->
         </div>
 
-        <div class="p-6 flex-grow overflow-y-auto max-h-[600px] lg:max-h-none custom-scrollbar" id="theory-container">
+        <div class="p-5 sm:p-6 flex-grow overflow-y-auto max-h-[60vh] lg:max-h-[calc(100vh-16rem)] custom-scrollbar" id="theory-container">
           <!-- Theory Content Injected via JS -->
         </div>
       </section>
 
       <!-- RIGHT PANE: Exercises -->
-      <section class="lg:w-3/5 flex flex-col bg-white rounded-xl shadow-md border border-gray-200 relative">
+      <section class="lg:w-3/5 flex flex-col bg-white rounded-xl shadow-md border border-gray-200 relative w-full">
         <div class="bg-indigo-50 p-4 border-b border-indigo-100 flex items-center justify-between flex-shrink-0 shadow-sm rounded-t-xl">
-          <h2 class="font-bold text-indigo-900 text-lg" id="exercise-title">Unit 34: Laws and punishments</h2>
+          <h2 class="font-bold text-indigo-900 text-lg flex items-center gap-2" id="exercise-title">
+            <i class="fa-solid fa-pen-nib text-indigo-600"></i> Exercises
+          </h2>
         </div>
         
         <!-- EXERCISE SUB-TABS -->
@@ -132,12 +149,12 @@
            <!-- Tabs injected here -->
         </div>
 
-        <div class="p-6 sm:p-8 flex-grow" id="exercises-container" style="padding-bottom: 6rem;">
+        <div class="p-4 sm:p-6 lg:p-8 flex-grow" id="exercises-container" style="padding-bottom: 6rem;">
           <!-- Exercise Content Injected via JS -->
         </div>
 
         <!-- Global Exercise Controls (Reset only) -->
-        <div class="sticky bottom-0 w-full bg-white/95 backdrop-blur border-t p-4 flex justify-center items-center gap-4 rounded-b-xl shadow-[0_-10px_15px_-3px_rgba(0,0,0,0.05)] z-20">
+        <div class="absolute bottom-0 w-full bg-white/95 backdrop-blur border-t p-4 flex justify-center items-center gap-4 rounded-b-xl shadow-[0_-10px_15px_-3px_rgba(0,0,0,0.05)] z-20">
           <button id="btn-reset" class="flex items-center gap-2 text-indigo-700 hover:text-indigo-900 bg-indigo-50 hover:bg-indigo-100 font-medium px-6 py-2 rounded-lg transition-all shadow-sm">
             <i class="fa-solid fa-rotate-right"></i> Reset All Progress
           </button>
@@ -150,68 +167,40 @@
   <script>
     // --- CONTENT DATA ---
     const contentData = {
-      unit34: {
-        title: "Unit 34: Laws and punishments",
+      unit25: {
+        title: "Unit 25: Crime & Punishment",
         theory: [
           {
-            tabLabel: "Law Verbs",
+            tabLabel: "Committing Crime",
             html: `
               <div class="space-y-6">
-                <div class="bg-blue-50 rounded-lg shadow-sm border border-blue-200 overflow-hidden">
-                  <h3 class="bg-blue-600 text-white font-bold p-3 text-lg"><i class="fa-solid fa-scale-balanced mr-2"></i> Verbs that collocate with 'law'</h3>
-                  <div class="p-4 space-y-3 text-sm text-gray-800">
-                    <ul class="list-disc pl-5 space-y-2">
-                      <li>We must all <span class="font-bold text-blue-700">observe the law</span> at all times. [formal]</li>
-                      <li>People who refuse to <span class="font-bold text-blue-700">obey the law</span> should be punished. [less formal]</li>
-                      <li>A new law has been <span class="font-bold text-blue-700">introduced / passed</span> forbidding the use of mobile phones.</li>
-                      <li>The company <span class="font-bold text-blue-700">acted within the law</span> as regards the rights of its employees.</li>
-                      <li>It is the job of the police to <span class="font-bold text-blue-700">uphold / enforce the law</span>. [make sure people obey it]</li>
-                      <li>Other verbs: <span class="font-bold text-blue-700">respect</span> the law, <span class="font-bold text-blue-700">break</span> the law.</li>
+                <div class="bg-indigo-50 rounded-lg shadow-sm border border-indigo-200 overflow-hidden">
+                  <h3 class="bg-indigo-600 text-white font-bold p-3 text-lg sm:text-base"><i class="fa-solid fa-mask mr-2"></i> Breaking the Law</h3>
+                  <div class="p-4 space-y-3 text-sm sm:text-base text-gray-800">
+                    <ul class="list-disc pl-5 space-y-3">
+                      <li><span class="font-bold text-indigo-700">commit a crime / an offence:</span> to do something illegal.</li>
+                      <li><span class="font-bold text-indigo-700">break the law:</span> to fail to obey a rule made by the government.</li>
+                      <li><span class="font-bold text-indigo-700">investigate a crime:</span> (police) to carefully examine a crime to discover the truth.</li>
+                      <li><span class="font-bold text-indigo-700">catch the culprit:</span> to find and arrest the person responsible for a crime.</li>
+                      <li><span class="font-bold text-indigo-700">arrest a suspect:</span> to take someone into custody who is believed to be guilty.</li>
                     </ul>
                   </div>
                 </div>
               </div>`
           },
           {
-            tabLabel: "Rules & Regs",
-            html: `
-              <div class="space-y-6">
-                <div class="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
-                  <h3 class="bg-teal-500 text-white font-bold p-3 text-lg"><i class="fa-solid fa-file-contract mr-2"></i> Noun and verb collocations</h3>
-                  <div class="p-4 space-y-3 text-sm text-gray-800">
-                    <ul class="list-disc pl-5 space-y-2">
-                      <li>The new law <span class="font-bold text-teal-700">forbids / prohibits</span> smoking in public places.</li>
-                      <li>The rules <span class="font-bold text-teal-700">permit / allow</span> members to bring guests.</li>
-                      <li>These rules/regulations <span class="font-bold text-teal-700">apply to</span> all students.</li>
-                      <li>If we <span class="font-bold text-teal-700">follow the rules</span>, at least 20 people must be present.</li>
-                      <li>The regulations <span class="font-bold text-teal-700">require / stipulate</span> that all students must register. [formal: the rules say that]</li>
-                      <li>We have to <span class="font-bold text-teal-700">comply with the regulations</span>. [formal: do what the rules say]</li>
-                      <li>I hope we can <span class="font-bold text-teal-700">bend the rules</span>. [informal: break them in a way not considered important]</li>
-                    </ul>
-                  </div>
-                </div>
-              </div>`
-          },
-          {
-            tabLabel: "Punishments",
+            tabLabel: "Punishment",
             html: `
               <div class="space-y-6">
                 <div class="bg-rose-50 rounded-lg shadow-sm border border-rose-200 overflow-hidden">
-                  <h3 class="bg-rose-500 text-white font-bold p-3 text-lg"><i class="fa-solid fa-gavel mr-2"></i> Punishments and Trials</h3>
-                  <div class="p-4 space-y-3 text-sm text-gray-800">
-                    <ul class="list-disc pl-5 space-y-2">
-                      <li><span class="font-bold text-rose-700">carry out an investigation:</span> police investigate a crime.</li>
-                      <li><span class="font-bold text-rose-700">appear in court:</span> go before a judge.</li>
-                      <li><span class="font-bold text-rose-700">go on trial:</span> accused person's trial begins.</li>
-                      <li><span class="font-bold text-rose-700">reach a verdict:</span> jury decides guilty or not guilty.</li>
-                      <li><span class="font-bold text-rose-700">a fair trial:</span> unbiased legal process.</li>
-                      <li><span class="font-bold text-rose-700">be severely punished</span></li>
-                      <li><span class="font-bold text-rose-700">pay / face a heavy fine</span></li>
-                      <li><span class="font-bold text-rose-700">face the death penalty</span></li>
-                      <li><span class="font-bold text-rose-700">act as a deterrent:</span> helps prevent crime.</li>
-                      <li><span class="font-bold text-rose-700">suffer the consequences</span></li>
-                      <li><span class="font-bold text-rose-700">a harsh penalty / sentence:</span> a very strict punishment.</li>
-                      <li><span class="font-bold text-rose-700">a hard legal battle / win a case</span></li>
+                  <h3 class="bg-rose-600 text-white font-bold p-3 text-lg sm:text-base"><i class="fa-solid fa-gavel mr-2"></i> Sentences & Penalties</h3>
+                  <div class="p-4 space-y-3 text-sm sm:text-base text-gray-800">
+                    <ul class="list-disc pl-5 space-y-3">
+                      <li><span class="font-bold text-rose-700">serve a sentence:</span> to spend time in prison as a punishment.</li>
+                      <li><span class="font-bold text-rose-700">pay a fine:</span> to pay money as a penalty for a minor offence.</li>
+                      <li><span class="font-bold text-rose-700">community service:</span> unpaid work that a criminal does for the community instead of going to prison.</li>
+                      <li><span class="font-bold text-rose-700">a suspended sentence:</span> a prison term that is delayed and won't be served if the offender stays out of trouble.</li>
+                      <li><span class="font-bold text-rose-700">capital punishment:</span> the legally authorized killing of someone as punishment for a crime.</li>
                     </ul>
                   </div>
                 </div>
@@ -220,375 +209,68 @@
         ],
         exercises: [
           {
-            tabLabel: "34.1 Fill Gaps",
+            tabLabel: "25.1 Collocations",
             html: `
-              <div class="exercise-block bg-white border border-gray-100 rounded-xl p-5 shadow-[0_2px_10px_-3px_rgba(6,81,237,0.1)]">
-                <h3 class="font-bold text-lg mb-4 text-gray-800 flex items-center gap-3 border-b pb-3"><span class="bg-indigo-100 text-indigo-800 px-3 py-1 rounded text-sm shadow-sm">34.1</span> Choose the correct verb from the 'Law Verbs' tab to fill the gaps.</h3>
-                <div class="bg-blue-50/50 p-5 rounded-lg border border-blue-100 text-gray-700 leading-[3rem]">
-                  In law-abiding societies ordinary citizens are usually happy to (1) ${generateInput({ correct: ['obey', 'observe'] })} or (2) ${generateInput({ correct: ['observe', 'obey'] })} the law. 
-                  But there are also rather different societies where most people feel that it is not such a serious matter to (3) ${generateInput({ correct: ['break'] })} the law. 
-                  In such places, people do not seem to (4) ${generateInput({ correct: ['respect'] })} the law and even the most honest of citizens does not expect always to (5) ${generateInput({ correct: ['act'] })} within it. 
-                  The rulers of such societies have no difficulty in (6) ${generateInput({ correct: ['passing', 'introducing'] })} or (7) ${generateInput({ correct: ['introducing', 'passing'] })} new laws but the police have considerable problems when it comes to (8) ${generateInput({ correct: ['enforcing', 'upholding'] })} or (9) ${generateInput({ correct: ['upholding', 'enforcing'] })} those laws.
-                </div>
-              </div>`
-          },
-          {
-            tabLabel: "34.2 Match",
-            html: `
-              <div class="exercise-block bg-white border border-gray-100 rounded-xl p-5 shadow-[0_2px_10px_-3px_rgba(6,81,237,0.1)]">
-                <h3 class="font-bold text-lg mb-4 text-gray-800 flex items-center gap-3 border-b pb-3"><span class="bg-indigo-100 text-indigo-800 px-3 py-1 rounded text-sm shadow-sm">34.2</span> Match the halves of sentences.</h3>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-gray-700 leading-8 font-medium">
-                  <div>1. The rules apply... <br> ${generateSelect({ options: ['the rules without too many complaints.', 'the rules to allow Mary to submit late.', 'the use of mobile phones in class.', 'that coursework must be handed in on time.', 'to all students in the college.', 'to book college guestrooms.', 'with the regulations.'], correct: 'to all students in the college.' })}</div>
-                  <div>2. The rules prohibit... <br> ${generateSelect({ options: ['the rules without too many complaints.', 'the rules to allow Mary to submit late.', 'the use of mobile phones in class.', 'that coursework must be handed in on time.', 'to all students in the college.', 'to book college guestrooms.', 'with the regulations.'], correct: 'the use of mobile phones in class.' })}</div>
-                  <div>3. The rules allow students... <br> ${generateSelect({ options: ['the rules without too many complaints.', 'the rules to allow Mary to submit late.', 'the use of mobile phones in class.', 'that coursework must be handed in on time.', 'to all students in the college.', 'to book college guestrooms.', 'with the regulations.'], correct: 'to book college guestrooms.' })}</div>
-                  <div>4. The regulations stipulate... <br> ${generateSelect({ options: ['the rules without too many complaints.', 'the rules to allow Mary to submit late.', 'the use of mobile phones in class.', 'that coursework must be handed in on time.', 'to all students in the college.', 'to book college guestrooms.', 'with the regulations.'], correct: 'that coursework must be handed in on time.' })}</div>
-                  <div>5. Most students follow... <br> ${generateSelect({ options: ['the rules without too many complaints.', 'the rules to allow Mary to submit late.', 'the use of mobile phones in class.', 'that coursework must be handed in on time.', 'to all students in the college.', 'to book college guestrooms.', 'with the regulations.'], correct: 'the rules without too many complaints.' })}</div>
-                  <div>6. The authorities bent... <br> ${generateSelect({ options: ['the rules without too many complaints.', 'the rules to allow Mary to submit late.', 'the use of mobile phones in class.', 'that coursework must be handed in on time.', 'to all students in the college.', 'to book college guestrooms.', 'with the regulations.'], correct: 'the rules to allow Mary to submit late.' })}</div>
-                  <div>7. All students must comply... <br> ${generateSelect({ options: ['the rules without too many complaints.', 'the rules to allow Mary to submit late.', 'the use of mobile phones in class.', 'that coursework must be handed in on time.', 'to all students in the college.', 'to book college guestrooms.', 'with the regulations.'], correct: 'with the regulations.' })}</div>
-                </div>
-              </div>`
-          },
-          {
-            tabLabel: "34.3 Order Events",
-            html: `
-              <div class="exercise-block bg-white border border-gray-100 rounded-xl p-5 shadow-[0_2px_10px_-3px_rgba(6,81,237,0.1)]">
-                <h3 class="font-bold text-lg mb-4 text-gray-800 flex items-center gap-3 border-b pb-3"><span class="bg-indigo-100 text-indigo-800 px-3 py-1 rounded text-sm shadow-sm">34.3</span> Put these events in a crime story in order.</h3>
-                <p class="text-sm text-gray-600 mb-4 font-medium">Select the order (1 to 7) for each event.</p>
-                <div class="space-y-4 text-gray-700 leading-8">
-                  <div class="flex items-center gap-4">
-                    ${generateSelect({ options: ['1', '2', '3', '4', '5', '6', '7'], correct: '4' })}
-                    <span>a) A number of witnesses appear in court.</span>
-                  </div>
-                  <div class="flex items-center gap-4">
-                    ${generateSelect({ options: ['1', '2', '3', '4', '5', '6', '7'], correct: '3' })}
-                    <span>b) Bill Sikes goes on trial.</span>
-                  </div>
-                  <div class="flex items-center gap-4">
-                    ${generateSelect({ options: ['1', '2', '3', '4', '5', '6', '7'], correct: '6' })}
-                    <span>c) Bill Sikes is found guilty.</span>
-                  </div>
-                  <div class="flex items-center gap-4">
-                    ${generateSelect({ options: ['1', '2', '3', '4', '5', '6', '7'], correct: '7' })}
-                    <span>d) Bill Sikes is severely punished.</span>
-                  </div>
-                  <div class="flex items-center gap-4">
-                    ${generateSelect({ options: ['1', '2', '3', '4', '5', '6', '7'], correct: '1' })}
-                    <span>e) Bill Sikes robs a bank.</span>
-                  </div>
-                  <div class="flex items-center gap-4">
-                    ${generateSelect({ options: ['1', '2', '3', '4', '5', '6', '7'], correct: '5' })}
-                    <span>f) The jury reaches its verdict.</span>
-                  </div>
-                  <div class="flex items-center gap-4">
-                    ${generateSelect({ options: ['1', '2', '3', '4', '5', '6', '7'], correct: '2' })}
-                    <span>g) The police carry out an investigation.</span>
-                  </div>
-                </div>
-              </div>`
-          },
-          {
-            tabLabel: "34.5 Rewrite",
-            html: `
-              <div class="exercise-block bg-indigo-50/50 p-6 rounded-xl border border-indigo-200 shadow-sm">
-                <h3 class="font-bold text-lg mb-4 text-indigo-900 border-b border-indigo-200 pb-2"><i class="fa-solid fa-pen-to-square text-indigo-600 mr-2"></i> 34.5 Rewrite using the word in brackets.</h3>
-                <ol class="list-decimal list-inside space-y-4 pl-2 leading-8 text-gray-700">
-                  <li>Everyone must observe these regulations. (COMPLY) <br><i class="fa-solid fa-arrow-right text-indigo-400 mx-4"></i> Everyone must ${generateInput({ correct: ['comply with'], widthClass: 'w-32' })} these regulations.</li>
-                  <li>All citizens must obey these rules. (APPLY) <br><i class="fa-solid fa-arrow-right text-indigo-400 mx-4"></i> These rules ${generateInput({ correct: ['apply to'], widthClass: 'w-32' })} all citizens.</li>
-                  <li>The jury found the accused guilty. (REACHED) <br><i class="fa-solid fa-arrow-right text-indigo-400 mx-4"></i> The jury ${generateInput({ correct: ['reached a verdict', 'reached its verdict'], widthClass: 'w-48' })} of guilty.</li>
-                  <li>The police are investigating the bank robbery. (INVESTIGATION) <br><i class="fa-solid fa-arrow-right text-indigo-400 mx-4"></i> The police are carrying out an ${generateInput({ correct: ['investigation into', 'investigation'], widthClass: 'w-40' })} the bank robbery.</li>
-                  <li>Our company would never break the law. (ACTS) <br><i class="fa-solid fa-arrow-right text-indigo-400 mx-4"></i> Our company always ${generateInput({ correct: ['acts within the law', 'acts within'], widthClass: 'w-48' })}.</li>
-                  <li>The rules prohibit eating and drinking in the classrooms. (ALLOW STUDENTS) <br><i class="fa-solid fa-arrow-right text-indigo-400 mx-4"></i> The rules do not ${generateInput({ correct: ['allow students to eat'], widthClass: 'w-48' })} and drink in the classrooms.</li>
-                </ol>
-              </div>`
-          }
-        ]
-      },
-      unit35: {
-        title: "Unit 35: Crime",
-        theory: [
-          {
-            tabLabel: "Criminals",
-            html: `
-              <div class="space-y-6">
-                <div class="bg-gray-800 rounded-lg shadow-sm border border-gray-700 overflow-hidden">
-                  <h3 class="bg-gray-900 text-white font-bold p-3 text-lg"><i class="fa-solid fa-user-ninja mr-2"></i> Talking about criminals</h3>
-                  <div class="p-4 space-y-3 text-sm text-gray-200">
-                    <ul class="list-disc pl-5 space-y-2">
-                      <li><span class="font-bold text-red-400">hardened criminal:</span> someone who has committed a lot of crimes.</li>
-                      <li><span class="font-bold text-red-400">committed serious offences</span></li>
-                      <li><span class="font-bold text-red-400">serve a sentence</span> of at least 15 years in prison.</li>
-                      <li><span class="font-bold text-red-400">convicted criminal:</span> someone declared officially guilty in a court of law.</li>
-                      <li><span class="font-bold text-red-400">conviction for robbery</span> dating back to 1996.</li>
-                      <li><span class="font-bold text-red-400">political prisoners / common criminals:</span> common criminal is a negative term for a low class criminal.</li>
-                      <li><span class="font-bold text-red-400">criminal record:</span> list kept by police of previous crimes.</li>
-                      <li><span class="font-bold text-red-400">young offenders:</span> crime relating to young persons not yet adults.</li>
-                    </ul>
-                  </div>
-                </div>
-              </div>`
-          },
-          {
-            tabLabel: "Politicians on Crime",
-            html: `
-              <div class="space-y-6">
-                <div class="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
-                  <h3 class="bg-red-500 text-white font-bold p-3 text-lg"><i class="fa-solid fa-bullhorn mr-2"></i> Politicians on crime</h3>
-                  <div class="p-4 space-y-3 text-sm text-gray-800">
-                    <ul class="list-disc pl-5 space-y-2">
-                      <li>"In the fight against crime we will not just <span class="font-bold text-red-600">target serious crime</span>, but all crime, including <span class="font-bold text-red-600">street crime</span> and <span class="font-bold text-red-600">vehicle crime</span>."</li>
-                      <li>"If someone <span class="font-bold text-red-600">breaks into</span> your house, <span class="font-bold text-red-600">steals</span> your car, or <span class="font-bold text-red-600">robs</span> you in the street... we're determined to <span class="font-bold text-red-600">tackle crime</span>."</li>
-                      <li>"We are doing everything to <span class="font-bold text-red-600">combat crime</span>. The <span class="font-bold text-red-600">crime rate</span> has come down, and we've focused on <span class="font-bold text-red-600">juvenile crime</span>."</li>
-                      <li>"We have all had experience of the recent <span class="font-bold text-red-600">crime wave</span>, whether it is <span class="font-bold text-red-600">petty crime</span> (not considered serious) or more serious offences."</li>
-                      <li>"The <span class="font-bold text-red-600">crime figures</span> are the worst since 1995. We have had a <span class="font-bold text-red-600">spate of burglaries</span> (large number happening at the same time), <span class="font-bold text-red-600">vehicle theft</span>, <span class="font-bold text-red-600">drug abuse</span>, and a <span class="font-bold text-red-600">staggering increase</span> in <span class="font-bold text-red-600">mindless vandalism</span>."</li>
-                    </ul>
-                    <div class="bg-amber-50 p-3 rounded border border-amber-100 mt-4">
-                      <p class="font-bold text-amber-800 text-xs uppercase">Common Mistake</p>
-                      <p>A person <span class="font-bold">steals</span> something (e.g. stole a car), but <span class="font-bold">robs</span> someone or an institution (e.g. robbed a bank, robbed an elderly person).</p>
-                    </div>
-                  </div>
-                </div>
-              </div>`
-          }
-        ],
-        exercises: [
-          {
-            tabLabel: "35.1 Definitions",
-            html: `
-              <div class="exercise-block bg-white border border-gray-100 rounded-xl p-5 shadow-[0_2px_10px_-3px_rgba(239,68,68,0.1)]">
-                <h3 class="font-bold text-lg mb-4 text-gray-800 flex items-center gap-3 border-b pb-3"><span class="bg-red-100 text-red-800 px-3 py-1 rounded text-sm shadow-sm">35.1</span> Find a collocation that matches each definition.</h3>
-                <ol class="list-decimal list-inside space-y-4 pl-2 leading-8 text-gray-700">
-                  <li>a schoolchild who commits a crime: a ${generateInput({ correct: ['juvenile', 'young offender'], widthClass: 'w-40' })}</li>
-                  <li>someone who has been found guilty of a crime in a court of law: a ${generateInput({ correct: ['convicted criminal'], widthClass: 'w-48' })}</li>
-                  <li>someone who has committed a lot of crimes: a ${generateInput({ correct: ['hardened criminal'], widthClass: 'w-48' })}</li>
-                  <li>to spend time in prison as punishment: to ${generateInput({ correct: ['serve a sentence'], widthClass: 'w-48' })}</li>
-                  <li>to do something that is against the law: to ${generateInput({ correct: ['commit a crime', 'commit an offence'], widthClass: 'w-48' })}</li>
-                  <li>someone who is imprisoned for what they believe: a ${generateInput({ correct: ['political prisoner'], widthClass: 'w-48' })}</li>
-                  <li>someone who has committed a crime (disapproving term): a ${generateInput({ correct: ['common criminal'], widthClass: 'w-48' })}</li>
-                  <li>a document stating that someone has been found guilty in a court of law: a ${generateInput({ correct: ['conviction', 'criminal record'], widthClass: 'w-40' })}</li>
+              <div class="exercise-block bg-white border border-gray-100 rounded-xl p-5 shadow-[0_2px_10px_-3px_rgba(79,70,229,0.1)]">
+                <h3 class="font-bold text-lg mb-4 text-gray-800 flex items-center gap-3 border-b pb-3"><span class="bg-indigo-100 text-indigo-800 px-3 py-1 rounded text-sm shadow-sm">25.1</span> Choose the right collocations.</h3>
+                <ol class="list-decimal list-inside space-y-4 pl-2 leading-8 text-gray-700 text-sm sm:text-base">
+                  <li>If you drive over the speed limit, you are ${generateSelect({ options: ['smashing', 'breaking', 'cracking'], correct: 'breaking' })} the law.</li>
+                  <li>The police are currently trying to ${generateSelect({ options: ['research', 'look', 'investigate'], correct: 'investigate' })} a series of burglaries in the area.</li>
+                  <li>Instead of prison, the judge ordered the young offender to do 100 hours of community ${generateSelect({ options: ['work', 'service', 'help'], correct: 'service' })}.</li>
+                  <li>It took the detectives months to finally catch the ${generateSelect({ options: ['culprit', 'fault', 'mistake'], correct: 'culprit' })}.</li>
+                  <li>He was caught shoplifting and had to ${generateSelect({ options: ['pay', 'give', 'spend'], correct: 'pay' })} a heavy fine.</li>
+                  <li>He is currently ${generateSelect({ options: ['serving', 'doing', 'making'], correct: 'serving' })} a ten-year sentence in a maximum-security prison.</li>
                 </ol>
               </div>`
           },
           {
-            tabLabel: "35.2 Headlines",
+            tabLabel: "25.2 Flashcards",
             html: `
-              <div class="exercise-block bg-white border border-gray-100 rounded-xl p-5 shadow-[0_2px_10px_-3px_rgba(239,68,68,0.1)]">
-                <h3 class="font-bold text-lg mb-4 text-gray-800 flex items-center gap-3 border-b pb-3"><span class="bg-red-100 text-red-800 px-3 py-1 rounded text-sm shadow-sm">35.2</span> Match the headlines with the first lines of their stories.</h3>
-                <div class="space-y-4 text-gray-700 leading-8">
-                  <div class="flex flex-col sm:flex-row gap-2 items-start sm:items-center">
-                    <span class="font-bold uppercase text-red-800 bg-red-50 px-2 rounded w-64 shrink-0">1. JUVENILE CRIME RISING</span>
-                    ${generateSelect({ options: ['a) 80-year-old Marianne Roberts had her house broken into...', 'b) An increasing number of young people are getting involved...', 'c) So many cars have recently been stolen...', 'd) A detailed report on crime in the UK is to be published...', 'e) Small-scale robberies remain a significant problem...', 'f) A number of TV celebrities have been named...'], correct: 'b) An increasing number of young people are getting involved...' })}
-                  </div>
-                  <div class="flex flex-col sm:flex-row gap-2 items-start sm:items-center">
-                    <span class="font-bold uppercase text-red-800 bg-red-50 px-2 rounded w-64 shrink-0">2. DRUG ABUSE SCANDAL</span>
-                    ${generateSelect({ options: ['a) 80-year-old Marianne Roberts had her house broken into...', 'b) An increasing number of young people are getting involved...', 'c) So many cars have recently been stolen...', 'd) A detailed report on crime in the UK is to be published...', 'e) Small-scale robberies remain a significant problem...', 'f) A number of TV celebrities have been named...'], correct: 'f) A number of TV celebrities have been named...' })}
-                  </div>
-                  <div class="flex flex-col sm:flex-row gap-2 items-start sm:items-center">
-                    <span class="font-bold uppercase text-red-800 bg-red-50 px-2 rounded w-64 shrink-0">3. PETTY CRIME CONTINUES</span>
-                    ${generateSelect({ options: ['a) 80-year-old Marianne Roberts had her house broken into...', 'b) An increasing number of young people are getting involved...', 'c) So many cars have recently been stolen...', 'd) A detailed report on crime in the UK is to be published...', 'e) Small-scale robberies remain a significant problem...', 'f) A number of TV celebrities have been named...'], correct: 'e) Small-scale robberies remain a significant problem...' })}
-                  </div>
-                  <div class="flex flex-col sm:flex-row gap-2 items-start sm:items-center">
-                    <span class="font-bold uppercase text-red-800 bg-red-50 px-2 rounded w-64 shrink-0">4. POLICE TARGET VEHICLE THEFT</span>
-                    ${generateSelect({ options: ['a) 80-year-old Marianne Roberts had her house broken into...', 'b) An increasing number of young people are getting involved...', 'c) So many cars have recently been stolen...', 'd) A detailed report on crime in the UK is to be published...', 'e) Small-scale robberies remain a significant problem...', 'f) A number of TV celebrities have been named...'], correct: 'c) So many cars have recently been stolen...' })}
-                  </div>
-                  <div class="flex flex-col sm:flex-row gap-2 items-start sm:items-center">
-                    <span class="font-bold uppercase text-red-800 bg-red-50 px-2 rounded w-64 shrink-0">5. PENSIONER ROBBED</span>
-                    ${generateSelect({ options: ['a) 80-year-old Marianne Roberts had her house broken into...', 'b) An increasing number of young people are getting involved...', 'c) So many cars have recently been stolen...', 'd) A detailed report on crime in the UK is to be published...', 'e) Small-scale robberies remain a significant problem...', 'f) A number of TV celebrities have been named...'], correct: 'a) 80-year-old Marianne Roberts had her house broken into...' })}
-                  </div>
-                  <div class="flex flex-col sm:flex-row gap-2 items-start sm:items-center">
-                    <span class="font-bold uppercase text-red-800 bg-red-50 px-2 rounded w-64 shrink-0">6. CRIME FIGURES OUT TODAY</span>
-                    ${generateSelect({ options: ['a) 80-year-old Marianne Roberts had her house broken into...', 'b) An increasing number of young people are getting involved...', 'c) So many cars have recently been stolen...', 'd) A detailed report on crime in the UK is to be published...', 'e) Small-scale robberies remain a significant problem...', 'f) A number of TV celebrities have been named...'], correct: 'd) A detailed report on crime in the UK is to be published...' })}
-                  </div>
-                </div>
-              </div>`
-          },
-          {
-            tabLabel: "35.3 Paragraph",
-            html: `
-              <div class="exercise-block bg-red-50/50 p-6 rounded-xl border border-red-200 shadow-sm">
-                <h3 class="font-bold text-lg mb-4 text-red-900 border-b border-red-200 pb-2"><i class="fa-solid fa-pen-to-square text-red-600 mr-2"></i> 35.3 Fill in the gaps</h3>
-                <div class="leading-[3rem] bg-white p-5 rounded-lg shadow-sm border border-red-100 text-gray-700">
-                  Police are concerned about the growing number of offences that are being (1) ${generateInput({ correct: ['committed'] })} by young people in our town. 
-                  They say that increasing numbers of youngsters are (2) ${generateInput({ correct: ['breaking'] })} into people's houses or (3) ${generateInput({ correct: ['stealing'] })} their cars. 
-                  Indeed, police claim that it is probably young (4) ${generateInput({ correct: ['offenders'] })} who are to blame for the recent (5) ${generateInput({ correct: ['spate'] })} of burglaries in our town. 
-                  Police are proposing a special campaign to (6) ${generateInput({ correct: ['tackle', 'combat'] })} the problem and are asking for the public's support in this (7) ${generateInput({ correct: ['fight'] })} against (8) ${generateInput({ correct: ['juvenile'] })} crime.
+              <div class="exercise-block bg-white border border-gray-100 rounded-xl p-5 shadow-[0_2px_10px_-3px_rgba(79,70,229,0.1)]">
+                <h3 class="font-bold text-lg mb-4 text-gray-800 flex items-center gap-3 border-b pb-3"><span class="bg-indigo-100 text-indigo-800 px-3 py-1 rounded text-sm shadow-sm">25.2</span> Vocabulary Checks</h3>
+                <p class="text-sm text-gray-500 mb-4 italic">Think of the correct collocations based on the clues, then click to reveal.</p>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  ${generateFlashcard("1. To perform an illegal act.", "commit a crime / an offence")}
+                  ${generateFlashcard("2. A punishment where you don't go to jail unless you commit another crime within a certain period.", "a suspended sentence")}
+                  ${generateFlashcard("3. To take a person believed to be guilty into police custody.", "arrest a suspect")}
+                  ${generateFlashcard("4. The formal term for the death penalty.", "capital punishment")}
                 </div>
               </div>`
           }
         ]
       },
-      unit36: {
-        title: "Unit 36: News",
+      unit26: {
+        title: "Unit 26: Law & Justice",
         theory: [
           {
-            tabLabel: "Newspapers",
-            html: `
-              <div class="space-y-6">
-                <div class="bg-indigo-50 rounded-lg shadow-sm border border-indigo-200 overflow-hidden">
-                  <h3 class="bg-indigo-600 text-white font-bold p-3 text-lg"><i class="fa-regular fa-newspaper mr-2"></i> Collocations about newspapers</h3>
-                  <div class="p-4 space-y-3 text-sm text-gray-800">
-                    <ul class="list-disc pl-5 space-y-2">
-                      <li><span class="font-bold text-indigo-700">a (news) story breaks:</span> becomes public knowledge.</li>
-                      <li><span class="font-bold text-indigo-700">news comes in:</span> just received.</li>
-                      <li><span class="font-bold text-indigo-700">news leaks out:</span> becomes known despite trying to keep it secret.</li>
-                      <li><span class="font-bold text-indigo-700">hit the headlines / make headlines:</span> become a major news story.</li>
-                      <li><span class="font-bold text-indigo-700">front-page headline:</span> main story on page one.</li>
-                      <li><span class="font-bold text-indigo-700">the latest news:</span> NOT 'the last news'.</li>
-                      <li><span class="font-bold text-indigo-700">be headline / front-page news.</span></li>
-                      <li><span class="font-bold text-indigo-700">item of news:</span> a single piece of news.</li>
-                      <li><span class="font-bold text-indigo-700">run a story:</span> publish a story.</li>
-                      <li><span class="font-bold text-indigo-700">flick through the newspaper:</span> look quickly without reading deeply.</li>
-                    </ul>
-                  </div>
-                </div>
-              </div>`
-          },
-          {
-            tabLabel: "News Language",
-            html: `
-              <div class="space-y-6">
-                <div class="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
-                  <h3 class="bg-cyan-600 text-white font-bold p-3 text-lg"><i class="fa-solid fa-microphone mr-2"></i> The language of news stories</h3>
-                  <div class="p-4 space-y-4 text-sm text-gray-800">
-                    <ul class="list-disc pl-5 space-y-2">
-                      <li>In a surprising <span class="font-bold text-cyan-700">turn of events</span>...</li>
-                      <li><span class="font-bold text-cyan-700">Interested parties</span> (people/groups with a connection) will <span class="font-bold text-cyan-700">hold talks</span>.</li>
-                      <li>The Minister has resigned after only six months in the <span class="font-bold text-cyan-700">top job</span>.</li>
-                      <li>He has <span class="font-bold text-cyan-700">attracted attention</span> over his <span class="font-bold text-cyan-700">controversial decision</span>.</li>
-                      <li>The Minister <span class="font-bold text-cyan-700">outlined plans</span> for a campaign. The government intends to <span class="font-bold text-cyan-700">launch the campaign</span>.</li>
-                      <li>A tourist was <span class="font-bold text-cyan-700">taken hostage</span> when troops <span class="font-bold text-cyan-700">seized control</span> of the airport. The government <span class="font-bold text-cyan-700">lost control</span>.</li>
-                      <li>Our reporter is <span class="font-bold text-cyan-700">keeping a close watch</span> on the situation and we shall be <span class="font-bold text-cyan-700">keeping you informed</span>.</li>
-                      <li>Peace talks <span class="font-bold text-cyan-700">broke down</span> last night.</li>
-                      <li>A building <span class="font-bold text-cyan-700">caught fire</span> when <span class="font-bold text-cyan-700">lightning struck</span>. Fortunately there was <span class="font-bold text-cyan-700">no loss of life</span>.</li>
-                    </ul>
-                  </div>
-                </div>
-              </div>`
-          }
-        ],
-        exercises: [
-          {
-            tabLabel: "36.1 TV Guide",
-            html: `
-              <div class="exercise-block bg-white border border-gray-100 rounded-xl p-5 shadow-[0_2px_10px_-3px_rgba(6,81,237,0.1)]">
-                <h3 class="font-bold text-lg mb-4 text-gray-800 flex items-center gap-3 border-b pb-3"><span class="bg-indigo-100 text-indigo-800 px-3 py-1 rounded text-sm shadow-sm">36.1</span> Complete the collocations in these descriptions.</h3>
-                <div class="space-y-4 text-gray-700 leading-8">
-                  <div class="bg-indigo-50/50 p-4 border border-indigo-100 rounded-lg">
-                    <p class="font-bold text-indigo-900 border-b border-indigo-100 pb-1 mb-2">Monday: 7.00 - 7.30 pm</p>
-                    The ${generateInput({ correct: ['latest'] })} news from the world solo balloon attempt. A 30-minute documentary.
-                  </div>
-                  <div class="bg-indigo-50/50 p-4 border border-indigo-100 rounded-lg">
-                    <p class="font-bold text-indigo-900 border-b border-indigo-100 pb-1 mb-2">Tuesday: 8.15 - 9.00 pm</p>
-                    A unique look at the private residences of the celebrities who ${generateInput({ correct: ['make', 'hit'] })} headlines around the world.
-                  </div>
-                  <div class="bg-indigo-50/50 p-4 border border-indigo-100 rounded-lg">
-                    <p class="font-bold text-indigo-900 border-b border-indigo-100 pb-1 mb-2">Wednesday: 10.25 - 11.25 pm</p>
-                    Last year, rock star Izzy Arbuttle was ${generateInput({ correct: ['front-page', 'headline'] })} news. But where is he now?
-                  </div>
-                  <div class="bg-indigo-50/50 p-4 border border-indigo-100 rounded-lg">
-                    <p class="font-bold text-indigo-900 border-b border-indigo-100 pb-1 mb-2">Thursday: 8.00 - 8.45 pm</p>
-                    When news ${generateInput({ correct: ['leaked'] })} out that singer Millie Logan was seeking a divorce, no one believed it.
-                  </div>
-                  <div class="bg-indigo-50/50 p-4 border border-indigo-100 rounded-lg">
-                    <p class="font-bold text-indigo-900 border-b border-indigo-100 pb-1 mb-2">Friday: 9.15 - 9.55 pm</p>
-                    The drug scandal which ${generateInput({ correct: ['hit', 'made'] })} the headlines last year. A major newspaper ${generateInput({ correct: ['ran'] })} a story claiming scientists had not done proper tests.
-                  </div>
-                  <div class="bg-indigo-50/50 p-4 border border-indigo-100 rounded-lg">
-                    <p class="font-bold text-indigo-900 border-b border-indigo-100 pb-1 mb-2">Sunday: 5.30 - 6.30 pm</p>
-                    Next Sunday, European Heads of State will ${generateInput({ correct: ['hold'] })} a news conference to end their summit.
-                  </div>
-                </div>
-              </div>`
-          },
-          {
-            tabLabel: "36.2 Crossword Clues",
-            html: `
-              <div class="exercise-block bg-white border border-gray-100 rounded-xl p-5 shadow-[0_2px_10px_-3px_rgba(6,81,237,0.1)]">
-                <h3 class="font-bold text-lg mb-4 text-gray-800 flex items-center gap-3 border-b pb-3"><span class="bg-indigo-100 text-indigo-800 px-3 py-1 rounded text-sm shadow-sm">36.2</span> Solve the clues (Adapted from the Crossword).</h3>
-                <ol class="list-decimal list-inside space-y-4 pl-2 leading-8 text-gray-700 font-medium">
-                  <li>The parties could not agree and the talks broke ${generateInput({ correct: ['down'] })}.</li>
-                  <li>The Minister outlined ${generateInput({ correct: ['plans'] })} for a new university funding system.</li>
-                  <li>I don't really read the newspaper, I usually just ${generateInput({ correct: ['flick'] })} through it.</li>
-                  <li>The plan got the ${generateInput({ correct: ['go'] })}-ahead yesterday.</li>
-                  <li>There was an interesting ${generateInput({ correct: ['item'] })} of news in the local paper.</li>
-                  <li>We must keep a ${generateInput({ correct: ['close'] })} watch on the dollar-euro exchange rate.</li>
-                  <li>Big news stories do this: ${generateInput({ correct: ['break'] })}</li>
-                </ol>
-              </div>`
-          },
-          {
-            tabLabel: "36.3 Collocations",
-            html: `
-              <div class="exercise-block bg-indigo-50/50 p-6 rounded-xl border border-indigo-200 shadow-sm">
-                <h3 class="font-bold text-lg mb-4 text-indigo-900 border-b border-indigo-200 pb-2"><i class="fa-solid fa-pen-to-square text-indigo-600 mr-2"></i> 36.3 Complete the collocations.</h3>
-                <div class="space-y-4 leading-[3rem] text-gray-700">
-                  <div>1. In an unexpected ${generateInput({ correct: ['turn'] })} of events, the manager has been sacked. We will ${generateInput({ correct: ['keep'] })} you informed as more news ${generateInput({ correct: ['comes'] })} in.</div>
-                  <div>2. Rebel troops ${generateInput({ correct: ['seized'] })} control of the capital last night. Meanwhile, five police officers were ${generateInput({ correct: ['taken'] })} captive.</div>
-                  <div>3. Lightning ${generateInput({ correct: ['struck'] })} a house yesterday which immediately ${generateInput({ correct: ['caught'] })} fire.</div>
-                  <div>4. The government will ${generateInput({ correct: ['hold'] })} talks with all interested parties to try to end the strike.</div>
-                  <div>5. Charles Ankram is to quit the ${generateInput({ correct: ['top'] })} job of personal adviser. He recently ${generateInput({ correct: ['attracted'] })} attention when he objected to a ${generateInput({ correct: ['controversial'] })} decision.</div>
-                  <div>6. The government has ${generateInput({ correct: ['launched'] })} a campaign to clean up the countryside.</div>
-                </div>
-              </div>`
-          }
-        ]
-      },
-      unit37: {
-        title: "Unit 37: Money",
-        theory: [
-          {
-            tabLabel: "Spending",
+            tabLabel: "The Legal System",
             html: `
               <div class="space-y-6">
                 <div class="bg-emerald-50 rounded-lg shadow-sm border border-emerald-200 overflow-hidden">
-                  <h3 class="bg-emerald-600 text-white font-bold p-3 text-lg"><i class="fa-solid fa-money-bill-wave mr-2"></i> Spending money</h3>
-                  <div class="p-4 space-y-3 text-sm text-gray-800">
-                    <ul class="list-disc pl-5 space-y-2">
-                      <li><span class="font-bold text-emerald-700">spend money (on):</span> give money as payment.</li>
-                      <li><span class="font-bold text-emerald-700">save money:</span> keep money for future use.</li>
-                      <li><span class="font-bold text-emerald-700">waste / squander money (on):</span> spend in a bad way (squander = large sums).</li>
-                      <li><span class="font-bold text-emerald-700">change money:</span> exchange one currency for another.</li>
-                      <li><span class="font-bold text-emerald-700">throw money around:</span> spend obviously/carelessly on unnecessary things.</li>
-                      <li><span class="font-bold text-emerald-700">throw money at:</span> spend a lot trying to solve a problem.</li>
-                      <li><span class="font-bold text-emerald-700">donate money (to):</span> give money to help society (charity).</li>
+                  <h3 class="bg-emerald-600 text-white font-bold p-3 text-lg sm:text-base"><i class="fa-solid fa-scale-balanced mr-2"></i> Laws & Regulations</h3>
+                  <div class="p-4 space-y-3 text-sm sm:text-base text-gray-800">
+                    <ul class="list-disc pl-5 space-y-3">
+                      <li><span class="font-bold text-emerald-700">pass a law:</span> when a government officially approves a new law.</li>
+                      <li><span class="font-bold text-emerald-700">introduce regulations:</span> to bring in new official rules.</li>
+                      <li><span class="font-bold text-emerald-700">uphold justice:</span> to maintain and defend the principles of fairness and law.</li>
+                      <li><span class="font-bold text-emerald-700">a fair trial:</span> a legal process in a court that is conducted justly and impartially.</li>
                     </ul>
                   </div>
                 </div>
               </div>`
           },
           {
-            tabLabel: "Prices",
+            tabLabel: "In Court",
             html: `
               <div class="space-y-6">
-                <div class="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
-                  <h3 class="bg-amber-500 text-white font-bold p-3 text-lg"><i class="fa-solid fa-tags mr-2"></i> Prices</h3>
-                  <div class="p-4 space-y-3 text-sm text-gray-800">
-                    <p>Prices can be high or low. If they are very low, they may be called <span class="font-bold text-amber-600">rock-bottom prices</span>.</p>
-                    <p>Prices may increase, <span class="font-bold text-amber-600">prices go up</span> and <span class="font-bold text-amber-600">prices rise</span>. If they go up very fast we say that <span class="font-bold text-amber-600">prices soar</span>. Occasionally <span class="font-bold text-amber-600">prices go down</span>.</p>
-                    <p>If you say that something is <span class="font-bold text-amber-600">reasonably priced</span>, you think it is neither too cheap nor too expensive.</p>
-                    <p>Calling something a <span class="font-bold text-amber-600">ridiculous price</span> may mean it is much too cheap or much too expensive.</p>
-                  </div>
-                </div>
-              </div>`
-          },
-          {
-            tabLabel: "Getting Money",
-            html: `
-              <div class="space-y-6">
-                <div class="bg-blue-50 rounded-lg shadow-sm border border-blue-200 overflow-hidden">
-                  <h3 class="bg-blue-600 text-white font-bold p-3 text-lg"><i class="fa-solid fa-sack-dollar mr-2"></i> Getting money</h3>
-                  <div class="p-4 space-y-3 text-sm text-gray-800">
-                    <ul class="list-disc pl-5 space-y-2">
-                      <li><span class="font-bold text-blue-700">money was tight:</span> there wasn't much money.</li>
-                      <li><span class="font-bold text-blue-700">in short supply:</span> rarely available.</li>
-                      <li><span class="font-bold text-blue-700">steady income / earn a good salary</span></li>
-                      <li><span class="font-bold text-blue-700">make big money:</span> a lot of money.</li>
-                      <li><span class="font-bold text-blue-700">seriously rich:</span> very rich.</li>
-                      <li><span class="font-bold text-blue-700">make a withdrawal:</span> take money out of the bank.</li>
-                      <li><span class="font-bold text-blue-700">raise enough money:</span> gather money.</li>
-                      <li><span class="font-bold text-blue-700">got a really good deal:</span> got a bargain.</li>
-                      <li><span class="font-bold text-blue-700">going cheap:</span> selling for a low price.</li>
-                      <li><span class="font-bold text-blue-700">made a small fortune:</span> made a large amount of money.</li>
-                      <li><span class="font-bold text-blue-700">tied up in:</span> not available for spending because it's invested in a business/property.</li>
+                <div class="bg-amber-50 rounded-lg shadow-sm border border-amber-200 overflow-hidden">
+                  <h3 class="bg-amber-500 text-white font-bold p-3 text-lg sm:text-base"><i class="fa-solid fa-building-columns mr-2"></i> The Courtroom</h3>
+                  <div class="p-4 space-y-3 text-sm sm:text-base text-gray-800">
+                    <ul class="list-disc pl-5 space-y-3">
+                      <li><span class="font-bold text-amber-700">stand trial:</span> to be judged for a crime in a court of law.</li>
+                      <li><span class="font-bold text-amber-700">plead guilty / not guilty:</span> to state formally in court whether you committed the crime or not.</li>
+                      <li><span class="font-bold text-amber-700">give evidence:</span> to provide information in a court to help prove the truth.</li>
+                      <li><span class="font-bold text-amber-700">reach a verdict:</span> (of a jury) to decide if the accused is guilty or not guilty.</li>
                     </ul>
                   </div>
                 </div>
@@ -597,239 +279,55 @@
         ],
         exercises: [
           {
-            tabLabel: "37.1 Who?",
+            tabLabel: "26.1 Fill in Blanks",
             html: `
               <div class="exercise-block bg-white border border-gray-100 rounded-xl p-5 shadow-[0_2px_10px_-3px_rgba(16,185,129,0.1)]">
-                <h3 class="font-bold text-lg mb-4 text-gray-800 flex items-center gap-3 border-b pb-3"><span class="bg-emerald-100 text-emerald-800 px-3 py-1 rounded text-sm shadow-sm">37.1</span> Read the remarks and answer the questions.</h3>
-                <div class="bg-gray-50 p-4 rounded-lg border border-gray-200 mb-6 space-y-2 text-sm text-gray-700 font-medium">
-                  <p><span class="text-emerald-600 font-bold">Lauren:</span> I sent 100 euros to the Children's Fund.</p>
-                  <p><span class="text-emerald-600 font-bold">Anthony:</span> I went into the bank with 1,000 euros and came out with the equivalent in Australian dollars.</p>
-                  <p><span class="text-emerald-600 font-bold">Patrick:</span> I won 100,000 dollars on the lottery and bought stupid, useless things. I have almost nothing left now.</p>
-                  <p><span class="text-emerald-600 font-bold">Emilia:</span> The garden was in a terrible mess. I paid a gardener a lot of money to sort it out but he didn't make it better.</p>
-                  <p><span class="text-emerald-600 font-bold">Hannah:</span> I put 5,000 euros in an account which gives 4% interest.</p>
-                </div>
-                <ol class="list-decimal list-inside space-y-4 pl-2 leading-8 text-gray-700">
-                  <li>Who threw money at something? <i class="fa-solid fa-arrow-right text-gray-300 mx-2"></i> ${generateSelect({ options: ['Lauren', 'Anthony', 'Patrick', 'Emilia', 'Hannah'], correct: 'Emilia' })}</li>
-                  <li>Who saved money? <i class="fa-solid fa-arrow-right text-gray-300 mx-2"></i> ${generateSelect({ options: ['Lauren', 'Anthony', 'Patrick', 'Emilia', 'Hannah'], correct: 'Hannah' })}</li>
-                  <li>Who donated money? <i class="fa-solid fa-arrow-right text-gray-300 mx-2"></i> ${generateSelect({ options: ['Lauren', 'Anthony', 'Patrick', 'Emilia', 'Hannah'], correct: 'Lauren' })}</li>
-                  <li>Who squandered money? <i class="fa-solid fa-arrow-right text-gray-300 mx-2"></i> ${generateSelect({ options: ['Lauren', 'Anthony', 'Patrick', 'Emilia', 'Hannah'], correct: 'Patrick' })}</li>
-                  <li>Who changed money? <i class="fa-solid fa-arrow-right text-gray-300 mx-2"></i> ${generateSelect({ options: ['Lauren', 'Anthony', 'Patrick', 'Emilia', 'Hannah'], correct: 'Anthony' })}</li>
-                </ol>
-              </div>`
-          },
-          {
-            tabLabel: "37.2 Prices",
-            html: `
-              <div class="exercise-block bg-white border border-gray-100 rounded-xl p-5 shadow-[0_2px_10px_-3px_rgba(16,185,129,0.1)]">
-                <h3 class="font-bold text-lg mb-4 text-gray-800 flex items-center gap-3 border-b pb-3"><span class="bg-emerald-100 text-emerald-800 px-3 py-1 rounded text-sm shadow-sm">37.2</span> Complete these sentences using collocations.</h3>
-                <ol class="list-decimal list-inside space-y-6 pl-2 leading-8 text-gray-700">
-                  <li>In January, the price of gold was 35,000 dollars a kilo. In July it was 44,000 dollars. In just six months the price had ${generateInput({ correct: ['soared', 'gone up', 'risen'] })}.</li>
-                  <li>An airline is offering a return flight from London to New York for just 50 dollars. At first sight this seems like a ${generateInput({ correct: ['ridiculous price'] })} as many people pay 1,000 dollars.</li>
-                  <li>Given that most first-class hotels were charging 350 dollars a night, at 275 dollars our four-star hotel seemed ${generateInput({ correct: ['reasonably priced'] })}.</li>
-                  <li>Tablet computers are now selling at ${generateInput({ correct: ['rock-bottom'] })} prices because there's so much competition.</li>
-                  <li>Car prices ${generateInput({ correct: ['went'] })} down last year, but they will probably ${generateInput({ correct: ['go up', 'rise'] })} again before the end of the year.</li>
-                </ol>
-              </div>`
-          },
-          {
-            tabLabel: "37.3 Choose",
-            html: `
-              <div class="exercise-block bg-emerald-50/50 p-6 rounded-xl border border-emerald-200 shadow-sm">
-                <h3 class="font-bold text-lg mb-4 text-emerald-900 border-b border-emerald-200 pb-2"><i class="fa-solid fa-pen-to-square text-emerald-600 mr-2"></i> 37.3 Choose the correct collocation.</h3>
-                <div class="space-y-4 text-gray-700 leading-8">
-                  <p>1. <span class="font-bold text-emerald-800">Customer:</span> I'd like to ${generateSelect({ options: ['take', 'get', 'make'], correct: 'make' })} a withdrawal from my account, please.</p>
-                  <p>2. <span class="font-bold text-emerald-800">Bank Manager:</span> Is your company ${generateSelect({ options: ['getting', 'making', 'taking'], correct: 'making' })} money? <br>
-                  <span class="font-bold text-emerald-800">Business customer:</span> Yes. We are in profit. So I have a ${generateSelect({ options: ['firm', 'steady', 'strong'], correct: 'steady' })} income.</p>
-                  <p>3. <span class="font-bold text-emerald-800">Teenage son:</span> Dad, will you lend me some money to buy a car? <br>
-                  <span class="font-bold text-emerald-800">Father:</span> Well, money is rather ${generateSelect({ options: ['slim', 'hard', 'tight'], correct: 'tight' })} at the moment. Ask your mother.</p>
-                  <p>4. <span class="font-bold text-emerald-800">Jake:</span> These cameras aren't as expensive as I thought. <br>
-                  <span class="font-bold text-emerald-800">Fran:</span> They're ${generateSelect({ options: ['going', 'asking', 'giving'], correct: 'going' })} cheap right now because a new model has just come out. The new ones are in such ${generateSelect({ options: ['low', 'short', 'little'], correct: 'short' })} supply.</p>
-                  <p>5. <span class="font-bold text-emerald-800">George:</span> We need to ${generateSelect({ options: ['bring up', 'rise', 'raise'], correct: 'raise' })} money for the new gym. Any ideas?</p>
-                  <p>6. <span class="font-bold text-emerald-800">Mick:</span> You must have made a ${generateSelect({ options: ['slight', 'slim', 'small'], correct: 'small' })} fortune when you sold your house. <br>
-                  <span class="font-bold text-emerald-800">Kathy:</span> Yes, I did, but the money is all ${generateSelect({ options: ['closed up', 'tied up', 'packed up'], correct: 'tied up' })} in the new one.</p>
-                  <p>7. <span class="font-bold text-emerald-800">Oscar:</span> I guess Zara is making ${generateSelect({ options: ['big', 'large', 'huge'], correct: 'big' })} money with her Internet business. <br>
-                  <span class="font-bold text-emerald-800">Erica:</span> Oh yes, she's ${generateSelect({ options: ['absolutely', 'utterly', 'seriously'], correct: 'seriously' })} rich now.</p>
-                </div>
-              </div>`
-          }
-        ]
-      },
-      unit38: {
-        title: "Unit 38: War and peace",
-        theory: [
-          {
-            tabLabel: "War",
-            html: `
-              <div class="space-y-6">
-                <div class="bg-red-50 rounded-lg shadow-sm border border-red-200 overflow-hidden">
-                  <h3 class="bg-red-600 text-white font-bold p-3 text-lg"><i class="fa-solid fa-jet-fighter mr-2"></i> War</h3>
-                  <div class="p-4 space-y-3 text-sm text-gray-800">
-                    <ul class="list-disc pl-5 space-y-2">
-                      <li><span class="font-bold text-red-700">war broke out:</span> suddenly started.</li>
-                      <li><span class="font-bold text-red-700">joined the army / declared war / go to war</span></li>
-                      <li><span class="font-bold text-red-700">sending troops</span></li>
-                      <li><span class="font-bold text-red-700">fierce fighting / minor incidents</span></li>
-                      <li><span class="font-bold text-red-700">all-out war:</span> complete/total war.</li>
-                      <li><span class="font-bold text-red-700">came within firing range:</span> distance within which the enemy could hit him.</li>
-                      <li><span class="font-bold text-red-700">opened fire:</span> started shooting.</li>
-                      <li><span class="font-bold text-red-700">taken prisoner / went into action</span></li>
-                      <li><span class="font-bold text-red-700">decisive battle / battle raged:</span> the battle was very violent.</li>
-                      <li><span class="font-bold text-red-700">peacekeeping forces</span></li>
-                      <li><span class="font-bold text-red-700">horrors of war / avert war:</span> prevent war.</li>
-                    </ul>
-                  </div>
-                </div>
-              </div>`
-          },
-          {
-            tabLabel: "Peace",
-            html: `
-              <div class="space-y-6">
-                <div class="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
-                  <h3 class="bg-emerald-500 text-white font-bold p-3 text-lg"><i class="fa-solid fa-dove mr-2"></i> Peace</h3>
-                  <div class="p-4 space-y-3 text-sm text-gray-800">
-                    <ul class="list-disc pl-5 space-y-2">
-                      <li><span class="font-bold text-emerald-700">bring about peace:</span> It will be no easy task to bring about peace in the area.</li>
-                      <li><span class="font-bold text-emerald-700">negotiate a peace agreement:</span> invite a neutral country to help.</li>
-                      <li><span class="font-bold text-emerald-700">call a truce / ceasefire:</span> stop fighting temporarily.</li>
-                      <li><span class="font-bold text-emerald-700">sign a (peace) treaty:</span> at the end of the war.</li>
-                      <li><span class="font-bold text-emerald-700">lasting peace:</span> a peace that continues for a long time.</li>
-                      <li><span class="font-bold text-emerald-700">peace activist:</span> person actively promoting peace.</li>
-                      <li><span class="font-bold text-emerald-700">keep the peace:</span> UN troops were sent in.</li>
-                      <li><span class="font-bold text-emerald-700">restore order:</span> Soldiers were sent in to restore order after the uprising.</li>
-                    </ul>
-                  </div>
-                </div>
-              </div>`
-          },
-          {
-            tabLabel: "Metaphors",
-            html: `
-              <div class="space-y-6">
-                <div class="bg-blue-50 rounded-lg shadow-sm border border-blue-200 overflow-hidden">
-                  <h3 class="bg-blue-600 text-white font-bold p-3 text-lg"><i class="fa-solid fa-comment-dots mr-2"></i> Everyday War Metaphors</h3>
-                  <div class="p-4 space-y-3 text-sm text-gray-800">
-                    <ul class="list-disc pl-5 space-y-2">
-                      <li>The police fought a <span class="font-bold text-blue-700">running battle</span> with hooligans.</li>
-                      <li>The people of the village <span class="font-bold text-blue-700">put up a heroic fight</span> against the motorway, but finally <span class="font-bold text-blue-700">lost the battle</span>.</li>
-                      <li>The bank robbers didn't <span class="font-bold text-blue-700">offer any resistance</span>.</li>
-                      <li>The President is <span class="font-bold text-blue-700">fighting for his life</span> tonight after a major operation.</li>
-                    </ul>
-                  </div>
-                </div>
-              </div>`
-          }
-        ],
-        exercises: [
-          {
-            tabLabel: "38.1 Broadcasts",
-            html: `
-              <div class="exercise-block bg-white border border-gray-100 rounded-xl p-5 shadow-[0_2px_10px_-3px_rgba(239,68,68,0.1)]">
-                <h3 class="font-bold text-lg mb-4 text-gray-800 flex items-center gap-3 border-b pb-3"><span class="bg-red-100 text-red-800 px-3 py-1 rounded text-sm shadow-sm">38.1</span> Use a word from the box to complete the extracts.</h3>
-                <p class="text-sm text-gray-500 mb-4 font-medium">Use: <span class="bg-gray-100 px-2 py-0.5 rounded font-mono">join</span>, <span class="bg-gray-100 px-2 py-0.5 rounded font-mono">horrors</span>, <span class="bg-gray-100 px-2 py-0.5 rounded font-mono">avert</span>, <span class="bg-gray-100 px-2 py-0.5 rounded font-mono">go</span>, <span class="bg-gray-100 px-2 py-0.5 rounded font-mono">fight</span>, <span class="bg-gray-100 px-2 py-0.5 rounded font-mono">open</span>, <span class="bg-gray-100 px-2 py-0.5 rounded font-mono">rage</span></p>
-                <div class="space-y-4 leading-[3rem] text-gray-700">
-                  <p>1. The president said he is ready to ${generateInput({ correct: ['go'] })} to war against the enemy. He said he had done everything possible to ${generateInput({ correct: ['avert'] })} war, but now there was no alternative.</p>
-                  <p>2. A two-hour battle ${generateInput({ correct: ['raged'] })} in the northern district today after troops ${generateInput({ correct: ['opened'] })} fire on rebel positions.</p>
-                  <p>3. The army will continue to ${generateInput({ correct: ['fight'] })} the war against the drug barons.</p>
-                  <p>4. The president said that young persons who ${generateInput({ correct: ['join'] })} the army must expect to fight to defend their country. They would experience the ${generateInput({ correct: ['horrors'] })} of war, but they must be brave.</p>
-                </div>
-              </div>`
-          },
-          {
-            tabLabel: "38.2 Rewrite",
-            html: `
-              <div class="exercise-block bg-red-50/50 p-6 rounded-xl border border-red-200 shadow-sm">
-                <h3 class="font-bold text-lg mb-4 text-red-900 border-b border-red-200 pb-2"><i class="fa-solid fa-pen-to-square text-red-600 mr-2"></i> 38.2 Rewrite replacing the brackets with collocations.</h3>
-                <ol class="list-decimal list-inside space-y-6 pl-2 leading-8 text-gray-700">
-                  <li>The war (started) ${generateInput({ correct: ['broke out'] })} in 1983. At first there were just (small events) ${generateInput({ correct: ['minor incidents'] })} but it soon turned into (a full-scale war) ${generateInput({ correct: ['all-out war'] })}. The war ended after (a battle which decided events) ${generateInput({ correct: ['a decisive battle'] })} in 1987.</li>
-                  <li>There was (very violent fighting) ${generateInput({ correct: ['fierce fighting'] })} yesterday. (forces who maintain peace) ${generateInput({ correct: ['Peacekeeping forces'] })} are expected to enter as soon as (armies say they will stop firing) ${generateInput({ correct: ['a ceasefire is called', 'a truce is called', 'they call a ceasefire'] })}.</li>
-                  <li>Forces sent in to (make the peace continue) ${generateInput({ correct: ['keep the peace'] })} had to retreat after they came (within firing distance) ${generateInput({ correct: ['within firing range'] })}.</li>
-                  <li>The military forces today (officially stated that they were at war) ${generateInput({ correct: ['declared war'] })}.</li>
-                  <li>Armed troops were sent in to (bring order again) ${generateInput({ correct: ['restore order'] })} after the riots.</li>
-                  <li>Even though the two sides (put their names to a document ending the war) ${generateInput({ correct: ['signed a peace treaty'] })}, fighting has started again and hopes for (a peace which might continue long) ${generateInput({ correct: ['a lasting peace'] })} are fading.</li>
-                  <li>As more soldiers were (captured and put in prison) ${generateInput({ correct: ['taken prisoner'] })}, (people actively promoting peace) ${generateInput({ correct: ['peace activists'] })} organised demonstrations.</li>
-                  <li>Representatives are meeting to (make peace) ${generateInput({ correct: ['bring about peace'] })}. It is hoped that they will (have negotiations) ${generateInput({ correct: ['negotiate a peace agreement'] })}.</li>
-                </ol>
-              </div>`
-          },
-          {
-            tabLabel: "38.3 Correct Errors",
-            html: `
-              <div class="exercise-block bg-white border border-gray-100 rounded-xl p-5 shadow-[0_2px_10px_-3px_rgba(239,68,68,0.1)]">
-                <h3 class="font-bold text-lg mb-4 text-gray-800 flex items-center gap-3 border-b pb-3"><span class="bg-red-100 text-red-800 px-3 py-1 rounded text-sm shadow-sm">38.3</span> Correct the collocation errors in these everyday sentences.</h3>
-                <ol class="list-decimal list-inside space-y-4 pl-2 leading-8 text-gray-700">
-                  <li>The police fought a <span class="underline decoration-wavy text-red-400">walking</span> ${generateInput({ correct: ['running'] })} battle with a group of violent demonstrators.</li>
-                  <li>I feel we are <span class="underline decoration-wavy text-red-400">missing</span> ${generateInput({ correct: ['losing'] })} the battle to persuade the management to increase our salaries.</li>
-                  <li>The students <span class="underline decoration-wavy text-red-400">made up</span> ${generateInput({ correct: ['put up'] })} a heroic fight against the plan to increase course fees.</li>
-                  <li>I was surprised that the Management Committee <span class="underline decoration-wavy text-red-400">sent</span> ${generateInput({ correct: ['offered'] })} no resistance to our demands.</li>
-                  <li>A tiny baby with a rare heart condition is fighting <span class="underline decoration-wavy text-red-400">her</span> ${generateInput({ correct: ['for her'] })} life in the General Hospital tonight.</li>
+                <h3 class="font-bold text-lg mb-4 text-gray-800 flex items-center gap-3 border-b pb-3"><span class="bg-emerald-100 text-emerald-800 px-3 py-1 rounded text-sm shadow-sm">26.1</span> Complete the sentences.</h3>
+                <ol class="list-decimal list-inside space-y-4 pl-2 leading-8 text-gray-700 text-sm sm:text-base">
+                  <li>The parliament voted to ${generateInput({ correct: ['pass'] })} a new law banning smoking in public parks.</li>
+                  <li>He is scheduled to ${generateInput({ correct: ['stand'] })} trial next month for corporate fraud.</li>
+                  <li>At the beginning of the trial, the defendant decided to ${generateInput({ correct: ['plead'] })} not guilty.</li>
+                  <li>Several witnesses were called to the stand to ${generateInput({ correct: ['give'] })} evidence.</li>
+                  <li>After three days of deliberation, the jury finally managed to ${generateInput({ correct: ['reach'] })} a verdict.</li>
+                  <li>The judge's primary duty is to ${generateInput({ correct: ['uphold'] })} justice and ensure a fair trial for everyone.</li>
                 </ol>
               </div>`
           }
         ]
       },
-      unit39: {
-        title: "Unit 39: Global problems",
+      unit27: {
+        title: "Unit 27: Politics & Society",
         theory: [
           {
-            tabLabel: "Environment",
+            tabLabel: "Elections",
             html: `
               <div class="space-y-6">
-                <div class="bg-emerald-50 rounded-lg shadow-sm border border-emerald-200 overflow-hidden">
-                  <h3 class="bg-emerald-600 text-white font-bold p-3 text-lg"><i class="fa-solid fa-leaf mr-2"></i> The environment</h3>
-                  <div class="p-4 space-y-3 text-sm text-gray-800">
-                    <ul class="list-disc pl-5 space-y-2">
-                      <li><span class="font-bold text-emerald-700">climate change / rising sea levels / greenhouse gases</span></li>
-                      <li><span class="font-bold text-emerald-700">disturbing the ecological balance</span></li>
-                      <li><span class="font-bold text-emerald-700">decrease in fish stocks</span></li>
-                      <li><span class="font-bold text-emerald-700">depleted the ozone layer:</span> reduced it in size or amount.</li>
-                      <li><span class="font-bold text-emerald-700">embracing green politics / short-term measures</span></li>
-                      <li><span class="font-bold text-emerald-700">tackle pollution / exhaust fumes / fossil fuels</span> (gas, coal, oil)</li>
-                      <li><span class="font-bold text-emerald-700">irreparable damage:</span> cannot be repaired (also irreversible).</li>
-                      <li><span class="font-bold text-emerald-700">crops fail / devastating famines / devastating floods</span></li>
-                      <li><span class="font-bold text-emerald-700">natural disasters</span></li>
+                <div class="bg-purple-50 rounded-lg shadow-sm border border-purple-200 overflow-hidden">
+                  <h3 class="bg-purple-600 text-white font-bold p-3 text-lg sm:text-base"><i class="fa-solid fa-check-to-slot mr-2"></i> Elections & Voting</h3>
+                  <div class="p-4 space-y-3 text-sm sm:text-base text-gray-800">
+                    <ul class="list-disc pl-5 space-y-3">
+                      <li><span class="font-bold text-purple-700">call an election:</span> to announce that an election will happen.</li>
+                      <li><span class="font-bold text-purple-700">run for office:</span> to campaign to be elected to a political position.</li>
+                      <li><span class="font-bold text-purple-700">cast a vote:</span> to vote in an election.</li>
+                      <li><span class="font-bold text-purple-700">win by a landslide:</span> to win an election with a very large majority of votes.</li>
+                      <li><span class="font-bold text-purple-700">form a government:</span> (of the winning party) to create the governing administration.</li>
                     </ul>
                   </div>
                 </div>
               </div>`
           },
           {
-            tabLabel: "Poverty",
+            tabLabel: "Public Issues",
             html: `
               <div class="space-y-6">
-                <div class="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
-                  <h3 class="bg-amber-500 text-white font-bold p-3 text-lg"><i class="fa-solid fa-bowl-rice mr-2"></i> Poverty</h3>
-                  <div class="p-4 space-y-3 text-sm text-gray-800">
-                    <ul class="list-disc pl-5 space-y-2">
-                      <li><span class="font-bold text-amber-700">escaping poverty / living below the poverty line</span></li>
-                      <li><span class="font-bold text-amber-700">lift them out of poverty</span></li>
-                      <li><span class="font-bold text-amber-700">widening gulf:</span> an important/growing difference between rich and poor.</li>
-                      <li><span class="font-bold text-amber-700">external forces</span> beyond their control.</li>
-                      <li><span class="font-bold text-amber-700">deprived regions / margins of society</span></li>
-                      <li><span class="font-bold text-amber-700">sleeping rough:</span> in the open, without shelter.</li>
-                      <li><span class="font-bold text-amber-700">street children / in desperate need</span></li>
-                      <li><span class="font-bold text-amber-700">breed crime:</span> cause crime to happen.</li>
-                      <li><span class="font-bold text-amber-700">global economy / golden opportunity</span></li>
-                      <li><span class="font-bold text-amber-700">combat poverty / eradicate poverty / alleviate poverty</span> (make less serious)</li>
-                    </ul>
-                  </div>
-                </div>
-              </div>`
-          },
-          {
-            tabLabel: "Other Problems",
-            html: `
-              <div class="space-y-6">
-                <div class="bg-indigo-50 rounded-lg shadow-sm border border-indigo-200 overflow-hidden">
-                  <h3 class="bg-indigo-600 text-white font-bold p-3 text-lg"><i class="fa-solid fa-globe mr-2"></i> Other global problems</h3>
-                  <div class="p-4 space-y-3 text-sm text-gray-800">
-                    <ul class="list-disc pl-5 space-y-2">
-                      <li><span class="font-bold text-indigo-700">seek political asylum:</span> looking for safety in another country.</li>
-                      <li><span class="font-bold text-indigo-700">asylum seekers / economic migrants</span></li>
-                      <li><span class="font-bold text-indigo-700">took to the streets:</span> to demonstrate.</li>
-                      <li><span class="font-bold text-indigo-700">debt repayments</span></li>
-                      <li><span class="font-bold text-indigo-700">earthquake hit / death toll was massive</span></li>
-                      <li><span class="font-bold text-indigo-700">sexual exploitation / child labour</span></li>
+                <div class="bg-cyan-50 rounded-lg shadow-sm border border-cyan-200 overflow-hidden">
+                  <h3 class="bg-cyan-600 text-white font-bold p-3 text-lg sm:text-base"><i class="fa-solid fa-users-viewfinder mr-2"></i> Society & Public Life</h3>
+                  <div class="p-4 space-y-3 text-sm sm:text-base text-gray-800">
+                    <ul class="list-disc pl-5 space-y-3">
+                      <li><span class="font-bold text-cyan-700">public opinion:</span> the collective views of the general public.</li>
+                      <li><span class="font-bold text-cyan-700">tackle a problem:</span> to make a determined effort to deal with a difficult issue.</li>
+                      <li><span class="font-bold text-cyan-700">spark debate:</span> to cause a lively discussion or argument to start.</li>
+                      <li><span class="font-bold text-cyan-700">a major breakthrough:</span> a significant and sudden advance or development.</li>
                     </ul>
                   </div>
                 </div>
@@ -838,50 +336,29 @@
         ],
         exercises: [
           {
-            tabLabel: "39.1 Collocations",
+            tabLabel: "27.1 Match the Halves",
             html: `
-              <div class="exercise-block bg-white border border-gray-100 rounded-xl p-5 shadow-[0_2px_10px_-3px_rgba(16,185,129,0.1)]">
-                <h3 class="font-bold text-lg mb-4 text-gray-800 flex items-center gap-3 border-b pb-3"><span class="bg-emerald-100 text-emerald-800 px-3 py-1 rounded text-sm shadow-sm">39.1</span> Complete the collocations.</h3>
-                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 leading-8 text-gray-700 font-medium">
-                  <div>1. a rise in the number of asylum ${generateInput({ correct: ['seekers'] })}</div>
-                  <div>2. to deplete the ozone ${generateInput({ correct: ['layer'] })}</div>
-                  <div>3. bad social conditions ${generateInput({ correct: ['breed'] })} crime</div>
-                  <div>4. increasing amounts of greenhouse ${generateInput({ correct: ['gases'] })}</div>
-                  <div>5. a golden ${generateInput({ correct: ['opportunity'] })} to combat poverty</div>
-                  <div>6. people who ${generateInput({ correct: ['sleep'] })} rough</div>
-                  <div>7. a massive ${generateInput({ correct: ['death'] })} toll</div>
-                  <div>8. to be in desperate ${generateInput({ correct: ['need'] })}</div>
-                  <div>9. to ${generateInput({ correct: ['lift'] })} people out of poverty</div>
-                  <div>10. below the poverty ${generateInput({ correct: ['line'] })}</div>
-                </div>
+              <div class="exercise-block bg-purple-50/50 p-4 sm:p-6 rounded-xl border border-purple-200 shadow-sm">
+                <h3 class="font-bold text-lg mb-4 text-purple-900 border-b border-purple-200 pb-2"><i class="fa-solid fa-link text-purple-600 mr-2"></i> 27.1 Match the sentence halves</h3>
+                <ol class="list-decimal list-inside space-y-4 pl-2 leading-8 text-gray-700 font-medium text-sm sm:text-base">
+                  <li>The Prime Minister has decided to... <br> ${generateSelect({ options: ['win the election by a landslide.', 'call an election for early November.', 'spark a fierce debate in parliament.', 'cast their vote at the local hall.'], correct: 'call an election for early November.' })}</li>
+                  <li>The new tax proposals are sure to... <br> ${generateSelect({ options: ['win the election by a landslide.', 'call an election for early November.', 'spark a fierce debate in parliament.', 'cast their vote at the local hall.'], correct: 'spark a fierce debate in parliament.' })}</li>
+                  <li>The opposition party managed to... <br> ${generateSelect({ options: ['win the election by a landslide.', 'call an election for early November.', 'spark a fierce debate in parliament.', 'cast their vote at the local hall.'], correct: 'win the election by a landslide.' })}</li>
+                  <li>Citizens are encouraged to go and... <br> ${generateSelect({ options: ['win the election by a landslide.', 'call an election for early November.', 'spark a fierce debate in parliament.', 'cast their vote at the local hall.'], correct: 'cast their vote at the local hall.' })}</li>
+                </ol>
               </div>`
           },
           {
-            tabLabel: "39.2 Match",
+            tabLabel: "27.2 Verbs",
             html: `
-              <div class="exercise-block bg-emerald-50/50 p-6 rounded-xl border border-emerald-200 shadow-sm">
-                <h3 class="font-bold text-lg mb-4 text-emerald-900 border-b border-emerald-200 pb-2"><i class="fa-solid fa-link text-emerald-600 mr-2"></i> 39.2 Match sentences 1-5 with a-e.</h3>
-                <div class="grid grid-cols-1 gap-6 text-gray-700 leading-8">
-                  <div>1. There was a big protest against child labour. <br> <i class="fa-solid fa-arrow-right text-emerald-400 mx-2"></i> ${generateSelect({ options: ['a) There is some evidence to suggest that fish stocks are beginning to rise...', 'b) People wanting to come to this country to escape poverty should be welcomed.', 'c) Large numbers of people took to the streets yesterday to demonstrate...', 'd) A worldwide study of young people who sleep rough has raised universal alarm.', 'e) Figures published today indicate that the divide between the rich and the poor is getting bigger.'], correct: 'c) Large numbers of people took to the streets yesterday to demonstrate...' })}</div>
-                  <div>2. There is new evidence of a widening gulf between the wealthy and more deprived sectors of society. <br> <i class="fa-solid fa-arrow-right text-emerald-400 mx-2"></i> ${generateSelect({ options: ['a) There is some evidence to suggest that fish stocks are beginning to rise...', 'b) People wanting to come to this country to escape poverty should be welcomed.', 'c) Large numbers of people took to the streets yesterday to demonstrate...', 'd) A worldwide study of young people who sleep rough has raised universal alarm.', 'e) Figures published today indicate that the divide between the rich and the poor is getting bigger.'], correct: 'e) Figures published today indicate that the divide between the rich and the poor is getting bigger.' })}</div>
-                  <div>3. There has been some small success in tackling marine pollution. <br> <i class="fa-solid fa-arrow-right text-emerald-400 mx-2"></i> ${generateSelect({ options: ['a) There is some evidence to suggest that fish stocks are beginning to rise...', 'b) People wanting to come to this country to escape poverty should be welcomed.', 'c) Large numbers of people took to the streets yesterday to demonstrate...', 'd) A worldwide study of young people who sleep rough has raised universal alarm.', 'e) Figures published today indicate that the divide between the rich and the poor is getting bigger.'], correct: 'a) There is some evidence to suggest that fish stocks are beginning to rise...' })}</div>
-                  <div>4. The problem of street children in big cities has become a global crisis. <br> <i class="fa-solid fa-arrow-right text-emerald-400 mx-2"></i> ${generateSelect({ options: ['a) There is some evidence to suggest that fish stocks are beginning to rise...', 'b) People wanting to come to this country to escape poverty should be welcomed.', 'c) Large numbers of people took to the streets yesterday to demonstrate...', 'd) A worldwide study of young people who sleep rough has raised universal alarm.', 'e) Figures published today indicate that the divide between the rich and the poor is getting bigger.'], correct: 'd) A worldwide study of young people who sleep rough has raised universal alarm.' })}</div>
-                  <div>5. A spokesperson for one of the biggest charities said access for economic migrants should be made easier. <br> <i class="fa-solid fa-arrow-right text-emerald-400 mx-2"></i> ${generateSelect({ options: ['a) There is some evidence to suggest that fish stocks are beginning to rise...', 'b) People wanting to come to this country to escape poverty should be welcomed.', 'c) Large numbers of people took to the streets yesterday to demonstrate...', 'd) A worldwide study of young people who sleep rough has raised universal alarm.', 'e) Figures published today indicate that the divide between the rich and the poor is getting bigger.'], correct: 'b) People wanting to come to this country to escape poverty should be welcomed.' })}</div>
-                </div>
-              </div>`
-          },
-          {
-            tabLabel: "39.3 Fill in the Gaps",
-            html: `
-              <div class="exercise-block bg-white border border-gray-100 rounded-xl p-5 shadow-[0_2px_10px_-3px_rgba(16,185,129,0.1)]">
-                <h3 class="font-bold text-lg mb-4 text-gray-800 flex items-center gap-3 border-b pb-3"><span class="bg-emerald-100 text-emerald-800 px-3 py-1 rounded text-sm shadow-sm">39.3</span> Fill in the gaps in this announcement.</h3>
-                <div class="leading-loose bg-gray-50 p-5 rounded-lg border border-gray-200 text-gray-700">
-                  Environment Concern is a new magazine for people interested in (1) ${generateInput({ correct: ['green'] })} politics. 
-                  The first issue includes an article on what happened to local crops when the earthquake (2) ${generateInput({ correct: ['hit', 'struck'] })} Santa Graziela last year. 
-                  Another feature looks at the problems which (3) ${generateInput({ correct: ['debt'] })} repayments are causing for (4) ${generateInput({ correct: ['developing', 'third-world'] })} countries and how this affects people who live on the (5) ${generateInput({ correct: ['margins'] })} of society there. 
-                  We appreciate that there is no simple (6) ${generateInput({ correct: ['solution'] })} to the problem of poverty in today's world but we have asked four experts what they would do to (7) ${generateInput({ correct: ['eradicate', 'combat', 'alleviate'] })} poverty. 
-                  Their answers make stimulating reading.
-                </div>
+              <div class="exercise-block bg-white border border-gray-100 rounded-xl p-5 shadow-[0_2px_10px_-3px_rgba(168,85,247,0.1)]">
+                <h3 class="font-bold text-lg mb-4 text-gray-800 flex items-center gap-3 border-b pb-3"><span class="bg-purple-100 text-purple-800 px-3 py-1 rounded text-sm shadow-sm">27.2</span> Fill in the correct verbs.</h3>
+                <ol class="list-decimal list-inside space-y-4 pl-2 leading-8 text-gray-700 text-sm sm:text-base">
+                  <li>The new mayor promised to firmly ${generateInput({ correct: ['tackle'] })} the problem of homelessness in the city centre.</li>
+                  <li>After stepping down from his business role, he decided to ${generateInput({ correct: ['run'] })} for office as a local councilor.</li>
+                  <li>The researchers announced a major ${generateInput({ correct: ['breakthrough'] })} in renewable energy technology today.</li>
+                  <li>The government's new policies strongly reflect current public ${generateInput({ correct: ['opinion'] })}.</li>
+                </ol>
               </div>`
           }
         ]
@@ -890,14 +367,14 @@
 
     // --- HTML GENERATORS ---
     
-    function generateInput({ correct, placeholder = "type here", widthClass = "w-32 sm:w-40" }) {
+    function generateInput({ correct, placeholder = "type here", widthClass = "w-28 sm:w-36 md:w-48" }) {
       const correctStr = JSON.stringify(correct).replace(/"/g, '&quot;').replace(/'/g, '&#39;');
       const firstAnswer = correct[0].replace(/'/g, '&#39;');
       return `
         <div class="inline-block relative m-1 exercise-component align-middle ${widthClass === 'w-full' ? 'w-full block mx-0 mt-2' : ''}">
-          <input type="text" class="exercise-input border-b-2 outline-none px-2 py-1 transition-all duration-200 text-center font-bold text-indigo-900 border-gray-300 focus:border-indigo-500 focus:bg-indigo-50 bg-transparent rounded-t-sm ${widthClass}" data-correct="${correctStr}" placeholder="${placeholder}" />
-          <span class="feedback-icon absolute right-2 top-1 text-lg drop-shadow-sm"></span>
-          <div class="answer-tooltip absolute top-full left-1/2 -translate-x-1/2 mt-2 px-3 py-1.5 rounded whitespace-nowrap z-30 hidden transition-opacity duration-200">${firstAnswer}</div>
+          <input type="text" class="exercise-input border-b-2 outline-none px-2 py-1 transition-all duration-200 text-center font-bold text-indigo-900 border-gray-300 focus:border-indigo-500 focus:bg-indigo-50 bg-transparent rounded-t-sm ${widthClass}" data-correct="${correctStr}" placeholder="${placeholder}" autocomplete="off" autocorrect="off" spellcheck="false" />
+          <span class="feedback-icon absolute ${widthClass === 'w-full' ? 'right-2' : '-right-2 sm:-right-6'} top-1 text-lg drop-shadow-sm flex items-center justify-center pointer-events-none"></span>
+          <div class="answer-tooltip absolute top-full left-1/2 -translate-x-1/2 mt-2 px-3 py-1.5 rounded z-30 hidden transition-opacity duration-200 text-xs w-max max-w-[200px] sm:max-w-none whitespace-normal sm:whitespace-nowrap text-center break-words">${firstAnswer}</div>
         </div>
       `;
     }
@@ -906,32 +383,33 @@
       const optionsHtml = options.map(opt => `<option value="${opt}">${opt}</option>`).join('');
       return `
         <div class="inline-block relative m-1 exercise-component align-middle w-full sm:w-auto">
-          <select class="exercise-select border-b-2 outline-none px-2 py-1 appearance-none bg-transparent font-bold text-indigo-900 text-center pr-6 cursor-pointer transition-all duration-200 border-gray-300 focus:border-indigo-500 focus:bg-indigo-50 rounded-t-sm max-w-full" data-correct="${correct}">
+          <select class="exercise-select border-b-2 outline-none px-2 py-1 appearance-none bg-transparent font-bold text-indigo-900 text-center pr-6 cursor-pointer transition-all duration-200 border-gray-300 focus:border-indigo-500 focus:bg-indigo-50 rounded-t-sm max-w-[200px] sm:max-w-[300px] text-ellipsis" data-correct="${correct}">
             <option value="" disabled selected>select...</option>
             ${optionsHtml}
           </select>
-          <span class="feedback-icon absolute -right-2 top-1 text-lg drop-shadow-sm"></span>
-          <div class="answer-tooltip absolute top-full left-1/2 -translate-x-1/2 mt-2 px-3 py-1.5 rounded whitespace-nowrap z-30 hidden transition-opacity duration-200">${correct}</div>
+          <span class="feedback-icon absolute -right-2 top-1 text-lg drop-shadow-sm flex items-center justify-center pointer-events-none"></span>
+          <div class="answer-tooltip absolute top-full left-1/2 -translate-x-1/2 mt-2 px-3 py-1.5 rounded z-30 hidden transition-opacity duration-200 text-xs w-max max-w-[200px] sm:max-w-none whitespace-normal sm:whitespace-nowrap text-center break-words">${correct}</div>
         </div>
       `;
     }
 
     function generateFlashcard(question, answer) {
       return `
-        <div class="flashcard p-4 border rounded-xl cursor-pointer transition-all duration-300 bg-white border-gray-200 hover:border-indigo-300 hover:shadow-md select-none group">
-          <div class="flex justify-between items-start pointer-events-none">
-            <p class="font-medium text-gray-800 leading-snug group-hover:text-indigo-900 transition-colors">${question}</p>
+        <div class="flashcard p-4 border rounded-xl cursor-pointer transition-all duration-300 bg-white border-gray-200 hover:border-indigo-300 hover:shadow-md select-none group relative overflow-hidden">
+          <div class="flex justify-between items-start pointer-events-none relative z-10">
+            <p class="font-medium text-gray-800 leading-snug group-hover:text-indigo-900 transition-colors text-sm sm:text-base">${question}</p>
             <span class="status-badge text-xs text-gray-500 uppercase tracking-wider font-bold bg-gray-100 px-2 py-1 rounded-md ml-2 shrink-0 transition-colors">Reveal</span>
           </div>
-          <div class="answer-content hidden mt-3 pt-3 border-t border-indigo-100 text-indigo-700 font-bold flex items-center gap-2 pointer-events-none">
+          <div class="answer-content hidden mt-3 pt-3 border-t border-indigo-100 text-indigo-700 font-bold flex items-center gap-2 pointer-events-none relative z-10 text-sm sm:text-base">
             <i class="fa-solid fa-check-circle text-indigo-500"></i> ${answer}
           </div>
+          <div class="absolute inset-0 bg-indigo-50 transform scale-y-0 origin-bottom transition-transform duration-300 ease-out z-0 bg-highlight"></div>
         </div>
       `;
     }
 
     // --- STATE AND LOGIC ---
-    let currentUnit = 'unit34';
+    let currentUnit = 'unit25';
 
     // Elements
     const theoryContainer = document.getElementById('theory-container');
@@ -948,15 +426,15 @@
       // Update Main Navigation Tabs
       tabButtons.forEach(btn => {
         if (btn.dataset.target === unitId) {
-          btn.className = "tab-btn whitespace-nowrap px-3 py-2 rounded-md text-sm font-semibold transition-all bg-white text-indigo-900 shadow-sm";
+          btn.className = "tab-btn whitespace-nowrap px-4 py-2 rounded-md text-sm font-semibold transition-all bg-white text-indigo-900 shadow border-b-2 border-indigo-500";
         } else {
-          btn.className = "tab-btn whitespace-nowrap px-3 py-2 rounded-md text-sm font-semibold transition-all text-indigo-100 hover:bg-indigo-700";
+          btn.className = "tab-btn whitespace-nowrap px-4 py-2 rounded-md text-sm font-semibold transition-all text-indigo-100 hover:bg-indigo-700 border-b-2 border-transparent";
         }
       });
 
       // Fetch Unit Data
       const data = contentData[unitId];
-      exerciseTitle.textContent = data.title;
+      exerciseTitle.innerHTML = `<i class="fa-solid fa-pen-nib text-indigo-600 mr-2"></i> ${data.title}`;
       
       // Clear containers
       theoryTabsContainer.innerHTML = '';
@@ -982,8 +460,8 @@
       data.exercises.forEach((ex, index) => {
         // 1. Create Tab Button
         const tabBtn = document.createElement('button');
-        tabBtn.className = "sub-tab-btn px-4 py-2 text-sm font-bold rounded-t-lg transition-colors border border-b-0 whitespace-nowrap";
-        tabBtn.textContent = ex.tabLabel;
+        tabBtn.className = "sub-tab-btn px-4 py-2 text-sm font-bold rounded-t-lg transition-colors border border-b-0 whitespace-nowrap flex items-center gap-2";
+        tabBtn.innerHTML = `${ex.tabLabel} <span class="hidden tab-score-badge bg-indigo-100 text-indigo-700 text-[10px] px-1.5 py-0.5 rounded-full"></span>`;
         tabBtn.onclick = () => switchSubTab(index);
         subTabsContainer.appendChild(tabBtn);
 
@@ -991,35 +469,44 @@
         const wrapper = document.createElement('div');
         wrapper.className = "exercise-tab-content hidden"; // all hidden initially
         wrapper.innerHTML = ex.html;
+        wrapper.dataset.tabIndex = index;
         exercisesContainer.appendChild(wrapper);
       });
 
       // Inject Per-Exercise Validation Controls
       const blocks = exercisesContainer.querySelectorAll('.exercise-block');
       blocks.forEach(block => {
-        // Only append Check Button if there are inputs/selects to check
         if (block.querySelectorAll('.exercise-input, .exercise-select').length > 0) {
           const controlDiv = document.createElement('div');
-          controlDiv.className = "mt-6 flex flex-col sm:flex-row justify-end items-center gap-4 border-t border-gray-100 pt-4";
+          controlDiv.className = "mt-6 flex flex-col sm:flex-row justify-between items-center gap-4 border-t border-gray-100 pt-4 bg-gray-50/50 -mx-4 sm:-mx-5 -mb-4 sm:-mb-5 px-4 sm:px-5 py-4 rounded-b-xl";
           
+          const scoreDisplay = document.createElement('div');
+          scoreDisplay.className = "score-display font-bold text-lg text-indigo-700 opacity-0 transition-opacity flex items-center gap-2";
+          scoreDisplay.innerHTML = `<i class="fa-solid fa-ranking-star"></i> <span class="score-text"></span>`;
+
+          const rightControls = document.createElement('div');
+          rightControls.className = "flex flex-col sm:flex-row items-center gap-3 w-full sm:w-auto";
+
           const warningSpan = document.createElement('span');
           warningSpan.className = "text-red-500 text-sm font-bold hidden flex items-center gap-1 warning-msg drop-shadow-sm";
-          warningSpan.innerHTML = '<i class="fa-solid fa-triangle-exclamation"></i> Please fill in all blanks first!';
+          warningSpan.innerHTML = '<i class="fa-solid fa-triangle-exclamation"></i> Fill all blanks!';
           
           const checkBtn = document.createElement('button');
-          checkBtn.className = "flex items-center gap-2 font-bold px-6 py-2 rounded-lg bg-indigo-600 text-white hover:bg-indigo-700 transition-all shadow-md hover:shadow-lg active:scale-95";
+          checkBtn.className = "w-full sm:w-auto flex items-center justify-center gap-2 font-bold px-6 py-2.5 rounded-lg bg-indigo-600 text-white hover:bg-indigo-700 transition-all shadow-md hover:shadow-lg active:scale-95";
           checkBtn.innerHTML = '<i class="fa-solid fa-clipboard-check"></i> Check Answers';
-          checkBtn.onclick = () => validateExerciseBlock(block, warningSpan);
+          checkBtn.onclick = () => validateExerciseBlock(block, warningSpan, scoreDisplay);
           
-          controlDiv.appendChild(warningSpan);
-          controlDiv.appendChild(checkBtn);
+          rightControls.appendChild(warningSpan);
+          rightControls.appendChild(checkBtn);
+          
+          controlDiv.appendChild(scoreDisplay);
+          controlDiv.appendChild(rightControls);
           block.appendChild(controlDiv);
         }
       });
 
       setupFlashcards();
       
-      // Default to the first sub-tabs
       if (data.theory.length > 0) switchTheoryTab(0);
       if (data.exercises.length > 0) switchSubTab(0);
     }
@@ -1051,9 +538,9 @@
 
       btns.forEach((btn, idx) => {
         if (idx === activeIndex) {
-          btn.className = "sub-tab-btn px-4 py-2 text-sm font-bold rounded-t-lg transition-colors border border-b-0 bg-white text-indigo-700 border-gray-200 shadow-[0_-2px_4px_rgba(0,0,0,0.02)] relative top-[1px] z-10 cursor-default whitespace-nowrap";
+          btn.className = "sub-tab-btn px-4 py-2 text-sm font-bold rounded-t-lg transition-colors border border-b-0 bg-white text-indigo-700 border-gray-200 shadow-[0_-2px_4px_rgba(0,0,0,0.02)] relative top-[1px] z-10 cursor-default whitespace-nowrap flex items-center gap-2";
         } else {
-          btn.className = "sub-tab-btn px-4 py-2 text-sm font-bold rounded-t-lg transition-colors border border-b-0 bg-transparent text-gray-500 border-transparent hover:bg-gray-100 hover:text-gray-700 cursor-pointer whitespace-nowrap";
+          btn.className = "sub-tab-btn px-4 py-2 text-sm font-bold rounded-t-lg transition-colors border border-b-0 bg-transparent text-gray-500 border-transparent hover:bg-gray-100 hover:text-gray-700 cursor-pointer whitespace-nowrap flex items-center gap-2";
         }
       });
 
@@ -1072,17 +559,18 @@
         card.addEventListener('click', function() {
           const content = this.querySelector('.answer-content');
           const badge = this.querySelector('.status-badge');
+          const bgHighlight = this.querySelector('.bg-highlight');
           
           if (content.classList.contains('hidden')) {
             content.classList.remove('hidden');
-            this.classList.replace('bg-white', 'bg-indigo-50');
             this.classList.replace('border-gray-200', 'border-indigo-300');
+            if (bgHighlight) bgHighlight.classList.replace('scale-y-0', 'scale-y-100');
             badge.textContent = 'Hide';
             badge.className = "status-badge text-xs text-indigo-700 uppercase tracking-wider font-bold bg-indigo-200 px-2 py-1 rounded-md ml-2 shrink-0 transition-colors";
           } else {
             content.classList.add('hidden');
-            this.classList.replace('bg-indigo-50', 'bg-white');
             this.classList.replace('border-indigo-300', 'border-gray-200');
+            if (bgHighlight) bgHighlight.classList.replace('scale-y-100', 'scale-y-0');
             badge.textContent = 'Reveal';
             badge.className = "status-badge text-xs text-gray-500 uppercase tracking-wider font-bold bg-gray-100 px-2 py-1 rounded-md ml-2 shrink-0 transition-colors";
           }
@@ -1090,19 +578,17 @@
       });
     }
 
-    // Helper to strip punctuation to make typing validation more forgiving
     function normalizeTextForComparison(text) {
       return text.toLowerCase().replace(/[.,?!]/g, '').replace(/\s+/g, ' ').trim();
     }
 
-    function validateExerciseBlock(block, warningSpan) {
+    function validateExerciseBlock(block, warningSpan, scoreDisplay) {
       const inputs = block.querySelectorAll('.exercise-input');
       const selects = block.querySelectorAll('.exercise-select');
       const elements = [...inputs, ...selects];
       
       if (elements.length === 0) return;
 
-      // 1. Force all blanks to be filled check
       let allFilled = true;
       elements.forEach(el => {
         if(el.value.trim() === '') {
@@ -1115,13 +601,13 @@
 
       if (!allFilled) {
         warningSpan.classList.remove('hidden', 'shake');
-        void warningSpan.offsetWidth; // trigger browser reflow
+        void warningSpan.offsetWidth;
         warningSpan.classList.add('shake');
         return;
       }
 
-      // 2. Proceed with validation if all filled
       warningSpan.classList.add('hidden');
+      let correctCount = 0;
 
       const processElement = (el, isSelect) => {
         const rawVal = el.value.trim();
@@ -1130,7 +616,6 @@
         const iconContainer = parent.querySelector('.feedback-icon');
         const tooltip = parent.querySelector('.answer-tooltip');
         
-        // Reset classes
         el.classList.remove('input-correct', 'input-incorrect', 'input-empty-error');
         iconContainer.innerHTML = '';
         tooltip.classList.add('hidden');
@@ -1146,16 +631,48 @@
 
         if (isCorrect) {
           el.classList.add('input-correct');
-          iconContainer.innerHTML = '<i class="fa-solid fa-circle-check text-green-500 drop-shadow-sm bg-white rounded-full"></i>';
+          iconContainer.innerHTML = '<i class="fa-solid fa-circle-check text-green-500 bg-white rounded-full leading-none"></i>';
+          correctCount++;
         } else {
           el.classList.add('input-incorrect');
-          iconContainer.innerHTML = '<i class="fa-solid fa-circle-xmark text-red-500 drop-shadow-sm bg-white rounded-full"></i>';
-          tooltip.classList.remove('hidden'); // Automatically reveal correct answer on mistake
+          iconContainer.innerHTML = '<i class="fa-solid fa-circle-xmark text-red-500 bg-white rounded-full leading-none"></i>';
+          tooltip.classList.remove('hidden');
         }
       };
 
       inputs.forEach(el => processElement(el, false));
       selects.forEach(el => processElement(el, true));
+
+      const total = elements.length;
+      scoreDisplay.querySelector('.score-text').textContent = `${correctCount} / ${total} Correct`;
+      scoreDisplay.classList.remove('opacity-0');
+      
+      if (correctCount === total) {
+        scoreDisplay.classList.remove('text-indigo-700');
+        scoreDisplay.classList.add('text-indigo-600', 'scale-105');
+        scoreDisplay.innerHTML = `<i class="fa-solid fa-crown text-amber-500"></i> <span class="score-text text-indigo-600">Perfect! ${correctCount}/${total}</span>`;
+      } else {
+        scoreDisplay.classList.add('text-indigo-700');
+        scoreDisplay.classList.remove('text-indigo-600', 'scale-105');
+        scoreDisplay.innerHTML = `<i class="fa-solid fa-ranking-star"></i> <span class="score-text">${correctCount} / ${total} Correct</span>`;
+      }
+
+      const parentTabContent = block.closest('.exercise-tab-content');
+      if (parentTabContent) {
+        const tabIndex = parentTabContent.dataset.tabIndex;
+        const badge = subTabsContainer.querySelectorAll('.tab-score-badge')[tabIndex];
+        if (badge) {
+          badge.textContent = `${correctCount}/${total}`;
+          badge.classList.remove('hidden');
+          if (correctCount === total) {
+             badge.classList.replace('bg-indigo-100', 'bg-indigo-500');
+             badge.classList.replace('text-indigo-700', 'text-white');
+          } else {
+             badge.classList.replace('bg-indigo-500', 'bg-indigo-100');
+             badge.classList.replace('text-white', 'text-indigo-700');
+          }
+        }
+      }
     }
 
     function resetAllExercises() {
@@ -1164,6 +681,8 @@
         const selects = exercisesContainer.querySelectorAll('.exercise-select');
         const components = exercisesContainer.querySelectorAll('.exercise-component');
         const warnings = exercisesContainer.querySelectorAll('.warning-msg');
+        const scores = exercisesContainer.querySelectorAll('.score-display');
+        const badges = subTabsContainer.querySelectorAll('.tab-score-badge');
         
         inputs.forEach(input => {
           input.value = '';
@@ -1183,15 +702,21 @@
         });
 
         warnings.forEach(warning => warning.classList.add('hidden'));
+        scores.forEach(s => s.classList.add('opacity-0'));
+        badges.forEach(b => {
+          b.classList.add('hidden');
+          b.textContent = '';
+        });
 
-        // Reset Flashcards
         const flashcards = exercisesContainer.querySelectorAll('.flashcard');
         flashcards.forEach(card => {
           const content = card.querySelector('.answer-content');
           const badge = card.querySelector('.status-badge');
+          const bgHighlight = card.querySelector('.bg-highlight');
+          
           content.classList.add('hidden');
-          card.classList.replace('bg-indigo-50', 'bg-white');
           card.classList.replace('border-indigo-300', 'border-gray-200');
+          if (bgHighlight) bgHighlight.classList.replace('scale-y-100', 'scale-y-0');
           badge.textContent = 'Reveal';
           badge.className = "status-badge text-xs text-gray-500 uppercase tracking-wider font-bold bg-gray-100 px-2 py-1 rounded-md ml-2 shrink-0 transition-colors";
         });
@@ -1199,16 +724,12 @@
     }
 
     // --- EVENT LISTENERS ---
-    
-    // Tab switching
     tabButtons.forEach(btn => {
       btn.addEventListener('click', () => loadUnit(btn.dataset.target));
     });
 
-    // Reset Button
     btnReset.addEventListener('click', resetAllExercises);
 
-    // Remove red borders and tooltips when user edits a field
     exercisesContainer.addEventListener('input', (e) => {
       if (e.target.classList.contains('exercise-input') || e.target.classList.contains('exercise-select')) {
         e.target.classList.remove('input-empty-error', 'input-incorrect');
@@ -1216,7 +737,6 @@
         parent.querySelector('.feedback-icon').innerHTML = '';
         parent.querySelector('.answer-tooltip').classList.add('hidden');
         
-        // Hide empty warning if they start typing
         const block = e.target.closest('.exercise-block');
         if (block) {
           const warning = block.querySelector('.warning-msg');
@@ -1226,8 +746,7 @@
     });
 
     // Initial Load
-    loadUnit('unit34');
-
+    loadUnit('unit25');
   </script>
 </body>
 </html>
