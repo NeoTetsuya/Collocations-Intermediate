@@ -21,6 +21,7 @@
       background-color: #f0fdf4 !important; 
       color: #166534 !important; 
       pointer-events: none; /* Lock input when correct */
+      box-shadow: 0 0 0 1px #22c55e;
     }
     .input-incorrect { 
       border-color: #ef4444 !important; 
@@ -75,6 +76,23 @@
       from { opacity: 0; transform: translateY(5px); }
       to { opacity: 1; transform: translateY(0); }
     }
+
+    /* Custom Scrollbar for responsive tabs/content */
+    .custom-scrollbar::-webkit-scrollbar {
+      height: 4px;
+      width: 4px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-track {
+      background: #f1f1f1; 
+      border-radius: 4px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-thumb {
+      background: #c1c1c1; 
+      border-radius: 4px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+      background: #a8a8a8; 
+    }
   </style>
 </head>
 <body class="bg-gray-50 text-gray-900 font-sans selection:bg-indigo-200 min-h-screen flex flex-col">
@@ -86,13 +104,13 @@
         <div class="bg-indigo-800 p-2 rounded-lg border border-indigo-700 shadow-sm">
           <i class="fa-solid fa-earth-americas text-xl text-indigo-300"></i>
         </div>
-        <h1 class="text-2xl font-bold tracking-tight">Travel, Weather & Places <span class="font-light opacity-80 text-lg hidden sm:inline">| Self-Study</span></h1>
+        <h1 class="text-xl sm:text-2xl font-bold tracking-tight">Travel, Weather & Places <span class="font-light opacity-80 text-lg hidden sm:inline">| Self-Study</span></h1>
       </div>
-      <nav class="flex bg-indigo-800 rounded-lg p-1 overflow-x-auto w-full sm:w-auto shadow-inner" id="tab-nav">
-        <button data-target="unit13" class="tab-btn whitespace-nowrap px-3 py-2 rounded-md text-sm font-semibold transition-all bg-white text-indigo-900 shadow">13: Weather</button>
-        <button data-target="unit14" class="tab-btn whitespace-nowrap px-3 py-2 rounded-md text-sm font-semibold transition-all text-indigo-100 hover:bg-indigo-700">14: Travel</button>
-        <button data-target="unit15" class="tab-btn whitespace-nowrap px-3 py-2 rounded-md text-sm font-semibold transition-all text-indigo-100 hover:bg-indigo-700">15: Countryside</button>
-        <button data-target="unit16" class="tab-btn whitespace-nowrap px-3 py-2 rounded-md text-sm font-semibold transition-all text-indigo-100 hover:bg-indigo-700">16: Towns/Cities</button>
+      <nav class="flex bg-indigo-800 rounded-lg p-1 overflow-x-auto w-full sm:w-auto shadow-inner custom-scrollbar" id="tab-nav">
+        <button data-target="unit13" class="tab-btn whitespace-nowrap px-3 py-2 rounded-md text-sm font-semibold transition-all bg-white text-indigo-900 shadow border-b-2 border-indigo-500">13: Weather</button>
+        <button data-target="unit14" class="tab-btn whitespace-nowrap px-3 py-2 rounded-md text-sm font-semibold transition-all text-indigo-100 hover:bg-indigo-700 border-b-2 border-transparent">14: Travel</button>
+        <button data-target="unit15" class="tab-btn whitespace-nowrap px-3 py-2 rounded-md text-sm font-semibold transition-all text-indigo-100 hover:bg-indigo-700 border-b-2 border-transparent">15: Countryside</button>
+        <button data-target="unit16" class="tab-btn whitespace-nowrap px-3 py-2 rounded-md text-sm font-semibold transition-all text-indigo-100 hover:bg-indigo-700 border-b-2 border-transparent">16: Towns/Cities</button>
       </nav>
     </div>
   </header>
@@ -102,7 +120,7 @@
     <div class="flex flex-col lg:flex-row gap-6 items-start">
       
       <!-- LEFT PANE: Theory -->
-      <section class="lg:w-2/5 flex-shrink-0 flex flex-col bg-white rounded-xl border border-gray-200 shadow-sm">
+      <section class="lg:w-2/5 flex-shrink-0 flex flex-col bg-white rounded-xl border border-gray-200 shadow-sm h-auto lg:sticky lg:top-24">
         <div class="bg-gray-100 p-4 border-b border-gray-200 flex items-center justify-between z-10 rounded-t-xl">
           <h2 class="font-bold text-gray-700 uppercase tracking-wider text-sm flex items-center gap-2">
             <i class="fa-solid fa-bookmark text-indigo-500"></i> Reference & Rules
@@ -114,15 +132,17 @@
            <!-- Tabs injected here -->
         </div>
 
-        <div class="p-6 flex-grow overflow-y-auto max-h-[500px] lg:max-h-none custom-scrollbar" id="theory-container">
+        <div class="p-5 sm:p-6 flex-grow overflow-y-auto max-h-[60vh] lg:max-h-[calc(100vh-16rem)] custom-scrollbar" id="theory-container">
           <!-- Theory Content Injected via JS -->
         </div>
       </section>
 
       <!-- RIGHT PANE: Exercises -->
-      <section class="lg:w-3/5 flex flex-col bg-white rounded-xl shadow-md border border-gray-200 relative">
+      <section class="lg:w-3/5 flex flex-col bg-white rounded-xl shadow-md border border-gray-200 relative w-full">
         <div class="bg-indigo-50 p-4 border-b border-indigo-100 flex items-center justify-between flex-shrink-0 shadow-sm rounded-t-xl">
-          <h2 class="font-bold text-indigo-900 text-lg" id="exercise-title">Unit 13: Weather</h2>
+          <h2 class="font-bold text-indigo-900 text-lg flex items-center gap-2" id="exercise-title">
+            <i class="fa-solid fa-pen-nib text-indigo-600"></i> Unit 13: Weather
+          </h2>
         </div>
         
         <!-- EXERCISE SUB-TABS -->
@@ -130,12 +150,12 @@
            <!-- Tabs injected here -->
         </div>
 
-        <div class="p-6 sm:p-8 flex-grow" id="exercises-container" style="padding-bottom: 6rem;">
+        <div class="p-4 sm:p-6 lg:p-8 flex-grow" id="exercises-container" style="padding-bottom: 6rem;">
           <!-- Exercise Content Injected via JS -->
         </div>
 
         <!-- Global Exercise Controls (Reset only) -->
-        <div class="sticky bottom-0 w-full bg-white/95 backdrop-blur border-t p-4 flex justify-center items-center gap-4 rounded-b-xl shadow-[0_-10px_15px_-3px_rgba(0,0,0,0.05)] z-20">
+        <div class="absolute bottom-0 w-full bg-white/95 backdrop-blur border-t p-4 flex justify-center items-center gap-4 rounded-b-xl shadow-[0_-10px_15px_-3px_rgba(0,0,0,0.05)] z-20">
           <button id="btn-reset" class="flex items-center gap-2 text-indigo-700 hover:text-indigo-900 bg-indigo-50 hover:bg-indigo-100 font-medium px-6 py-2 rounded-lg transition-all shadow-sm">
             <i class="fa-solid fa-rotate-right"></i> Reset All Progress
           </button>
@@ -156,8 +176,8 @@
             html: `
               <div class="space-y-6">
                 <div class="bg-amber-50 rounded-lg shadow-sm border border-amber-200 overflow-hidden">
-                  <h3 class="bg-amber-400 text-amber-900 font-bold p-3 text-lg"><i class="fa-regular fa-sun mr-2"></i> Sun & Heat</h3>
-                  <div class="p-4 space-y-4 text-sm text-gray-800">
+                  <h3 class="bg-amber-400 text-amber-900 font-bold p-3 text-lg sm:text-base"><i class="fa-regular fa-sun mr-2"></i> Sun & Heat</h3>
+                  <div class="p-4 space-y-4 text-sm sm:text-base text-gray-800">
                     <p class="italic bg-white p-3 rounded shadow-sm border border-amber-100">
                       "It's great here. Have had <span class="font-bold text-amber-600">unbroken sunshine</span> ever since we arrived. We're having a wonderful time - though in the middle of the day it's just too <span class="font-bold text-amber-600">scorching hot</span> to do anything but lie on the beach <span class="font-bold text-amber-600">soaking up the sunshine</span>."
                     </p>
@@ -175,8 +195,8 @@
             html: `
               <div class="space-y-6">
                 <div class="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
-                  <h3 class="bg-blue-500 text-white font-bold p-3 text-lg"><i class="fa-solid fa-cloud-showers-heavy mr-2"></i> Weather Conditions</h3>
-                  <ul class="divide-y divide-gray-100 text-sm">
+                  <h3 class="bg-blue-500 text-white font-bold p-3 text-lg sm:text-base"><i class="fa-solid fa-cloud-showers-heavy mr-2"></i> Weather Conditions</h3>
+                  <ul class="divide-y divide-gray-100 text-sm sm:text-base">
                     <li class="p-3"><span class="font-bold text-blue-700">weather deteriorates / improves:</span> 'deteriorate' is formal for getting worse.</li>
                     <li class="p-3"><span class="font-bold text-blue-700">thick/dense fog, patches of fog/mist, a blanket of fog:</span> Patches are small areas; a blanket is thicker/extensive.</li>
                     <li class="p-3"><span class="font-bold text-blue-700">fog/mist comes down / lifts:</span> When it lifts, it goes away.</li>
@@ -189,7 +209,7 @@
                     <li class="p-3"><span class="font-bold text-blue-700">the wind blows/whistles:</span> The wind whistled through the trees.</li>
                   </ul>
                 </div>
-                <div class="bg-indigo-50 p-4 rounded border border-indigo-100 text-sm">
+                <div class="bg-indigo-50 p-4 rounded border border-indigo-100 text-sm sm:text-base">
                   <p class="font-bold text-indigo-900 mb-2">Other Rain Phrases:</p>
                   <ul class="list-disc pl-5 text-indigo-800">
                     <li>pouring with rain / torrential rain (very heavy)</li>
@@ -205,8 +225,8 @@
             html: `
               <div class="space-y-6">
                 <div class="bg-red-50 rounded-lg shadow-sm border border-red-200 overflow-hidden">
-                  <h3 class="bg-red-600 text-white font-bold p-3 text-lg"><i class="fa-solid fa-tornado mr-2"></i> Extreme Weather</h3>
-                  <div class="p-4 space-y-3 text-sm text-gray-800">
+                  <h3 class="bg-red-600 text-white font-bold p-3 text-lg sm:text-base"><i class="fa-solid fa-tornado mr-2"></i> Extreme Weather</h3>
+                  <div class="p-4 space-y-3 text-sm sm:text-base text-gray-800">
                     <p class="font-bold text-lg text-red-800 border-b border-red-200 pb-1 mb-2">FREAK STORMS DEVASTATE SW</p>
                     <p>Yesterday <span class="font-bold text-red-600">freak weather conditions hit</span> the south-west. <span class="font-bold text-red-600">Gale-force winds</span> caused a lot of damage. Buildings were destroyed, roofs were <span class="font-bold text-red-600">torn off</span> and fences were <span class="font-bold text-red-600">blown down</span>. Several rivers <span class="font-bold text-red-600">burst their banks</span>.</p>
                     <ul class="list-disc pl-5 mt-4 space-y-1">
@@ -226,7 +246,7 @@
             html: `
               <div class="exercise-block bg-white border border-gray-100 rounded-xl p-5 shadow-[0_2px_10px_-3px_rgba(6,81,237,0.1)]">
                 <h3 class="font-bold text-lg mb-4 text-gray-800 flex items-center gap-3 border-b pb-3"><span class="bg-indigo-100 text-indigo-800 px-3 py-1 rounded text-sm shadow-sm">13.1</span> Complete the weather collocations.</h3>
-                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 leading-8 text-gray-700 font-medium">
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 leading-8 text-gray-700 font-medium text-sm sm:text-base">
                   <div>1. ${generateInput({ correct: ['crisp'] })} snow</div>
                   <div>2. patches of ${generateInput({ correct: ['fog', 'mist'] })}</div>
                   <div>3. strong ${generateInput({ correct: ['sun', 'wind', 'winds'] })}</div>
@@ -243,7 +263,7 @@
             html: `
               <div class="exercise-block bg-white border border-gray-100 rounded-xl p-5 shadow-[0_2px_10px_-3px_rgba(6,81,237,0.1)]">
                 <h3 class="font-bold text-lg mb-4 text-gray-800 flex items-center gap-3 border-b pb-3"><span class="bg-indigo-100 text-indigo-800 px-3 py-1 rounded text-sm shadow-sm">13.2</span> Change the underlined words to the opposite meaning.</h3>
-                <ol class="list-decimal list-inside space-y-4 pl-2 leading-8 text-gray-700">
+                <ol class="list-decimal list-inside space-y-4 pl-2 leading-8 text-gray-700 text-sm sm:text-base">
                   <li>There was a <span class="underline decoration-dotted">light</span> ${generateInput({ correct: ['strong', 'high', 'biting'] })} wind yesterday.</li>
                   <li>The wind <span class="underline decoration-dotted">picked up</span> ${generateInput({ correct: ['died down'] })} in the evening.</li>
                   <li>The weather is likely to <span class="underline decoration-dotted">improve</span> ${generateInput({ correct: ['deteriorate'] })} tomorrow.</li>
@@ -258,7 +278,7 @@
             html: `
               <div class="exercise-block bg-white border border-gray-100 rounded-xl p-5 shadow-[0_2px_10px_-3px_rgba(6,81,237,0.1)]">
                 <h3 class="font-bold text-lg mb-4 text-gray-800 flex items-center gap-3 border-b pb-3"><span class="bg-indigo-100 text-indigo-800 px-3 py-1 rounded text-sm shadow-sm">13.3</span> Replace the underlined words with better collocations.</h3>
-                <div class="bg-blue-50/50 p-5 rounded-lg border border-blue-100 text-gray-700 leading-9">
+                <div class="bg-blue-50/50 p-4 sm:p-5 rounded-lg border border-blue-100 text-gray-700 leading-9 text-sm sm:text-base">
                   I wish I'd worn a warmer jacket. There's a <span class="underline decoration-wavy decoration-blue-300">very cold</span> ${generateInput({ correct: ['biting'] })} wind. 
                   At least it's not <span class="underline decoration-wavy decoration-blue-300">raining heavily</span> ${generateInput({ correct: ['pouring with rain', 'driving rain'] })} today. 
                   We had such <span class="underline decoration-wavy decoration-blue-300">heavy rain</span> ${generateInput({ correct: ['torrential rain', 'driving rain'] })} yesterday. 
@@ -271,7 +291,7 @@
             html: `
               <div class="exercise-block bg-white border border-gray-100 rounded-xl p-5 shadow-[0_2px_10px_-3px_rgba(6,81,237,0.1)]">
                 <h3 class="font-bold text-lg mb-4 text-gray-800 flex items-center gap-3 border-b pb-3"><span class="bg-indigo-100 text-indigo-800 px-3 py-1 rounded text-sm shadow-sm">13.4</span> Answer the questions.</h3>
-                <ol class="list-decimal list-inside space-y-6 pl-2 text-gray-700">
+                <ol class="list-decimal list-inside space-y-6 pl-2 text-gray-700 text-sm sm:text-base">
                   <li class="border-b border-gray-50 pb-4">
                     What might make a river burst its banks? <br>
                     ${generateSelect({ options: ['Deteriorating weather', 'Heavy or torrential rain', 'Gale-force winds'], correct: 'Heavy or torrential rain' })}
@@ -309,8 +329,8 @@
             html: `
               <div class="space-y-6">
                 <div class="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
-                  <h3 class="bg-indigo-600 text-white font-bold p-3 text-lg"><i class="fa-solid fa-suitcase mr-2"></i> Travel vs. Journey vs. Trip</h3>
-                  <div class="p-4 space-y-4 text-sm text-gray-800">
+                  <h3 class="bg-indigo-600 text-white font-bold p-3 text-lg sm:text-base"><i class="fa-solid fa-suitcase mr-2"></i> Travel vs. Journey vs. Trip</h3>
+                  <div class="p-4 space-y-4 text-sm sm:text-base text-gray-800">
                     <p class="font-bold text-indigo-900">TRAVEL (Uncountable Noun/Verb)</p>
                     <ul class="list-disc pl-5 mb-4">
                       <li>make <span class="font-semibold text-indigo-600">travel arrangements</span></li>
@@ -342,8 +362,8 @@
             html: `
               <div class="space-y-6">
                 <div class="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
-                  <h3 class="bg-cyan-600 text-white font-bold p-3 text-lg"><i class="fa-solid fa-plane-departure mr-2"></i> Flights</h3>
-                  <ul class="divide-y divide-gray-100 text-sm">
+                  <h3 class="bg-cyan-600 text-white font-bold p-3 text-lg sm:text-base"><i class="fa-solid fa-plane-departure mr-2"></i> Flights</h3>
+                  <ul class="divide-y divide-gray-100 text-sm sm:text-base">
                     <li class="p-3"><span class="font-bold text-cyan-700">in-flight entertainment / magazine:</span> movies, reading material provided during the flight.</li>
                     <li class="p-3"><span class="font-bold text-cyan-700">board the plane:</span> get on the plane.</li>
                     <li class="p-3"><span class="font-bold text-cyan-700">connecting flight:</span> a flight you take after arriving at an intermediate destination.</li>
@@ -362,8 +382,8 @@
             html: `
               <div class="space-y-6">
                 <div class="bg-rose-50 rounded-lg shadow-sm border border-rose-200 overflow-hidden">
-                  <h3 class="bg-rose-600 text-white font-bold p-3 text-lg"><i class="fa-solid fa-hotel mr-2"></i> Accommodation</h3>
-                  <div class="p-4 space-y-3 text-sm text-gray-800">
+                  <h3 class="bg-rose-600 text-white font-bold p-3 text-lg sm:text-base"><i class="fa-solid fa-hotel mr-2"></i> Accommodation</h3>
+                  <div class="p-4 space-y-3 text-sm sm:text-base text-gray-800">
                     <ul class="list-disc pl-5 space-y-2">
                       <li>We stayed in a small, <span class="font-bold text-rose-600">family-run hotel</span>.</li>
                       <li>The Panorama is a rather <span class="font-bold text-rose-600">run-down hotel</span> in a back street. (in bad condition)</li>
@@ -383,7 +403,7 @@
             html: `
               <div class="exercise-block bg-white border border-gray-100 rounded-xl p-5 shadow-[0_2px_10px_-3px_rgba(6,81,237,0.1)]">
                 <h3 class="font-bold text-lg mb-4 text-gray-800 flex items-center gap-3 border-b pb-3"><span class="bg-indigo-100 text-indigo-800 px-3 py-1 rounded text-sm shadow-sm">14.1</span> Complete each sentence.</h3>
-                <ol class="list-decimal list-inside space-y-4 pl-2 leading-8 text-gray-700 font-medium">
+                <ol class="list-decimal list-inside space-y-4 pl-2 leading-8 text-gray-700 font-medium text-sm sm:text-base">
                   <li>I'll get some ${generateSelect({ options: ['travel', 'trip', 'journey'], correct: 'travel' })} brochures today.</li>
                   <li>Tom is away on a business ${generateSelect({ options: ['travel', 'trip', 'journey'], correct: 'trip' })} all week.</li>
                   <li>It's a rather difficult overnight ${generateSelect({ options: ['travel', 'trip', 'journey'], correct: 'journey' })} to the mountains.</li>
@@ -402,7 +422,7 @@
             html: `
               <div class="exercise-block bg-white border border-gray-100 rounded-xl p-5 shadow-[0_2px_10px_-3px_rgba(6,81,237,0.1)]">
                 <h3 class="font-bold text-lg mb-4 text-gray-800 flex items-center gap-3 border-b pb-3"><span class="bg-indigo-100 text-indigo-800 px-3 py-1 rounded text-sm shadow-sm">14.2</span> Complete the sentences.</h3>
-                <ol class="list-decimal list-inside space-y-5 pl-2 leading-8 text-gray-700">
+                <ol class="list-decimal list-inside space-y-5 pl-2 leading-8 text-gray-700 text-sm sm:text-base">
                   <li>We couldn't make a ${generateInput({ correct: ['reservation'] })}; all the hotels were ${generateInput({ correct: ['fully'] })} booked.</li>
                   <li>As I've got long legs, I usually ask for an ${generateInput({ correct: ['aisle'] })} seat, but on the flight to NY I had a ${generateInput({ correct: ['window'] })} seat and got a great view.</li>
                   <li>We only have half an hour in Dubai, so I hope we don't miss our ${generateInput({ correct: ['connecting'] })} flight.</li>
@@ -419,7 +439,7 @@
             html: `
               <div class="exercise-block bg-white border border-gray-100 rounded-xl p-5 shadow-[0_2px_10px_-3px_rgba(6,81,237,0.1)]">
                 <h3 class="font-bold text-lg mb-4 text-gray-800 flex items-center gap-3 border-b pb-3"><span class="bg-indigo-100 text-indigo-800 px-3 py-1 rounded text-sm shadow-sm">14.3</span> Answer these questions.</h3>
-                <ol class="list-decimal list-inside space-y-6 pl-2 text-gray-700">
+                <ol class="list-decimal list-inside space-y-6 pl-2 text-gray-700 text-sm sm:text-base">
                   <li class="border-b border-gray-50 pb-4">
                     What is the opposite of a smooth flight? <br>
                     ${generateSelect({ options: ['A rough flight', 'A bumpy flight', 'A shaky flight'], correct: 'A bumpy flight' })}
@@ -453,8 +473,8 @@
             html: `
               <div class="space-y-6">
                 <div class="bg-emerald-50 rounded-lg shadow-sm border border-emerald-200 overflow-hidden">
-                  <h3 class="bg-emerald-600 text-white font-bold p-3 text-lg"><i class="fa-solid fa-tree mr-2"></i> Writing about the landscape</h3>
-                  <div class="p-4 space-y-4 text-sm text-gray-800">
+                  <h3 class="bg-emerald-600 text-white font-bold p-3 text-lg sm:text-base"><i class="fa-solid fa-tree mr-2"></i> Writing about the landscape</h3>
+                  <div class="p-4 space-y-4 text-sm sm:text-base text-gray-800">
                     <ul class="list-disc pl-5 space-y-2">
                       <li><span class="font-bold text-emerald-700">surrounding countryside:</span> the land around you</li>
                       <li><span class="font-bold text-emerald-700">familiar landscape:</span> the landscape you know well</li>
@@ -480,8 +500,8 @@
             html: `
               <div class="space-y-6">
                 <div class="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
-                  <h3 class="bg-teal-600 text-white font-bold p-3 text-lg"><i class="fa-solid fa-camera mr-2"></i> The language of tourism</h3>
-                  <div class="overflow-x-auto">
+                  <h3 class="bg-teal-600 text-white font-bold p-3 text-lg sm:text-base"><i class="fa-solid fa-camera mr-2"></i> The language of tourism</h3>
+                  <div class="overflow-x-auto custom-scrollbar">
                     <table class="w-full text-sm text-left">
                       <thead class="bg-teal-50 text-teal-900 border-b border-teal-100">
                         <tr>
@@ -543,7 +563,7 @@
             html: `
               <div class="exercise-block bg-white border border-gray-100 rounded-xl p-5 shadow-[0_2px_10px_-3px_rgba(16,185,129,0.1)]">
                 <h3 class="font-bold text-lg mb-4 text-gray-800 flex items-center gap-3 border-b pb-3"><span class="bg-emerald-100 text-emerald-800 px-3 py-1 rounded text-sm shadow-sm">15.1</span> Complete the sentences based on context.</h3>
-                <ol class="list-decimal list-inside space-y-6 pl-2 leading-8 text-gray-700">
+                <ol class="list-decimal list-inside space-y-6 pl-2 leading-8 text-gray-700 text-sm sm:text-base">
                   <li>Near the lake there is an old house that fell into ${generateInput({ correct: ['ruin'] })} about a hundred years ago. It stands in a lovely landscape, surrounded by ${generateInput({ correct: ['snow-covered', 'snowy'] })} mountains.</li>
                   <li>We walked through a gentle landscape of ${generateInput({ correct: ['open'] })} fields.</li>
                   <li>We followed a footpath along the river. In the distance there was a ${generateInput({ correct: ['dense'] })} forest; it was very dark among the trees.</li>
@@ -553,10 +573,10 @@
           {
             tabLabel: "15.2 Correct Errors",
             html: `
-              <div class="exercise-block bg-emerald-50/50 p-6 rounded-xl border border-emerald-200 shadow-sm">
+              <div class="exercise-block bg-emerald-50/50 p-4 sm:p-6 rounded-xl border border-emerald-200 shadow-sm">
                 <h3 class="font-bold text-lg mb-4 text-emerald-900 border-b border-emerald-200 pb-2"><i class="fa-solid fa-pen-to-square text-emerald-600 mr-2"></i> 15.2 Correct the underlined errors</h3>
                 
-                <div class="leading-[3rem] bg-white p-6 rounded-lg shadow-sm border border-emerald-100 text-gray-700">
+                <div class="leading-[3rem] bg-white p-4 sm:p-6 rounded-lg shadow-sm border border-emerald-100 text-gray-700 text-sm sm:text-base">
                   A chain of <span class="underline decoration-wavy decoration-red-400">snowy</span> ${generateInput({ correct: ['snow-covered'] })} mountains runs down the east. 
                   The Wassa River <span class="underline decoration-wavy decoration-red-400">dances</span> ${generateInput({ correct: ['winds'] })} slowly from the mountains to the sea. 
                   It is a <span class="underline decoration-wavy decoration-red-400">sour</span> ${generateInput({ correct: ['bleak'] })} landscape, with its dark, stony mountains. 
@@ -573,7 +593,7 @@
             html: `
               <div class="exercise-block bg-white border border-gray-100 rounded-xl p-5 shadow-[0_2px_10px_-3px_rgba(16,185,129,0.1)]">
                 <h3 class="font-bold text-lg mb-4 text-gray-800 flex items-center gap-3 border-b pb-3"><span class="bg-emerald-100 text-emerald-800 px-3 py-1 rounded text-sm shadow-sm">15.3 & 15.4</span> Vocab Check</h3>
-                <ol class="list-decimal list-inside space-y-4 pl-2 leading-8 text-gray-700">
+                <ol class="list-decimal list-inside space-y-4 pl-2 leading-8 text-gray-700 text-sm sm:text-base">
                   <li>We ${generateSelect({ options: ['made', 'took', 'put'], correct: 'took' })} a lot of photographs because it was such a beautiful day.</li>
                   <li>As I turned the corner I ${generateSelect({ options: ['made', 'caught', 'took'], correct: 'caught' })} a glimpse of the house through the trees.</li>
                   <li>A long ${generateSelect({ options: ['sanded', 'sandy'], correct: 'sandy' })} beach ${generateSelect({ options: ['reached', 'ran', 'stretched'], correct: 'stretched' })} for miles in front of us.</li>
@@ -589,13 +609,13 @@
             html: `
               <div class="exercise-block bg-white border border-gray-100 rounded-xl p-5 shadow-[0_2px_10px_-3px_rgba(16,185,129,0.1)]">
                 <h3 class="font-bold text-lg mb-4 text-gray-800 flex items-center gap-3 border-b pb-3"><span class="bg-emerald-100 text-emerald-800 px-3 py-1 rounded text-sm shadow-sm">15.5</span> Replace the descriptions in brackets.</h3>
-                <ol class="list-decimal list-inside space-y-4 pl-2 leading-8 text-gray-700">
-                  <li>It's a beautiful town and the countryside [which is all around it] is even more beautiful. <br> <i class="fa-solid fa-arrow-right text-emerald-400 mx-4"></i> ${generateInput({ correct: ['surrounding'] })}</li>
-                  <li>The tower [is the most important and visible thing on] the landscape. <br> <i class="fa-solid fa-arrow-right text-emerald-400 mx-4"></i> ${generateInput({ correct: ['dominates'] })}</li>
-                  <li>From the tower, you get a view [which allows you to see a very wide stretch] of the area. <br> <i class="fa-solid fa-arrow-right text-emerald-400 mx-4"></i> ${generateInput({ correct: ['panoramic'] })}</li>
-                  <li>There are lovely beaches [with very few people on them]. <br> <i class="fa-solid fa-arrow-right text-emerald-400 mx-4"></i> ${generateInput({ correct: ['secluded'] })}</li>
-                  <li>We travelled through some scenery [which was extremely exciting and beautiful]. <br> <i class="fa-solid fa-arrow-right text-emerald-400 mx-4"></i> ${generateInput({ correct: ['breathtaking'] })}</li>
-                  <li>From the windows of our villa we had views [which were continuous, without obstacles]. <br> <i class="fa-solid fa-arrow-right text-emerald-400 mx-4"></i> ${generateInput({ correct: ['uninterrupted'] })}</li>
+                <ol class="list-decimal list-inside space-y-4 pl-2 leading-8 text-gray-700 text-sm sm:text-base">
+                  <li>It's a beautiful town and the countryside [which is all around it] is even more beautiful. <br> <i class="fa-solid fa-arrow-right text-emerald-400 mx-4 hidden sm:inline-block"></i> ${generateInput({ correct: ['surrounding'] })}</li>
+                  <li>The tower [is the most important and visible thing on] the landscape. <br> <i class="fa-solid fa-arrow-right text-emerald-400 mx-4 hidden sm:inline-block"></i> ${generateInput({ correct: ['dominates'] })}</li>
+                  <li>From the tower, you get a view [which allows you to see a very wide stretch] of the area. <br> <i class="fa-solid fa-arrow-right text-emerald-400 mx-4 hidden sm:inline-block"></i> ${generateInput({ correct: ['panoramic'] })}</li>
+                  <li>There are lovely beaches [with very few people on them]. <br> <i class="fa-solid fa-arrow-right text-emerald-400 mx-4 hidden sm:inline-block"></i> ${generateInput({ correct: ['secluded'] })}</li>
+                  <li>We travelled through some scenery [which was extremely exciting and beautiful]. <br> <i class="fa-solid fa-arrow-right text-emerald-400 mx-4 hidden sm:inline-block"></i> ${generateInput({ correct: ['breathtaking'] })}</li>
+                  <li>From the windows of our villa we had views [which were continuous, without obstacles]. <br> <i class="fa-solid fa-arrow-right text-emerald-400 mx-4 hidden sm:inline-block"></i> ${generateInput({ correct: ['uninterrupted'] })}</li>
                 </ol>
               </div>`
           }
@@ -609,8 +629,8 @@
             html: `
               <div class="space-y-6">
                 <div class="bg-indigo-50 rounded-lg shadow-sm border border-indigo-200 overflow-hidden">
-                  <h3 class="bg-indigo-600 text-white font-bold p-3 text-lg"><i class="fa-solid fa-city mr-2"></i> Describing towns and cities</h3>
-                  <div class="p-4 space-y-3 text-sm text-gray-800">
+                  <h3 class="bg-indigo-600 text-white font-bold p-3 text-lg sm:text-base"><i class="fa-solid fa-city mr-2"></i> Describing towns and cities</h3>
+                  <div class="p-4 space-y-3 text-sm sm:text-base text-gray-800">
                     <ul class="list-disc pl-5 space-y-2">
                       <li><span class="font-bold text-indigo-700">city skyline:</span> the silhouette of the city against the sky.</li>
                       <li><span class="font-bold text-indigo-700">cobbled streets:</span> streets made of a regular pattern of stones.</li>
@@ -634,8 +654,8 @@
             html: `
               <div class="space-y-6">
                 <div class="bg-gray-800 rounded-lg shadow-sm border border-gray-700 overflow-hidden">
-                  <h3 class="bg-gray-900 text-white font-bold p-3 text-lg"><i class="fa-solid fa-triangle-exclamation text-yellow-500 mr-2"></i> Towns and their problems</h3>
-                  <div class="p-4 space-y-3 text-sm text-gray-200">
+                  <h3 class="bg-gray-900 text-white font-bold p-3 text-lg sm:text-base"><i class="fa-solid fa-triangle-exclamation text-yellow-500 mr-2"></i> Towns and their problems</h3>
+                  <div class="p-4 space-y-3 text-sm sm:text-base text-gray-200">
                     <ul class="list-disc pl-5 space-y-2">
                       <li><span class="font-bold text-yellow-400">urban wasteland:</span> an empty, bad condition city area.</li>
                       <li><span class="font-bold text-yellow-400">no-go areas:</span> areas where police/authorities are afraid to enter.</li>
@@ -661,7 +681,7 @@
             html: `
               <div class="exercise-block bg-white border border-gray-100 rounded-xl p-5 shadow-[0_2px_10px_-3px_rgba(79,70,229,0.1)]">
                 <h3 class="font-bold text-lg mb-4 text-gray-800 flex items-center gap-3 border-b pb-3"><span class="bg-indigo-100 text-indigo-800 px-3 py-1 rounded text-sm shadow-sm">16.2</span> Are these positive (+) or negative (-)?</h3>
-                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 leading-8 text-gray-700">
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 leading-8 text-gray-700 text-sm sm:text-base">
                   <div>1. lively bar ${generateSelect({ options: ['+', '-'], correct: '+' })}</div>
                   <div>2. relaxed atmosphere ${generateSelect({ options: ['+', '-'], correct: '+' })}</div>
                   <div>3. imposing building ${generateSelect({ options: ['+', '-'], correct: '+' })}</div>
@@ -679,7 +699,7 @@
             html: `
               <div class="exercise-block bg-white border border-gray-100 rounded-xl p-5 shadow-[0_2px_10px_-3px_rgba(79,70,229,0.1)]">
                 <h3 class="font-bold text-lg mb-4 text-gray-800 flex items-center gap-3 border-b pb-3"><span class="bg-indigo-100 text-indigo-800 px-3 py-1 rounded text-sm shadow-sm">16.3</span> Answer using collocations.</h3>
-                <ol class="list-decimal list-inside space-y-6 pl-2 text-gray-700">
+                <ol class="list-decimal list-inside space-y-6 pl-2 text-gray-700 text-sm sm:text-base">
                   <li class="border-b border-gray-50 pb-4">
                     What might prevent you from sleeping in a house near a busy motorway? <br>
                     ${generateSelect({ options: ['The incessant roar of traffic', 'The volume of traffic', 'Bumper-to-bumper traffic'], correct: 'The incessant roar of traffic' })}
@@ -714,9 +734,9 @@
           {
             tabLabel: "16.4 Matching",
             html: `
-              <div class="exercise-block bg-indigo-50/50 p-6 rounded-xl border border-indigo-200 shadow-sm">
+              <div class="exercise-block bg-indigo-50/50 p-4 sm:p-6 rounded-xl border border-indigo-200 shadow-sm">
                 <h3 class="font-bold text-lg mb-4 text-indigo-900 border-b border-indigo-200 pb-2"><i class="fa-solid fa-link text-indigo-600 mr-2"></i> 16.4 Match the sentence halves</h3>
-                <ol class="list-decimal list-inside space-y-4 pl-2 leading-8 text-gray-700 font-medium">
+                <ol class="list-decimal list-inside space-y-4 pl-2 leading-8 text-gray-700 font-medium text-sm sm:text-base">
                   <li>It is a sprawling... <br> ${generateSelect({ options: ['traffic all the way to the airport.', 'city covering an enormous area.', 'with litter.'], correct: 'city covering an enormous area.' })}</li>
                   <li>It is full of upmarket... <br> ${generateSelect({ options: ['shops, which are too expensive for me.', 'runs from the castle to the river.', 'areas are not far from the city centre.'], correct: 'shops, which are too expensive for me.' })}</li>
                   <li>There was bumper-to-bumper... <br> ${generateSelect({ options: ['traffic all the way to the airport.', 'fumes in the city centre.', 'with shops and cafés.'], correct: 'traffic all the way to the airport.' })}</li>
@@ -736,42 +756,46 @@
 
     // --- HTML GENERATORS ---
     
-    function generateInput({ correct, placeholder = "type here", widthClass = "w-32 sm:w-40" }) {
+    // Updated generateInput to support responsive inline widths
+    function generateInput({ correct, placeholder = "type here", widthClass = "w-28 sm:w-36 md:w-48" }) {
       const correctStr = JSON.stringify(correct).replace(/"/g, '&quot;').replace(/'/g, '&#39;');
       const firstAnswer = correct[0].replace(/'/g, '&#39;');
       return `
         <div class="inline-block relative m-1 exercise-component align-middle ${widthClass === 'w-full' ? 'w-full block mx-0 mt-2' : ''}">
-          <input type="text" class="exercise-input border-b-2 outline-none px-2 py-1 transition-all duration-200 text-center font-bold text-indigo-900 border-gray-300 focus:border-indigo-500 focus:bg-indigo-50 bg-transparent rounded-t-sm ${widthClass}" data-correct="${correctStr}" placeholder="${placeholder}" />
-          <span class="feedback-icon absolute right-2 top-1 text-lg drop-shadow-sm"></span>
-          <div class="answer-tooltip absolute top-full left-1/2 -translate-x-1/2 mt-2 px-3 py-1.5 rounded whitespace-nowrap z-30 hidden transition-opacity duration-200">${firstAnswer}</div>
+          <input type="text" class="exercise-input border-b-2 outline-none px-2 py-1 transition-all duration-200 text-center font-bold text-indigo-900 border-gray-300 focus:border-indigo-500 focus:bg-indigo-50 bg-transparent rounded-t-sm ${widthClass}" data-correct="${correctStr}" placeholder="${placeholder}" autocomplete="off" autocorrect="off" spellcheck="false" />
+          <span class="feedback-icon absolute ${widthClass === 'w-full' ? 'right-2' : '-right-2 sm:-right-6'} top-1 text-lg drop-shadow-sm flex items-center justify-center pointer-events-none"></span>
+          <div class="answer-tooltip absolute top-full left-1/2 -translate-x-1/2 mt-2 px-3 py-1.5 rounded z-30 hidden transition-opacity duration-200 text-xs w-max max-w-[200px] sm:max-w-none whitespace-normal sm:whitespace-nowrap text-center break-words">${firstAnswer}</div>
         </div>
       `;
     }
 
+    // Updated generateSelect to support responsive dropdowns wrapping text
     function generateSelect({ options, correct }) {
       const optionsHtml = options.map(opt => `<option value="${opt}">${opt}</option>`).join('');
       return `
         <div class="inline-block relative m-1 exercise-component align-middle w-full sm:w-auto">
-          <select class="exercise-select border-b-2 outline-none px-2 py-1 appearance-none bg-transparent font-bold text-indigo-900 text-center pr-6 cursor-pointer transition-all duration-200 border-gray-300 focus:border-indigo-500 focus:bg-indigo-50 rounded-t-sm max-w-full" data-correct="${correct}">
+          <select class="exercise-select border-b-2 outline-none px-2 py-1 appearance-none bg-transparent font-bold text-indigo-900 text-center pr-6 cursor-pointer transition-all duration-200 border-gray-300 focus:border-indigo-500 focus:bg-indigo-50 rounded-t-sm max-w-[200px] sm:max-w-[300px] text-ellipsis" data-correct="${correct}">
             <option value="" disabled selected>select...</option>
             ${optionsHtml}
           </select>
-          <span class="feedback-icon absolute -right-2 top-1 text-lg drop-shadow-sm"></span>
-          <div class="answer-tooltip absolute top-full left-1/2 -translate-x-1/2 mt-2 px-3 py-1.5 rounded whitespace-nowrap z-30 hidden transition-opacity duration-200">${correct}</div>
+          <span class="feedback-icon absolute -right-2 top-1 text-lg drop-shadow-sm flex items-center justify-center pointer-events-none"></span>
+          <div class="answer-tooltip absolute top-full left-1/2 -translate-x-1/2 mt-2 px-3 py-1.5 rounded z-30 hidden transition-opacity duration-200 text-xs w-max max-w-[200px] sm:max-w-none whitespace-normal sm:whitespace-nowrap text-center break-words">${correct}</div>
         </div>
       `;
     }
 
     function generateFlashcard(question, answer) {
       return `
-        <div class="flashcard p-4 border rounded-xl cursor-pointer transition-all duration-300 bg-white border-gray-200 hover:border-indigo-300 hover:shadow-md select-none group">
-          <div class="flex justify-between items-start pointer-events-none">
-            <p class="font-medium text-gray-800 leading-snug group-hover:text-indigo-900 transition-colors">${question}</p>
+        <div class="flashcard p-4 border rounded-xl cursor-pointer transition-all duration-300 bg-white border-gray-200 hover:border-indigo-300 hover:shadow-md select-none group relative overflow-hidden">
+          <div class="flex justify-between items-start pointer-events-none relative z-10">
+            <p class="font-medium text-gray-800 leading-snug group-hover:text-indigo-900 transition-colors text-sm sm:text-base">${question}</p>
             <span class="status-badge text-xs text-gray-500 uppercase tracking-wider font-bold bg-gray-100 px-2 py-1 rounded-md ml-2 shrink-0 transition-colors">Reveal</span>
           </div>
-          <div class="answer-content hidden mt-3 pt-3 border-t border-indigo-100 text-indigo-700 font-bold flex items-center gap-2 pointer-events-none">
+          <div class="answer-content hidden mt-3 pt-3 border-t border-indigo-100 text-indigo-700 font-bold flex items-center gap-2 pointer-events-none relative z-10 text-sm sm:text-base">
             <i class="fa-solid fa-check-circle text-indigo-500"></i> ${answer}
           </div>
+          <!-- Background highlight element -->
+          <div class="absolute inset-0 bg-indigo-50 transform scale-y-0 origin-bottom transition-transform duration-300 ease-out z-0 bg-highlight"></div>
         </div>
       `;
     }
@@ -794,15 +818,15 @@
       // Update Main Navigation Tabs
       tabButtons.forEach(btn => {
         if (btn.dataset.target === unitId) {
-          btn.className = "tab-btn whitespace-nowrap px-3 py-2 rounded-md text-sm font-semibold transition-all bg-white text-indigo-900 shadow-sm";
+          btn.className = "tab-btn whitespace-nowrap px-3 py-2 rounded-md text-sm font-semibold transition-all bg-white text-indigo-900 shadow border-b-2 border-indigo-500";
         } else {
-          btn.className = "tab-btn whitespace-nowrap px-3 py-2 rounded-md text-sm font-semibold transition-all text-indigo-100 hover:bg-indigo-700";
+          btn.className = "tab-btn whitespace-nowrap px-3 py-2 rounded-md text-sm font-semibold transition-all text-indigo-100 hover:bg-indigo-700 border-b-2 border-transparent";
         }
       });
 
       // Fetch Unit Data
       const data = contentData[unitId];
-      exerciseTitle.textContent = data.title;
+      exerciseTitle.innerHTML = `<i class="fa-solid fa-pen-nib text-indigo-600 mr-2"></i> ${data.title}`;
       
       // Clear containers
       theoryTabsContainer.innerHTML = '';
@@ -828,8 +852,8 @@
       data.exercises.forEach((ex, index) => {
         // 1. Create Tab Button
         const tabBtn = document.createElement('button');
-        tabBtn.className = "sub-tab-btn px-4 py-2 text-sm font-bold rounded-t-lg transition-colors border border-b-0 whitespace-nowrap";
-        tabBtn.textContent = ex.tabLabel;
+        tabBtn.className = "sub-tab-btn px-4 py-2 text-sm font-bold rounded-t-lg transition-colors border border-b-0 whitespace-nowrap flex items-center gap-2";
+        tabBtn.innerHTML = `${ex.tabLabel} <span class="hidden tab-score-badge bg-indigo-100 text-indigo-700 text-[10px] px-1.5 py-0.5 rounded-full"></span>`;
         tabBtn.onclick = () => switchSubTab(index);
         subTabsContainer.appendChild(tabBtn);
 
@@ -837,6 +861,7 @@
         const wrapper = document.createElement('div');
         wrapper.className = "exercise-tab-content hidden"; // all hidden initially
         wrapper.innerHTML = ex.html;
+        wrapper.dataset.tabIndex = index;
         exercisesContainer.appendChild(wrapper);
       });
 
@@ -846,19 +871,29 @@
         // Only append Check Button if there are inputs/selects to check
         if (block.querySelectorAll('.exercise-input, .exercise-select').length > 0) {
           const controlDiv = document.createElement('div');
-          controlDiv.className = "mt-6 flex flex-col sm:flex-row justify-end items-center gap-4 border-t border-gray-100 pt-4";
+          controlDiv.className = "mt-6 flex flex-col sm:flex-row justify-between items-center gap-4 border-t border-gray-100 pt-4 bg-gray-50/50 -mx-4 sm:-mx-5 -mb-4 sm:-mb-5 px-4 sm:px-5 py-4 rounded-b-xl";
           
+          const scoreDisplay = document.createElement('div');
+          scoreDisplay.className = "score-display font-bold text-lg text-indigo-700 opacity-0 transition-opacity flex items-center gap-2";
+          scoreDisplay.innerHTML = `<i class="fa-solid fa-ranking-star"></i> <span class="score-text"></span>`;
+
+          const rightControls = document.createElement('div');
+          rightControls.className = "flex flex-col sm:flex-row items-center gap-3 w-full sm:w-auto";
+
           const warningSpan = document.createElement('span');
           warningSpan.className = "text-red-500 text-sm font-bold hidden flex items-center gap-1 warning-msg drop-shadow-sm";
-          warningSpan.innerHTML = '<i class="fa-solid fa-triangle-exclamation"></i> Please fill in all blanks first!';
+          warningSpan.innerHTML = '<i class="fa-solid fa-triangle-exclamation"></i> Fill all blanks!';
           
           const checkBtn = document.createElement('button');
-          checkBtn.className = "flex items-center gap-2 font-bold px-6 py-2 rounded-lg bg-indigo-600 text-white hover:bg-indigo-700 transition-all shadow-md hover:shadow-lg active:scale-95";
+          checkBtn.className = "w-full sm:w-auto flex items-center justify-center gap-2 font-bold px-6 py-2.5 rounded-lg bg-indigo-600 text-white hover:bg-indigo-700 transition-all shadow-md hover:shadow-lg active:scale-95";
           checkBtn.innerHTML = '<i class="fa-solid fa-clipboard-check"></i> Check Answers';
-          checkBtn.onclick = () => validateExerciseBlock(block, warningSpan);
+          checkBtn.onclick = () => validateExerciseBlock(block, warningSpan, scoreDisplay);
           
-          controlDiv.appendChild(warningSpan);
-          controlDiv.appendChild(checkBtn);
+          rightControls.appendChild(warningSpan);
+          rightControls.appendChild(checkBtn);
+          
+          controlDiv.appendChild(scoreDisplay);
+          controlDiv.appendChild(rightControls);
           block.appendChild(controlDiv);
         }
       });
@@ -897,9 +932,9 @@
 
       btns.forEach((btn, idx) => {
         if (idx === activeIndex) {
-          btn.className = "sub-tab-btn px-4 py-2 text-sm font-bold rounded-t-lg transition-colors border border-b-0 bg-white text-indigo-700 border-gray-200 shadow-[0_-2px_4px_rgba(0,0,0,0.02)] relative top-[1px] z-10 cursor-default whitespace-nowrap";
+          btn.className = "sub-tab-btn px-4 py-2 text-sm font-bold rounded-t-lg transition-colors border border-b-0 bg-white text-indigo-700 border-gray-200 shadow-[0_-2px_4px_rgba(0,0,0,0.02)] relative top-[1px] z-10 cursor-default whitespace-nowrap flex items-center gap-2";
         } else {
-          btn.className = "sub-tab-btn px-4 py-2 text-sm font-bold rounded-t-lg transition-colors border border-b-0 bg-transparent text-gray-500 border-transparent hover:bg-gray-100 hover:text-gray-700 cursor-pointer whitespace-nowrap";
+          btn.className = "sub-tab-btn px-4 py-2 text-sm font-bold rounded-t-lg transition-colors border border-b-0 bg-transparent text-gray-500 border-transparent hover:bg-gray-100 hover:text-gray-700 cursor-pointer whitespace-nowrap flex items-center gap-2";
         }
       });
 
@@ -918,17 +953,18 @@
         card.addEventListener('click', function() {
           const content = this.querySelector('.answer-content');
           const badge = this.querySelector('.status-badge');
+          const bgHighlight = this.querySelector('.bg-highlight');
           
           if (content.classList.contains('hidden')) {
             content.classList.remove('hidden');
-            this.classList.replace('bg-white', 'bg-indigo-50');
             this.classList.replace('border-gray-200', 'border-indigo-300');
+            if (bgHighlight) bgHighlight.classList.replace('scale-y-0', 'scale-y-100');
             badge.textContent = 'Hide';
             badge.className = "status-badge text-xs text-indigo-700 uppercase tracking-wider font-bold bg-indigo-200 px-2 py-1 rounded-md ml-2 shrink-0 transition-colors";
           } else {
             content.classList.add('hidden');
-            this.classList.replace('bg-indigo-50', 'bg-white');
             this.classList.replace('border-indigo-300', 'border-gray-200');
+            if (bgHighlight) bgHighlight.classList.replace('scale-y-100', 'scale-y-0');
             badge.textContent = 'Reveal';
             badge.className = "status-badge text-xs text-gray-500 uppercase tracking-wider font-bold bg-gray-100 px-2 py-1 rounded-md ml-2 shrink-0 transition-colors";
           }
@@ -941,7 +977,7 @@
       return text.toLowerCase().replace(/[.,?!]/g, '').replace(/\s+/g, ' ').trim();
     }
 
-    function validateExerciseBlock(block, warningSpan) {
+    function validateExerciseBlock(block, warningSpan, scoreDisplay) {
       const inputs = block.querySelectorAll('.exercise-input');
       const selects = block.querySelectorAll('.exercise-select');
       const elements = [...inputs, ...selects];
@@ -968,6 +1004,7 @@
 
       // 2. Proceed with validation if all filled
       warningSpan.classList.add('hidden');
+      let correctCount = 0;
 
       const processElement = (el, isSelect) => {
         const rawVal = el.value.trim();
@@ -992,16 +1029,50 @@
 
         if (isCorrect) {
           el.classList.add('input-correct');
-          iconContainer.innerHTML = '<i class="fa-solid fa-circle-check text-green-500 drop-shadow-sm bg-white rounded-full"></i>';
+          iconContainer.innerHTML = '<i class="fa-solid fa-circle-check text-green-500 bg-white rounded-full leading-none"></i>';
+          correctCount++;
         } else {
           el.classList.add('input-incorrect');
-          iconContainer.innerHTML = '<i class="fa-solid fa-circle-xmark text-red-500 drop-shadow-sm bg-white rounded-full"></i>';
+          iconContainer.innerHTML = '<i class="fa-solid fa-circle-xmark text-red-500 bg-white rounded-full leading-none"></i>';
           tooltip.classList.remove('hidden'); // Automatically reveal correct answer on mistake
         }
       };
 
       inputs.forEach(el => processElement(el, false));
       selects.forEach(el => processElement(el, true));
+
+      // Update Score UI
+      const total = elements.length;
+      scoreDisplay.querySelector('.score-text').textContent = `${correctCount} / ${total} Correct`;
+      scoreDisplay.classList.remove('opacity-0');
+      
+      if (correctCount === total) {
+        scoreDisplay.classList.remove('text-indigo-700');
+        scoreDisplay.classList.add('text-indigo-600', 'scale-105');
+        scoreDisplay.innerHTML = `<i class="fa-solid fa-crown text-amber-500"></i> <span class="score-text text-indigo-600">Perfect! ${correctCount}/${total}</span>`;
+      } else {
+        scoreDisplay.classList.add('text-indigo-700');
+        scoreDisplay.classList.remove('text-indigo-600', 'scale-105');
+        scoreDisplay.innerHTML = `<i class="fa-solid fa-ranking-star"></i> <span class="score-text">${correctCount} / ${total} Correct</span>`;
+      }
+
+      // Update Tab Badge
+      const parentTabContent = block.closest('.exercise-tab-content');
+      if (parentTabContent) {
+        const tabIndex = parentTabContent.dataset.tabIndex;
+        const badge = subTabsContainer.querySelectorAll('.tab-score-badge')[tabIndex];
+        if (badge) {
+          badge.textContent = `${correctCount}/${total}`;
+          badge.classList.remove('hidden');
+          if (correctCount === total) {
+             badge.classList.replace('bg-indigo-100', 'bg-indigo-500');
+             badge.classList.replace('text-indigo-700', 'text-white');
+          } else {
+             badge.classList.replace('bg-indigo-500', 'bg-indigo-100');
+             badge.classList.replace('text-white', 'text-indigo-700');
+          }
+        }
+      }
     }
 
     function resetAllExercises() {
@@ -1010,6 +1081,8 @@
         const selects = exercisesContainer.querySelectorAll('.exercise-select');
         const components = exercisesContainer.querySelectorAll('.exercise-component');
         const warnings = exercisesContainer.querySelectorAll('.warning-msg');
+        const scores = exercisesContainer.querySelectorAll('.score-display');
+        const badges = subTabsContainer.querySelectorAll('.tab-score-badge');
         
         inputs.forEach(input => {
           input.value = '';
@@ -1029,15 +1102,22 @@
         });
 
         warnings.forEach(warning => warning.classList.add('hidden'));
+        scores.forEach(s => s.classList.add('opacity-0'));
+        badges.forEach(b => {
+          b.classList.add('hidden');
+          b.textContent = '';
+        });
 
         // Reset Flashcards
         const flashcards = exercisesContainer.querySelectorAll('.flashcard');
         flashcards.forEach(card => {
           const content = card.querySelector('.answer-content');
           const badge = card.querySelector('.status-badge');
+          const bgHighlight = card.querySelector('.bg-highlight');
+          
           content.classList.add('hidden');
-          card.classList.replace('bg-indigo-50', 'bg-white');
           card.classList.replace('border-indigo-300', 'border-gray-200');
+          if (bgHighlight) bgHighlight.classList.replace('scale-y-100', 'scale-y-0');
           badge.textContent = 'Reveal';
           badge.className = "status-badge text-xs text-gray-500 uppercase tracking-wider font-bold bg-gray-100 px-2 py-1 rounded-md ml-2 shrink-0 transition-colors";
         });
