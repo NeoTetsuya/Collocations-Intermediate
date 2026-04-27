@@ -21,6 +21,7 @@
       background-color: #f0fdf4 !important; 
       color: #166534 !important; 
       pointer-events: none; /* Lock input when correct */
+      box-shadow: 0 0 0 1px #22c55e;
     }
     .input-incorrect { 
       border-color: #ef4444 !important; 
@@ -75,6 +76,23 @@
       from { opacity: 0; transform: translateY(5px); }
       to { opacity: 1; transform: translateY(0); }
     }
+
+    /* Custom Scrollbar for responsive tabs/content */
+    .custom-scrollbar::-webkit-scrollbar {
+      height: 4px;
+      width: 4px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-track {
+      background: #f1f1f1; 
+      border-radius: 4px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-thumb {
+      background: #c1c1c1; 
+      border-radius: 4px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+      background: #a8a8a8; 
+    }
   </style>
 </head>
 <body class="bg-gray-50 text-gray-900 font-sans selection:bg-indigo-200 min-h-screen flex flex-col">
@@ -86,13 +104,11 @@
         <div class="bg-indigo-800 p-2 rounded-lg border border-indigo-700 shadow-sm">
           <i class="fa-solid fa-users text-xl text-indigo-300"></i>
         </div>
-        <h1 class="text-2xl font-bold tracking-tight">People & Relationships <span class="font-light opacity-80 text-lg hidden sm:inline">| Self-Study</span></h1>
+        <h1 class="text-xl sm:text-2xl font-bold tracking-tight">People & Relationships <span class="font-light opacity-80 text-lg hidden sm:inline">| Self-Study</span></h1>
       </div>
       <nav class="flex bg-indigo-800 rounded-lg p-1 overflow-x-auto w-full sm:w-auto shadow-inner custom-scrollbar" id="tab-nav">
-        <button data-target="unit17" class="tab-btn whitespace-nowrap px-4 py-2 rounded-md text-sm font-semibold transition-all bg-white text-indigo-900 shadow">Unit 17: Character</button>
-        <button data-target="unit18" class="tab-btn whitespace-nowrap px-4 py-2 rounded-md text-sm font-semibold transition-all text-indigo-100 hover:bg-indigo-700">Unit 18: Appearance</button>
-        <button data-target="unit19" class="tab-btn whitespace-nowrap px-4 py-2 rounded-md text-sm font-semibold transition-all text-indigo-100 hover:bg-indigo-700">Unit 19: Families</button>
-        <button data-target="unit20" class="tab-btn whitespace-nowrap px-4 py-2 rounded-md text-sm font-semibold transition-all text-indigo-100 hover:bg-indigo-700">Unit 20: Relationships</button>
+        <button data-target="unit17" class="tab-btn whitespace-nowrap px-4 py-2 rounded-md text-sm font-semibold transition-all bg-white text-indigo-900 shadow border-b-2 border-indigo-500">Unit 17: Character</button>
+        <button data-target="unit18" class="tab-btn whitespace-nowrap px-4 py-2 rounded-md text-sm font-semibold transition-all text-indigo-100 hover:bg-indigo-700 border-b-2 border-transparent">Unit 18: Appearance</button>
       </nav>
     </div>
   </header>
@@ -102,7 +118,7 @@
     <div class="flex flex-col lg:flex-row gap-6 items-start">
       
       <!-- LEFT PANE: Theory -->
-      <section class="lg:w-2/5 flex-shrink-0 flex flex-col bg-white rounded-xl border border-gray-200 shadow-sm">
+      <section class="lg:w-2/5 flex-shrink-0 flex flex-col bg-white rounded-xl border border-gray-200 shadow-sm h-auto lg:sticky lg:top-24">
         <div class="bg-gray-100 p-4 border-b border-gray-200 flex items-center justify-between z-10 rounded-t-xl">
           <h2 class="font-bold text-gray-700 uppercase tracking-wider text-sm flex items-center gap-2">
             <i class="fa-solid fa-bookmark text-indigo-500"></i> Reference & Rules
@@ -114,15 +130,17 @@
            <!-- Tabs injected here -->
         </div>
 
-        <div class="p-6 flex-grow overflow-y-auto max-h-[600px] lg:max-h-none custom-scrollbar" id="theory-container">
+        <div class="p-5 sm:p-6 flex-grow overflow-y-auto max-h-[60vh] lg:max-h-[calc(100vh-16rem)] custom-scrollbar" id="theory-container">
           <!-- Theory Content Injected via JS -->
         </div>
       </section>
 
       <!-- RIGHT PANE: Exercises -->
-      <section class="lg:w-3/5 flex flex-col bg-white rounded-xl shadow-md border border-gray-200 relative">
+      <section class="lg:w-3/5 flex flex-col bg-white rounded-xl shadow-md border border-gray-200 relative w-full">
         <div class="bg-indigo-50 p-4 border-b border-indigo-100 flex items-center justify-between flex-shrink-0 shadow-sm rounded-t-xl">
-          <h2 class="font-bold text-indigo-900 text-lg" id="exercise-title">Unit 17: People: character and behaviour</h2>
+          <h2 class="font-bold text-indigo-900 text-lg flex items-center gap-2" id="exercise-title">
+            <i class="fa-solid fa-pen-nib text-indigo-600"></i> Unit 17: People: character and behaviour
+          </h2>
         </div>
         
         <!-- EXERCISE SUB-TABS -->
@@ -130,12 +148,12 @@
            <!-- Tabs injected here -->
         </div>
 
-        <div class="p-6 sm:p-8 flex-grow" id="exercises-container" style="padding-bottom: 6rem;">
+        <div class="p-4 sm:p-6 lg:p-8 flex-grow" id="exercises-container" style="padding-bottom: 6rem;">
           <!-- Exercise Content Injected via JS -->
         </div>
 
         <!-- Global Exercise Controls (Reset only) -->
-        <div class="sticky bottom-0 w-full bg-white/95 backdrop-blur border-t p-4 flex justify-center items-center gap-4 rounded-b-xl shadow-[0_-10px_15px_-3px_rgba(0,0,0,0.05)] z-20">
+        <div class="absolute bottom-0 w-full bg-white/95 backdrop-blur border-t p-4 flex justify-center items-center gap-4 rounded-b-xl shadow-[0_-10px_15px_-3px_rgba(0,0,0,0.05)] z-20">
           <button id="btn-reset" class="flex items-center gap-2 text-indigo-700 hover:text-indigo-900 bg-indigo-50 hover:bg-indigo-100 font-medium px-6 py-2 rounded-lg transition-all shadow-sm">
             <i class="fa-solid fa-rotate-right"></i> Reset All Progress
           </button>
@@ -156,8 +174,8 @@
             html: `
               <div class="space-y-6">
                 <div class="bg-indigo-50 rounded-lg shadow-sm border border-indigo-200 overflow-hidden">
-                  <h3 class="bg-indigo-600 text-white font-bold p-3 text-lg"><i class="fa-solid fa-star mr-2"></i> Personality & Character</h3>
-                  <div class="p-4 space-y-3 text-sm text-gray-800">
+                  <h3 class="bg-indigo-600 text-white font-bold p-3 text-lg sm:text-base"><i class="fa-solid fa-star mr-2"></i> Personality & Character</h3>
+                  <div class="p-4 space-y-3 text-sm sm:text-base text-gray-800">
                     <ul class="list-disc pl-5 space-y-3">
                       <li><span class="font-bold text-indigo-700">good company:</span> people enjoy being with you.</li>
                       <li><span class="font-bold text-indigo-700">selfish streak:</span> you sometimes act in a selfish way.</li>
@@ -189,8 +207,8 @@
             html: `
               <div class="space-y-6">
                 <div class="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
-                  <h3 class="bg-emerald-600 text-white font-bold p-3 text-lg"><i class="fa-solid fa-masks-theater mr-2"></i> Behaviour: verb + noun</h3>
-                  <div class="overflow-x-auto">
+                  <h3 class="bg-emerald-600 text-white font-bold p-3 text-lg sm:text-base"><i class="fa-solid fa-masks-theater mr-2"></i> Behaviour: verb + noun</h3>
+                  <div class="overflow-x-auto custom-scrollbar">
                     <table class="w-full text-sm text-left">
                       <thead class="bg-emerald-50 text-emerald-900 border-b border-emerald-100">
                         <tr>
@@ -254,23 +272,23 @@
             html: `
               <div class="exercise-block bg-white border border-gray-100 rounded-xl p-5 shadow-[0_2px_10px_-3px_rgba(79,70,229,0.1)]">
                 <h3 class="font-bold text-lg mb-4 text-gray-800 flex items-center gap-3 border-b pb-3"><span class="bg-indigo-100 text-indigo-800 px-3 py-1 rounded text-sm shadow-sm">17.2</span> Fill in the missing letters/words in these magazine letters.</h3>
-                <div class="space-y-6 leading-8 text-gray-700">
+                <div class="space-y-6 leading-8 text-gray-700 text-sm sm:text-base">
                   <div class="bg-indigo-50/50 p-4 rounded-lg border border-indigo-100">
                     <p class="font-bold text-indigo-900 border-b border-indigo-100 pb-1 mb-2">Letter 1</p>
                     I know that I have a tendency to ${generateInput({ correct: ['bear'] })} a grudge, but I just can't forget something bad a friend did to me recently. She has a selfish ${generateInput({ correct: ['streak'] })} and doesn't care sometimes how much she hurts my ${generateInput({ correct: ['feelings'] })}. I am finding it increasingly hard to k${generateInput({ correct: ['eep'] })} my temper with her. But perhaps it might be better to l${generateInput({ correct: ['ose'] })} my temper and let her know how I really feel? 
-                    <br><span class="font-semibold text-sm mt-2 block">— Silvia M.</span>
+                    <br><span class="font-semibold text-sm mt-2 block text-indigo-800">— Silvia M.</span>
                   </div>
 
                   <div class="bg-indigo-50/50 p-4 rounded-lg border border-indigo-100">
                     <p class="font-bold text-indigo-900 border-b border-indigo-100 pb-1 mb-2">Letter 2</p>
                     Should I talk about personal matters to my closest colleague at work? She is not very good at ${generateInput({ correct: ['keeping'] })} secrets and she has a very v${generateInput({ correct: ['ivid'] })} imagination. She always promises not to tell other people, but I'm not sure she always k${generateInput({ correct: ['eeps'] })} her word.
-                    <br><span class="font-semibold text-sm mt-2 block">— Jan H.</span>
+                    <br><span class="font-semibold text-sm mt-2 block text-indigo-800">— Jan H.</span>
                   </div>
 
                   <div class="bg-indigo-50/50 p-4 rounded-lg border border-indigo-100">
                     <p class="font-bold text-indigo-900 border-b border-indigo-100 pb-1 mb-2">Letter 3</p>
                     I have always tried to p${generateInput({ correct: ['ut'] })} others first and not to think of myself. I believe you should not lose your p${generateInput({ correct: ['atience'] })} with your friends, but if someone seems to enjoy ${generateInput({ correct: ['making'] })} a fool out of you in front of other people, do those rules of friendship still apply?
-                    <br><span class="font-semibold text-sm mt-2 block">— Stefan P.</span>
+                    <br><span class="font-semibold text-sm mt-2 block text-indigo-800">— Stefan P.</span>
                   </div>
                 </div>
               </div>`
@@ -280,23 +298,23 @@
             html: `
               <div class="exercise-block bg-white border border-gray-100 rounded-xl p-5 shadow-[0_2px_10px_-3px_rgba(79,70,229,0.1)]">
                 <h3 class="font-bold text-lg mb-4 text-gray-800 flex items-center gap-3 border-b pb-3"><span class="bg-indigo-100 text-indigo-800 px-3 py-1 rounded text-sm shadow-sm">17.2</span> Fill in the missing letters/words in these magazine letters.</h3>
-                <div class="space-y-6 leading-8 text-gray-700">
+                <div class="space-y-6 leading-8 text-gray-700 text-sm sm:text-base">
                   <div class="bg-indigo-50/50 p-4 rounded-lg border border-indigo-100">
                     <p class="font-bold text-indigo-900 border-b border-indigo-100 pb-1 mb-2">Letter 4</p>
                     I'm a little shy with new people, though not p${generateInput({ correct: ['ainfully'] })} shy, but sometimes I think I g${generateInput({ correct: ['ive'] })} the impression that I'm unfriendly. How can I convince people that I'm good c${generateInput({ correct: ['ompany'] })} and worth getting to know?
-                    <br><span class="font-semibold text-sm mt-2 block">— Tom W.</span>
+                    <br><span class="font-semibold text-sm mt-2 block text-indigo-800">— Tom W.</span>
                   </div>
 
                   <div class="bg-indigo-50/50 p-4 rounded-lg border border-indigo-100">
                     <p class="font-bold text-indigo-900 border-b border-indigo-100 pb-1 mb-2">Letter 5</p>
                     My boyfriend has a really friendly, o${generateInput({ correct: ['utgoing'] })} personality and a great ${generateInput({ correct: ['sense'] })} of humour. He's h${generateInput({ correct: ['ighly'] })} intelligent and has a r${generateInput({ correct: ['azor'] })}-sharp mind. The perfect man. We've been together now for a year, and I like him a lot, but don't love him any more. Should I be b${generateInput({ correct: ['rutally'] })} honest with him and tell him?
-                    <br><span class="font-semibold text-sm mt-2 block">— Lydia T.</span>
+                    <br><span class="font-semibold text-sm mt-2 block text-indigo-800">— Lydia T.</span>
                   </div>
 
                   <div class="bg-indigo-50/50 p-4 rounded-lg border border-indigo-100">
                     <p class="font-bold text-indigo-900 border-b border-indigo-100 pb-1 mb-2">Letter 6</p>
                     I think a friend is destroying himself with drugs. I feel a ${generateInput({ correct: ['sense'] })} of responsibility towards him. He has always been f${generateInput({ correct: ['iercely'] })} loyal to me in good and bad times, which is a wonderful a${generateInput({ correct: ['spect'] })} of his personality. I feel I ought to contact the police or social services, but I don't want to make a s${generateInput({ correct: ['nap'] })} decision which I'll regret later.
-                    <br><span class="font-semibold text-sm mt-2 block">— Gary J.</span>
+                    <br><span class="font-semibold text-sm mt-2 block text-indigo-800">— Gary J.</span>
                   </div>
                 </div>
               </div>`
@@ -306,26 +324,26 @@
             html: `
               <div class="exercise-block bg-white border border-gray-100 rounded-xl p-5 shadow-[0_2px_10px_-3px_rgba(79,70,229,0.1)]">
                 <h3 class="font-bold text-lg mb-4 text-gray-800 flex items-center gap-3 border-b pb-3"><span class="bg-indigo-100 text-indigo-800 px-3 py-1 rounded text-sm shadow-sm">17.3</span> Complete B's remarks to mean the same as A's.</h3>
-                <div class="space-y-6 leading-8 text-gray-700">
+                <div class="space-y-6 leading-8 text-gray-700 text-sm sm:text-base">
                   <div>
                     <p class="font-bold text-indigo-700">1. A: Charlie's found it hard to accept psychologically the fact that he's now divorced.</p>
-                    <p class="ml-5">B: Yes, he's found it hard to ${generateInput({ correct: ['come to terms'] })} with his new situation.</p>
+                    <p class="ml-2 sm:ml-5">B: Yes, he's found it hard to ${generateInput({ correct: ['come to terms'] })} with his new situation.</p>
                   </div>
                   <div>
                     <p class="font-bold text-indigo-700">2. A: Parker's problem is he can't laugh when people play jokes on him.</p>
-                    <p class="ml-5">B: No, it's true. He just can't ${generateInput({ correct: ['take a joke'] })}, can he?</p>
+                    <p class="ml-2 sm:ml-5">B: No, it's true. He just can't ${generateInput({ correct: ['take a joke'] })}, can he?</p>
                   </div>
                   <div>
                     <p class="font-bold text-indigo-700">3. A: Well, Sara's behaviour last night certainly showed the truth about her.</p>
-                    <p class="ml-5">B: Yes, it certainly ${generateInput({ correct: ['revealed her true character', 'revealed his true character'], widthClass: 'w-64' })}.</p>
+                    <p class="ml-2 sm:ml-5">B: Yes, it certainly ${generateInput({ correct: ['revealed her true character', 'revealed his true character'], widthClass: 'w-48 sm:w-64' })}.</p>
                   </div>
                   <div>
                     <p class="font-bold text-indigo-700">4. A: She always has very high expectations of both herself and her children.</p>
-                    <p class="ml-5">B: Yes, she always ${generateInput({ correct: ['sets high standards'] })}.</p>
+                    <p class="ml-2 sm:ml-5">B: Yes, she always ${generateInput({ correct: ['sets high standards'] })}.</p>
                   </div>
                   <div>
                     <p class="font-bold text-indigo-700">5. A: Max started screaming and stamping his feet when I tried to put him to bed.</p>
-                    <p class="ml-5">B: Well, two-year-olds often ${generateInput({ correct: ['throw a tantrum'] })}.</p>
+                    <p class="ml-2 sm:ml-5">B: Well, two-year-olds often ${generateInput({ correct: ['throw a tantrum'] })}.</p>
                   </div>
                 </div>
               </div>`
@@ -340,8 +358,8 @@
             html: `
               <div class="space-y-6">
                 <div class="bg-emerald-50 rounded-lg shadow-sm border border-emerald-200 overflow-hidden">
-                  <h3 class="bg-emerald-600 text-white font-bold p-3 text-lg"><i class="fa-solid fa-face-smile mr-2"></i> Faces & Hair</h3>
-                  <div class="p-4 space-y-4 text-sm text-gray-800">
+                  <h3 class="bg-emerald-600 text-white font-bold p-3 text-lg sm:text-base"><i class="fa-solid fa-face-smile mr-2"></i> Faces & Hair</h3>
+                  <div class="p-4 space-y-4 text-sm sm:text-base text-gray-800">
                     <p class="font-bold text-emerald-900 border-b border-emerald-200 pb-1">Facial Features:</p>
                     <ul class="list-disc pl-5 space-y-1">
                       <li><span class="font-bold text-emerald-700">round face / pointed face / oval face</span> (egg-shaped)</li>
@@ -371,8 +389,8 @@
             html: `
               <div class="space-y-6">
                 <div class="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
-                  <h3 class="bg-cyan-600 text-white font-bold p-3 text-lg"><i class="fa-solid fa-person mr-2"></i> Body & Overall Appearance</h3>
-                  <div class="p-4 space-y-4 text-sm text-gray-800">
+                  <h3 class="bg-cyan-600 text-white font-bold p-3 text-lg sm:text-base"><i class="fa-solid fa-person mr-2"></i> Body & Overall Appearance</h3>
+                  <div class="p-4 space-y-4 text-sm sm:text-base text-gray-800">
                     <p class="font-bold text-cyan-900 border-b border-cyan-100 pb-1">Figures & Build:</p>
                     <ul class="list-disc pl-5 space-y-2">
                       <li><span class="font-bold text-cyan-700">slim figure / slender waist:</span> slender is a formal, poetic word for attractively slim.</li>
@@ -402,12 +420,12 @@
               <div class="exercise-block bg-white border border-gray-100 rounded-xl p-5 shadow-[0_2px_10px_-3px_rgba(16,185,129,0.1)]">
                 <h3 class="font-bold text-lg mb-4 text-gray-800 flex items-center gap-3 border-b pb-3"><span class="bg-emerald-100 text-emerald-800 px-3 py-1 rounded text-sm shadow-sm">18.1</span> Fat or Thin? Answer the questions.</h3>
                 <p class="text-sm text-gray-500 mb-4 font-medium">Use these words: <span class="bg-gray-100 px-2 py-0.5 rounded font-mono">portly</span>, <span class="bg-gray-100 px-2 py-0.5 rounded font-mono">lanky</span>, <span class="bg-gray-100 px-2 py-0.5 rounded font-mono">slender</span>, <span class="bg-gray-100 px-2 py-0.5 rounded font-mono">dumpy</span>, <span class="bg-gray-100 px-2 py-0.5 rounded font-mono">slim</span>, <span class="bg-gray-100 px-2 py-0.5 rounded font-mono">chubby</span></p>
-                <ol class="list-decimal list-inside space-y-4 pl-2 leading-8 text-gray-700">
-                  <li>Which words could be used to describe someone's waist? <br><i class="fa-solid fa-arrow-right text-emerald-400 mx-4"></i> ${generateInput({ correct: ['slender', 'slim'] })} and ${generateInput({ correct: ['slim', 'slender'] })}</li>
-                  <li>Which word is likely to be used of a rather physically awkward young person? <br><i class="fa-solid fa-arrow-right text-emerald-400 mx-4"></i> ${generateInput({ correct: ['lanky'] })}</li>
-                  <li>Which word means 'fat but in a pleasant way'? <br><i class="fa-solid fa-arrow-right text-emerald-400 mx-4"></i> ${generateInput({ correct: ['chubby'] })}</li>
-                  <li>Which word is more likely to be used to describe a man rather than a woman? <br><i class="fa-solid fa-arrow-right text-emerald-400 mx-4"></i> ${generateInput({ correct: ['portly'] })}</li>
-                  <li>Which word is more likely to be used to describe a woman rather than a man? <br><i class="fa-solid fa-arrow-right text-emerald-400 mx-4"></i> ${generateInput({ correct: ['dumpy'] })}</li>
+                <ol class="list-decimal list-inside space-y-4 pl-2 leading-8 text-gray-700 text-sm sm:text-base">
+                  <li>Which words could be used to describe someone's waist? <br><i class="fa-solid fa-arrow-right text-emerald-400 mx-4 hidden sm:inline"></i> ${generateInput({ correct: ['slender', 'slim'] })} and ${generateInput({ correct: ['slim', 'slender'] })}</li>
+                  <li>Which word is likely to be used of a rather physically awkward young person? <br><i class="fa-solid fa-arrow-right text-emerald-400 mx-4 hidden sm:inline"></i> ${generateInput({ correct: ['lanky'] })}</li>
+                  <li>Which word means 'fat but in a pleasant way'? <br><i class="fa-solid fa-arrow-right text-emerald-400 mx-4 hidden sm:inline"></i> ${generateInput({ correct: ['chubby'] })}</li>
+                  <li>Which word is more likely to be used to describe a man rather than a woman? <br><i class="fa-solid fa-arrow-right text-emerald-400 mx-4 hidden sm:inline"></i> ${generateInput({ correct: ['portly'] })}</li>
+                  <li>Which word is more likely to be used to describe a woman rather than a man? <br><i class="fa-solid fa-arrow-right text-emerald-400 mx-4 hidden sm:inline"></i> ${generateInput({ correct: ['dumpy'] })}</li>
                 </ol>
               </div>`
           },
@@ -416,7 +434,7 @@
             html: `
               <div class="exercise-block bg-white border border-gray-100 rounded-xl p-5 shadow-[0_2px_10px_-3px_rgba(16,185,129,0.1)]">
                 <h3 class="font-bold text-lg mb-4 text-gray-800 flex items-center gap-3 border-b pb-3"><span class="bg-emerald-100 text-emerald-800 px-3 py-1 rounded text-sm shadow-sm">18.2</span> Match the adjectives to the nouns.</h3>
-                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 leading-8 text-gray-700 font-medium">
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 leading-8 text-gray-700 font-medium text-sm sm:text-base">
                   <div>1. bushy ${generateSelect({ options: ['cheeks', 'moustache', 'shoulders', 'hair', 'eyebrows', 'resemblance', 'face'], correct: 'eyebrows' })}</div>
                   <div>2. oval ${generateSelect({ options: ['cheeks', 'moustache', 'shoulders', 'hair', 'eyebrows', 'resemblance', 'face'], correct: 'face' })}</div>
                   <div>3. striking ${generateSelect({ options: ['cheeks', 'moustache', 'shoulders', 'hair', 'eyebrows', 'resemblance', 'face'], correct: 'resemblance' })}</div>
@@ -430,9 +448,9 @@
           {
             tabLabel: "18.3 Story Fill-in",
             html: `
-              <div class="exercise-block bg-emerald-50/50 p-6 rounded-xl border border-emerald-200 shadow-sm">
+              <div class="exercise-block bg-emerald-50/50 p-4 sm:p-6 rounded-xl border border-emerald-200 shadow-sm">
                 <h3 class="font-bold text-lg mb-4 text-emerald-900 border-b border-emerald-200 pb-2"><i class="fa-solid fa-pen-to-square text-emerald-600 mr-2"></i> 18.3 Fill the gaps</h3>
-                <div class="leading-loose bg-white p-5 rounded-lg shadow-sm border border-emerald-100 text-gray-700">
+                <div class="leading-loose bg-white p-4 sm:p-5 rounded-lg shadow-sm border border-emerald-100 text-gray-700 text-sm sm:text-base">
                   I hadn't seen Owen since he was just a baby. He was (1) im${generateInput({ correct: ['maculately groomed'], widthClass: 'w-48' })}, smart and elegant. He was with a pretty young woman with (2) j${generateInput({ correct: ['et'] })}-black, (3) shoulder-${generateInput({ correct: ['length'] })} hair and a (4) lovely com${generateInput({ correct: ['plexion'] })}. She could have been a model, she had such a (5) str${generateInput({ correct: ['iking appearance'], widthClass: 'w-48' })}. He had his arm round her (6) sl${generateInput({ correct: ['ender'] })} wa${generateInput({ correct: ['ist'] })}. With them was a (7) po${generateInput({ correct: ['rtly'] })} g${generateInput({ correct: ['entleman'] })} who looked as though he enjoyed good food. When I introduced myself to Owen, he smiled. 'You haven't aged at all! You have a much more (8) y${generateInput({ correct: ['outhful'] })} a${generateInput({ correct: ['ppearance'], widthClass: 'w-32' })} than my father now does. Dad has (9) g${generateInput({ correct: ['one'] })} very grey.' I felt very pleased; he obviously didn't notice I was beginning to (10) ${generateInput({ correct: ['go'] })} bald.
                 </div>
               </div>`
@@ -443,315 +461,11 @@
               <div class="exercise-block bg-white border border-gray-100 rounded-xl p-5 shadow-[0_2px_10px_-3px_rgba(16,185,129,0.1)]">
                 <h3 class="font-bold text-lg mb-4 text-gray-800 flex items-center gap-3 border-b pb-3"><span class="bg-emerald-100 text-emerald-800 px-3 py-1 rounded text-sm shadow-sm">18.4</span> Fill the gaps to give contrasting meanings.</h3>
                 <p class="text-sm text-gray-500 mb-4 font-medium">Use these words: <span class="bg-gray-100 px-2 py-0.5 rounded font-mono">round</span>, <span class="bg-gray-100 px-2 py-0.5 rounded font-mono">coarse</span>, <span class="bg-gray-100 px-2 py-0.5 rounded font-mono">upturned</span>, <span class="bg-gray-100 px-2 py-0.5 rounded font-mono">fair</span>, <span class="bg-gray-100 px-2 py-0.5 rounded font-mono">pointed</span>, <span class="bg-gray-100 px-2 py-0.5 rounded font-mono">straight</span>, <span class="bg-gray-100 px-2 py-0.5 rounded font-mono">dark</span>, <span class="bg-gray-100 px-2 py-0.5 rounded font-mono">sleek</span></p>
-                <ol class="list-decimal list-inside space-y-4 pl-2 leading-8 text-gray-700">
+                <ol class="list-decimal list-inside space-y-4 pl-2 leading-8 text-gray-700 text-sm sm:text-base">
                   <li>Her hair's not ${generateInput({ correct: ['fair'] })}, in fact it's almost black.</li>
                   <li>She has an ${generateInput({ correct: ['upturned'] })} nose but her brother has a ${generateInput({ correct: ['straight'] })} nose.</li>
                   <li>Her mother has a ${generateInput({ correct: ['round', 'pointed'] })} face but her father has a ${generateInput({ correct: ['pointed', 'round'] })} face.</li>
                   <li>My hair is so ${generateInput({ correct: ['coarse'] })} and ugly; Sally's is so ${generateInput({ correct: ['sleek'] })} and lovely.</li>
-                </ol>
-              </div>`
-          }
-        ]
-      },
-      unit19: {
-        title: "Unit 19: Families",
-        theory: [
-          {
-            tabLabel: "Family Relationships",
-            html: `
-              <div class="space-y-6">
-                <div class="bg-amber-50 rounded-lg shadow-sm border border-amber-200 overflow-hidden">
-                  <h3 class="bg-amber-600 text-white font-bold p-3 text-lg"><i class="fa-solid fa-people-roof mr-2"></i> Family Networks & Types</h3>
-                  <div class="p-4 space-y-4 text-sm text-gray-800">
-                    <ul class="list-disc pl-5 space-y-2">
-                      <li><span class="font-bold text-amber-700">nuclear family:</span> just parents and children.</li>
-                      <li><span class="font-bold text-amber-700">extended family:</span> a wider network including grandparents, cousins, etc.</li>
-                      <li><span class="font-bold text-amber-700">close / immediate family:</span> people who are your nearest blood relatives.</li>
-                      <li><span class="font-bold text-amber-700">distant relatives:</span> e.g. second cousins or distant cousins.</li>
-                      <li><span class="font-bold text-amber-700">close-knit family:</span> a family where the relationship is very strong.</li>
-                      <li><span class="font-bold text-amber-700">respectable family:</span> well-regarded in society.</li>
-                      <li><span class="font-bold text-amber-700">dysfunctional family:</span> unhappy, not working in a healthy way.</li>
-                    </ul>
-
-                    <p class="font-bold text-amber-900 border-b border-amber-200 pb-1 mt-4">Marriage & Divorce:</p>
-                    <ul class="list-disc pl-5 space-y-2">
-                      <li><span class="font-bold text-amber-700">late husband/wife:</span> one who has died.</li>
-                      <li><span class="font-bold text-amber-700">estranged husband/wife:</span> lives in a different place and has a difficult relationship.</li>
-                      <li><span class="font-bold text-amber-700">trial separation / get a divorce / bitter (acrimonious) divorce</span></li>
-                      <li><span class="font-bold text-amber-700">ex-husband / ex-wife:</span> previously married.</li>
-                      <li><span class="font-bold text-amber-700">confirmed bachelor:</span> a man who seems to have no intention of ever marrying.</li>
-                    </ul>
-
-                    <p class="font-bold text-amber-900 border-b border-amber-200 pb-1 mt-4">Types of Homes:</p>
-                    <ul class="list-disc pl-5 space-y-2">
-                      <li><span class="font-bold text-amber-700">broken home:</span> children whose parents have separated/divorced.</li>
-                      <li><span class="font-bold text-amber-700">stable home:</span> strong, loving family environment.</li>
-                      <li><span class="font-bold text-amber-700">deprived home:</span> poor, lacking things necessary for a pleasant life.</li>
-                    </ul>
-                  </div>
-                </div>
-              </div>`
-          },
-          {
-            tabLabel: "Parents & Children",
-            html: `
-              <div class="space-y-6">
-                <div class="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
-                  <h3 class="bg-orange-600 text-white font-bold p-3 text-lg"><i class="fa-solid fa-children mr-2"></i> Parents and Children</h3>
-                  <div class="overflow-x-auto">
-                    <table class="w-full text-sm text-left">
-                      <thead class="bg-orange-50 text-orange-900 border-b border-orange-100">
-                        <tr>
-                          <th class="p-3 font-bold w-1/3">Collocation</th>
-                          <th class="p-3 font-bold">Comments / Usage</th>
-                        </tr>
-                      </thead>
-                      <tbody class="divide-y divide-gray-100 text-gray-700">
-                        <tr class="hover:bg-gray-50">
-                          <td class="p-3 font-bold text-orange-700">start a family</td>
-                          <td class="p-3">NOT <em>begin a family</em></td>
-                        </tr>
-                        <tr class="hover:bg-gray-50">
-                          <td class="p-3 font-bold text-orange-700">have children / a baby</td>
-                          <td class="p-3">NOT <em>get children / a baby</em></td>
-                        </tr>
-                        <tr class="hover:bg-gray-50">
-                          <td class="p-3 font-bold text-orange-700">expect a baby</td>
-                          <td class="p-3">NOT <em>wait (for) a baby</em></td>
-                        </tr>
-                        <tr class="hover:bg-gray-50">
-                          <td class="p-3 font-bold text-orange-700">the baby is due</td>
-                          <td class="p-3">Expected to arrive</td>
-                        </tr>
-                        <tr class="hover:bg-gray-50">
-                          <td class="p-3 font-bold text-orange-700">single parent/mother</td>
-                          <td class="p-3">Unmarried or divorced</td>
-                        </tr>
-                        <tr class="hover:bg-gray-50">
-                          <td class="p-3 font-bold text-orange-700">raise / bring up children (or a family)</td>
-                          <td class="p-3"><em>Raise</em> is more common in US; <em>bring up</em> in UK</td>
-                        </tr>
-                        <tr class="hover:bg-gray-50">
-                          <td class="p-3 font-bold text-orange-700">apply for / grant custody of</td>
-                          <td class="p-3">Legal right to care for a child after separation</td>
-                        </tr>
-                        <tr class="hover:bg-gray-50">
-                          <td class="p-3 font-bold text-orange-700">provide for your family</td>
-                          <td class="p-3">To earn enough money to support them</td>
-                        </tr>
-                        <tr class="hover:bg-gray-50">
-                          <td class="p-3 font-bold text-orange-700">set up home</td>
-                          <td class="p-3">Start an independent life in one's own flat/house</td>
-                        </tr>
-                      </tbody>
-                    </table>
-                  </div>
-                </div>
-              </div>`
-          }
-        ],
-        exercises: [
-          {
-            tabLabel: "19.1 Old Man's Memories",
-            html: `
-              <div class="exercise-block bg-white border border-gray-100 rounded-xl p-5 shadow-[0_2px_10px_-3px_rgba(245,158,11,0.1)]">
-                <h3 class="font-bold text-lg mb-4 text-gray-800 flex items-center gap-3 border-b pb-3"><span class="bg-amber-100 text-amber-800 px-3 py-1 rounded text-sm shadow-sm">19.1</span> Fill the gaps in these memories.</h3>
-                <div class="leading-loose bg-amber-50/50 p-6 rounded-lg shadow-sm border border-amber-100 text-gray-700">
-                  I grew up in an (1) ${generateInput({ correct: ['extended'] })} family as my grandparents and a couple of aunts and an uncle, who was a (2) ${generateInput({ correct: ['confirmed'] })} bachelor, lived with us. We saw a lot of our (3) ${generateInput({ correct: ['distant'] })} relatives as well as our close ones. I think that families tended to be much more (4) ${generateInput({ correct: ['close', 'close-knit'] })} then - we talked to each other more and did things together more. I'm sure there are far more (5) ${generateInput({ correct: ['dysfunctional'] })} families now than there used to be - you know, where parents hardly spend any time with their children, or with each other - and a lot of parents who are divorced. My (6) ${generateInput({ correct: ['late'] })} wife, who died two years ago, used to say that it is not fair on children to let them grow up in (7) ${generateInput({ correct: ['broken', 'deprived'] })} homes.
-                </div>
-              </div>`
-          },
-          {
-            tabLabel: "19.2 Fix the Errors",
-            html: `
-              <div class="exercise-block bg-white border border-gray-100 rounded-xl p-5 shadow-[0_2px_10px_-3px_rgba(245,158,11,0.1)]">
-                <h3 class="font-bold text-lg mb-4 text-gray-800 flex items-center gap-3 border-b pb-3"><span class="bg-amber-100 text-amber-800 px-3 py-1 rounded text-sm shadow-sm">19.2</span> Correct the 6 collocation errors.</h3>
-                <div class="bg-white p-5 rounded-lg shadow-sm text-gray-700 leading-loose border border-orange-100 space-y-4">
-                  <div>James and I are hoping to <span class="line-through text-red-400">begin</span> ${generateInput({ correct: ['start'] })} a family soon.</div>
-                  <div>We both want to <span class="line-through text-red-400">get</span> ${generateInput({ correct: ['have'] })} lots of children. Ideally, I'd like to have my first baby next year.</div>
-                  <div>My sister is <span class="line-through text-red-400">waiting</span> ${generateInput({ correct: ['expecting'] })} a baby now.</div>
-                  <div>It's <span class="line-through text-red-400">coming</span> ${generateInput({ correct: ['due'] })} next month.</div>
-                  <div>She's going to be a <span class="line-through text-red-400">sole</span> ${generateInput({ correct: ['single'] })} parent...</div>
-                  <div>...and it'll be hard for her to <span class="line-through text-red-400">grow up</span> ${generateInput({ correct: ['bring up', 'raise'] })} a child on her own.</div>
-                </div>
-              </div>`
-          },
-          {
-            tabLabel: "19.3 Match Halves",
-            html: `
-              <div class="exercise-block bg-white border border-gray-100 rounded-xl p-5 shadow-[0_2px_10px_-3px_rgba(245,158,11,0.1)]">
-                <h3 class="font-bold text-lg mb-4 text-gray-800 flex items-center gap-3 border-b pb-3"><span class="bg-amber-100 text-amber-800 px-3 py-1 rounded text-sm shadow-sm">19.3</span> Match the two parts of these collocations.</h3>
-                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 leading-8 text-gray-700 font-medium">
-                  <div>1. apply for ${generateSelect({ options: ['cousin', 'separation', 'custody', 'home', 'wife', 'family', 'your family', 'a divorce'], correct: 'custody' })}</div>
-                  <div>2. get ${generateSelect({ options: ['cousin', 'separation', 'custody', 'home', 'wife', 'family', 'your family', 'a divorce'], correct: 'a divorce' })}</div>
-                  <div>3. estranged ${generateSelect({ options: ['cousin', 'separation', 'custody', 'home', 'wife', 'family', 'your family', 'a divorce'], correct: 'wife' })}</div>
-                  <div>4. nuclear ${generateSelect({ options: ['cousin', 'separation', 'custody', 'home', 'wife', 'family', 'your family', 'a divorce'], correct: 'family' })}</div>
-                  <div>5. provide for ${generateSelect({ options: ['cousin', 'separation', 'custody', 'home', 'wife', 'family', 'your family', 'a divorce'], correct: 'your family' })}</div>
-                  <div>6. distant ${generateSelect({ options: ['cousin', 'separation', 'custody', 'home', 'wife', 'family', 'your family', 'a divorce'], correct: 'cousin' })}</div>
-                  <div>7. set up ${generateSelect({ options: ['cousin', 'separation', 'custody', 'home', 'wife', 'family', 'your family', 'a divorce'], correct: 'home' })}</div>
-                  <div>8. trial ${generateSelect({ options: ['cousin', 'separation', 'custody', 'home', 'wife', 'family', 'your family', 'a divorce'], correct: 'separation' })}</div>
-                </div>
-              </div>`
-          },
-          {
-            tabLabel: "19.4 Q&A",
-            html: `
-              <div class="exercise-block bg-white border border-gray-100 rounded-xl p-5 shadow-[0_2px_10px_-3px_rgba(245,158,11,0.1)]">
-                <h3 class="font-bold text-lg mb-4 text-gray-800 flex items-center gap-3 border-b pb-3"><span class="bg-amber-100 text-amber-800 px-3 py-1 rounded text-sm shadow-sm">19.4</span> Answer these specific questions from the unit.</h3>
-                <ol class="list-decimal list-inside space-y-6 pl-2 leading-8 text-gray-700">
-                  <li>
-                    What collocation means the same as to be pregnant?<br>
-                    <i class="fa-solid fa-arrow-right text-amber-400 mx-4"></i> ${generateInput({ correct: ['expecting a baby', 'expect a baby'], widthClass: 'w-48' })}
-                  </li>
-                  <li>
-                    What can be put before the words <em>wife</em> and <em>husband</em> to indicate that they are no longer married?<br>
-                    <i class="fa-solid fa-arrow-right text-amber-400 mx-4"></i> ${generateInput({ correct: ['ex', 'ex-'] })}
-                  </li>
-                  <li>
-                    What is a more formal alternative for <em>give custody</em>?<br>
-                    <i class="fa-solid fa-arrow-right text-amber-400 mx-4"></i> ${generateInput({ correct: ['grant custody'] })}
-                  </li>
-                </ol>
-              </div>`
-          }
-        ]
-      },
-      unit20: {
-        title: "Unit 20: Relationships",
-        theory: [
-          {
-            tabLabel: "Friendship",
-            html: `
-              <div class="space-y-6">
-                <div class="bg-rose-50 rounded-lg shadow-sm border border-rose-200 overflow-hidden">
-                  <h3 class="bg-rose-600 text-white font-bold p-3 text-lg"><i class="fa-solid fa-user-group mr-2"></i> Friends and Friendship</h3>
-                  <div class="overflow-x-auto">
-                    <table class="w-full text-sm text-left">
-                      <thead class="bg-rose-100 text-rose-900 border-b border-rose-200">
-                        <tr>
-                          <th class="p-3 font-bold w-1/3">Collocation</th>
-                          <th class="p-3 font-bold">Example & Meaning</th>
-                        </tr>
-                      </thead>
-                      <tbody class="divide-y divide-gray-100 text-gray-700">
-                        <tr class="hover:bg-white">
-                          <td class="p-3 font-bold text-rose-700">make friends</td>
-                          <td class="p-3">NOT <em>find friends</em> (a common error)</td>
-                        </tr>
-                        <tr class="hover:bg-white">
-                          <td class="p-3 font-bold text-rose-700">strike up a friendship</td>
-                          <td class="p-3">To start a friendship</td>
-                        </tr>
-                        <tr class="hover:bg-white">
-                          <td class="p-3 font-bold text-rose-700">form/develop a friendship</td>
-                          <td class="p-3">NOT <em>make a friendship</em></td>
-                        </tr>
-                        <tr class="hover:bg-white">
-                          <td class="p-3 font-bold text-rose-700">cement/spoil a friendship</td>
-                          <td class="p-3">cement = strengthen ; spoil = have a bad effect on</td>
-                        </tr>
-                        <tr class="hover:bg-white">
-                          <td class="p-3 font-bold text-rose-700">a friendship grows</td>
-                          <td class="p-3">Gets stronger</td>
-                        </tr>
-                        <tr class="hover:bg-white">
-                          <td class="p-3 font-bold text-rose-700">close/special friends<br>mutual friends</td>
-                          <td class="p-3">mutual friends = friends that you share with someone else</td>
-                        </tr>
-                        <tr class="hover:bg-white">
-                          <td class="p-3 font-bold text-rose-700">a casual acquaintance</td>
-                          <td class="p-3">Someone you know a little</td>
-                        </tr>
-                        <tr class="hover:bg-white">
-                          <td class="p-3 font-bold text-rose-700">have a good relationship with</td>
-                          <td class="p-3">NOT <em>have a relation/relations with</em></td>
-                        </tr>
-                        <tr class="hover:bg-white">
-                          <td class="p-3 font-bold text-rose-700">keep in contact/touch</td>
-                          <td class="p-3">Opposite = lose contact/touch</td>
-                        </tr>
-                      </tbody>
-                    </table>
-                  </div>
-                </div>
-              </div>`
-          },
-          {
-            tabLabel: "More Than Friends",
-            html: `
-              <div class="space-y-6">
-                <div class="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
-                  <h3 class="bg-pink-600 text-white font-bold p-3 text-lg"><i class="fa-solid fa-heart mr-2"></i> A Love Story</h3>
-                  <div class="p-4 text-sm text-gray-800 leading-relaxed bg-pink-50/30">
-                    <p>
-                      I fell <strong class="text-pink-700">madly in love</strong> with Anton from the moment I met him. It was certainly <strong class="text-pink-700">love at first sight</strong>. I knew at once that he was the <strong class="text-pink-700">love of my life</strong> but at first I was not sure if my <strong class="text-pink-700">love was returned</strong> or not.
-                    </p>
-                    <p class="mt-3">
-                      Within a few days, however, he had told me that he was <strong class="text-pink-700">desperately in love</strong> with me too. A couple of weeks later, we realised that we wanted to <strong class="text-pink-700">make a commitment</strong> to each other and, when Anton asked me to marry him, I immediately <strong class="text-pink-700">accepted his proposal</strong>.
-                    </p>
-                    <p class="mt-3">
-                      I'm sure we will always <strong class="text-pink-700">love each other unconditionally</strong> <em>(love that is total and does not change)</em>. Neither of us would ever consider <strong class="text-pink-700">having an affair</strong> <em>(having a sexual relationship outside marriage)</em> with someone else.
-                    </p>
-                  </div>
-                </div>
-              </div>`
-          }
-        ],
-        exercises: [
-          {
-            tabLabel: "20.1 Fill-in",
-            html: `
-              <div class="exercise-block bg-white border border-gray-100 rounded-xl p-5 shadow-[0_2px_10px_-3px_rgba(225,29,72,0.1)]">
-                <h3 class="font-bold text-lg mb-4 text-gray-800 flex items-center gap-3 border-b pb-3"><span class="bg-rose-100 text-rose-800 px-3 py-1 rounded text-sm shadow-sm">20.1</span> Choose an appropriate word to complete each sentence.</h3>
-                <ol class="list-decimal list-inside space-y-4 pl-2 leading-8 text-gray-700">
-                  <li>Ellie is quite a shy person and finds it hard to ${generateInput({ correct: ['make'] })} friends.</li>
-                  <li>Do Matthew and Emily ${generateInput({ correct: ['have'] })} a good relationship?</li>
-                  <li>Alex is always ${generateInput({ correct: ['striking'] })} up friendships with people he meets.</li>
-                  <li>I hope their disagreement over the bill won't ${generateInput({ correct: ['spoil'] })} their friendship.</li>
-                  <li>It's amazing how often you find that you have some ${generateInput({ correct: ['mutual'] })} friends.</li>
-                  <li>Apparently, people ${generateInput({ correct: ['make', 'form', 'develop'] })} most of their closest friendships when they are young.</li>
-                  <li>I wouldn't call Graham a close friend, more a casual ${generateInput({ correct: ['acquaintance'] })}.</li>
-                  <li>We didn't really like each other at first, but our friendship ${generateInput({ correct: ['grew'] })} as we got to know each other better.</li>
-                </ol>
-              </div>`
-          },
-          {
-            tabLabel: "20.2 Match Collocations",
-            html: `
-              <div class="exercise-block bg-white border border-gray-100 rounded-xl p-5 shadow-[0_2px_10px_-3px_rgba(225,29,72,0.1)]">
-                <h3 class="font-bold text-lg mb-4 text-gray-800 flex items-center gap-3 border-b pb-3"><span class="bg-rose-100 text-rose-800 px-3 py-1 rounded text-sm shadow-sm">20.2</span> Make 9 collocations out of the words in the box.</h3>
-                <div class="flex gap-2 justify-center mb-6 flex-wrap text-sm border p-4 bg-gray-50 rounded">
-                  ${['a', 'a', 'contact', 'love', 'a', 'love', 'proposal', 'accept', 'affair', 'an', 'at first', 'friends', 'friendship', 'return', 'sight', 'commitment', 'contact', 'have', 'in', "someone's", 'keep', 'special', 'lose', 'make', 'strike', 'up'].map(v => `<span class="bg-white border border-rose-200 px-2 py-1 rounded shadow-sm text-gray-700">${v}</span>`).join('')}
-                </div>
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 leading-8">
-                  <div class="flex items-center gap-2"><span class="w-6 text-right">1.</span> ${generateInput({ correct: ['accept a proposal'], placeholder: '...', widthClass: 'w-full' })}</div>
-                  <div class="flex items-center gap-2"><span class="w-6 text-right">2.</span> ${generateInput({ correct: ['have an affair'], placeholder: '...', widthClass: 'w-full' })}</div>
-                  <div class="flex items-center gap-2"><span class="w-6 text-right">3.</span> ${generateInput({ correct: ['love at first sight'], placeholder: '...', widthClass: 'w-full' })}</div>
-                  <div class="flex items-center gap-2"><span class="w-6 text-right">4.</span> ${generateInput({ correct: ['make a commitment'], placeholder: '...', widthClass: 'w-full' })}</div>
-                  <div class="flex items-center gap-2"><span class="w-6 text-right">5.</span> ${generateInput({ correct: ["return someone's love"], placeholder: '...', widthClass: 'w-full' })}</div>
-                  <div class="flex items-center gap-2"><span class="w-6 text-right">6.</span> ${generateInput({ correct: ['keep in contact'], placeholder: '...', widthClass: 'w-full' })}</div>
-                  <div class="flex items-center gap-2"><span class="w-6 text-right">7.</span> ${generateInput({ correct: ['lose contact'], placeholder: '...', widthClass: 'w-full' })}</div>
-                  <div class="flex items-center gap-2"><span class="w-6 text-right">8.</span> ${generateInput({ correct: ['strike up a friendship'], placeholder: '...', widthClass: 'w-full' })}</div>
-                  <div class="flex items-center gap-2"><span class="w-6 text-right">9.</span> ${generateInput({ correct: ['special friends'], placeholder: '...', widthClass: 'w-full' })}</div>
-                </div>
-              </div>`
-          },
-          {
-            tabLabel: "20.3 & 20.4 Questions",
-            html: `
-              <div class="exercise-block bg-rose-50/50 border border-rose-100 rounded-xl p-5 shadow-sm">
-                <h3 class="font-bold text-lg mb-4 text-rose-900 flex items-center gap-3 border-b border-rose-200 pb-3"><span class="bg-white text-rose-800 px-3 py-1 rounded text-sm shadow-sm">20.3 & 20.4</span> Answer and complete these questions.</h3>
-                <ol class="list-decimal list-inside space-y-6 pl-2 leading-8 text-gray-700 bg-white p-6 rounded-lg shadow-sm">
-                  <li>Which verb suggests that friendship can be seen as a plant? <i class="fa-solid fa-arrow-right text-rose-300 mx-2"></i> ${generateInput({ correct: ['grow'] })}</li>
-                  <li>Which collocation suggests that love is close to being crazy? <i class="fa-solid fa-arrow-right text-rose-300 mx-2"></i> ${generateInput({ correct: ['madly in love', 'fall madly in love'], widthClass: 'w-40' })}</li>
-                  <li>Which collocation means 'agree to marry someone'? <i class="fa-solid fa-arrow-right text-rose-300 mx-2"></i> ${generateInput({ correct: ['accept a proposal'], widthClass: 'w-40' })}</li>
-                  <li>Which collocation means the same as 'keep in contact with'? <i class="fa-solid fa-arrow-right text-rose-300 mx-2"></i> ${generateInput({ correct: ['keep in touch', 'keep in touch with'], widthClass: 'w-40' })}</li>
-                  <li class="border-t pt-4">Have you ever fallen in love at first ${generateInput({ correct: ['sight'] })}?</li>
-                  <li>Do you think it's true that men are more reluctant to ${generateInput({ correct: ['make'] })} a commitment?</li>
-                  <li>How old were you when you ${generateInput({ correct: ['fell'] })} in love for the first time?</li>
-                  <li>Do you think it is possible to have one person who is the love of your ${generateInput({ correct: ['life'] })}?</li>
-                  <li>Have you ever been in love with someone who has not ${generateInput({ correct: ['returned'] })} your love?</li>
-                  <li>Do you think that men or women are more likely to be tempted to ${generateInput({ correct: ['have'] })} an affair?</li>
                 </ol>
               </div>`
           }
@@ -761,42 +475,46 @@
 
     // --- HTML GENERATORS ---
     
-    function generateInput({ correct, placeholder = "type here", widthClass = "w-32 sm:w-40" }) {
+    // Updated generateInput to support responsive inline widths
+    function generateInput({ correct, placeholder = "type here", widthClass = "w-28 sm:w-36 md:w-48" }) {
       const correctStr = JSON.stringify(correct).replace(/"/g, '&quot;').replace(/'/g, '&#39;');
       const firstAnswer = correct[0].replace(/'/g, '&#39;');
       return `
         <div class="inline-block relative m-1 exercise-component align-middle ${widthClass === 'w-full' ? 'w-full block mx-0 mt-2' : ''}">
-          <input type="text" class="exercise-input border-b-2 outline-none px-2 py-1 transition-all duration-200 text-center font-bold text-indigo-900 border-gray-300 focus:border-indigo-500 focus:bg-indigo-50 bg-transparent rounded-t-sm ${widthClass}" data-correct="${correctStr}" placeholder="${placeholder}" />
-          <span class="feedback-icon absolute right-2 top-1 text-lg drop-shadow-sm"></span>
-          <div class="answer-tooltip absolute top-full left-1/2 -translate-x-1/2 mt-2 px-3 py-1.5 rounded whitespace-nowrap z-30 hidden transition-opacity duration-200">${firstAnswer}</div>
+          <input type="text" class="exercise-input border-b-2 outline-none px-2 py-1 transition-all duration-200 text-center font-bold text-indigo-900 border-gray-300 focus:border-indigo-500 focus:bg-indigo-50 bg-transparent rounded-t-sm ${widthClass}" data-correct="${correctStr}" placeholder="${placeholder}" autocomplete="off" autocorrect="off" spellcheck="false" />
+          <span class="feedback-icon absolute ${widthClass === 'w-full' ? 'right-2' : '-right-2 sm:-right-6'} top-1 text-lg drop-shadow-sm flex items-center justify-center pointer-events-none"></span>
+          <div class="answer-tooltip absolute top-full left-1/2 -translate-x-1/2 mt-2 px-3 py-1.5 rounded z-30 hidden transition-opacity duration-200 text-xs w-max max-w-[200px] sm:max-w-none whitespace-normal sm:whitespace-nowrap text-center break-words">${firstAnswer}</div>
         </div>
       `;
     }
 
+    // Updated generateSelect to support responsive dropdowns wrapping text
     function generateSelect({ options, correct }) {
       const optionsHtml = options.map(opt => `<option value="${opt}">${opt}</option>`).join('');
       return `
         <div class="inline-block relative m-1 exercise-component align-middle w-full sm:w-auto">
-          <select class="exercise-select border-b-2 outline-none px-2 py-1 appearance-none bg-transparent font-bold text-indigo-900 text-center pr-6 cursor-pointer transition-all duration-200 border-gray-300 focus:border-indigo-500 focus:bg-indigo-50 rounded-t-sm max-w-full" data-correct="${correct}">
+          <select class="exercise-select border-b-2 outline-none px-2 py-1 appearance-none bg-transparent font-bold text-indigo-900 text-center pr-6 cursor-pointer transition-all duration-200 border-gray-300 focus:border-indigo-500 focus:bg-indigo-50 rounded-t-sm max-w-[200px] sm:max-w-[300px] text-ellipsis" data-correct="${correct}">
             <option value="" disabled selected>select...</option>
             ${optionsHtml}
           </select>
-          <span class="feedback-icon absolute -right-2 top-1 text-lg drop-shadow-sm"></span>
-          <div class="answer-tooltip absolute top-full left-1/2 -translate-x-1/2 mt-2 px-3 py-1.5 rounded whitespace-nowrap z-30 hidden transition-opacity duration-200">${correct}</div>
+          <span class="feedback-icon absolute -right-2 top-1 text-lg drop-shadow-sm flex items-center justify-center pointer-events-none"></span>
+          <div class="answer-tooltip absolute top-full left-1/2 -translate-x-1/2 mt-2 px-3 py-1.5 rounded z-30 hidden transition-opacity duration-200 text-xs w-max max-w-[200px] sm:max-w-none whitespace-normal sm:whitespace-nowrap text-center break-words">${correct}</div>
         </div>
       `;
     }
 
     function generateFlashcard(question, answer) {
       return `
-        <div class="flashcard p-4 border rounded-xl cursor-pointer transition-all duration-300 bg-white border-gray-200 hover:border-indigo-300 hover:shadow-md select-none group">
-          <div class="flex justify-between items-start pointer-events-none">
-            <p class="font-medium text-gray-800 leading-snug group-hover:text-indigo-900 transition-colors">${question}</p>
+        <div class="flashcard p-4 border rounded-xl cursor-pointer transition-all duration-300 bg-white border-gray-200 hover:border-indigo-300 hover:shadow-md select-none group relative overflow-hidden">
+          <div class="flex justify-between items-start pointer-events-none relative z-10">
+            <p class="font-medium text-gray-800 leading-snug group-hover:text-indigo-900 transition-colors text-sm sm:text-base">${question}</p>
             <span class="status-badge text-xs text-gray-500 uppercase tracking-wider font-bold bg-gray-100 px-2 py-1 rounded-md ml-2 shrink-0 transition-colors">Reveal</span>
           </div>
-          <div class="answer-content hidden mt-3 pt-3 border-t border-indigo-100 text-indigo-700 font-bold flex items-center gap-2 pointer-events-none">
+          <div class="answer-content hidden mt-3 pt-3 border-t border-indigo-100 text-indigo-700 font-bold flex items-center gap-2 pointer-events-none relative z-10 text-sm sm:text-base">
             <i class="fa-solid fa-check-circle text-indigo-500"></i> ${answer}
           </div>
+          <!-- Background highlight element -->
+          <div class="absolute inset-0 bg-indigo-50 transform scale-y-0 origin-bottom transition-transform duration-300 ease-out z-0 bg-highlight"></div>
         </div>
       `;
     }
@@ -819,15 +537,15 @@
       // Update Main Navigation Tabs
       tabButtons.forEach(btn => {
         if (btn.dataset.target === unitId) {
-          btn.className = "tab-btn whitespace-nowrap px-4 py-2 rounded-md text-sm font-semibold transition-all bg-white text-indigo-900 shadow-sm";
+          btn.className = "tab-btn whitespace-nowrap px-4 py-2 rounded-md text-sm font-semibold transition-all bg-white text-indigo-900 shadow border-b-2 border-indigo-500";
         } else {
-          btn.className = "tab-btn whitespace-nowrap px-4 py-2 rounded-md text-sm font-semibold transition-all text-indigo-100 hover:bg-indigo-700";
+          btn.className = "tab-btn whitespace-nowrap px-4 py-2 rounded-md text-sm font-semibold transition-all text-indigo-100 hover:bg-indigo-700 border-b-2 border-transparent";
         }
       });
 
       // Fetch Unit Data
       const data = contentData[unitId];
-      exerciseTitle.textContent = data.title;
+      exerciseTitle.innerHTML = `<i class="fa-solid fa-pen-nib text-indigo-600 mr-2"></i> ${data.title}`;
       
       // Clear containers
       theoryTabsContainer.innerHTML = '';
@@ -853,8 +571,8 @@
       data.exercises.forEach((ex, index) => {
         // 1. Create Tab Button
         const tabBtn = document.createElement('button');
-        tabBtn.className = "sub-tab-btn px-4 py-2 text-sm font-bold rounded-t-lg transition-colors border border-b-0 whitespace-nowrap";
-        tabBtn.textContent = ex.tabLabel;
+        tabBtn.className = "sub-tab-btn px-4 py-2 text-sm font-bold rounded-t-lg transition-colors border border-b-0 whitespace-nowrap flex items-center gap-2";
+        tabBtn.innerHTML = `${ex.tabLabel} <span class="hidden tab-score-badge bg-indigo-100 text-indigo-700 text-[10px] px-1.5 py-0.5 rounded-full"></span>`;
         tabBtn.onclick = () => switchSubTab(index);
         subTabsContainer.appendChild(tabBtn);
 
@@ -862,6 +580,7 @@
         const wrapper = document.createElement('div');
         wrapper.className = "exercise-tab-content hidden"; // all hidden initially
         wrapper.innerHTML = ex.html;
+        wrapper.dataset.tabIndex = index;
         exercisesContainer.appendChild(wrapper);
       });
 
@@ -871,19 +590,29 @@
         // Only append Check Button if there are inputs/selects to check
         if (block.querySelectorAll('.exercise-input, .exercise-select').length > 0) {
           const controlDiv = document.createElement('div');
-          controlDiv.className = "mt-6 flex flex-col sm:flex-row justify-end items-center gap-4 border-t border-gray-100 pt-4";
+          controlDiv.className = "mt-6 flex flex-col sm:flex-row justify-between items-center gap-4 border-t border-gray-100 pt-4 bg-gray-50/50 -mx-4 sm:-mx-5 -mb-4 sm:-mb-5 px-4 sm:px-5 py-4 rounded-b-xl";
           
+          const scoreDisplay = document.createElement('div');
+          scoreDisplay.className = "score-display font-bold text-lg text-indigo-700 opacity-0 transition-opacity flex items-center gap-2";
+          scoreDisplay.innerHTML = `<i class="fa-solid fa-ranking-star"></i> <span class="score-text"></span>`;
+
+          const rightControls = document.createElement('div');
+          rightControls.className = "flex flex-col sm:flex-row items-center gap-3 w-full sm:w-auto";
+
           const warningSpan = document.createElement('span');
           warningSpan.className = "text-red-500 text-sm font-bold hidden flex items-center gap-1 warning-msg drop-shadow-sm";
-          warningSpan.innerHTML = '<i class="fa-solid fa-triangle-exclamation"></i> Please fill in all blanks first!';
+          warningSpan.innerHTML = '<i class="fa-solid fa-triangle-exclamation"></i> Fill all blanks!';
           
           const checkBtn = document.createElement('button');
-          checkBtn.className = "flex items-center gap-2 font-bold px-6 py-2 rounded-lg bg-indigo-600 text-white hover:bg-indigo-700 transition-all shadow-md hover:shadow-lg active:scale-95";
+          checkBtn.className = "w-full sm:w-auto flex items-center justify-center gap-2 font-bold px-6 py-2.5 rounded-lg bg-indigo-600 text-white hover:bg-indigo-700 transition-all shadow-md hover:shadow-lg active:scale-95";
           checkBtn.innerHTML = '<i class="fa-solid fa-clipboard-check"></i> Check Answers';
-          checkBtn.onclick = () => validateExerciseBlock(block, warningSpan);
+          checkBtn.onclick = () => validateExerciseBlock(block, warningSpan, scoreDisplay);
           
-          controlDiv.appendChild(warningSpan);
-          controlDiv.appendChild(checkBtn);
+          rightControls.appendChild(warningSpan);
+          rightControls.appendChild(checkBtn);
+          
+          controlDiv.appendChild(scoreDisplay);
+          controlDiv.appendChild(rightControls);
           block.appendChild(controlDiv);
         }
       });
@@ -922,9 +651,9 @@
 
       btns.forEach((btn, idx) => {
         if (idx === activeIndex) {
-          btn.className = "sub-tab-btn px-4 py-2 text-sm font-bold rounded-t-lg transition-colors border border-b-0 bg-white text-indigo-700 border-gray-200 shadow-[0_-2px_4px_rgba(0,0,0,0.02)] relative top-[1px] z-10 cursor-default whitespace-nowrap";
+          btn.className = "sub-tab-btn px-4 py-2 text-sm font-bold rounded-t-lg transition-colors border border-b-0 bg-white text-indigo-700 border-gray-200 shadow-[0_-2px_4px_rgba(0,0,0,0.02)] relative top-[1px] z-10 cursor-default whitespace-nowrap flex items-center gap-2";
         } else {
-          btn.className = "sub-tab-btn px-4 py-2 text-sm font-bold rounded-t-lg transition-colors border border-b-0 bg-transparent text-gray-500 border-transparent hover:bg-gray-100 hover:text-gray-700 cursor-pointer whitespace-nowrap";
+          btn.className = "sub-tab-btn px-4 py-2 text-sm font-bold rounded-t-lg transition-colors border border-b-0 bg-transparent text-gray-500 border-transparent hover:bg-gray-100 hover:text-gray-700 cursor-pointer whitespace-nowrap flex items-center gap-2";
         }
       });
 
@@ -943,17 +672,18 @@
         card.addEventListener('click', function() {
           const content = this.querySelector('.answer-content');
           const badge = this.querySelector('.status-badge');
+          const bgHighlight = this.querySelector('.bg-highlight');
           
           if (content.classList.contains('hidden')) {
             content.classList.remove('hidden');
-            this.classList.replace('bg-white', 'bg-indigo-50');
             this.classList.replace('border-gray-200', 'border-indigo-300');
+            if (bgHighlight) bgHighlight.classList.replace('scale-y-0', 'scale-y-100');
             badge.textContent = 'Hide';
             badge.className = "status-badge text-xs text-indigo-700 uppercase tracking-wider font-bold bg-indigo-200 px-2 py-1 rounded-md ml-2 shrink-0 transition-colors";
           } else {
             content.classList.add('hidden');
-            this.classList.replace('bg-indigo-50', 'bg-white');
             this.classList.replace('border-indigo-300', 'border-gray-200');
+            if (bgHighlight) bgHighlight.classList.replace('scale-y-100', 'scale-y-0');
             badge.textContent = 'Reveal';
             badge.className = "status-badge text-xs text-gray-500 uppercase tracking-wider font-bold bg-gray-100 px-2 py-1 rounded-md ml-2 shrink-0 transition-colors";
           }
@@ -966,7 +696,7 @@
       return text.toLowerCase().replace(/[.,?!]/g, '').replace(/\s+/g, ' ').trim();
     }
 
-    function validateExerciseBlock(block, warningSpan) {
+    function validateExerciseBlock(block, warningSpan, scoreDisplay) {
       const inputs = block.querySelectorAll('.exercise-input');
       const selects = block.querySelectorAll('.exercise-select');
       const elements = [...inputs, ...selects];
@@ -993,6 +723,7 @@
 
       // 2. Proceed with validation if all filled
       warningSpan.classList.add('hidden');
+      let correctCount = 0;
 
       const processElement = (el, isSelect) => {
         const rawVal = el.value.trim();
@@ -1017,16 +748,50 @@
 
         if (isCorrect) {
           el.classList.add('input-correct');
-          iconContainer.innerHTML = '<i class="fa-solid fa-circle-check text-green-500 drop-shadow-sm bg-white rounded-full"></i>';
+          iconContainer.innerHTML = '<i class="fa-solid fa-circle-check text-green-500 bg-white rounded-full leading-none"></i>';
+          correctCount++;
         } else {
           el.classList.add('input-incorrect');
-          iconContainer.innerHTML = '<i class="fa-solid fa-circle-xmark text-red-500 drop-shadow-sm bg-white rounded-full"></i>';
+          iconContainer.innerHTML = '<i class="fa-solid fa-circle-xmark text-red-500 bg-white rounded-full leading-none"></i>';
           tooltip.classList.remove('hidden'); // Automatically reveal correct answer on mistake
         }
       };
 
       inputs.forEach(el => processElement(el, false));
       selects.forEach(el => processElement(el, true));
+
+      // Update Score UI
+      const total = elements.length;
+      scoreDisplay.querySelector('.score-text').textContent = `${correctCount} / ${total} Correct`;
+      scoreDisplay.classList.remove('opacity-0');
+      
+      if (correctCount === total) {
+        scoreDisplay.classList.remove('text-indigo-700');
+        scoreDisplay.classList.add('text-indigo-600', 'scale-105');
+        scoreDisplay.innerHTML = `<i class="fa-solid fa-crown text-amber-500"></i> <span class="score-text text-indigo-600">Perfect! ${correctCount}/${total}</span>`;
+      } else {
+        scoreDisplay.classList.add('text-indigo-700');
+        scoreDisplay.classList.remove('text-indigo-600', 'scale-105');
+        scoreDisplay.innerHTML = `<i class="fa-solid fa-ranking-star"></i> <span class="score-text">${correctCount} / ${total} Correct</span>`;
+      }
+
+      // Update Tab Badge
+      const parentTabContent = block.closest('.exercise-tab-content');
+      if (parentTabContent) {
+        const tabIndex = parentTabContent.dataset.tabIndex;
+        const badge = subTabsContainer.querySelectorAll('.tab-score-badge')[tabIndex];
+        if (badge) {
+          badge.textContent = `${correctCount}/${total}`;
+          badge.classList.remove('hidden');
+          if (correctCount === total) {
+             badge.classList.replace('bg-indigo-100', 'bg-indigo-500');
+             badge.classList.replace('text-indigo-700', 'text-white');
+          } else {
+             badge.classList.replace('bg-indigo-500', 'bg-indigo-100');
+             badge.classList.replace('text-white', 'text-indigo-700');
+          }
+        }
+      }
     }
 
     function resetAllExercises() {
@@ -1035,6 +800,8 @@
         const selects = exercisesContainer.querySelectorAll('.exercise-select');
         const components = exercisesContainer.querySelectorAll('.exercise-component');
         const warnings = exercisesContainer.querySelectorAll('.warning-msg');
+        const scores = exercisesContainer.querySelectorAll('.score-display');
+        const badges = subTabsContainer.querySelectorAll('.tab-score-badge');
         
         inputs.forEach(input => {
           input.value = '';
@@ -1054,15 +821,22 @@
         });
 
         warnings.forEach(warning => warning.classList.add('hidden'));
+        scores.forEach(s => s.classList.add('opacity-0'));
+        badges.forEach(b => {
+          b.classList.add('hidden');
+          b.textContent = '';
+        });
 
         // Reset Flashcards
         const flashcards = exercisesContainer.querySelectorAll('.flashcard');
         flashcards.forEach(card => {
           const content = card.querySelector('.answer-content');
           const badge = card.querySelector('.status-badge');
+          const bgHighlight = card.querySelector('.bg-highlight');
+          
           content.classList.add('hidden');
-          card.classList.replace('bg-indigo-50', 'bg-white');
           card.classList.replace('border-indigo-300', 'border-gray-200');
+          if (bgHighlight) bgHighlight.classList.replace('scale-y-100', 'scale-y-0');
           badge.textContent = 'Reveal';
           badge.className = "status-badge text-xs text-gray-500 uppercase tracking-wider font-bold bg-gray-100 px-2 py-1 rounded-md ml-2 shrink-0 transition-colors";
         });
