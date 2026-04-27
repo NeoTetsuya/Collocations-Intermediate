@@ -21,6 +21,7 @@
       background-color: #f0fdf4 !important; 
       color: #166534 !important; 
       pointer-events: none; /* Lock input when correct */
+      box-shadow: 0 0 0 1px #22c55e;
     }
     .input-incorrect { 
       border-color: #ef4444 !important; 
@@ -75,6 +76,23 @@
       from { opacity: 0; transform: translateY(5px); }
       to { opacity: 1; transform: translateY(0); }
     }
+
+    /* Custom Scrollbar for responsive tabs/content */
+    .custom-scrollbar::-webkit-scrollbar {
+      height: 4px;
+      width: 4px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-track {
+      background: #f1f1f1; 
+      border-radius: 4px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-thumb {
+      background: #c1c1c1; 
+      border-radius: 4px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+      background: #a8a8a8; 
+    }
   </style>
 </head>
 <body class="bg-gray-50 text-gray-900 font-sans selection:bg-indigo-200 min-h-screen flex flex-col">
@@ -86,9 +104,9 @@
         <div class="bg-indigo-800 p-2 rounded-lg border border-indigo-700 shadow-sm">
           <i class="fa-solid fa-language text-xl text-indigo-300"></i>
         </div>
-        <h1 class="text-2xl font-bold tracking-tight">Synonyms & Confusable Words <span class="font-light opacity-80 text-lg hidden sm:inline">| Self-Study</span></h1>
+        <h1 class="text-xl sm:text-2xl font-bold tracking-tight">Synonyms & Confusable Words <span class="font-light opacity-80 text-lg hidden sm:inline">| Self-Study</span></h1>
       </div>
-      <nav class="flex bg-indigo-800 rounded-lg p-1 overflow-x-auto w-full sm:w-auto shadow-inner" id="tab-nav">
+      <nav class="flex bg-indigo-800 rounded-lg p-1 overflow-x-auto w-full sm:w-auto shadow-inner custom-scrollbar" id="tab-nav">
         <button data-target="unit10" class="tab-btn whitespace-nowrap px-4 py-2 rounded-md text-sm font-semibold transition-all bg-white text-indigo-900 shadow">Unit 10: Synonyms 1</button>
         <button data-target="unit11" class="tab-btn whitespace-nowrap px-4 py-2 rounded-md text-sm font-semibold transition-all text-indigo-100 hover:bg-indigo-700">Unit 11: Synonyms 2</button>
       </nav>
@@ -100,7 +118,7 @@
     <div class="flex flex-col lg:flex-row gap-6 items-start">
       
       <!-- LEFT PANE: Theory -->
-      <section class="lg:w-2/5 flex-shrink-0 flex flex-col bg-white rounded-xl border border-gray-200 shadow-sm">
+      <section class="lg:w-2/5 flex-shrink-0 flex flex-col bg-white rounded-xl border border-gray-200 shadow-sm h-auto lg:sticky lg:top-24">
         <div class="bg-gray-100 p-4 border-b border-gray-200 flex items-center justify-between z-10 rounded-t-xl">
           <h2 class="font-bold text-gray-700 uppercase tracking-wider text-sm flex items-center gap-2">
             <i class="fa-solid fa-bookmark text-indigo-500"></i> Reference & Rules
@@ -112,13 +130,13 @@
            <!-- Tabs injected here -->
         </div>
 
-        <div class="p-6 flex-grow" id="theory-container">
+        <div class="p-5 sm:p-6 flex-grow overflow-y-auto max-h-[60vh] lg:max-h-[calc(100vh-16rem)] custom-scrollbar" id="theory-container">
           <!-- Theory Content Injected via JS -->
         </div>
       </section>
 
       <!-- RIGHT PANE: Exercises -->
-      <section class="lg:w-3/5 flex flex-col bg-white rounded-xl shadow-md border border-gray-200 relative">
+      <section class="lg:w-3/5 flex flex-col bg-white rounded-xl shadow-md border border-gray-200 relative w-full">
         <div class="bg-indigo-50 p-4 border-b border-indigo-100 flex items-center justify-between flex-shrink-0 shadow-sm rounded-t-xl">
           <h2 class="font-bold text-indigo-900 text-lg" id="exercise-title">Unit 10: Synonyms and confusable words 1</h2>
         </div>
@@ -128,12 +146,12 @@
            <!-- Tabs injected here -->
         </div>
 
-        <div class="p-6 sm:p-8 flex-grow" id="exercises-container" style="padding-bottom: 6rem;">
+        <div class="p-4 sm:p-6 lg:p-8 flex-grow" id="exercises-container" style="padding-bottom: 6rem;">
           <!-- Exercise Content Injected via JS -->
         </div>
 
         <!-- Global Exercise Controls (Reset only) -->
-        <div class="sticky bottom-0 w-full bg-white/95 backdrop-blur border-t p-4 flex justify-center items-center gap-4 rounded-b-xl shadow-[0_-10px_15px_-3px_rgba(0,0,0,0.05)] z-20">
+        <div class="absolute bottom-0 w-full bg-white/95 backdrop-blur border-t p-4 flex justify-center items-center gap-4 rounded-b-xl shadow-[0_-10px_15px_-3px_rgba(0,0,0,0.05)] z-20">
           <button id="btn-reset" class="flex items-center gap-2 text-indigo-700 hover:text-indigo-900 bg-indigo-50 hover:bg-indigo-100 font-medium px-6 py-2 rounded-lg transition-all shadow-sm">
             <i class="fa-solid fa-rotate-right"></i> Reset All Progress
           </button>
@@ -154,32 +172,32 @@
             html: `
               <div class="space-y-6">
                 <div class="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
-                  <h3 class="bg-indigo-600 text-white font-bold p-3 text-lg"><i class="fa-solid fa-code-compare text-indigo-200 mr-2"></i> Close, Start, Big, End</h3>
+                  <h3 class="bg-indigo-600 text-white font-bold p-3 text-lg sm:text-base"><i class="fa-solid fa-code-compare text-indigo-200 mr-2"></i> Close, Start, Big, End</h3>
                   <ul class="divide-y divide-gray-100">
                     <li class="p-4 hover:bg-gray-50 flex flex-col">
-                      <div class="font-bold text-indigo-800 mb-1 border-b border-indigo-100 pb-1">close vs. shut</div>
-                      <div class="text-sm text-gray-700 space-y-2 mt-1">
+                      <div class="font-bold text-indigo-800 mb-1 border-b border-indigo-100 pb-1 text-sm sm:text-base">close vs. shut</div>
+                      <div class="text-sm text-gray-700 space-y-2 mt-1 sm:text-base">
                         <p><span class="font-semibold">close:</span> We close meetings, discussions, conferences, etc. <br><em class="text-gray-500">"The chairperson closed the meeting at 4.30."</em></p>
                         <p><span class="font-semibold">shut:</span> Generally more informal. A dentist might ask you to 'close your mouth', whereas 'shut your mouth!' is an impolite way of telling someone not to speak.</p>
                       </div>
                     </li>
                     <li class="p-4 hover:bg-gray-50 flex flex-col">
-                      <div class="font-bold text-indigo-800 mb-1 border-b border-indigo-100 pb-1">start vs. begin</div>
-                      <div class="text-sm text-gray-700 space-y-2 mt-1">
+                      <div class="font-bold text-indigo-800 mb-1 border-b border-indigo-100 pb-1 text-sm sm:text-base">start vs. begin</div>
+                      <div class="text-sm text-gray-700 space-y-2 mt-1 sm:text-base">
                         <p><span class="font-semibold">start:</span> Used for engines and vehicles. <br><em class="text-gray-500">"I could not start my car." (NOT begin my car)</em></p>
                         <p><span class="font-semibold">begin:</span> Preferred in more formal and abstract contexts. <br><em class="text-gray-500">"Before the universe began, time and space did not exist."</em></p>
                       </div>
                     </li>
                     <li class="p-4 hover:bg-gray-50 flex flex-col">
-                      <div class="font-bold text-indigo-800 mb-1 border-b border-indigo-100 pb-1">big vs. large</div>
-                      <div class="text-sm text-gray-700 space-y-2 mt-1">
+                      <div class="font-bold text-indigo-800 mb-1 border-b border-indigo-100 pb-1 text-sm sm:text-base">big vs. large</div>
+                      <div class="text-sm text-gray-700 space-y-2 mt-1 sm:text-base">
                         <p><span class="font-semibold">big:</span> It was a big decision to make. There were some big problems to solve.</p>
                         <p><span class="font-semibold">large:</span> I wanted the sweater in the large size but they only had medium.</p>
                       </div>
                     </li>
                     <li class="p-4 hover:bg-gray-50 flex flex-col">
-                      <div class="font-bold text-indigo-800 mb-1 border-b border-indigo-100 pb-1">end vs. finish</div>
-                      <div class="text-sm text-gray-700 space-y-2 mt-1">
+                      <div class="font-bold text-indigo-800 mb-1 border-b border-indigo-100 pb-1 text-sm sm:text-base">end vs. finish</div>
+                      <div class="text-sm text-gray-700 space-y-2 mt-1 sm:text-base">
                         <p><span class="font-semibold">end:</span> Means decide to stop. <br><em class="text-gray-500">"They ended their relationship a year ago."</em></p>
                         <p><span class="font-semibold">finish:</span> Means complete. <br><em class="text-gray-500">"I haven't finished my homework yet."</em></p>
                       </div>
@@ -193,11 +211,11 @@
             html: `
               <div class="space-y-6">
                 <div class="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
-                  <h3 class="bg-teal-600 text-white font-bold p-3 text-lg"><i class="fa-solid fa-layer-group text-teal-200 mr-2"></i> Groups with Similar Meanings</h3>
+                  <h3 class="bg-teal-600 text-white font-bold p-3 text-lg sm:text-base"><i class="fa-solid fa-layer-group text-teal-200 mr-2"></i> Groups with Similar Meanings</h3>
                   <div class="p-4 space-y-6">
                     <div>
-                      <h4 class="font-bold text-teal-800 border-b border-teal-100 pb-1 mb-3">Words meaning 'old'</h4>
-                      <ul class="text-sm text-gray-700 space-y-2 list-disc pl-5">
+                      <h4 class="font-bold text-teal-800 border-b border-teal-100 pb-1 mb-3 text-sm sm:text-base">Words meaning 'old'</h4>
+                      <ul class="text-sm sm:text-base text-gray-700 space-y-2 list-disc pl-5">
                         <li>I met an <strong>old friend</strong> the other day. It's a very <strong>old building</strong>.</li>
                         <li>She studied <strong>ancient history</strong>. In <strong>ancient times</strong>, life was very hard.</li>
                         <li>This shop sells <strong>antique furniture</strong>. She collects <strong>antique jewellery</strong>. <em>[old and valuable]</em></li>
@@ -205,8 +223,8 @@
                       </ul>
                     </div>
                     <div>
-                      <h4 class="font-bold text-teal-800 border-b border-teal-100 pb-1 mb-3">Words meaning 'with no one or nothing else'</h4>
-                      <ul class="text-sm text-gray-700 space-y-2 list-disc pl-5">
+                      <h4 class="font-bold text-teal-800 border-b border-teal-100 pb-1 mb-3 text-sm sm:text-base">Words meaning 'with no one or nothing else'</h4>
+                      <ul class="text-sm sm:text-base text-gray-700 space-y-2 list-disc pl-5">
                         <li>Donna is a <strong>single parent</strong>; it's difficult for her to work full time.</li>
                         <li>He lives in a very <strong>lonely place/spot</strong> up in the mountains.</li>
                         <li>At first I felt <strong>desperately lonely</strong> when I moved.</li>
@@ -226,25 +244,25 @@
             html: `
               <div class="space-y-6">
                 <div class="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
-                  <h3 class="bg-emerald-600 text-white font-bold p-3 text-lg"><i class="fa-solid fa-code-compare text-emerald-200 mr-2"></i> Charge, Injure, Grow</h3>
+                  <h3 class="bg-emerald-600 text-white font-bold p-3 text-lg sm:text-base"><i class="fa-solid fa-code-compare text-emerald-200 mr-2"></i> Charge, Injure, Grow</h3>
                   <ul class="divide-y divide-gray-100">
                     <li class="p-4 hover:bg-gray-50 flex flex-col">
-                      <div class="font-bold text-emerald-800 mb-1 border-b border-emerald-100 pb-1">charge vs. load</div>
-                      <div class="text-sm text-gray-700 space-y-2 mt-1">
+                      <div class="font-bold text-emerald-800 mb-1 border-b border-emerald-100 pb-1 text-sm sm:text-base">charge vs. load</div>
+                      <div class="text-sm sm:text-base text-gray-700 space-y-2 mt-1">
                         <p><span class="font-semibold">charge:</span> Used for batteries, electrical items. <br><em class="text-gray-500">"I need to charge my phone."</em></p>
                         <p><span class="font-semibold">load:</span> Used for cargoes, lorries, vans, ships, and weapons. <br><em class="text-gray-500">"They loaded the lorry and drove away."</em></p>
                       </div>
                     </li>
                     <li class="p-4 hover:bg-gray-50 flex flex-col">
-                      <div class="font-bold text-emerald-800 mb-1 border-b border-emerald-100 pb-1">injure vs. damage</div>
-                      <div class="text-sm text-gray-700 space-y-2 mt-1">
+                      <div class="font-bold text-emerald-800 mb-1 border-b border-emerald-100 pb-1 text-sm sm:text-base">injure vs. damage</div>
+                      <div class="text-sm sm:text-base text-gray-700 space-y-2 mt-1">
                         <p><span class="font-semibold">injure:</span> Collocates with words to do with people. <br><em class="text-gray-500">"Three injured people were taken to hospital."</em></p>
                         <p><span class="font-semibold">damage:</span> Collocates with words for things. <br><em class="text-gray-500">"The shop tried to sell me a damaged sofa."</em></p>
                       </div>
                     </li>
                     <li class="p-4 hover:bg-gray-50 flex flex-col">
-                      <div class="font-bold text-emerald-800 mb-1 border-b border-emerald-100 pb-1">grow vs. raise</div>
-                      <div class="text-sm text-gray-700 space-y-2 mt-1">
+                      <div class="font-bold text-emerald-800 mb-1 border-b border-emerald-100 pb-1 text-sm sm:text-base">grow vs. raise</div>
+                      <div class="text-sm sm:text-base text-gray-700 space-y-2 mt-1">
                         <p><span class="font-semibold">grow:</span> Collocates with crops, plants. <br><em class="text-gray-500">"In the south the farmers grow crops."</em></p>
                         <p><span class="font-semibold">raise:</span> Collocates with animals, children. <br><em class="text-gray-500">"In the north the farmers mostly raise cattle."</em></p>
                       </div>
@@ -260,7 +278,7 @@
             html: `
               <div class="exercise-block bg-white border border-gray-100 rounded-xl p-5 shadow-[0_2px_10px_-3px_rgba(6,81,237,0.1)]">
                 <h3 class="font-bold text-lg mb-4 text-gray-800 flex items-center gap-3 border-b pb-3"><span class="bg-indigo-100 text-indigo-800 px-3 py-1 rounded text-sm shadow-sm">10.1</span> Choose the correct collocation.</h3>
-                <ol class="list-decimal list-inside space-y-4 pl-2 leading-8 text-gray-700">
+                <ol class="list-decimal list-inside space-y-4 pl-2 leading-8 text-gray-700 text-sm sm:text-base">
                   <li>The dentist told me to ${generateSelect({ options: ['shut', 'close'], correct: 'close' })} my mouth.</li>
                   <li>I didn't know what to do when I got into my car and couldn't ${generateSelect({ options: ['start', 'begin'], correct: 'start' })} the engine.</li>
                   <li>I want to buy a sweater for my dad. He needs one in a ${generateSelect({ options: ['big', 'large'], correct: 'large' })} size.</li>
@@ -277,7 +295,7 @@
             html: `
               <div class="exercise-block bg-white border border-gray-100 rounded-xl p-5 shadow-[0_2px_10px_-3px_rgba(6,81,237,0.1)]">
                 <h3 class="font-bold text-lg mb-4 text-gray-800 flex items-center gap-3 border-b pb-3"><span class="bg-indigo-100 text-indigo-800 px-3 py-1 rounded text-sm shadow-sm">10.2</span> Complete each phrase with a word meaning either 'old' or 'alone'.</h3>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-4 text-gray-700 leading-8">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-4 text-gray-700 leading-8 text-sm sm:text-base">
                   <div>1. a ${generateInput({ correct: ['solitary'] })} figure on the horizon</div>
                   <div>2. a shop selling ${generateInput({ correct: ['antique'] })} furniture</div>
                   <div>3. to be an ${generateInput({ correct: ['only'] })} child</div>
@@ -296,7 +314,7 @@
             html: `
               <div class="exercise-block bg-white border border-gray-100 rounded-xl p-5 shadow-[0_2px_10px_-3px_rgba(6,81,237,0.1)]">
                 <h3 class="font-bold text-lg mb-4 text-gray-800 flex items-center gap-3 border-b pb-3"><span class="bg-indigo-100 text-indigo-800 px-3 py-1 rounded text-sm shadow-sm">10.3</span> Correct the underlined errors in these sentences.</h3>
-                <ol class="list-decimal list-inside space-y-4 pl-2 leading-8 text-gray-700">
+                <ol class="list-decimal list-inside space-y-4 pl-2 leading-8 text-gray-700 text-sm sm:text-base">
                   <li>Were many people <span class="underline decoration-red-400 decoration-wavy">damaged</span> ${generateInput({ correct: ['injured'] })} in the earthquake?</li>
                   <li>Single parents who are <span class="underline decoration-red-400 decoration-wavy">growing</span> ${generateInput({ correct: ['raising'] })} children without a partner's support are entitled to financial help.</li>
                   <li>My mobile isn't working. I need to <span class="underline decoration-red-400 decoration-wavy">load</span> ${generateInput({ correct: ['charge'] })} the battery.</li>
@@ -311,16 +329,52 @@
           {
             tabLabel: "10.4 Match Context",
             html: `
-              <div class="exercise-block bg-blue-50/50 p-6 rounded-xl border border-blue-200 shadow-sm">
+              <div class="exercise-block bg-blue-50/50 p-4 sm:p-6 rounded-xl border border-blue-200 shadow-sm">
                 <h3 class="font-bold text-lg mb-4 text-blue-900 border-b border-blue-200 pb-2"><i class="fa-solid fa-image text-blue-600 mr-2"></i> 10.4 Context Matching</h3>
-                <p class="text-sm text-blue-800 mb-6 font-medium">Which collocations from this unit describe the following scenarios? (Type the verb and the noun object).</p>
-                <div class="space-y-4 text-gray-700 bg-white p-6 rounded-lg border border-blue-100 shadow-sm leading-8">
-                  <div>1. A large crane is lifting shipping containers onto a cargo ship. <br><i class="fa-solid fa-arrow-right text-blue-400 ml-4 mr-2"></i> They are ${generateInput({ correct: ['loading a ship', 'loading the ship', 'loading'] })}.</div>
-                  <div>2. A phone is plugged into a wall outlet to get battery power. <br><i class="fa-solid fa-arrow-right text-blue-400 ml-4 mr-2"></i> The phone is ${generateInput({ correct: ['charging', 'being charged', 'charging the battery'] })}.</div>
-                  <div>3. A farmer is taking care of a flock of sheep on a farm. <br><i class="fa-solid fa-arrow-right text-blue-400 ml-4 mr-2"></i> The farmer is ${generateInput({ correct: ['raising sheep', 'raising animals', 'raising cattle'] })}.</div>
-                  <div>4. A woman is planting vegetable seeds in the soil. <br><i class="fa-solid fa-arrow-right text-blue-400 ml-4 mr-2"></i> She is ${generateInput({ correct: ['growing crops', 'growing plants', 'growing vegetables'] })}.</div>
-                  <div>5. An old, valuable wooden chair from the 18th century. <br><i class="fa-solid fa-arrow-right text-blue-400 ml-4 mr-2"></i> It is a piece of ${generateInput({ correct: ['antique furniture', 'antique'] })}.</div>
-                  <div>6. A man is sitting on a bed with crutches and a cast on his broken leg. <br><i class="fa-solid fa-arrow-right text-blue-400 ml-4 mr-2"></i> He is an ${generateInput({ correct: ['injured person', 'injured man'] })}.</div>
+                <p class="text-sm sm:text-base text-blue-800 mb-6 font-medium">Which collocations from this unit describe the following scenarios? (Type the verb and the noun object).</p>
+                <div class="space-y-4 text-gray-700 bg-white p-4 sm:p-6 rounded-lg border border-blue-100 shadow-sm leading-8 text-sm sm:text-base">
+                  <div>
+                    <span class="block">1. A large crane is lifting shipping containers onto a cargo ship.</span>
+                    <div class="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-2 mt-1">
+                      <span class="text-gray-600 font-medium ml-0 sm:ml-4 flex items-center"><i class="fa-solid fa-arrow-right text-blue-400 mr-2 hidden sm:inline"></i> They are </span>
+                      ${generateInput({ correct: ['loading a ship', 'loading the ship', 'loading'] })}.
+                    </div>
+                  </div>
+                  <div>
+                    <span class="block">2. A phone is plugged into a wall outlet to get battery power.</span>
+                    <div class="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-2 mt-1">
+                      <span class="text-gray-600 font-medium ml-0 sm:ml-4 flex items-center"><i class="fa-solid fa-arrow-right text-blue-400 mr-2 hidden sm:inline"></i> The phone is </span>
+                      ${generateInput({ correct: ['charging', 'being charged', 'charging the battery'] })}.
+                    </div>
+                  </div>
+                  <div>
+                    <span class="block">3. A farmer is taking care of a flock of sheep on a farm.</span>
+                    <div class="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-2 mt-1">
+                      <span class="text-gray-600 font-medium ml-0 sm:ml-4 flex items-center"><i class="fa-solid fa-arrow-right text-blue-400 mr-2 hidden sm:inline"></i> The farmer is </span>
+                      ${generateInput({ correct: ['raising sheep', 'raising animals', 'raising cattle'] })}.
+                    </div>
+                  </div>
+                  <div>
+                    <span class="block">4. A woman is planting vegetable seeds in the soil.</span>
+                    <div class="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-2 mt-1">
+                      <span class="text-gray-600 font-medium ml-0 sm:ml-4 flex items-center"><i class="fa-solid fa-arrow-right text-blue-400 mr-2 hidden sm:inline"></i> She is </span>
+                      ${generateInput({ correct: ['growing crops', 'growing plants', 'growing vegetables'] })}.
+                    </div>
+                  </div>
+                  <div>
+                    <span class="block">5. An old, valuable wooden chair from the 18th century.</span>
+                    <div class="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-2 mt-1">
+                      <span class="text-gray-600 font-medium ml-0 sm:ml-4 flex items-center"><i class="fa-solid fa-arrow-right text-blue-400 mr-2 hidden sm:inline"></i> It is a piece of </span>
+                      ${generateInput({ correct: ['antique furniture', 'antique'] })}.
+                    </div>
+                  </div>
+                  <div>
+                    <span class="block">6. A man is sitting on a bed with crutches and a cast on his broken leg.</span>
+                    <div class="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-2 mt-1">
+                      <span class="text-gray-600 font-medium ml-0 sm:ml-4 flex items-center"><i class="fa-solid fa-arrow-right text-blue-400 mr-2 hidden sm:inline"></i> He is an </span>
+                      ${generateInput({ correct: ['injured person', 'injured man'] })}.
+                    </div>
+                  </div>
                 </div>
               </div>`
           }
@@ -334,14 +388,14 @@
             html: `
               <div class="space-y-6">
                 <div class="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
-                  <h3 class="bg-purple-600 text-white font-bold p-3 text-lg"><i class="fa-solid fa-trophy text-purple-200 mr-2"></i> Gaining, winning, and achieving</h3>
-                  <div class="overflow-x-auto">
+                  <h3 class="bg-purple-600 text-white font-bold p-3 text-lg sm:text-base"><i class="fa-solid fa-trophy text-purple-200 mr-2"></i> Gaining, winning, and achieving</h3>
+                  <div class="overflow-x-auto custom-scrollbar">
                     <table class="w-full text-sm text-left">
                       <thead class="bg-purple-50 text-purple-900 border-b border-purple-100">
                         <tr>
                           <th class="p-3 font-bold">Verb</th>
                           <th class="p-3 font-bold">Collocates with</th>
-                          <th class="p-3 font-bold">Comments</th>
+                          <th class="p-3 font-bold min-w-[200px]">Comments</th>
                         </tr>
                       </thead>
                       <tbody class="divide-y divide-gray-100 text-gray-700">
@@ -391,21 +445,21 @@
             html: `
               <div class="space-y-6">
                 <div class="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
-                  <h3 class="bg-amber-600 text-white font-bold p-3 text-lg"><i class="fa-solid fa-shirt text-amber-200 mr-2"></i> Wear vs. Carry vs. Use</h3>
-                  <div class="p-5 space-y-4">
-                    <p class="text-sm text-gray-700 border-l-4 border-amber-400 pl-3">
+                  <h3 class="bg-amber-600 text-white font-bold p-3 text-lg sm:text-base"><i class="fa-solid fa-shirt text-amber-200 mr-2"></i> Wear vs. Carry vs. Use</h3>
+                  <div class="p-5 space-y-4 text-sm sm:text-base">
+                    <p class="text-gray-700 border-l-4 border-amber-400 pl-3">
                       You'll need to <strong>take</strong> warm clothes when you go to Alaska. (NOT carry)
                     </p>
-                    <p class="text-sm text-gray-700 border-l-4 border-amber-400 pl-3">
+                    <p class="text-gray-700 border-l-4 border-amber-400 pl-3">
                       I always <strong>carry</strong> my mobile phone whenever I go out. (NOT wear)
                     </p>
-                    <p class="text-sm text-gray-700 border-l-4 border-amber-400 pl-3">
+                    <p class="text-gray-700 border-l-4 border-amber-400 pl-3">
                       She was <strong>wearing</strong> a hat. (NOT carrying)
                     </p>
-                    <p class="text-sm text-gray-700 border-l-4 border-amber-400 pl-3">
+                    <p class="text-gray-700 border-l-4 border-amber-400 pl-3">
                       He kindly offered to <strong>carry</strong> my bag for me.
                     </p>
-                    <p class="text-sm text-gray-700 border-l-4 border-red-400 pl-3 bg-red-50 py-2 rounded-r">
+                    <p class="text-gray-700 border-l-4 border-red-400 pl-3 bg-red-50 py-2 rounded-r">
                       <span class="font-bold text-red-800 text-xs uppercase block mb-1">Common Mistakes</span>
                       She's <strong>wearing</strong> a dress. (NOT using)<br>
                       He's <strong>using</strong> a laptop.
@@ -419,8 +473,8 @@
             html: `
               <div class="space-y-6">
                 <div class="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
-                  <h3 class="bg-rose-600 text-white font-bold p-3 text-lg"><i class="fa-solid fa-clock text-rose-200 mr-2"></i> Spend vs. Pass / Use / Stay</h3>
-                  <div class="p-5 space-y-4 text-sm text-gray-700 leading-relaxed">
+                  <h3 class="bg-rose-600 text-white font-bold p-3 text-lg sm:text-base"><i class="fa-solid fa-clock text-rose-200 mr-2"></i> Spend vs. Pass / Use / Stay</h3>
+                  <div class="p-5 space-y-4 text-sm sm:text-base text-gray-700 leading-relaxed">
                     <p class="font-medium text-rose-900 mb-2">Notice how <span class="bg-rose-100 px-1 rounded">spend</span> is used when talking about time and money.</p>
                     <ul class="space-y-3 list-disc pl-5">
                       <li>We <strong>spent</strong> three days in the mountains. It was wonderful. <br><span class="text-xs text-rose-500 font-bold tracking-wide uppercase">(NOT passed)</span></li>
@@ -439,10 +493,10 @@
             html: `
               <div class="exercise-block bg-white border border-gray-100 rounded-xl p-5 shadow-[0_2px_10px_-3px_rgba(147,51,234,0.1)]">
                 <h3 class="font-bold text-lg mb-4 text-gray-800 flex items-center gap-3 border-b pb-3"><span class="bg-purple-100 text-purple-800 px-3 py-1 rounded text-sm shadow-sm">11.1</span> Use a verb from the box in the correct form.</h3>
-                <div class="flex gap-3 justify-center mb-6 flex-wrap">
+                <div class="flex gap-3 justify-center mb-6 flex-wrap text-sm sm:text-base">
                   ${['achieve', 'beat', 'earn', 'gain', 'make', 'win'].map(v => `<span class="bg-white border border-purple-200 px-4 py-1.5 rounded-full shadow-sm font-mono font-bold text-purple-700">${v}</span>`).join('')}
                 </div>
-                <ol class="list-decimal list-inside space-y-4 pl-2 leading-8 text-gray-700">
+                <ol class="list-decimal list-inside space-y-4 pl-2 leading-8 text-gray-700 text-sm sm:text-base">
                   <li>I don't have ambitions to ${generateInput({ correct: ['make', 'earn'] })} a lot of money; I just want to be happy in life.</li>
                   <li>Jack has already ${generateInput({ correct: ['gained', 'earned'] })} a very good reputation as a talented lawyer.</li>
                   <li>Sophia has ${generateInput({ correct: ['won'] })} several prizes for her singing.</li>
@@ -459,19 +513,37 @@
             html: `
               <div class="exercise-block bg-white border border-gray-100 rounded-xl p-5 shadow-[0_2px_10px_-3px_rgba(147,51,234,0.1)]">
                 <h3 class="font-bold text-lg mb-4 text-gray-800 flex items-center gap-3 border-b pb-3"><span class="bg-purple-100 text-purple-800 px-3 py-1 rounded text-sm shadow-sm">11.2</span> Answer based on the scenarios.</h3>
-                <div class="space-y-8">
+                <div class="space-y-8 text-sm sm:text-base">
                   <div class="bg-purple-50/50 p-4 rounded-lg border border-purple-100 text-gray-700 leading-8">
                     <p class="font-bold text-purple-900 mb-2 italic border-b border-purple-200 pb-1">Scenario A: A woman in a business suit is walking in the rain holding an open umbrella in one hand and a briefcase in the other.</p>
-                    <div class="ml-2 mt-3">1. What is the woman wearing? <i class="fa-solid fa-arrow-right text-purple-400 mx-2"></i> She is wearing ${generateInput({ correct: ['a suit', 'clothes', 'a business suit'] })}.</div>
-                    <div class="ml-2">2. What is the woman carrying? <i class="fa-solid fa-arrow-right text-purple-400 mx-2"></i> She is carrying ${generateInput({ correct: ['a briefcase', 'a bag'] })}.</div>
-                    <div class="ml-2">3. What is the woman using? <i class="fa-solid fa-arrow-right text-purple-400 mx-2"></i> She is using ${generateInput({ correct: ['an umbrella'] })}.</div>
+                    <div class="ml-0 sm:ml-2 mt-3 flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-2">
+                      <span class="flex items-center">1. What is the woman wearing? <i class="fa-solid fa-arrow-right text-purple-400 mx-2 hidden sm:inline"></i></span> 
+                      She is wearing ${generateInput({ correct: ['a suit', 'clothes', 'a business suit'] })}.
+                    </div>
+                    <div class="ml-0 sm:ml-2 flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-2">
+                      <span class="flex items-center">2. What is the woman carrying? <i class="fa-solid fa-arrow-right text-purple-400 mx-2 hidden sm:inline"></i></span> 
+                      She is carrying ${generateInput({ correct: ['a briefcase', 'a bag'] })}.
+                    </div>
+                    <div class="ml-0 sm:ml-2 flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-2">
+                      <span class="flex items-center">3. What is the woman using? <i class="fa-solid fa-arrow-right text-purple-400 mx-2 hidden sm:inline"></i></span> 
+                      She is using ${generateInput({ correct: ['an umbrella'] })}.
+                    </div>
                   </div>
                   
                   <div class="bg-purple-50/50 p-4 rounded-lg border border-purple-100 text-gray-700 leading-8">
                     <p class="font-bold text-purple-900 mb-2 italic border-b border-purple-200 pb-1">Scenario B: A man in a t-shirt and jeans is tapping on his mobile phone while holding a gym bag.</p>
-                    <div class="ml-2 mt-3">4. What is the man wearing? <i class="fa-solid fa-arrow-right text-purple-400 mx-2"></i> He is wearing ${generateInput({ correct: ['jeans', 'a t-shirt', 'clothes'] })}.</div>
-                    <div class="ml-2">5. What is the man using? <i class="fa-solid fa-arrow-right text-purple-400 mx-2"></i> He is using ${generateInput({ correct: ['a phone', 'a mobile phone', 'a mobile'] })}.</div>
-                    <div class="ml-2">6. What is the man carrying? <i class="fa-solid fa-arrow-right text-purple-400 mx-2"></i> He is carrying ${generateInput({ correct: ['a gym bag', 'a bag'] })}.</div>
+                    <div class="ml-0 sm:ml-2 mt-3 flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-2">
+                      <span class="flex items-center">4. What is the man wearing? <i class="fa-solid fa-arrow-right text-purple-400 mx-2 hidden sm:inline"></i></span> 
+                      He is wearing ${generateInput({ correct: ['jeans', 'a t-shirt', 'clothes'] })}.
+                    </div>
+                    <div class="ml-0 sm:ml-2 flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-2">
+                      <span class="flex items-center">5. What is the man using? <i class="fa-solid fa-arrow-right text-purple-400 mx-2 hidden sm:inline"></i></span> 
+                      He is using ${generateInput({ correct: ['a phone', 'a mobile phone', 'a mobile'] })}.
+                    </div>
+                    <div class="ml-0 sm:ml-2 flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-2">
+                      <span class="flex items-center">6. What is the man carrying? <i class="fa-solid fa-arrow-right text-purple-400 mx-2 hidden sm:inline"></i></span> 
+                      He is carrying ${generateInput({ correct: ['a gym bag', 'a bag'] })}.
+                    </div>
                   </div>
                 </div>
               </div>`
@@ -479,11 +551,11 @@
           {
             tabLabel: "11.3 Find Errors",
             html: `
-              <div class="exercise-block bg-purple-50/50 p-6 rounded-xl border border-purple-200 shadow-sm">
+              <div class="exercise-block bg-purple-50/50 p-4 sm:p-6 rounded-xl border border-purple-200 shadow-sm">
                 <h3 class="font-bold text-lg mb-4 text-purple-900 border-b border-purple-200 pb-2"><i class="fa-solid fa-magnifying-glass text-purple-600 mr-2"></i> 11.3 Correct the 9 errors</h3>
-                <p class="text-sm text-purple-800 mb-6 font-medium">Replace the underlined incorrect words with the correct collocations.</p>
+                <p class="text-sm sm:text-base text-purple-800 mb-6 font-medium">Replace the underlined incorrect words with the correct collocations.</p>
                 
-                <div class="leading-[3rem] bg-white p-6 rounded-lg shadow-sm border border-purple-100 text-gray-700">
+                <div class="leading-[3rem] bg-white p-4 sm:p-6 rounded-lg shadow-sm border border-purple-100 text-gray-700 text-sm sm:text-base">
                   Last year I got a new job and started <span class="underline decoration-wavy decoration-red-400">gaining</span> ${generateInput({ correct: ['earning', 'making'] })} a lot more money. 
                   I realised I could afford to <span class="underline decoration-wavy decoration-red-400">use</span> ${generateInput({ correct: ['spend'] })} more money on my holiday than 
                   I usually do and decided to <span class="underline decoration-wavy decoration-red-400">pass</span> ${generateInput({ correct: ['spend'] })} a month in Australia. I knew it 
@@ -501,7 +573,7 @@
             html: `
               <div class="exercise-block bg-white border border-gray-100 rounded-xl p-5 shadow-[0_2px_10px_-3px_rgba(147,51,234,0.1)]">
                 <h3 class="font-bold text-lg mb-4 text-gray-800 flex items-center gap-3 border-b pb-3"><span class="bg-purple-100 text-purple-800 px-3 py-1 rounded text-sm shadow-sm">11.4</span> Change the underlined words so that each sentence has the opposite meaning.</h3>
-                <ol class="list-decimal list-inside space-y-4 pl-2 leading-8 text-gray-700">
+                <ol class="list-decimal list-inside space-y-4 pl-2 leading-8 text-gray-700 text-sm sm:text-base">
                   <li>The Democratic Party <span class="underline decoration-dotted underline-offset-4">lost</span> ${generateInput({ correct: ['won'] })} the election.</li>
                   <li>The ruling power has <span class="underline decoration-dotted underline-offset-4">lost</span> ${generateInput({ correct: ['gained'] })} control of the situation.</li>
                   <li>Our team was <span class="underline decoration-dotted underline-offset-4">defeated in</span> ${generateInput({ correct: ['won'] })} the match.</li>
@@ -515,7 +587,7 @@
             html: `
               <div class="exercise-block bg-white border border-gray-100 rounded-xl p-5 shadow-[0_2px_10px_-3px_rgba(147,51,234,0.1)]">
                 <h3 class="font-bold text-lg mb-4 text-gray-800 flex items-center gap-3 border-b pb-3"><span class="bg-purple-100 text-purple-800 px-3 py-1 rounded text-sm shadow-sm">11.5</span> Complete these questions with the appropriate verb.</h3>
-                <ol class="list-decimal list-inside space-y-4 pl-2 leading-8 text-gray-700">
+                <ol class="list-decimal list-inside space-y-4 pl-2 leading-8 text-gray-700 text-sm sm:text-base">
                   <li>Where did you ${generateInput({ correct: ['spend'] })} your last holiday?</li>
                   <li>How much money did you ${generateInput({ correct: ['earn', 'spend', 'make'] })} last week?</li>
                   <li>What do you always ${generateInput({ correct: ['carry', 'take'] })} with you when you go out?</li>
@@ -535,9 +607,9 @@
       const firstAnswer = correct[0];
       return `
         <div class="inline-block relative m-1 exercise-component align-middle">
-          <input type="text" class="exercise-input border-b-2 outline-none px-2 py-1 transition-all duration-200 w-32 sm:w-40 text-center font-bold text-indigo-900 border-gray-300 focus:border-indigo-500 focus:bg-indigo-50 bg-transparent rounded-t-sm" data-correct="${correctStr}" placeholder="${placeholder}" />
-          <span class="feedback-icon absolute -right-6 top-1 text-lg drop-shadow-sm"></span>
-          <div class="answer-tooltip absolute top-full left-1/2 -translate-x-1/2 mt-2 px-3 py-1.5 rounded whitespace-nowrap z-30 hidden transition-opacity duration-200">${firstAnswer}</div>
+          <input type="text" class="exercise-input border-b-2 outline-none px-2 py-1 transition-all duration-200 w-28 sm:w-36 md:w-48 text-center font-bold text-indigo-900 border-gray-300 focus:border-indigo-500 focus:bg-indigo-50 bg-transparent rounded-t-sm" data-correct="${correctStr}" placeholder="${placeholder}" autocomplete="off" autocorrect="off" spellcheck="false" />
+          <span class="feedback-icon absolute -right-2 sm:-right-6 top-1 text-lg drop-shadow-sm flex items-center justify-center pointer-events-none"></span>
+          <div class="answer-tooltip absolute top-full left-1/2 -translate-x-1/2 mt-2 px-3 py-1.5 rounded z-30 hidden transition-opacity duration-200 text-xs w-max max-w-[200px] sm:max-w-none whitespace-normal sm:whitespace-nowrap text-center break-words">${firstAnswer}</div>
         </div>
       `;
     }
@@ -546,26 +618,28 @@
       const optionsHtml = options.map(opt => `<option value="${opt}">${opt}</option>`).join('');
       return `
         <div class="inline-block relative m-1 exercise-component align-middle">
-          <select class="exercise-select border-b-2 outline-none px-2 py-1 appearance-none bg-transparent font-bold text-indigo-900 text-center pr-6 cursor-pointer transition-all duration-200 border-gray-300 focus:border-indigo-500 focus:bg-indigo-50 rounded-t-sm" data-correct="${correct}">
+          <select class="exercise-select border-b-2 outline-none px-2 py-1 appearance-none bg-transparent font-bold text-indigo-900 text-center pr-6 cursor-pointer transition-all duration-200 border-gray-300 focus:border-indigo-500 focus:bg-indigo-50 rounded-t-sm max-w-[140px] sm:max-w-[200px] text-ellipsis" data-correct="${correct}">
             <option value="" disabled selected>select...</option>
             ${optionsHtml}
           </select>
-          <span class="feedback-icon absolute -right-2 top-1 text-lg drop-shadow-sm"></span>
-          <div class="answer-tooltip absolute top-full left-1/2 -translate-x-1/2 mt-2 px-3 py-1.5 rounded whitespace-nowrap z-30 hidden transition-opacity duration-200">${correct}</div>
+          <span class="feedback-icon absolute -right-2 top-1 text-lg drop-shadow-sm flex items-center justify-center pointer-events-none"></span>
+          <div class="answer-tooltip absolute top-full left-1/2 -translate-x-1/2 mt-2 px-3 py-1.5 rounded z-30 hidden transition-opacity duration-200 text-xs w-max max-w-[200px] sm:max-w-none whitespace-normal sm:whitespace-nowrap text-center break-words">${correct}</div>
         </div>
       `;
     }
 
     function generateFlashcard(question, answer) {
       return `
-        <div class="flashcard p-4 border rounded-xl cursor-pointer transition-all duration-300 bg-white border-gray-200 hover:border-purple-300 hover:shadow-md select-none group">
-          <div class="flex justify-between items-start pointer-events-none">
-            <p class="font-medium text-gray-800 leading-snug group-hover:text-purple-900 transition-colors">${question}</p>
+        <div class="flashcard p-4 border rounded-xl cursor-pointer transition-all duration-300 bg-white border-gray-200 hover:border-indigo-300 hover:shadow-md select-none group relative overflow-hidden">
+          <div class="flex justify-between items-start pointer-events-none relative z-10">
+            <p class="font-medium text-gray-800 leading-snug group-hover:text-indigo-900 transition-colors text-sm sm:text-base">${question}</p>
             <span class="status-badge text-xs text-gray-500 uppercase tracking-wider font-bold bg-gray-100 px-2 py-1 rounded-md ml-2 shrink-0 transition-colors">Reveal</span>
           </div>
-          <div class="answer-content hidden mt-3 pt-3 border-t border-purple-100 text-purple-700 font-bold flex items-center gap-2 pointer-events-none">
-            <i class="fa-solid fa-check-circle text-purple-500"></i> ${answer}
+          <div class="answer-content hidden mt-3 pt-3 border-t border-indigo-100 text-indigo-700 font-bold flex items-center gap-2 pointer-events-none relative z-10 text-sm sm:text-base">
+            <i class="fa-solid fa-check-circle text-indigo-500"></i> ${answer}
           </div>
+          <!-- Background highlight element -->
+          <div class="absolute inset-0 bg-indigo-50 transform scale-y-0 origin-bottom transition-transform duration-300 ease-out z-0 bg-highlight"></div>
         </div>
       `;
     }
@@ -589,15 +663,15 @@
       // Update Main Navigation Tabs
       tabButtons.forEach(btn => {
         if (btn.dataset.target === unitId) {
-          btn.className = "tab-btn whitespace-nowrap px-4 py-2 rounded-md text-sm font-semibold transition-all bg-white text-indigo-900 shadow-sm";
+          btn.className = "tab-btn whitespace-nowrap px-4 py-2 rounded-md text-sm font-semibold transition-all bg-white text-indigo-900 shadow border-b-2 border-indigo-500";
         } else {
-          btn.className = "tab-btn whitespace-nowrap px-4 py-2 rounded-md text-sm font-semibold transition-all text-indigo-100 hover:bg-indigo-700";
+          btn.className = "tab-btn whitespace-nowrap px-4 py-2 rounded-md text-sm font-semibold transition-all text-indigo-100 hover:bg-indigo-700 border-b-2 border-transparent";
         }
       });
 
       // Fetch Unit Data
       const data = contentData[unitId];
-      exerciseTitle.textContent = data.title;
+      exerciseTitle.innerHTML = `<i class="fa-solid fa-pen-nib text-indigo-600 mr-2"></i> ${data.title}`;
       
       // Clear containers
       theoryTabsContainer.innerHTML = '';
@@ -623,8 +697,8 @@
       data.exercises.forEach((ex, index) => {
         // 1. Create Tab Button
         const tabBtn = document.createElement('button');
-        tabBtn.className = "sub-tab-btn px-4 py-2 text-sm font-bold rounded-t-lg transition-colors border border-b-0 whitespace-nowrap";
-        tabBtn.textContent = ex.tabLabel;
+        tabBtn.className = "sub-tab-btn px-4 py-2 text-sm font-bold rounded-t-lg transition-colors border border-b-0 whitespace-nowrap flex items-center gap-2";
+        tabBtn.innerHTML = `${ex.tabLabel} <span class="hidden tab-score-badge bg-indigo-100 text-indigo-700 text-[10px] px-1.5 py-0.5 rounded-full"></span>`;
         tabBtn.onclick = () => switchSubTab(index);
         subTabsContainer.appendChild(tabBtn);
 
@@ -632,6 +706,7 @@
         const wrapper = document.createElement('div');
         wrapper.className = "exercise-tab-content hidden"; // all hidden initially
         wrapper.innerHTML = ex.html;
+        wrapper.dataset.tabIndex = index;
         exercisesContainer.appendChild(wrapper);
       });
 
@@ -641,19 +716,29 @@
         // Only append Check Button if there are inputs/selects to check
         if (block.querySelectorAll('.exercise-input, .exercise-select').length > 0) {
           const controlDiv = document.createElement('div');
-          controlDiv.className = "mt-6 flex flex-col sm:flex-row justify-end items-center gap-4 border-t border-gray-100 pt-4";
+          controlDiv.className = "mt-6 flex flex-col sm:flex-row justify-between items-center gap-4 border-t border-gray-100 pt-4 bg-gray-50/50 -mx-4 sm:-mx-5 -mb-4 sm:-mb-5 px-4 sm:px-5 py-4 rounded-b-xl";
           
+          const scoreDisplay = document.createElement('div');
+          scoreDisplay.className = "score-display font-bold text-lg text-indigo-700 opacity-0 transition-opacity flex items-center gap-2";
+          scoreDisplay.innerHTML = `<i class="fa-solid fa-ranking-star"></i> <span class="score-text"></span>`;
+
+          const rightControls = document.createElement('div');
+          rightControls.className = "flex flex-col sm:flex-row items-center gap-3 w-full sm:w-auto";
+
           const warningSpan = document.createElement('span');
           warningSpan.className = "text-red-500 text-sm font-bold hidden flex items-center gap-1 warning-msg drop-shadow-sm";
-          warningSpan.innerHTML = '<i class="fa-solid fa-triangle-exclamation"></i> Please fill in all blanks first!';
+          warningSpan.innerHTML = '<i class="fa-solid fa-triangle-exclamation"></i> Fill all blanks!';
           
           const checkBtn = document.createElement('button');
-          checkBtn.className = "flex items-center gap-2 font-bold px-6 py-2 rounded-lg bg-indigo-600 text-white hover:bg-indigo-700 transition-all shadow-md hover:shadow-lg active:scale-95";
+          checkBtn.className = "w-full sm:w-auto flex items-center justify-center gap-2 font-bold px-6 py-2.5 rounded-lg bg-indigo-600 text-white hover:bg-indigo-700 transition-all shadow-md hover:shadow-lg active:scale-95";
           checkBtn.innerHTML = '<i class="fa-solid fa-clipboard-check"></i> Check Answers';
-          checkBtn.onclick = () => validateExerciseBlock(block, warningSpan);
+          checkBtn.onclick = () => validateExerciseBlock(block, warningSpan, scoreDisplay);
           
-          controlDiv.appendChild(warningSpan);
-          controlDiv.appendChild(checkBtn);
+          rightControls.appendChild(warningSpan);
+          rightControls.appendChild(checkBtn);
+          
+          controlDiv.appendChild(scoreDisplay);
+          controlDiv.appendChild(rightControls);
           block.appendChild(controlDiv);
         }
       });
@@ -692,9 +777,9 @@
 
       btns.forEach((btn, idx) => {
         if (idx === activeIndex) {
-          btn.className = "sub-tab-btn px-4 py-2 text-sm font-bold rounded-t-lg transition-colors border border-b-0 bg-white text-indigo-700 border-gray-200 shadow-[0_-2px_4px_rgba(0,0,0,0.02)] relative top-[1px] z-10 cursor-default whitespace-nowrap";
+          btn.className = "sub-tab-btn px-4 py-2 text-sm font-bold rounded-t-lg transition-colors border border-b-0 bg-white text-indigo-700 border-gray-200 shadow-[0_-2px_4px_rgba(0,0,0,0.02)] relative top-[1px] z-10 cursor-default whitespace-nowrap flex items-center gap-2";
         } else {
-          btn.className = "sub-tab-btn px-4 py-2 text-sm font-bold rounded-t-lg transition-colors border border-b-0 bg-transparent text-gray-500 border-transparent hover:bg-gray-100 hover:text-gray-700 cursor-pointer whitespace-nowrap";
+          btn.className = "sub-tab-btn px-4 py-2 text-sm font-bold rounded-t-lg transition-colors border border-b-0 bg-transparent text-gray-500 border-transparent hover:bg-gray-100 hover:text-gray-700 cursor-pointer whitespace-nowrap flex items-center gap-2";
         }
       });
 
@@ -713,17 +798,18 @@
         card.addEventListener('click', function() {
           const content = this.querySelector('.answer-content');
           const badge = this.querySelector('.status-badge');
+          const bgHighlight = this.querySelector('.bg-highlight');
           
           if (content.classList.contains('hidden')) {
             content.classList.remove('hidden');
-            this.classList.replace('bg-white', 'bg-purple-50');
-            this.classList.replace('border-gray-200', 'border-purple-300');
+            this.classList.replace('border-gray-200', 'border-indigo-300');
+            if (bgHighlight) bgHighlight.classList.replace('scale-y-0', 'scale-y-100');
             badge.textContent = 'Hide';
-            badge.className = "status-badge text-xs text-purple-700 uppercase tracking-wider font-bold bg-purple-200 px-2 py-1 rounded-md ml-2 shrink-0 transition-colors";
+            badge.className = "status-badge text-xs text-indigo-700 uppercase tracking-wider font-bold bg-indigo-200 px-2 py-1 rounded-md ml-2 shrink-0 transition-colors";
           } else {
             content.classList.add('hidden');
-            this.classList.replace('bg-purple-50', 'bg-white');
-            this.classList.replace('border-purple-300', 'border-gray-200');
+            this.classList.replace('border-indigo-300', 'border-gray-200');
+            if (bgHighlight) bgHighlight.classList.replace('scale-y-100', 'scale-y-0');
             badge.textContent = 'Reveal';
             badge.className = "status-badge text-xs text-gray-500 uppercase tracking-wider font-bold bg-gray-100 px-2 py-1 rounded-md ml-2 shrink-0 transition-colors";
           }
@@ -731,7 +817,7 @@
       });
     }
 
-    function validateExerciseBlock(block, warningSpan) {
+    function validateExerciseBlock(block, warningSpan, scoreDisplay) {
       const inputs = block.querySelectorAll('.exercise-input');
       const selects = block.querySelectorAll('.exercise-select');
       const elements = [...inputs, ...selects];
@@ -758,6 +844,7 @@
 
       // 2. Proceed with validation if all filled
       warningSpan.classList.add('hidden');
+      let correctCount = 0;
 
       const processElement = (el, isSelect) => {
         const val = el.value.trim().toLowerCase().replace(/\s+/g, ' ');
@@ -781,16 +868,50 @@
 
         if (isCorrect) {
           el.classList.add('input-correct');
-          iconContainer.innerHTML = '<i class="fa-solid fa-circle-check text-green-500 drop-shadow-sm bg-white rounded-full"></i>';
+          iconContainer.innerHTML = '<i class="fa-solid fa-circle-check text-green-500 bg-white rounded-full leading-none"></i>';
+          correctCount++;
         } else {
           el.classList.add('input-incorrect');
-          iconContainer.innerHTML = '<i class="fa-solid fa-circle-xmark text-red-500 drop-shadow-sm bg-white rounded-full"></i>';
+          iconContainer.innerHTML = '<i class="fa-solid fa-circle-xmark text-red-500 bg-white rounded-full leading-none"></i>';
           tooltip.classList.remove('hidden'); // Automatically reveal correct answer on mistake
         }
       };
 
       inputs.forEach(el => processElement(el, false));
       selects.forEach(el => processElement(el, true));
+
+      // Update Score UI
+      const total = elements.length;
+      scoreDisplay.querySelector('.score-text').textContent = `${correctCount} / ${total} Correct`;
+      scoreDisplay.classList.remove('opacity-0');
+      
+      if (correctCount === total) {
+        scoreDisplay.classList.remove('text-indigo-700');
+        scoreDisplay.classList.add('text-indigo-600', 'scale-105');
+        scoreDisplay.innerHTML = `<i class="fa-solid fa-crown text-amber-500"></i> <span class="score-text text-indigo-600">Perfect! ${correctCount}/${total}</span>`;
+      } else {
+        scoreDisplay.classList.add('text-indigo-700');
+        scoreDisplay.classList.remove('text-indigo-600', 'scale-105');
+        scoreDisplay.innerHTML = `<i class="fa-solid fa-ranking-star"></i> <span class="score-text">${correctCount} / ${total} Correct</span>`;
+      }
+
+      // Update Tab Badge
+      const parentTabContent = block.closest('.exercise-tab-content');
+      if (parentTabContent) {
+        const tabIndex = parentTabContent.dataset.tabIndex;
+        const badge = subTabsContainer.querySelectorAll('.tab-score-badge')[tabIndex];
+        if (badge) {
+          badge.textContent = `${correctCount}/${total}`;
+          badge.classList.remove('hidden');
+          if (correctCount === total) {
+             badge.classList.replace('bg-indigo-100', 'bg-indigo-500');
+             badge.classList.replace('text-indigo-700', 'text-white');
+          } else {
+             badge.classList.replace('bg-indigo-500', 'bg-indigo-100');
+             badge.classList.replace('text-white', 'text-indigo-700');
+          }
+        }
+      }
     }
 
     function resetAllExercises() {
@@ -799,6 +920,8 @@
         const selects = exercisesContainer.querySelectorAll('.exercise-select');
         const components = exercisesContainer.querySelectorAll('.exercise-component');
         const warnings = exercisesContainer.querySelectorAll('.warning-msg');
+        const scores = exercisesContainer.querySelectorAll('.score-display');
+        const badges = subTabsContainer.querySelectorAll('.tab-score-badge');
         
         inputs.forEach(input => {
           input.value = '';
@@ -818,15 +941,22 @@
         });
 
         warnings.forEach(warning => warning.classList.add('hidden'));
+        scores.forEach(s => s.classList.add('opacity-0'));
+        badges.forEach(b => {
+          b.classList.add('hidden');
+          b.textContent = '';
+        });
 
         // Reset Flashcards
         const flashcards = exercisesContainer.querySelectorAll('.flashcard');
         flashcards.forEach(card => {
           const content = card.querySelector('.answer-content');
           const badge = card.querySelector('.status-badge');
+          const bgHighlight = card.querySelector('.bg-highlight');
+          
           content.classList.add('hidden');
-          card.classList.replace('bg-purple-50', 'bg-white');
-          card.classList.replace('border-purple-300', 'border-gray-200');
+          card.classList.replace('border-indigo-300', 'border-gray-200');
+          if (bgHighlight) bgHighlight.classList.replace('scale-y-100', 'scale-y-0');
           badge.textContent = 'Reveal';
           badge.className = "status-badge text-xs text-gray-500 uppercase tracking-wider font-bold bg-gray-100 px-2 py-1 rounded-md ml-2 shrink-0 transition-colors";
         });
