@@ -1,0 +1,754 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Work & Study | Self-Study</title>
+  
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <style>
+    /* Utility classes for states */
+    .tab-content { display: none; }
+    .tab-content.active { display: block; }
+    
+    .input-correct { 
+      border-color: #22c55e !important; 
+      background-color: #f0fdf4 !important; 
+      color: #166534 !important; 
+      pointer-events: none; /* Lock input when correct */
+      box-shadow: 0 0 0 1px #22c55e;
+    }
+    .input-incorrect { 
+      border-color: #ef4444 !important; 
+      background-color: #fef2f2 !important; 
+      color: #991b1b !important; 
+    }
+    .input-empty-error { 
+      border-color: #fca5a5 !important; 
+      background-color: #fff1f2 !important; 
+    }
+    
+    select {
+      background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e");
+      background-position: right 0.1rem center;
+      background-repeat: no-repeat;
+      background-size: 1.5em 1.5em;
+    }
+
+    /* Animation for incomplete exercises */
+    @keyframes shake {
+      0%, 100% { transform: translateX(0); }
+      25% { transform: translateX(-6px); }
+      50% { transform: translateX(6px); }
+      75% { transform: translateX(-6px); }
+    }
+    .shake { animation: shake 0.4s ease-in-out; }
+
+    /* Enhanced Correction Tooltip */
+    .answer-tooltip {
+      background-color: #ef4444; /* red-500 */
+      color: white;
+      font-weight: 600;
+      letter-spacing: 0.025em;
+      box-shadow: 0 4px 6px -1px rgba(239, 68, 68, 0.3), 0 2px 4px -1px rgba(239, 68, 68, 0.2);
+    }
+    .answer-tooltip::after {
+      content: '';
+      position: absolute;
+      bottom: 100%;
+      left: 50%;
+      margin-left: -6px;
+      border-width: 6px;
+      border-style: solid;
+      border-color: transparent transparent #ef4444 transparent;
+    }
+
+    /* Sub-tabs fade animation */
+    .exercise-tab-content, .theory-tab-content {
+      animation: fadeIn 0.3s ease-in-out;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(5px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Custom Scrollbar for responsive tabs/content */
+    .custom-scrollbar::-webkit-scrollbar {
+      height: 4px;
+      width: 4px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-track {
+      background: #f1f1f1; 
+      border-radius: 4px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-thumb {
+      background: #c1c1c1; 
+      border-radius: 4px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+      background: #a8a8a8; 
+    }
+  </style>
+</head>
+<body class="bg-gray-50 text-gray-900 font-sans selection:bg-indigo-200 min-h-screen flex flex-col">
+
+  <!-- Header -->
+  <header class="bg-indigo-900 text-white p-4 shadow-md sticky top-0 z-30 flex-shrink-0">
+    <div class="max-w-6xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-4">
+      <div class="flex items-center gap-3">
+        <div class="bg-indigo-800 p-2 rounded-lg border border-indigo-700 shadow-sm">
+          <i class="fa-solid fa-briefcase text-xl text-indigo-300"></i>
+        </div>
+        <h1 class="text-xl sm:text-2xl font-bold tracking-tight">Work & Study <span class="font-light opacity-80 text-lg hidden sm:inline">| Self-Study</span></h1>
+      </div>
+      <nav class="flex bg-indigo-800 rounded-lg p-1 overflow-x-auto w-full sm:w-auto shadow-inner custom-scrollbar" id="tab-nav">
+        <button data-target="unit22" class="tab-btn whitespace-nowrap px-4 py-2 rounded-md text-sm font-semibold transition-all bg-white text-indigo-900 shadow border-b-2 border-indigo-500">Unit 22: Work</button>
+        <button data-target="unit23" class="tab-btn whitespace-nowrap px-4 py-2 rounded-md text-sm font-semibold transition-all text-indigo-100 hover:bg-indigo-700 border-b-2 border-transparent">Unit 23: Business</button>
+        <button data-target="unit24" class="tab-btn whitespace-nowrap px-4 py-2 rounded-md text-sm font-semibold transition-all text-indigo-100 hover:bg-indigo-700 border-b-2 border-transparent">Unit 24: Study</button>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Main Content Layout -->
+  <main class="max-w-6xl mx-auto p-4 sm:p-6 lg:py-8 flex-grow w-full flex flex-col">
+    <div class="flex flex-col lg:flex-row gap-6 items-start">
+      
+      <!-- LEFT PANE: Theory -->
+      <section class="lg:w-2/5 flex-shrink-0 flex flex-col bg-white rounded-xl border border-gray-200 shadow-sm h-auto lg:sticky lg:top-24">
+        <div class="bg-gray-100 p-4 border-b border-gray-200 flex items-center justify-between z-10 rounded-t-xl">
+          <h2 class="font-bold text-gray-700 uppercase tracking-wider text-sm flex items-center gap-2">
+            <i class="fa-solid fa-bookmark text-indigo-500"></i> Reference & Rules
+          </h2>
+        </div>
+
+        <!-- THEORY SUB-TABS -->
+        <div id="theory-tabs-container" class="flex overflow-x-auto bg-gray-50 border-b border-gray-200 px-4 pt-3 gap-1 flex-shrink-0 custom-scrollbar">
+           <!-- Tabs injected here -->
+        </div>
+
+        <div class="p-5 sm:p-6 flex-grow overflow-y-auto max-h-[60vh] lg:max-h-[calc(100vh-16rem)] custom-scrollbar" id="theory-container">
+          <!-- Theory Content Injected via JS -->
+        </div>
+      </section>
+
+      <!-- RIGHT PANE: Exercises -->
+      <section class="lg:w-3/5 flex flex-col bg-white rounded-xl shadow-md border border-gray-200 relative w-full">
+        <div class="bg-indigo-50 p-4 border-b border-indigo-100 flex items-center justify-between flex-shrink-0 shadow-sm rounded-t-xl">
+          <h2 class="font-bold text-indigo-900 text-lg flex items-center gap-2" id="exercise-title">
+            <i class="fa-solid fa-pen-nib text-indigo-600"></i> Exercises
+          </h2>
+        </div>
+        
+        <!-- EXERCISE SUB-TABS -->
+        <div id="sub-tabs-container" class="flex overflow-x-auto bg-indigo-50/50 border-b border-gray-200 px-4 pt-3 gap-1 flex-shrink-0 custom-scrollbar">
+           <!-- Tabs injected here -->
+        </div>
+
+        <div class="p-4 sm:p-6 lg:p-8 flex-grow" id="exercises-container" style="padding-bottom: 6rem;">
+          <!-- Exercise Content Injected via JS -->
+        </div>
+
+        <!-- Global Exercise Controls (Reset only) -->
+        <div class="absolute bottom-0 w-full bg-white/95 backdrop-blur border-t p-4 flex justify-center items-center gap-4 rounded-b-xl shadow-[0_-10px_15px_-3px_rgba(0,0,0,0.05)] z-20">
+          <button id="btn-reset" class="flex items-center gap-2 text-indigo-700 hover:text-indigo-900 bg-indigo-50 hover:bg-indigo-100 font-medium px-6 py-2 rounded-lg transition-all shadow-sm">
+            <i class="fa-solid fa-rotate-right"></i> Reset All Progress
+          </button>
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <script>
+    // --- CONTENT DATA ---
+    const contentData = {
+      unit22: {
+        title: "Unit 22: Work & Jobs",
+        theory: [
+          {
+            tabLabel: "Jobs & Careers",
+            html: `
+              <div class="space-y-6">
+                <div class="bg-indigo-50 rounded-lg shadow-sm border border-indigo-200 overflow-hidden">
+                  <h3 class="bg-indigo-600 text-white font-bold p-3 text-lg sm:text-base"><i class="fa-solid fa-user-tie mr-2"></i> Describing Jobs</h3>
+                  <div class="p-4 space-y-3 text-sm sm:text-base text-gray-800">
+                    <ul class="list-disc pl-5 space-y-3">
+                      <li><span class="font-bold text-indigo-700">a demanding job:</span> a job that requires a lot of time, energy, or attention.</li>
+                      <li><span class="font-bold text-indigo-700">a highly rewarding job:</span> a job that gives you a lot of satisfaction.</li>
+                      <li><span class="font-bold text-indigo-700">a dead-end job:</span> a job with no promotional opportunities.</li>
+                      <li><span class="font-bold text-indigo-700">career prospects:</span> the chances of being successful in your career.</li>
+                      <li><span class="font-bold text-indigo-700">a promising career:</span> a career with a lot of potential for the future.</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>`
+          },
+          {
+            tabLabel: "Employment",
+            html: `
+              <div class="space-y-6">
+                <div class="bg-rose-50 rounded-lg shadow-sm border border-rose-200 overflow-hidden">
+                  <h3 class="bg-rose-600 text-white font-bold p-3 text-lg sm:text-base"><i class="fa-solid fa-file-contract mr-2"></i> Employment Actions</h3>
+                  <div class="p-4 space-y-3 text-sm sm:text-base text-gray-800">
+                    <ul class="list-disc pl-5 space-y-3">
+                      <li><span class="font-bold text-rose-700">apply for a job:</span> submit your resume/CV for a position.</li>
+                      <li><span class="font-bold text-rose-700">get a promotion:</span> be given a higher position in a company.</li>
+                      <li><span class="font-bold text-rose-700">step down:</span> resign from an important position.</li>
+                      <li><span class="font-bold text-rose-700">get the sack:</span> (informal) be dismissed from your job.</li>
+                      <li><span class="font-bold text-rose-700">lay off staff:</span> dismiss staff because there is no work for them to do.</li>
+                      <li><span class="font-bold text-rose-700">work overtime:</span> work extra hours.</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>`
+          }
+        ],
+        exercises: [
+          {
+            tabLabel: "22.1 Collocations",
+            html: `
+              <div class="exercise-block bg-white border border-gray-100 rounded-xl p-5 shadow-[0_2px_10px_-3px_rgba(79,70,229,0.1)]">
+                <h3 class="font-bold text-lg mb-4 text-gray-800 flex items-center gap-3 border-b pb-3"><span class="bg-indigo-100 text-indigo-800 px-3 py-1 rounded text-sm shadow-sm">22.1</span> Choose the right collocations.</h3>
+                <ol class="list-decimal list-inside space-y-4 pl-2 leading-8 text-gray-700 text-sm sm:text-base">
+                  <li>She resigned from her position, stating she wanted to ${generateSelect({ options: ['step down', 'step off', 'step out'], correct: 'step down' })} due to health reasons.</li>
+                  <li>Working in a factory packaging boxes was a ${generateSelect({ options: ['dead-end', 'no-end', 'blind-alley'], correct: 'dead-end' })} job.</li>
+                  <li>Nursing is a highly ${generateSelect({ options: ['rewarding', 'awarding', 'giving'], correct: 'rewarding' })} career if you love helping people.</li>
+                  <li>Due to the financial crisis, the company had to ${generateSelect({ options: ['lay off', 'lay out', 'lay down'], correct: 'lay off' })} fifty staff members.</li>
+                  <li>If you consistently arrive late, you will probably ${generateSelect({ options: ['get the sack', 'get the bag', 'get the bin'], correct: 'get the sack' })}.</li>
+                  <li>He was offered the role because of his excellent career ${generateSelect({ options: ['prospects', 'perspectives', 'views'], correct: 'prospects' })}.</li>
+                </ol>
+              </div>`
+          },
+          {
+            tabLabel: "22.2 Flashcards",
+            html: `
+              <div class="exercise-block bg-white border border-gray-100 rounded-xl p-5 shadow-[0_2px_10px_-3px_rgba(79,70,229,0.1)]">
+                <h3 class="font-bold text-lg mb-4 text-gray-800 flex items-center gap-3 border-b pb-3"><span class="bg-indigo-100 text-indigo-800 px-3 py-1 rounded text-sm shadow-sm">22.2</span> Vocabulary Checks</h3>
+                <p class="text-sm text-gray-500 mb-4 italic">Think of the correct collocations based on the clues, then click to reveal.</p>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  ${generateFlashcard("1. A job that is very difficult, tiring, and takes up a lot of your energy.", "a demanding job")}
+                  ${generateFlashcard("2. A formal expression for 'getting fired' or 'being dismissed' from your job.", "get the sack / be laid off")}
+                  ${generateFlashcard("3. What you do when you work extra hours beyond your normal schedule.", "work overtime")}
+                  ${generateFlashcard("4. A job that has absolutely no chance of promotion.", "a dead-end job")}
+                </div>
+              </div>`
+          }
+        ]
+      },
+      unit23: {
+        title: "Unit 23: Business",
+        theory: [
+          {
+            tabLabel: "Running a Business",
+            html: `
+              <div class="space-y-6">
+                <div class="bg-emerald-50 rounded-lg shadow-sm border border-emerald-200 overflow-hidden">
+                  <h3 class="bg-emerald-600 text-white font-bold p-3 text-lg sm:text-base"><i class="fa-solid fa-store mr-2"></i> Starting & Running</h3>
+                  <div class="p-4 space-y-3 text-sm sm:text-base text-gray-800">
+                    <ul class="list-disc pl-5 space-y-3">
+                      <li><span class="font-bold text-emerald-700">set up a business:</span> start a new business.</li>
+                      <li><span class="font-bold text-emerald-700">run a business:</span> manage or operate a business.</li>
+                      <li><span class="font-bold text-emerald-700">go into business:</span> start working in trade or commerce.</li>
+                      <li><span class="font-bold text-emerald-700">do market research:</span> investigate what consumers want or need.</li>
+                      <li><span class="font-bold text-emerald-700">stiff / cut-throat competition:</span> extremely strong and ruthless competition.</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>`
+          },
+          {
+            tabLabel: "Financial Terms",
+            html: `
+              <div class="space-y-6">
+                <div class="bg-amber-50 rounded-lg shadow-sm border border-amber-200 overflow-hidden">
+                  <h3 class="bg-amber-500 text-white font-bold p-3 text-lg sm:text-base"><i class="fa-solid fa-chart-line mr-2"></i> Finance & Profit</h3>
+                  <div class="p-4 space-y-3 text-sm sm:text-base text-gray-800">
+                    <ul class="list-disc pl-5 space-y-3">
+                      <li><span class="font-bold text-amber-700">make a profit / a loss:</span> earn more/less money than you spend.</li>
+                      <li><span class="font-bold text-amber-700">go bankrupt:</span> be unable to pay your debts.</li>
+                      <li><span class="font-bold text-amber-700">balance the books:</span> make sure the amount spent is not more than the amount earned.</li>
+                      <li><span class="font-bold text-amber-700">profit margin:</span> the difference between the cost of buying/producing and the selling price.</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>`
+          }
+        ],
+        exercises: [
+          {
+            tabLabel: "23.1 Fill in Blanks",
+            html: `
+              <div class="exercise-block bg-white border border-gray-100 rounded-xl p-5 shadow-[0_2px_10px_-3px_rgba(16,185,129,0.1)]">
+                <h3 class="font-bold text-lg mb-4 text-gray-800 flex items-center gap-3 border-b pb-3"><span class="bg-emerald-100 text-emerald-800 px-3 py-1 rounded text-sm shadow-sm">23.1</span> Complete the sentences.</h3>
+                <ol class="list-decimal list-inside space-y-4 pl-2 leading-8 text-gray-700 text-sm sm:text-base">
+                  <li>If the company doesn't make a ${generateInput({ correct: ['profit'] })} this year, they might go ${generateInput({ correct: ['bankrupt'] })}.</li>
+                  <li>She decided to ${generateInput({ correct: ['set up'] })} a business selling handmade crafts online.</li>
+                  <li>Before launching the product, we need to ${generateInput({ correct: ['do'] })} some market research to understand the demand.</li>
+                  <li>In the tech industry, you have to survive in a market with ${generateInput({ correct: ['stiff', 'cut-throat'] })} competition.</li>
+                  <li>The accountant is working late trying to ${generateInput({ correct: ['balance'] })} the books before the end of the financial year.</li>
+                </ol>
+              </div>`
+          }
+        ]
+      },
+      unit24: {
+        title: "Unit 24: Academic English",
+        theory: [
+          {
+            tabLabel: "Studying",
+            html: `
+              <div class="space-y-6">
+                <div class="bg-purple-50 rounded-lg shadow-sm border border-purple-200 overflow-hidden">
+                  <h3 class="bg-purple-600 text-white font-bold p-3 text-lg sm:text-base"><i class="fa-solid fa-graduation-cap mr-2"></i> Assignments & Courses</h3>
+                  <div class="p-4 space-y-3 text-sm sm:text-base text-gray-800">
+                    <ul class="list-disc pl-5 space-y-3">
+                      <li><span class="font-bold text-purple-700">meet a deadline:</span> finish work on time.</li>
+                      <li><span class="font-bold text-purple-700">submit an assignment:</span> hand in your work to a teacher.</li>
+                      <li><span class="font-bold text-purple-700">request an extension:</span> ask for more time to finish work.</li>
+                      <li><span class="font-bold text-purple-700">drop out of a course:</span> leave a course before finishing it.</li>
+                      <li><span class="font-bold text-purple-700">higher education:</span> education at a college or university.</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>`
+          },
+          {
+            tabLabel: "Research & Exams",
+            html: `
+              <div class="space-y-6">
+                <div class="bg-cyan-50 rounded-lg shadow-sm border border-cyan-200 overflow-hidden">
+                  <h3 class="bg-cyan-600 text-white font-bold p-3 text-lg sm:text-base"><i class="fa-solid fa-microscope mr-2"></i> Research & Exams</h3>
+                  <div class="p-4 space-y-3 text-sm sm:text-base text-gray-800">
+                    <ul class="list-disc pl-5 space-y-3">
+                      <li><span class="font-bold text-cyan-700">conduct research:</span> formal way of saying 'do research'.</li>
+                      <li><span class="font-bold text-cyan-700">broad knowledge:</span> knowing a lot about a wide range of subjects.</li>
+                      <li><span class="font-bold text-cyan-700">continuous assessment:</span> evaluation of a student's progress throughout a course.</li>
+                      <li><span class="font-bold text-cyan-700">pass with flying colours:</span> pass an exam with a very high mark.</li>
+                      <li><span class="font-bold text-cyan-700">scrape a pass:</span> pass an exam but with a very low grade.</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>`
+          }
+        ],
+        exercises: [
+          {
+            tabLabel: "24.1 Match the Halves",
+            html: `
+              <div class="exercise-block bg-purple-50/50 p-4 sm:p-6 rounded-xl border border-purple-200 shadow-sm">
+                <h3 class="font-bold text-lg mb-4 text-purple-900 border-b border-purple-200 pb-2"><i class="fa-solid fa-link text-purple-600 mr-2"></i> 24.1 Match the sentence halves</h3>
+                <ol class="list-decimal list-inside space-y-4 pl-2 leading-8 text-gray-700 font-medium text-sm sm:text-base">
+                  <li>If you don't submit your assignment on time... <br> ${generateSelect({ options: ['she passed with flying colours.', 'you will have to request an extension.', 'they do continuous assessment.', 'he decided to drop out of the course.'], correct: 'you will have to request an extension.' })}</li>
+                  <li>Because she studied incredibly hard... <br> ${generateSelect({ options: ['she passed with flying colours.', 'you will have to request an extension.', 'they do continuous assessment.', 'he decided to drop out of the course.'], correct: 'she passed with flying colours.' })}</li>
+                  <li>Finding the math module too difficult... <br> ${generateSelect({ options: ['she passed with flying colours.', 'you will have to request an extension.', 'they do continuous assessment.', 'he decided to drop out of the course.'], correct: 'he decided to drop out of the course.' })}</li>
+                  <li>Instead of having one final exam... <br> ${generateSelect({ options: ['she passed with flying colours.', 'you will have to request an extension.', 'they do continuous assessment.', 'he decided to drop out of the course.'], correct: 'they do continuous assessment.' })}</li>
+                </ol>
+              </div>`
+          },
+          {
+            tabLabel: "24.2 Verbs",
+            html: `
+              <div class="exercise-block bg-white border border-gray-100 rounded-xl p-5 shadow-[0_2px_10px_-3px_rgba(168,85,247,0.1)]">
+                <h3 class="font-bold text-lg mb-4 text-gray-800 flex items-center gap-3 border-b pb-3"><span class="bg-purple-100 text-purple-800 px-3 py-1 rounded text-sm shadow-sm">24.2</span> Fill in the correct verbs.</h3>
+                <ol class="list-decimal list-inside space-y-4 pl-2 leading-8 text-gray-700 text-sm sm:text-base">
+                  <li>The scientist plans to ${generateInput({ correct: ['conduct', 'do'] })} research into the effects of climate change.</li>
+                  <li>I barely studied, so I was lucky to ${generateInput({ correct: ['scrape'] })} a pass in chemistry.</li>
+                  <li>If I don't finish writing this essay by midnight, I won't ${generateInput({ correct: ['meet'] })} the deadline.</li>
+                  <li>Please make sure to ${generateInput({ correct: ['submit', 'hand in'] })} your assignment through the online portal.</li>
+                </ol>
+              </div>`
+          }
+        ]
+      }
+    };
+
+    // --- HTML GENERATORS ---
+    
+    function generateInput({ correct, placeholder = "type here", widthClass = "w-28 sm:w-36 md:w-48" }) {
+      const correctStr = JSON.stringify(correct).replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+      const firstAnswer = correct[0].replace(/'/g, '&#39;');
+      return `
+        <div class="inline-block relative m-1 exercise-component align-middle ${widthClass === 'w-full' ? 'w-full block mx-0 mt-2' : ''}">
+          <input type="text" class="exercise-input border-b-2 outline-none px-2 py-1 transition-all duration-200 text-center font-bold text-indigo-900 border-gray-300 focus:border-indigo-500 focus:bg-indigo-50 bg-transparent rounded-t-sm ${widthClass}" data-correct="${correctStr}" placeholder="${placeholder}" autocomplete="off" autocorrect="off" spellcheck="false" />
+          <span class="feedback-icon absolute ${widthClass === 'w-full' ? 'right-2' : '-right-2 sm:-right-6'} top-1 text-lg drop-shadow-sm flex items-center justify-center pointer-events-none"></span>
+          <div class="answer-tooltip absolute top-full left-1/2 -translate-x-1/2 mt-2 px-3 py-1.5 rounded z-30 hidden transition-opacity duration-200 text-xs w-max max-w-[200px] sm:max-w-none whitespace-normal sm:whitespace-nowrap text-center break-words">${firstAnswer}</div>
+        </div>
+      `;
+    }
+
+    function generateSelect({ options, correct }) {
+      const optionsHtml = options.map(opt => `<option value="${opt}">${opt}</option>`).join('');
+      return `
+        <div class="inline-block relative m-1 exercise-component align-middle w-full sm:w-auto">
+          <select class="exercise-select border-b-2 outline-none px-2 py-1 appearance-none bg-transparent font-bold text-indigo-900 text-center pr-6 cursor-pointer transition-all duration-200 border-gray-300 focus:border-indigo-500 focus:bg-indigo-50 rounded-t-sm max-w-[200px] sm:max-w-[300px] text-ellipsis" data-correct="${correct}">
+            <option value="" disabled selected>select...</option>
+            ${optionsHtml}
+          </select>
+          <span class="feedback-icon absolute -right-2 top-1 text-lg drop-shadow-sm flex items-center justify-center pointer-events-none"></span>
+          <div class="answer-tooltip absolute top-full left-1/2 -translate-x-1/2 mt-2 px-3 py-1.5 rounded z-30 hidden transition-opacity duration-200 text-xs w-max max-w-[200px] sm:max-w-none whitespace-normal sm:whitespace-nowrap text-center break-words">${correct}</div>
+        </div>
+      `;
+    }
+
+    function generateFlashcard(question, answer) {
+      return `
+        <div class="flashcard p-4 border rounded-xl cursor-pointer transition-all duration-300 bg-white border-gray-200 hover:border-indigo-300 hover:shadow-md select-none group relative overflow-hidden">
+          <div class="flex justify-between items-start pointer-events-none relative z-10">
+            <p class="font-medium text-gray-800 leading-snug group-hover:text-indigo-900 transition-colors text-sm sm:text-base">${question}</p>
+            <span class="status-badge text-xs text-gray-500 uppercase tracking-wider font-bold bg-gray-100 px-2 py-1 rounded-md ml-2 shrink-0 transition-colors">Reveal</span>
+          </div>
+          <div class="answer-content hidden mt-3 pt-3 border-t border-indigo-100 text-indigo-700 font-bold flex items-center gap-2 pointer-events-none relative z-10 text-sm sm:text-base">
+            <i class="fa-solid fa-check-circle text-indigo-500"></i> ${answer}
+          </div>
+          <div class="absolute inset-0 bg-indigo-50 transform scale-y-0 origin-bottom transition-transform duration-300 ease-out z-0 bg-highlight"></div>
+        </div>
+      `;
+    }
+
+    // --- STATE AND LOGIC ---
+    let currentUnit = 'unit22';
+
+    // Elements
+    const theoryContainer = document.getElementById('theory-container');
+    const theoryTabsContainer = document.getElementById('theory-tabs-container');
+    const exercisesContainer = document.getElementById('exercises-container');
+    const subTabsContainer = document.getElementById('sub-tabs-container');
+    const exerciseTitle = document.getElementById('exercise-title');
+    const tabButtons = document.querySelectorAll('.tab-btn');
+    const btnReset = document.getElementById('btn-reset');
+
+    function loadUnit(unitId) {
+      currentUnit = unitId;
+      
+      // Update Main Navigation Tabs
+      tabButtons.forEach(btn => {
+        if (btn.dataset.target === unitId) {
+          btn.className = "tab-btn whitespace-nowrap px-4 py-2 rounded-md text-sm font-semibold transition-all bg-white text-indigo-900 shadow border-b-2 border-indigo-500";
+        } else {
+          btn.className = "tab-btn whitespace-nowrap px-4 py-2 rounded-md text-sm font-semibold transition-all text-indigo-100 hover:bg-indigo-700 border-b-2 border-transparent";
+        }
+      });
+
+      // Fetch Unit Data
+      const data = contentData[unitId];
+      exerciseTitle.innerHTML = `<i class="fa-solid fa-pen-nib text-indigo-600 mr-2"></i> ${data.title}`;
+      
+      // Clear containers
+      theoryTabsContainer.innerHTML = '';
+      theoryContainer.innerHTML = '';
+      subTabsContainer.innerHTML = '';
+      exercisesContainer.innerHTML = '';
+
+      // Generate Theory Sub-tabs
+      data.theory.forEach((th, index) => {
+        const tabBtn = document.createElement('button');
+        tabBtn.className = "theory-tab-btn px-4 py-2 text-sm font-bold rounded-t-lg transition-colors border border-b-0 whitespace-nowrap";
+        tabBtn.textContent = th.tabLabel;
+        tabBtn.onclick = () => switchTheoryTab(index);
+        theoryTabsContainer.appendChild(tabBtn);
+
+        const wrapper = document.createElement('div');
+        wrapper.className = "theory-tab-content hidden"; 
+        wrapper.innerHTML = th.html;
+        theoryContainer.appendChild(wrapper);
+      });
+
+      // Generate Exercise Sub-tabs and Exercise Blocks
+      data.exercises.forEach((ex, index) => {
+        // 1. Create Tab Button
+        const tabBtn = document.createElement('button');
+        tabBtn.className = "sub-tab-btn px-4 py-2 text-sm font-bold rounded-t-lg transition-colors border border-b-0 whitespace-nowrap flex items-center gap-2";
+        tabBtn.innerHTML = `${ex.tabLabel} <span class="hidden tab-score-badge bg-indigo-100 text-indigo-700 text-[10px] px-1.5 py-0.5 rounded-full"></span>`;
+        tabBtn.onclick = () => switchSubTab(index);
+        subTabsContainer.appendChild(tabBtn);
+
+        // 2. Create Exercise Wrapper
+        const wrapper = document.createElement('div');
+        wrapper.className = "exercise-tab-content hidden"; // all hidden initially
+        wrapper.innerHTML = ex.html;
+        wrapper.dataset.tabIndex = index;
+        exercisesContainer.appendChild(wrapper);
+      });
+
+      // Inject Per-Exercise Validation Controls
+      const blocks = exercisesContainer.querySelectorAll('.exercise-block');
+      blocks.forEach(block => {
+        if (block.querySelectorAll('.exercise-input, .exercise-select').length > 0) {
+          const controlDiv = document.createElement('div');
+          controlDiv.className = "mt-6 flex flex-col sm:flex-row justify-between items-center gap-4 border-t border-gray-100 pt-4 bg-gray-50/50 -mx-4 sm:-mx-5 -mb-4 sm:-mb-5 px-4 sm:px-5 py-4 rounded-b-xl";
+          
+          const scoreDisplay = document.createElement('div');
+          scoreDisplay.className = "score-display font-bold text-lg text-indigo-700 opacity-0 transition-opacity flex items-center gap-2";
+          scoreDisplay.innerHTML = `<i class="fa-solid fa-ranking-star"></i> <span class="score-text"></span>`;
+
+          const rightControls = document.createElement('div');
+          rightControls.className = "flex flex-col sm:flex-row items-center gap-3 w-full sm:w-auto";
+
+          const warningSpan = document.createElement('span');
+          warningSpan.className = "text-red-500 text-sm font-bold hidden flex items-center gap-1 warning-msg drop-shadow-sm";
+          warningSpan.innerHTML = '<i class="fa-solid fa-triangle-exclamation"></i> Fill all blanks!';
+          
+          const checkBtn = document.createElement('button');
+          checkBtn.className = "w-full sm:w-auto flex items-center justify-center gap-2 font-bold px-6 py-2.5 rounded-lg bg-indigo-600 text-white hover:bg-indigo-700 transition-all shadow-md hover:shadow-lg active:scale-95";
+          checkBtn.innerHTML = '<i class="fa-solid fa-clipboard-check"></i> Check Answers';
+          checkBtn.onclick = () => validateExerciseBlock(block, warningSpan, scoreDisplay);
+          
+          rightControls.appendChild(warningSpan);
+          rightControls.appendChild(checkBtn);
+          
+          controlDiv.appendChild(scoreDisplay);
+          controlDiv.appendChild(rightControls);
+          block.appendChild(controlDiv);
+        }
+      });
+
+      setupFlashcards();
+      
+      if (data.theory.length > 0) switchTheoryTab(0);
+      if (data.exercises.length > 0) switchSubTab(0);
+    }
+
+    function switchTheoryTab(activeIndex) {
+      const btns = document.querySelectorAll('.theory-tab-btn');
+      const contents = document.querySelectorAll('.theory-tab-content');
+
+      btns.forEach((btn, idx) => {
+        if (idx === activeIndex) {
+          btn.className = "theory-tab-btn px-4 py-2 text-sm font-bold rounded-t-lg transition-colors border border-b-0 bg-white text-indigo-700 border-gray-200 shadow-[0_-2px_4px_rgba(0,0,0,0.02)] relative top-[1px] z-10 cursor-default whitespace-nowrap";
+        } else {
+          btn.className = "theory-tab-btn px-4 py-2 text-sm font-bold rounded-t-lg transition-colors border border-b-0 bg-transparent text-gray-500 border-transparent hover:bg-gray-100 hover:text-gray-700 cursor-pointer whitespace-nowrap";
+        }
+      });
+
+      contents.forEach((content, idx) => {
+        if (idx === activeIndex) {
+          content.classList.remove('hidden');
+        } else {
+          content.classList.add('hidden');
+        }
+      });
+    }
+
+    function switchSubTab(activeIndex) {
+      const btns = document.querySelectorAll('.sub-tab-btn');
+      const contents = document.querySelectorAll('.exercise-tab-content');
+
+      btns.forEach((btn, idx) => {
+        if (idx === activeIndex) {
+          btn.className = "sub-tab-btn px-4 py-2 text-sm font-bold rounded-t-lg transition-colors border border-b-0 bg-white text-indigo-700 border-gray-200 shadow-[0_-2px_4px_rgba(0,0,0,0.02)] relative top-[1px] z-10 cursor-default whitespace-nowrap flex items-center gap-2";
+        } else {
+          btn.className = "sub-tab-btn px-4 py-2 text-sm font-bold rounded-t-lg transition-colors border border-b-0 bg-transparent text-gray-500 border-transparent hover:bg-gray-100 hover:text-gray-700 cursor-pointer whitespace-nowrap flex items-center gap-2";
+        }
+      });
+
+      contents.forEach((content, idx) => {
+        if (idx === activeIndex) {
+          content.classList.remove('hidden');
+        } else {
+          content.classList.add('hidden');
+        }
+      });
+    }
+
+    function setupFlashcards() {
+      const flashcards = exercisesContainer.querySelectorAll('.flashcard');
+      flashcards.forEach(card => {
+        card.addEventListener('click', function() {
+          const content = this.querySelector('.answer-content');
+          const badge = this.querySelector('.status-badge');
+          const bgHighlight = this.querySelector('.bg-highlight');
+          
+          if (content.classList.contains('hidden')) {
+            content.classList.remove('hidden');
+            this.classList.replace('border-gray-200', 'border-indigo-300');
+            if (bgHighlight) bgHighlight.classList.replace('scale-y-0', 'scale-y-100');
+            badge.textContent = 'Hide';
+            badge.className = "status-badge text-xs text-indigo-700 uppercase tracking-wider font-bold bg-indigo-200 px-2 py-1 rounded-md ml-2 shrink-0 transition-colors";
+          } else {
+            content.classList.add('hidden');
+            this.classList.replace('border-indigo-300', 'border-gray-200');
+            if (bgHighlight) bgHighlight.classList.replace('scale-y-100', 'scale-y-0');
+            badge.textContent = 'Reveal';
+            badge.className = "status-badge text-xs text-gray-500 uppercase tracking-wider font-bold bg-gray-100 px-2 py-1 rounded-md ml-2 shrink-0 transition-colors";
+          }
+        });
+      });
+    }
+
+    function normalizeTextForComparison(text) {
+      return text.toLowerCase().replace(/[.,?!]/g, '').replace(/\s+/g, ' ').trim();
+    }
+
+    function validateExerciseBlock(block, warningSpan, scoreDisplay) {
+      const inputs = block.querySelectorAll('.exercise-input');
+      const selects = block.querySelectorAll('.exercise-select');
+      const elements = [...inputs, ...selects];
+      
+      if (elements.length === 0) return;
+
+      let allFilled = true;
+      elements.forEach(el => {
+        if(el.value.trim() === '') {
+          allFilled = false;
+          el.classList.add('input-empty-error');
+        } else {
+          el.classList.remove('input-empty-error');
+        }
+      });
+
+      if (!allFilled) {
+        warningSpan.classList.remove('hidden', 'shake');
+        void warningSpan.offsetWidth;
+        warningSpan.classList.add('shake');
+        return;
+      }
+
+      warningSpan.classList.add('hidden');
+      let correctCount = 0;
+
+      const processElement = (el, isSelect) => {
+        const rawVal = el.value.trim();
+        const val = normalizeTextForComparison(rawVal);
+        const parent = el.closest('.exercise-component');
+        const iconContainer = parent.querySelector('.feedback-icon');
+        const tooltip = parent.querySelector('.answer-tooltip');
+        
+        el.classList.remove('input-correct', 'input-incorrect', 'input-empty-error');
+        iconContainer.innerHTML = '';
+        tooltip.classList.add('hidden');
+
+        let isCorrect = false;
+
+        if (isSelect) {
+          isCorrect = (rawVal === el.dataset.correct);
+        } else {
+          const correctAnswersArray = JSON.parse(el.dataset.correct.replace(/&quot;/g, '"').replace(/&#39;/g, "'"));
+          isCorrect = correctAnswersArray.some(ans => normalizeTextForComparison(ans) === val);
+        }
+
+        if (isCorrect) {
+          el.classList.add('input-correct');
+          iconContainer.innerHTML = '<i class="fa-solid fa-circle-check text-green-500 bg-white rounded-full leading-none"></i>';
+          correctCount++;
+        } else {
+          el.classList.add('input-incorrect');
+          iconContainer.innerHTML = '<i class="fa-solid fa-circle-xmark text-red-500 bg-white rounded-full leading-none"></i>';
+          tooltip.classList.remove('hidden');
+        }
+      };
+
+      inputs.forEach(el => processElement(el, false));
+      selects.forEach(el => processElement(el, true));
+
+      const total = elements.length;
+      scoreDisplay.querySelector('.score-text').textContent = `${correctCount} / ${total} Correct`;
+      scoreDisplay.classList.remove('opacity-0');
+      
+      if (correctCount === total) {
+        scoreDisplay.classList.remove('text-indigo-700');
+        scoreDisplay.classList.add('text-indigo-600', 'scale-105');
+        scoreDisplay.innerHTML = `<i class="fa-solid fa-crown text-amber-500"></i> <span class="score-text text-indigo-600">Perfect! ${correctCount}/${total}</span>`;
+      } else {
+        scoreDisplay.classList.add('text-indigo-700');
+        scoreDisplay.classList.remove('text-indigo-600', 'scale-105');
+        scoreDisplay.innerHTML = `<i class="fa-solid fa-ranking-star"></i> <span class="score-text">${correctCount} / ${total} Correct</span>`;
+      }
+
+      const parentTabContent = block.closest('.exercise-tab-content');
+      if (parentTabContent) {
+        const tabIndex = parentTabContent.dataset.tabIndex;
+        const badge = subTabsContainer.querySelectorAll('.tab-score-badge')[tabIndex];
+        if (badge) {
+          badge.textContent = `${correctCount}/${total}`;
+          badge.classList.remove('hidden');
+          if (correctCount === total) {
+             badge.classList.replace('bg-indigo-100', 'bg-indigo-500');
+             badge.classList.replace('text-indigo-700', 'text-white');
+          } else {
+             badge.classList.replace('bg-indigo-500', 'bg-indigo-100');
+             badge.classList.replace('text-white', 'text-indigo-700');
+          }
+        }
+      }
+    }
+
+    function resetAllExercises() {
+      if(confirm("Clear all your progress for this unit?")) {
+        const inputs = exercisesContainer.querySelectorAll('.exercise-input');
+        const selects = exercisesContainer.querySelectorAll('.exercise-select');
+        const components = exercisesContainer.querySelectorAll('.exercise-component');
+        const warnings = exercisesContainer.querySelectorAll('.warning-msg');
+        const scores = exercisesContainer.querySelectorAll('.score-display');
+        const badges = subTabsContainer.querySelectorAll('.tab-score-badge');
+        
+        inputs.forEach(input => {
+          input.value = '';
+          input.disabled = false;
+          input.classList.remove('input-correct', 'input-incorrect', 'input-empty-error');
+        });
+        
+        selects.forEach(select => {
+          select.value = '';
+          select.disabled = false;
+          select.classList.remove('input-correct', 'input-incorrect', 'input-empty-error');
+        });
+
+        components.forEach(parent => {
+          parent.querySelector('.feedback-icon').innerHTML = '';
+          parent.querySelector('.answer-tooltip').classList.add('hidden');
+        });
+
+        warnings.forEach(warning => warning.classList.add('hidden'));
+        scores.forEach(s => s.classList.add('opacity-0'));
+        badges.forEach(b => {
+          b.classList.add('hidden');
+          b.textContent = '';
+        });
+
+        const flashcards = exercisesContainer.querySelectorAll('.flashcard');
+        flashcards.forEach(card => {
+          const content = card.querySelector('.answer-content');
+          const badge = card.querySelector('.status-badge');
+          const bgHighlight = card.querySelector('.bg-highlight');
+          
+          content.classList.add('hidden');
+          card.classList.replace('border-indigo-300', 'border-gray-200');
+          if (bgHighlight) bgHighlight.classList.replace('scale-y-100', 'scale-y-0');
+          badge.textContent = 'Reveal';
+          badge.className = "status-badge text-xs text-gray-500 uppercase tracking-wider font-bold bg-gray-100 px-2 py-1 rounded-md ml-2 shrink-0 transition-colors";
+        });
+      }
+    }
+
+    // --- EVENT LISTENERS ---
+    tabButtons.forEach(btn => {
+      btn.addEventListener('click', () => loadUnit(btn.dataset.target));
+    });
+
+    btnReset.addEventListener('click', resetAllExercises);
+
+    exercisesContainer.addEventListener('input', (e) => {
+      if (e.target.classList.contains('exercise-input') || e.target.classList.contains('exercise-select')) {
+        e.target.classList.remove('input-empty-error', 'input-incorrect');
+        const parent = e.target.closest('.exercise-component');
+        parent.querySelector('.feedback-icon').innerHTML = '';
+        parent.querySelector('.answer-tooltip').classList.add('hidden');
+        
+        const block = e.target.closest('.exercise-block');
+        if (block) {
+          const warning = block.querySelector('.warning-msg');
+          if (warning) warning.classList.add('hidden');
+        }
+      }
+    });
+
+    // Initial Load
+    loadUnit('unit22');
+  </script>
+</body>
+</html>
